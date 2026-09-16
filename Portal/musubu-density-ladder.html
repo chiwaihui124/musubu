@@ -1,0 +1,428 @@
+<meta charset="utf-8">
+<title>Choose your size — the Kunisaki cluster</title>
+
+<style>
+:root{
+  --paper:#F3F1EA; --card:#FAF8F2; --paper-2:#E7E4D9; --rule:#D5D0C2;
+  --ink:#191F24; --ink-2:#4C575E; --ink-3:#828C93;
+  --s1:#8FAFA8; --s2:#5E8F91; --s3:#3A6E7B; --s4:#274F62; --s5:#1B3348;
+  --accent:#B85327; --accent-soft:#F1DFD4;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#0F1418;--card:#161C21;--paper-2:#1C242A;--rule:#2A343B;
+    --ink:#E6E2D7;--ink-2:#A4AEB4;--ink-3:#6D777D;
+    --s1:#6E9089;--s2:#4E7C7E;--s3:#3E7986;--s4:#3D6B81;--s5:#5B7E9E;
+    --accent:#E0743F;--accent-soft:#2C1B13;}
+}
+:root[data-theme="light"]{--paper:#F3F1EA;--card:#FAF8F2;--paper-2:#E7E4D9;--rule:#D5D0C2;--ink:#191F24;--ink-2:#4C575E;--ink-3:#828C93;--accent:#B85327;--accent-soft:#F1DFD4;--s1:#8FAFA8;--s2:#5E8F91;--s3:#3A6E7B;--s4:#274F62;--s5:#1B3348;}
+:root[data-theme="dark"]{--paper:#0F1418;--card:#161C21;--paper-2:#1C242A;--rule:#2A343B;--ink:#E6E2D7;--ink-2:#A4AEB4;--ink-3:#6D777D;--accent:#E0743F;--accent-soft:#2C1B13;--s1:#6E9089;--s2:#4E7C7E;--s3:#3E7986;--s4:#3D6B81;--s5:#5B7E9E;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;line-height:1.2;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:64rem;margin-inline:auto;padding-inline:1.5rem}
+.narrow{max-width:38rem}
+section{padding-block:3rem;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.eyebrow{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.85rem}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);letter-spacing:-0.02em}
+h2{font-size:1.5rem}
+.lede{color:var(--ink-2);margin-top:0.85rem}
+.mock{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:0.28rem 0.55rem;display:inline-block;margin-bottom:1.5rem}
+
+/* ── the ladder ── */
+.ladderbox{margin-top:2rem;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1.4rem 1.3rem 1.1rem;overflow-x:auto}
+#ladder{display:block;width:100%;min-width:44rem;height:auto}
+.lkey{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:0.76rem;color:var(--ink-2);margin-top:0.9rem;padding-top:0.8rem;border-top:1px solid var(--rule)}
+.lkey i{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:0.35rem}
+
+/* ── towns ── */
+.towns{display:grid;gap:1rem;margin-top:1.6rem}
+@media(min-width:52rem){.towns{grid-template-columns:repeat(3,1fr)}}
+.town{background:var(--card);border:1px solid var(--rule);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+.town .top{padding:1.05rem 1.1rem;color:#F4F2EA}
+.town .pop{font-family:var(--mono);font-size:1.8rem;font-variant-numeric:tabular-nums;letter-spacing:-0.02em;line-height:1}
+.town .nm{font-family:var(--display);font-size:1.15rem;margin-top:0.3rem}
+.town .jp{font-size:0.78rem;opacity:0.82}
+.town .body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:0.75rem;flex:1}
+.town .char{font-size:0.88rem;color:var(--ink-2)}
+.town .ph{background:var(--paper-2);border:1px dashed var(--rule);border-radius:3px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;text-align:center;padding:0.6rem}
+.rows{display:grid;grid-template-columns:auto 1fr;gap:0.28rem 0.7rem;font-size:0.82rem}
+.rows .k{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);padding-top:0.15rem;white-space:nowrap}
+.for{margin-top:auto;padding-top:0.7rem;border-top:1px solid var(--rule);font-size:0.82rem}
+.for b{display:block;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem}
+
+/* ── has / hasn't ── */
+.hasgrid{display:grid;gap:0.5rem;margin-top:0.6rem}
+.has{display:grid;grid-template-columns:1.1rem 1fr;gap:0.5rem;font-size:0.81rem;align-items:baseline}
+.has .m{font-family:var(--mono);font-size:0.78rem}
+.has.y .m{color:var(--s3)}
+.has.n .m{color:var(--ink-3)}
+.has.n span{color:var(--ink-3)}
+
+/* ── compare ── */
+.cmpbox{margin-top:1.5rem;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1.2rem;overflow-x:auto}
+.cmp{display:grid;grid-template-columns:11rem repeat(3,minmax(8rem,1fr));gap:0.3rem 1rem;font-size:0.85rem;min-width:38rem}
+.cmp .hd{font-family:var(--display);font-size:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--rule)}
+.cmp .k{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);padding-top:0.35rem}
+.cmp .v{padding-top:0.3rem}
+.cmp .v.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.cmp .row-rule{grid-column:1/-1;height:1px;background:var(--rule);margin:0.15rem 0}
+
+/* ── move ── */
+.moves{display:grid;gap:0.85rem;margin-top:1.5rem}
+@media(min-width:46rem){.moves{grid-template-columns:1fr 1fr}}
+.move{background:var(--card);border:1px solid var(--rule);border-left:2px solid var(--accent);border-radius:0 3px 3px 0;padding:0.95rem 1.05rem}
+.move h3{font-size:0.98rem}
+.move p{font-size:0.84rem;color:var(--ink-2);margin-top:0.3rem}
+.move .path{font-family:var(--mono);font-size:0.7rem;color:var(--accent);margin-top:0.45rem}
+
+.callout{background:var(--accent-soft);border-left:2px solid var(--accent);padding:1rem 1.15rem;border-radius:0 3px 3px 0;margin-top:1.4rem;max-width:40rem}
+.callout p{font-size:0.9rem;color:var(--ink-2)}
+.callout b{color:var(--ink)}
+
+footer{padding-block:2rem 3.5rem;border-top:1px solid var(--rule)}
+footer p{font-size:0.78rem;color:var(--ink-3);max-width:46rem}
+</style>
+
+<section>
+  <div class="wrap">
+    <span class="mock">Vision artifact · speculative · programme data invented</span>
+    <p class="eyebrow">The Kunisaki cluster · Ōita</p>
+    <h1>Japan offers you thirteen million people or a town that is disappearing. Nothing in between is being kept alive on purpose.</h1>
+    <p class="lede narrow">
+      Every rural municipality is shrinking at roughly the same rate, so size stopped being something
+      you choose and became something you are stuck with. Three towns forty minutes apart, held at
+      three different sizes deliberately, would give a person somewhere to move <em>to</em> at each
+      stage of their life — without ever leaving the region.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The ladder</p>
+    <h2 class="narrow">What a population size actually buys you.</h2>
+    <p class="lede narrow">
+      Services turn on at thresholds. This is not a preference chart — a clinic needs a catchment, a
+      supermarket needs a catchment, a high school needs a catchment. Below each line, the thing does
+      not sustain itself.
+    </p>
+
+    <div class="ladderbox">
+      <svg id="ladder" viewBox="0 0 1000 300" role="img"
+           aria-label="A logarithmic scale of settlement size from 300 people to Tokyo, showing which services become viable at each population, with three towns marked."></svg>
+      <div class="lkey">
+        <span><i style="background:var(--s1)"></i>Under 1,000</span>
+        <span><i style="background:var(--s2)"></i>1,000–5,000</span>
+        <span><i style="background:var(--s3)"></i>5,000–15,000</span>
+        <span><i style="background:var(--s4)"></i>15,000–50,000</span>
+        <span><i style="background:var(--s5)"></i>Metropolitan</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>
+        <b>Look at the gap.</b> Between a service town of 22,000 and Tokyo there is a stretch of the
+        scale where almost nothing in Japan is growing on purpose. That gap is not a law of nature.
+        It is the result of every settlement below it shrinking at the same rate at the same time.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Three sizes, forty minutes apart</p>
+    <h2 class="narrow">Not three versions of the same town. Three different answers.</h2>
+
+    <div class="towns">
+      <div class="town">
+        <div class="top" style="background:var(--s1)">
+          <div class="pop">610</div>
+          <div class="nm">Tashibu</div>
+          <div class="jp">田染 · rice terraces, Bungotakada</div>
+        </div>
+        <div class="body">
+          <div class="ph">photo — terraces in late summer</div>
+          <p class="char">
+            A single valley of stepped paddy that has been farmed the same way for eight hundred
+            years. Everyone knows everyone, which is the appeal and also the cost. You will be
+            noticed, always, in both directions.
+          </p>
+          <div class="hasgrid">
+            <div class="has y"><span class="m">✓</span><span>Shared shop, three days a week</span></div>
+            <div class="has y"><span class="m">✓</span><span>Craft workshops and the apprenticeship</span></div>
+            <div class="has n"><span class="m">—</span><span>No school — children bus 20 min</span></div>
+            <div class="has n"><span class="m">—</span><span>No clinic, no supermarket</span></div>
+          </div>
+          <div class="for">
+            <b>Suits</b>
+            People who want to make something with their hands, retirees who want quiet with people
+            nearby, and anyone who already knows they do not need choice.
+          </div>
+        </div>
+      </div>
+
+      <div class="town">
+        <div class="top" style="background:var(--s2)">
+          <div class="pop">4,800</div>
+          <div class="nm">Yamaga</div>
+          <div class="jp">山香 · inland basin, Kitsuki</div>
+        </div>
+        <div class="body">
+          <div class="ph">photo — school gate at 3pm</div>
+          <p class="char">
+            Deliberately built around the years when children are small. Every service a young family
+            needs is inside a ten minute cycle, and the town has been holding its size rather than
+            growing — because past about six thousand, the thing that makes it work stops working.
+          </p>
+          <div class="hasgrid">
+            <div class="has y"><span class="m">✓</span><span>Primary school, nursery, after-school club</span></div>
+            <div class="has y"><span class="m">✓</span><span>GP clinic, midwife, pharmacy</span></div>
+            <div class="has y"><span class="m">✓</span><span>Grocery, two cafés, the pool</span></div>
+            <div class="has n"><span class="m">—</span><span>No high school — 25 min to Kitsuki</span></div>
+          </div>
+          <div class="for">
+            <b>Suits</b>
+            Couples deciding whether to have children, families with under-tens, and anyone who wants
+            other parents within walking distance rather than scattered across a city.
+          </div>
+        </div>
+      </div>
+
+      <div class="town">
+        <div class="top" style="background:var(--s4)">
+          <div class="pop">22,810</div>
+          <div class="nm">Bungotakada</div>
+          <div class="jp">豊後高田市 · river mouth on the Suo-nada</div>
+        </div>
+        <div class="body">
+          <div class="ph">photo — the Shōwa street, Sunday</div>
+          <p class="char">
+            The service town for the whole peninsula. Big enough that you can be anonymous when you
+            want to be, and big enough to carry a hospital and a high school that the smaller places
+            depend on.
+          </p>
+          <div class="hasgrid">
+            <div class="has y"><span class="m">✓</span><span>Hospital, high schools, specialists</span></div>
+            <div class="has y"><span class="m">✓</span><span>Supermarkets, real employment market</span></div>
+            <div class="has y"><span class="m">✓</span><span>Workshop, co-working, cinema at Kitsuki</span></div>
+            <div class="has n"><span class="m">—</span><span>You will not know everyone. Some want that.</span></div>
+          </div>
+          <div class="for">
+            <b>Suits</b>
+            Teenagers who need a high school, anyone running a business, people who want a community
+            they can step out of, and households where one person works remotely and one does not.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Side by side</p>
+    <h2 class="narrow">The trade is legible, which is the point.</h2>
+
+    <div class="cmpbox">
+      <div class="cmp">
+        <span></span>
+        <span class="hd">Tashibu</span><span class="hd">Yamaga</span><span class="hd">Bungotakada</span>
+        <span class="k">Population</span><span class="v num">610</span><span class="v num">4,800</span><span class="v num">22,810</span>
+        <div class="row-rule"></div>
+        <span class="k">Rent, 3 rooms</span><span class="v num">¥21,000</span><span class="v num">¥38,000</span><span class="v num">¥54,000</span>
+        <span class="k">Akiya, typical</span><span class="v num">¥900K</span><span class="v num">¥2.4M</span><span class="v num">¥4.8M</span>
+        <div class="row-rule"></div>
+        <span class="k">To a GP</span><span class="v">18 min, by car</span><span class="v">4 min, walk</span><span class="v">6 min, walk</span>
+        <span class="k">To a hospital</span><span class="v">40 min</span><span class="v">25 min</span><span class="v">6 min</span>
+        <span class="k">Primary school</span><span class="v">bus, 20 min</span><span class="v">in the town</span><span class="v">four of them</span>
+        <span class="k">High school</span><span class="v">45 min</span><span class="v">25 min</span><span class="v">in the town</span>
+        <div class="row-rule"></div>
+        <span class="k">Need a car?</span><span class="v">Yes, absolutely</span><span class="v">One per household</span><span class="v">One per household</span>
+        <span class="k">Children 0–9</span><span class="v num">11</span><span class="v num">312</span><span class="v num">840</span>
+        <span class="k">Arriving, 18 mo</span><span class="v num">4 households</span><span class="v num">31 households</span><span class="v num">48 households</span>
+        <div class="row-rule"></div>
+        <span class="k">Held at</span><span class="v">550–700</span><span class="v">4,500–6,000</span><span class="v">22,000–26,000</span>
+        <span class="k">Why that size</span><span class="v">One valley of workable terraces</span><span class="v">Above 6,000 the walk-everywhere breaks</span><span class="v">The catchment a hospital needs</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>
+        <b>Each town states a size it is trying to hold, not a size it wants to exceed.</b>
+        Growth is not the goal anywhere on this page. A town that knows what it is for knows when it
+        is full, and saying so out loud is what lets the next person choose honestly.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Moving between them</p>
+    <h2 class="narrow">Sizing up or down should be a transfer, not a rupture.</h2>
+    <p class="lede narrow">
+      All three are inside forty minutes of each other. Moving between them means keeping your job,
+      your friends, your doctor and your kid's judo club. That is the difference between a region and
+      a set of unrelated villages — and it is the thing Tokyo actually offers that nowhere else does.
+    </p>
+
+    <div class="moves">
+      <div class="move">
+        <h3>The apprentice who started a family</h3>
+        <p>Two years in Tashibu learning timber framing, then wanted a school gate rather than a bus stop. Same trade, same crew, twenty-five minutes away.</p>
+        <p class="path">Tashibu 610 → Yamaga 4,800 · housing transferred, no deposit</p>
+      </div>
+      <div class="move">
+        <h3>The family whose eldest turned fifteen</h3>
+        <p>Yamaga has no high school. Rather than a two-hour daily round trip for three years, they moved down the valley and kept everything else.</p>
+        <p class="path">Yamaga 4,800 → Bungotakada 22,810 · priority on the arrival list</p>
+      </div>
+      <div class="move">
+        <h3>The couple who retired out of the town</h3>
+        <p>Sold the Bungotakada house to an arriving family, took a terrace cottage, and still drive in on Thursdays for the hospital and the market.</p>
+        <p class="path">Bungotakada 22,810 → Tashibu 610 · house passed on within the network</p>
+      </div>
+      <div class="move">
+        <h3>The one who tried small and hated it</h3>
+        <p>Six months in Tashibu was five months too many. Moved up rather than going back to Osaka, which she says she would otherwise have done.</p>
+        <p class="path">Tashibu 610 → Bungotakada 22,810 · stayed in the region</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>
+        <b>The last one matters most.</b> Somebody who finds a village too small currently has one
+        option, and it is Tokyo. A ladder means the failure mode of moving to the countryside is
+        moving to a slightly larger part of the countryside.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What this changes</p>
+    <h2 class="narrow">Five towns shrinking to nothing, or three towns holding at three sizes.</h2>
+    <p class="lede narrow">
+      A region of five municipalities each declining from 8,000 toward 5,000 ends with five places
+      that cannot sustain a clinic. The same population, held deliberately at 610, 4,800 and 22,810
+      with two more villages beside them, ends with three that can — and with somewhere for a person
+      to go when their life changes shape.
+    </p>
+    <p class="lede narrow">
+      This is not an argument for abandoning places. It is an argument that shrinking evenly is a
+      choice nobody made on purpose, and that a region which decides what each of its settlements is
+      <em>for</em> can hold more people, more happily, than one that lets all of them thin out at
+      the same rate.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Speculative. Tashibu, Yamaga and Bungotakada are real places in Ōita Prefecture; their
+      current populations are approximate and every programme figure, arrival count, rent and
+      service claim on this page is invented to illustrate the model. Nothing here has been proposed
+      to any municipality. Service thresholds are drawn from the population mathematics in the
+      project's own economics work and are themselves unverified.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("ladder");
+
+  var W = 1000, H = 300, L = 70, R = 950, BASE = 196;
+  var lo = Math.log10(300), hi = Math.log10(14000000);
+  function X(p) { return L + (Math.log10(p) - lo) / (hi - lo) * (R - L); }
+
+  function el(tag, a, txt) {
+    var e = document.createElementNS(NS, tag);
+    Object.keys(a).forEach(function (k) { e.setAttribute(k, a[k]); });
+    if (txt !== undefined) e.textContent = txt;
+    svg.appendChild(e); return e;
+  }
+
+  // graded band
+  var bands = [
+    [300, 1000, "var(--s1)"], [1000, 5000, "var(--s2)"], [5000, 15000, "var(--s3)"],
+    [15000, 50000, "var(--s4)"], [50000, 14000000, "var(--s5)"]
+  ];
+  bands.forEach(function (b) {
+    el("rect", { x: X(b[0]), y: BASE - 13, width: X(b[1]) - X(b[0]), height: 26, fill: b[2], opacity: 0.9 });
+  });
+
+  // scale ticks
+  [500, 1000, 5000, 10000, 30000, 100000, 1000000, 13000000].forEach(function (p) {
+    el("line", { x1: X(p), y1: BASE + 13, x2: X(p), y2: BASE + 19, stroke: "var(--ink-3)", "stroke-width": 1 });
+    el("text", {
+      x: X(p), y: BASE + 31, "text-anchor": "middle", "font-family": "var(--mono)",
+      "font-size": 9.5, fill: "var(--ink-3)"
+    }, p >= 1000000 ? (p / 1000000) + "M" : p >= 1000 ? (p / 1000) + "k" : String(p));
+  });
+
+  // Service thresholds. Labels are placed onto the first tier where they do not
+  // collide — measured, not hand-positioned, so the copy can change freely.
+  var svc = [
+    [400, "Shared shop"], [1200, "Primary school"], [2500, "GP clinic"],
+    [4000, "Nursery + grocery"], [8000, "Junior high"], [12000, "Supermarket, dentist"],
+    [20000, "High school"], [30000, "General hospital"], [150000, "University, dept. stores"]
+  ];
+  var TIERS = [124, 96, 68], lastRight = [-Infinity, -Infinity, -Infinity], PAD = 10;
+
+  svc.forEach(function (s) {
+    var cx = X(s[0]);
+    var t = el("text", {
+      x: cx, y: 0, "text-anchor": "middle", "font-family": "var(--body)",
+      "font-size": 10.5, fill: "var(--ink-2)"
+    }, s[1]);
+    var half = t.getComputedTextLength() / 2;
+
+    var tier = 0;
+    while (tier < TIERS.length - 1 && cx - half < lastRight[tier] + PAD) tier++;
+    lastRight[tier] = cx + half;
+
+    var y = TIERS[tier];
+    t.setAttribute("y", y);
+    el("line", {
+      x1: cx, y1: y + 7, x2: cx, y2: BASE - 14,
+      stroke: "var(--ink-3)", "stroke-width": 0.7, "stroke-dasharray": "2 3", opacity: 0.7
+    });
+    el("circle", { cx: cx, cy: BASE - 14, r: 2.2, fill: "var(--ink-3)" });
+    svg.appendChild(t); // keep label above its own leader line
+  });
+
+  // the three towns
+  var towns = [[610, "Tashibu", "var(--s1)"], [4800, "Yamaga", "var(--s2)"], [22810, "Bungotakada", "var(--s4)"]];
+  towns.forEach(function (t) {
+    el("line", { x1: X(t[0]), y1: BASE + 13, x2: X(t[0]), y2: 252, stroke: "var(--accent)", "stroke-width": 1.2 });
+    el("circle", { cx: X(t[0]), cy: BASE, r: 7, fill: "var(--accent)", stroke: "var(--card)", "stroke-width": 2 });
+    el("text", { x: X(t[0]), y: 268, "text-anchor": "middle", "font-family": "var(--display)", "font-size": 13, fill: "var(--ink)" }, t[1]);
+    el("text", { x: X(t[0]), y: 283, "text-anchor": "middle", "font-family": "var(--mono)", "font-size": 9.5, fill: "var(--accent)" }, t[0].toLocaleString());
+  });
+
+  // Tokyo reference
+  el("line", { x1: X(13000000), y1: BASE + 13, x2: X(13000000), y2: 252, stroke: "var(--ink-3)", "stroke-width": 1, "stroke-dasharray": "3 3" });
+  el("circle", { cx: X(13000000), cy: BASE, r: 5.5, fill: "var(--ink-3)", stroke: "var(--card)", "stroke-width": 2 });
+  el("text", { x: X(13000000), y: 268, "text-anchor": "middle", "font-family": "var(--display)", "font-size": 12, fill: "var(--ink-3)" }, "Tokyo");
+  el("text", { x: X(13000000), y: 283, "text-anchor": "middle", "font-family": "var(--mono)", "font-size": 9.5, fill: "var(--ink-3)" }, "13.9M");
+
+  // the gap
+  var g1 = X(35000), g2 = X(2000000);
+  el("rect", { x: g1, y: BASE - 34, width: g2 - g1, height: 68, fill: "var(--accent)", opacity: 0.07 });
+  el("text", { x: (g1 + g2) / 2, y: BASE - 42, "text-anchor": "middle", "font-family": "var(--mono)", "font-size": 9.5, "letter-spacing": 1, fill: "var(--accent)" }, "ALMOST NOTHING HERE IS GROWING ON PURPOSE");
+
+  el("text", { x: L, y: 26, "font-family": "var(--mono)", "font-size": 9.5, "letter-spacing": 1.4, fill: "var(--ink-3)" }, "SETTLEMENT SIZE — LOGARITHMIC");
+})();
+</script>

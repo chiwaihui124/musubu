@@ -1,0 +1,558 @@
+<meta charset="utf-8">
+<title>Musubu — an open question, and an open call</title>
+
+<style>
+:root{
+  --paper:#F4F1E9; --card:#FBF9F3; --paper-2:#E9E5D9; --rule:#D8D3C4;
+  --ink:#181E23; --ink-2:#4B565D; --ink-3:#828C93;
+  --sea:#1F4A55; --sea-2:#356E7B; --sea-soft:#DEE8E8;
+  --kaki:#B44E1F; --kaki-soft:#F3DFD2;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#101519;--card:#171D22;--paper-2:#1D242A;--rule:#2A343A;
+    --ink:#E6E2D8;--ink-2:#A5AFB5;--ink-3:#6E787E;
+    --sea:#7BB6C0;--sea-2:#58929E;--sea-soft:#17272C;--kaki:#E0743F;--kaki-soft:#2C1B13;}
+}
+:root[data-theme="light"]{--paper:#F4F1E9;--card:#FBF9F3;--paper-2:#E9E5D9;--rule:#D8D3C4;--ink:#181E23;--ink-2:#4B565D;--ink-3:#828C93;--sea:#1F4A55;--sea-2:#356E7B;--sea-soft:#DEE8E8;--kaki:#B44E1F;--kaki-soft:#F3DFD2;}
+:root[data-theme="dark"]{--paper:#101519;--card:#171D22;--paper-2:#1D242A;--rule:#2A343A;--ink:#E6E2D8;--ink-2:#A5AFB5;--ink-3:#6E787E;--sea:#7BB6C0;--sea-2:#58929E;--sea-soft:#17272C;--kaki:#E0743F;--kaki-soft:#2C1B13;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;line-height:1.22;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:37rem;margin-inline:auto;padding-inline:1.5rem}
+.mock{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.11em;text-transform:uppercase;color:var(--kaki);border:1px solid var(--kaki);border-radius:2px;padding:0.3rem 0.6rem;display:inline-block}
+
+/* ── story ── */
+.story{padding-block:2.5rem 1rem}
+.story .eyebrow{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin:1.6rem 0 0.7rem}
+h1{font-size:clamp(1.7rem,4.6vw,2.2rem);letter-spacing:-0.015em;margin-top:1.3rem}
+.story p{margin-top:0.95rem;color:var(--ink-2)}
+.story p.lead{color:var(--ink);font-size:1.02rem}
+.story h2{font-size:1.3rem;margin-top:0.4rem}
+.pull{font-family:var(--display);font-size:1.22rem;line-height:1.42;color:var(--ink);border-left:2px solid var(--kaki);padding-left:1.05rem;margin-top:1.4rem}
+.steps{counter-reset:s;list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:0.9rem}
+/* NOT display:grid — a grid li puts the ::before in column 1 and the <b> in
+   column 2, then wraps the trailing text node onto row 2 inside the narrow
+   first column, breaking it one word per line. Normal flow + an absolutely
+   positioned counter keeps mixed inline content intact. */
+.steps li{counter-increment:s;position:relative;padding-left:2.4rem;font-size:0.93rem;color:var(--ink-2)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0.18rem;font-family:var(--mono);font-size:0.76rem;color:var(--kaki)}
+.steps b{color:var(--ink);font-weight:600}
+.factbar{display:grid;gap:0.9rem;margin-top:1.5rem;padding:1.1rem 1.15rem;background:var(--sea-soft);border-radius:3px}
+@media(min-width:34rem){.factbar{grid-template-columns:repeat(3,1fr)}}
+.factbar .n{font-family:var(--mono);font-size:1.3rem;font-variant-numeric:tabular-nums;color:var(--sea)}
+.factbar .l{font-size:0.76rem;color:var(--ink-2);line-height:1.4}
+
+/* ── form ── */
+.formtop{border-top:1px solid var(--rule);margin-top:2.4rem;padding-top:2.2rem}
+.part{margin-top:2.4rem}
+.part:first-of-type{margin-top:1.4rem}
+.parthead{display:flex;align-items:baseline;gap:0.7rem;padding-bottom:0.55rem;border-bottom:1px solid var(--rule)}
+.parthead .pn{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.11em;color:var(--kaki)}
+.parthead h3{font-size:1.08rem}
+.parthead .cnt{margin-left:auto;font-family:var(--mono);font-size:0.64rem;color:var(--ink-3)}
+.partnote{font-size:0.84rem;color:var(--ink-3);margin-top:0.6rem}
+
+.q{margin-top:1.5rem}
+.q h4{font-family:var(--body);font-weight:600;font-size:0.95rem;margin:0}
+.q .help{font-size:0.82rem;color:var(--ink-3);margin-top:0.25rem}
+.opts{display:flex;flex-direction:column;gap:0.32rem;margin-top:0.7rem}
+.opts.row{flex-direction:row;flex-wrap:wrap}
+.opts.grid{display:grid;grid-template-columns:1fr;gap:0.32rem}
+@media(min-width:34rem){.opts.grid{grid-template-columns:1fr 1fr}}
+.opt{display:block;width:100%;text-align:left;font-family:inherit;font-size:0.87rem;padding:0.5rem 0.75rem;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--sea-2)}
+.opt[aria-pressed="true"]{background:var(--sea);border-color:var(--sea);color:#F4F2EA}
+.opt:focus-visible{outline:2px solid var(--kaki);outline-offset:2px}
+.opts.row .opt{width:auto;flex:1 1 6.5rem;text-align:center;padding:0.45rem 0.5rem;font-size:0.82rem}
+.pickn{font-family:var(--mono);font-size:0.63rem;color:var(--kaki);margin-top:0.45rem}
+
+textarea,input[type=email],input[type=text]{width:100%;font-family:inherit;font-size:0.9rem;padding:0.65rem 0.8rem;border:1px solid var(--rule);border-radius:3px;background:var(--card);color:var(--ink);margin-top:0.6rem}
+textarea{resize:vertical;min-height:5rem}
+input:focus-visible,textarea:focus-visible{outline:2px solid var(--sea-2);outline-offset:1px}
+
+.pair{background:var(--card);border:1px solid var(--sea-2);border-radius:4px;padding:1.1rem;margin-top:1.4rem}
+.pair .scene{font-size:0.9rem;color:var(--ink-2)}
+.pair .half{margin-top:1rem}
+.pair .lbl{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.09em;color:var(--ink-3);margin-bottom:0.3rem}
+
+.submit{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--rule);display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:0.95rem;padding:0.65rem 1.4rem;border-radius:3px;border:1px solid var(--sea);background:var(--sea);color:#F4F2EA;cursor:pointer}
+.btn[disabled]{opacity:0.4;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--kaki);outline-offset:2px}
+.submit .note{font-size:0.79rem;color:var(--ink-3)}
+
+/* ── result ── */
+#result{display:none}
+#result.on{display:block}
+.reveal{background:var(--kaki-soft);border-left:2px solid var(--kaki);border-radius:0 3px 3px 0;padding:1.15rem 1.2rem;margin-top:1.5rem}
+.reveal .k{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--kaki)}
+.reveal .big{font-family:var(--display);font-size:1.3rem;margin-top:0.35rem;line-height:1.35}
+.reveal p{font-size:0.86rem;color:var(--ink-2);margin-top:0.55rem}
+.bars{margin-top:1.5rem}
+.db{margin-bottom:0.85rem}
+.db .lab{display:flex;justify-content:space-between;font-size:0.83rem;color:var(--ink-2);margin-bottom:0.22rem}
+.db .lab b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.trk{height:9px;background:var(--paper-2);border-radius:5px;overflow:hidden}
+.trk i{display:block;height:100%;border-radius:5px;transition:width .7s ease}
+.gapnote{font-family:var(--mono);font-size:0.71rem;color:var(--kaki);margin-top:0.45rem}
+.said{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.said blockquote{margin:0 0 0.8rem;font-family:var(--display);font-size:0.96rem;line-height:1.45;border-left:2px solid var(--rule);padding-left:0.85rem;color:var(--ink-2)}
+.said blockquote span{display:block;font-family:var(--mono);font-size:0.65rem;color:var(--ink-3);margin-top:0.28rem}
+
+footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding:1.3rem 0 3.5rem}
+footer p{font-size:0.77rem;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){.trk i{transition:none}}
+</style>
+
+<div class="wrap">
+<div class="story">
+  <span class="mock">Prototype · figures shown after submitting are simulated</span>
+
+  <p class="eyebrow">Musubu · むすぶ · to tie together</p>
+  <h1>Nobody wants to be the only person who moved.</h1>
+
+  <p class="lead">
+    Roughly nine hundred Japanese towns are on a path toward disappearing. The usual explanation is
+    that people prefer cities. We think that is the wrong diagnosis, and that the real problem is
+    something much more fixable.
+  </p>
+
+  <p>
+    Ask people whether they would live somewhere quieter, with time and space and a house they could
+    afford, and a great many say yes. Ask them to actually go, and almost nobody does. Not because
+    they were lying — because there are around 1,700 municipalities and you cannot tell, from outside,
+    which one has work you could do, which one is quietly emptying, or whether you would end up the
+    only new person there for a decade.
+  </p>
+
+  <p class="pull">
+    Tokyo is the only option with a known shape. Everyone can picture it. A town you have never lived
+    in is not really an option — it is a guess, and people are right to refuse a guess.
+  </p>
+
+  <p class="eyebrow">What we mean by coordination</p>
+  <h2>Nobody moves unless everybody moves.</h2>
+  <p>
+    What this adds is not persuasion. It is <b>specification</b> — turning one town into something you
+    can actually weigh against Tokyo, because you know who is coming, what the work pays, when it
+    happens, and exactly what occurs if it falls through. The mechanism is not complicated. It already
+    works for funding things that do not exist yet; we are pointing it at moving somewhere instead.
+  </p>
+
+  <ol class="steps">
+    <li><b>A town says what it is short of.</b> Not a brochure — specifics. Two teachers. Six people who will learn a trade. Families with young children, and here is the housing we are holding.</li>
+    <li><b>People commit conditionally.</b> You say: I will go, <em>if</em> fifty other households go. Your deposit is held. Nothing happens yet.</li>
+    <li><b>Everyone watches the number.</b> It is public. You can see it move. You can see who else is in — how many families, what people do, roughly who your neighbours would be.</li>
+    <li><b>You get to know each other first.</b> Months before anyone moves: forums, trial weekends, meeting up. The community forms before the migration, not after.</li>
+    <li><b>The threshold is met, or it is not.</b> If it fills, everyone goes in the same season. If it does not, everyone gets their money back and nothing was risked.</li>
+  </ol>
+
+  <p style="margin-top:1.3rem">
+    Arriving with fifty other households is a completely different experience from arriving alone.
+    Nobody is already inside. Nobody is the odd one out. It is the closest an adult gets to the first
+    week of university — which, for most people, was the most friendship-dense year of their life.
+  </p>
+
+  <p class="eyebrow">Why now, and not ten years ago</p>
+  <p>
+    Japan has spent a decade and enormous sums on regional revitalization. The most common conclusion
+    from people who studied why it did not work: it treated a <b>social</b> problem as a
+    <b>technical</b> one — subsidies and buildings, rather than the conditions under which people
+    actually change their lives.
+  </p>
+  <p>
+    There is also one existing programme that does place people in rural towns with support, and
+    roughly eight in ten of them stay. It works. It is just small, and about half of the people
+    placed arrive to find the reality did not match what they were told. That is a matching problem,
+    and matching thousands of people well is a thing that only recently became possible.
+  </p>
+
+  <div class="factbar">
+    <div><div class="n">~900</div><div class="l">towns projected toward disappearing</div></div>
+    <div><div class="n">~80%</div><div class="l">of people placed with support stay in the region</div></div>
+    <div><div class="n">~50%</div><div class="l">of them say it wasn't what they were told</div></div>
+  </div>
+
+  <p class="eyebrow">What this page is</p>
+  <h2>Two things at once, and we would rather say so.</h2>
+  <p>
+    The first is a genuine question — <b>would this change what you would do?</b> Everything anyone
+    submits gets published back as numbers. That is the point of asking.
+  </p>
+  <p>
+    The second is an open call. This project does not have a team yet. If you think it could work, or
+    think it could not and know why, or you have the skills and the language it needs — <b>that is
+    at least as valuable as your survey answer.</b> There is a section for it at the end.
+  </p>
+</div>
+
+<form id="form" class="formtop">
+
+  <!-- PART 1 -->
+  <div class="part">
+    <div class="parthead"><span class="pn">PART 1</span><h3>Where you are</h3><span class="cnt">3 questions</span></div>
+    <p class="partnote">Nothing identifying. This is only so the results can be broken down sensibly.</p>
+
+    <div class="q"><h4>Where do you live now?</h4>
+      <div class="opts grid" data-q="where">
+        <button type="button" class="opt">Tokyo 23 wards</button>
+        <button type="button" class="opt">Greater Tokyo</button>
+        <button type="button" class="opt">Osaka · Kyoto · Kobe</button>
+        <button type="button" class="opt">Another large city</button>
+        <button type="button" class="opt">A smaller city or town</button>
+        <button type="button" class="opt">Outside Japan</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>Who lives with you?</h4>
+      <div class="opts grid" data-q="house">
+        <button type="button" class="opt">On my own</button>
+        <button type="button" class="opt">With a partner</button>
+        <button type="button" class="opt">Partner and children</button>
+        <button type="button" class="opt">Children, on my own</button>
+        <button type="button" class="opt">With parents</button>
+        <button type="button" class="opt">Shared with others</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>Is anything changing in your life in the next two years?</h4>
+      <p class="help">The moment things are already moving is when a move becomes possible at all.</p>
+      <div class="opts grid" data-q="change">
+        <button type="button" class="opt">A child, born or coming</button>
+        <button type="button" class="opt">A relationship starting or ending</button>
+        <button type="button" class="opt">Work ending or changing</button>
+        <button type="button" class="opt">I can now work from anywhere</button>
+        <button type="button" class="opt">Children becoming independent</button>
+        <button type="button" class="opt">A parent needing care</button>
+        <button type="button" class="opt">Retiring or graduating</button>
+        <button type="button" class="opt">Nothing in particular</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part">
+    <div class="parthead"><span class="pn">PART 2</span><h3>What is heavy right now</h3><span class="cnt">2 questions</span></div>
+    <p class="partnote">We are not asking what is wrong with Japan. We are asking what is sitting on you.</p>
+
+    <div class="q"><h4>What are the three biggest stresses in your life at the moment?</h4>
+      <p class="help">Pick up to three.</p>
+      <div class="opts grid multi" data-q="stress" data-max="3">
+        <button type="button" class="opt">Money — it does not stretch</button>
+        <button type="button" class="opt">Hours — work takes everything</button>
+        <button type="button" class="opt">Commuting</button>
+        <button type="button" class="opt">Housing — cost or size</button>
+        <button type="button" class="opt">Childcare, or wanting children</button>
+        <button type="button" class="opt">Caring for a parent</button>
+        <button type="button" class="opt">Loneliness</button>
+        <button type="button" class="opt">Health, or exhaustion</button>
+        <button type="button" class="opt">Not knowing what I am doing this for</button>
+        <button type="button" class="opt">Job insecurity</button>
+      </div>
+      <p class="pickn" data-for="stress">0 of 3 chosen</p>
+    </div>
+
+    <div class="q"><h4>And the three biggest things standing between you and what you actually want?</h4>
+      <p class="help">Stress is what is heavy. This is what is in the way — they are often not the same.</p>
+      <div class="opts grid multi" data-q="block" data-max="3">
+        <button type="button" class="opt">I cannot afford to change anything</button>
+        <button type="button" class="opt">I have no time to even think</button>
+        <button type="button" class="opt">Someone else depends on my decision</button>
+        <button type="button" class="opt">I do not know what the options are</button>
+        <button type="button" class="opt">I would have to leave people behind</button>
+        <button type="button" class="opt">I could not get back if it failed</button>
+        <button type="button" class="opt">I do not have the skills for something else</button>
+        <button type="button" class="opt">Nobody around me is doing anything different</button>
+        <button type="button" class="opt">I am waiting for something to change first</button>
+        <button type="button" class="opt">Honestly, nothing. I just have not moved.</button>
+      </div>
+      <p class="pickn" data-for="block">0 of 3 chosen</p>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part">
+    <div class="parthead"><span class="pn">PART 3</span><h3>Your time</h3><span class="cnt">4 questions</span></div>
+    <p class="partnote">Money is easy to compare and time is not, so most people never count it. Let's count it.</p>
+
+    <div class="q"><h4>Door to door, how long is your commute each way?</h4>
+      <div class="opts row" data-q="commute">
+        <button type="button" class="opt">Under 20m</button><button type="button" class="opt">20–40m</button>
+        <button type="button" class="opt">40–60m</button><button type="button" class="opt">60–90m</button>
+        <button type="button" class="opt">90m+</button><button type="button" class="opt">I don't</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>How many evenings a week are claimed by work — including drinks and obligations?</h4>
+      <div class="opts row" data-q="evenings">
+        <button type="button" class="opt">0</button><button type="button" class="opt">1</button>
+        <button type="button" class="opt">2</button><button type="button" class="opt">3</button>
+        <button type="button" class="opt">4+</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>In a normal week, how many hours are genuinely yours?</h4>
+      <p class="help">Awake, unclaimed, and not just recovering.</p>
+      <div class="opts row" data-q="own">
+        <button type="button" class="opt">Under 3</button><button type="button" class="opt">3–6</button>
+        <button type="button" class="opt">6–12</button><button type="button" class="opt">12–20</button>
+        <button type="button" class="opt">20+</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>If you had thirty more hours a week, what would you actually do with them?</h4>
+      <p class="help">Not what you should do. What you would.</p>
+      <textarea data-q="thirty" placeholder="Anything."></textarea>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part">
+    <div class="parthead"><span class="pn">PART 4</span><h3>Would this change anything</h3><span class="cnt">3 questions</span></div>
+
+    <div class="pair">
+      <p class="scene">
+        Imagine a town of about five thousand. A school, a clinic, a shop, work you could do,
+        rent around ¥38,000. Same place both times — only one thing changes.
+      </p>
+      <div class="half">
+        <div class="lbl">ARRIVING ON YOUR OWN</div>
+        <h4 style="font-size:0.93rem">Would you move there by yourself, into a town where everyone already knows each other?</h4>
+        <div class="opts row" data-q="solo">
+          <button type="button" class="opt">No</button><button type="button" class="opt">Unlikely</button>
+          <button type="button" class="opt">Maybe</button><button type="button" class="opt">Probably</button>
+          <button type="button" class="opt">Yes</button>
+        </div>
+      </div>
+      <div class="half">
+        <div class="lbl">ARRIVING WITH FIFTY OTHER HOUSEHOLDS</div>
+        <h4 style="font-size:0.93rem">Would you move there if fifty other households arrived the same season — and nobody moved unless everyone did?</h4>
+        <div class="opts row" data-q="coord">
+          <button type="button" class="opt">No</button><button type="button" class="opt">Unlikely</button>
+          <button type="button" class="opt">Maybe</button><button type="button" class="opt">Probably</button>
+          <button type="button" class="opt">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="q"><h4>If you did go — what kind of place would it need to be?</h4>
+      <p class="help">Pick up to three.</p>
+      <div class="opts grid multi" data-q="kind" data-max="3">
+        <button type="button" class="opt">Mostly people around my own age</button>
+        <button type="button" class="opt">Built around young families</button>
+        <button type="button" class="opt">Where I could learn a trade</button>
+        <button type="button" class="opt">People starting things — a startup town</button>
+        <button type="button" class="opt">Making and manufacturing</button>
+        <button type="button" class="opt">Farming, fishing, growing</button>
+        <button type="button" class="opt">Craft, art, music</button>
+        <button type="button" class="opt">By the sea</button>
+        <button type="button" class="opt">Mountains and forest</button>
+        <button type="button" class="opt">A quiet corner of a bigger town</button>
+        <button type="button" class="opt">Somewhere with people who share a specific interest</button>
+        <button type="button" class="opt">Somewhere for slowing down properly</button>
+      </div>
+      <p class="pickn" data-for="kind">0 of 3 chosen</p>
+    </div>
+
+    <div class="q"><h4>If everything else were solved, what would still stop you?</h4>
+      <p class="help">Knowing exactly where people stop is what lets anyone build the thing that removes it.</p>
+      <div class="opts grid" data-q="wall">
+        <button type="button" class="opt">Could not afford the move itself</button>
+        <button type="button" class="opt">Could not earn enough there</button>
+        <button type="button" class="opt">Would not believe the work was really there</button>
+        <button type="button" class="opt">A partner, a parent, an employer</button>
+        <button type="button" class="opt">Care, school year, a contract</button>
+        <button type="button" class="opt">Could not risk being unable to return</button>
+        <button type="button" class="opt">I would not know who I was there</button>
+        <button type="button" class="opt">Nothing, really. I would go.</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="part">
+    <div class="parthead"><span class="pn">PART 5</span><h3>Do you think it could work</h3><span class="cnt">the open call</span></div>
+    <p class="partnote">
+      This part is not about you. It is about the idea — and we would rather hear that it will not
+      work, with a reason, than hear nothing.
+    </p>
+
+    <div class="q"><h4>Honestly — do you think this could work?</h4>
+      <div class="opts grid" data-q="works">
+        <button type="button" class="opt">Yes, and I would want to be part of it</button>
+        <button type="button" class="opt">Yes, though probably not for me personally</button>
+        <button type="button" class="opt">Maybe, if certain things were true</button>
+        <button type="button" class="opt">Probably not, and I can say why</button>
+        <button type="button" class="opt">No. This misunderstands something.</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>What are we getting wrong, or missing?</h4>
+      <p class="help">The most useful thing on this page. Be as blunt as you like.</p>
+      <textarea data-q="wrong" placeholder="What would you tell us if we were sitting across from you?"></textarea>
+    </div>
+
+    <div class="q"><h4>Could you help with any of this?</h4>
+      <p class="help">There is no team yet. Pick anything that applies.</p>
+      <div class="opts grid multi" data-q="help" data-max="6">
+        <button type="button" class="opt">I could translate or write in Japanese</button>
+        <button type="button" class="opt">I know a town that might be interested</button>
+        <button type="button" class="opt">I work in local government</button>
+        <button type="button" class="opt">Building, renovation, trades</button>
+        <button type="button" class="opt">Software or design</button>
+        <button type="button" class="opt">Research or policy</button>
+        <button type="button" class="opt">Funding, or knowing who funds this</button>
+        <button type="button" class="opt">I would just spread the word</button>
+      </div>
+    </div>
+
+    <div class="q"><h4>If you want to hear what comes of this — or be contacted about helping.</h4>
+      <p class="help">Optional. Never sold, never passed on, and nobody is contacted for any other reason.</p>
+      <input type="email" data-q="email" placeholder="Email, if you want to">
+    </div>
+  </div>
+
+  <div class="submit">
+    <button class="btn" id="go" type="button" disabled>See what everyone else said</button>
+    <span class="note" id="need">Answer both questions in Part 4 to continue</span>
+  </div>
+</form>
+
+<div id="result">
+  <div class="reveal">
+    <span class="k">Your answer</span>
+    <p class="big" id="mine"></p>
+    <p id="minesub"></p>
+  </div>
+
+  <div class="bars">
+    <p style="font-family:var(--mono);font-size:0.64rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.9rem">Everyone so far — answering “probably” or “yes”</p>
+    <div class="db"><div class="lab"><span>Arriving on your own</span><b>21%</b></div><div class="trk"><i id="b1" style="width:0;background:var(--ink-3)"></i></div></div>
+    <div class="db"><div class="lab"><span>Arriving with fifty other households</span><b>63%</b></div><div class="trk"><i id="b2" style="width:0;background:var(--sea)"></i></div></div>
+    <p class="gapnote">The gap — 42 points — is the one number this whole thing exists to find.</p>
+  </div>
+
+  <div class="bars">
+    <p style="font-family:var(--mono);font-size:0.64rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.9rem">What people say is standing in the way</p>
+    <div class="db"><div class="lab"><span>Could not earn enough there</span><b>24%</b></div><div class="trk"><i style="width:24%;background:var(--kaki)"></i></div></div>
+    <div class="db"><div class="lab"><span>Would not believe the work was really there</span><b>19%</b></div><div class="trk"><i style="width:19%;background:var(--kaki)"></i></div></div>
+    <div class="db"><div class="lab"><span>A partner, a parent, an employer</span><b>17%</b></div><div class="trk"><i style="width:17%;background:var(--kaki)"></i></div></div>
+    <div class="db"><div class="lab"><span>Could not risk being unable to return</span><b>14%</b></div><div class="trk"><i style="width:14%;background:var(--kaki)"></i></div></div>
+    <div class="db"><div class="lab"><span>Nothing, really. I would go.</span><b>8%</b></div><div class="trk"><i style="width:8%;background:var(--sea-2)"></i></div></div>
+  </div>
+
+  <div class="bars">
+    <p style="font-family:var(--mono);font-size:0.64rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.9rem">Do people think it could work</p>
+    <div class="db"><div class="lab"><span>Yes — and would want to be part of it</span><b>29%</b></div><div class="trk"><i style="width:29%;background:var(--sea)"></i></div></div>
+    <div class="db"><div class="lab"><span>Yes, though not for me personally</span><b>34%</b></div><div class="trk"><i style="width:34%;background:var(--sea-2)"></i></div></div>
+    <div class="db"><div class="lab"><span>Maybe, under conditions</span><b>22%</b></div><div class="trk"><i style="width:22%;background:var(--ink-3)"></i></div></div>
+    <div class="db"><div class="lab"><span>Probably not / no</span><b>15%</b></div><div class="trk"><i style="width:15%;background:var(--kaki)"></i></div></div>
+  </div>
+
+  <div class="said">
+    <p style="font-family:var(--mono);font-size:0.64rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.9rem">Some of what people wrote</p>
+    <blockquote>“If I knew even three families were going, I would stop treating it as a fantasy and start treating it as a plan.”<span>Setagaya · partner and children</span></blockquote>
+    <blockquote>“The problem was never the countryside. It is arriving somewhere as the only new person for a decade.”<span>Yokohama · on my own</span></blockquote>
+    <blockquote>“You are underestimating the existing residents. My grandmother's village would not welcome fifty outsiders at once, however nice they were. Talk to them first.”<span>Ōita · answering “probably not”</span></blockquote>
+    <blockquote>“Honestly no. I like being anonymous and I do not want to be known by everyone. But I hope it works for other people.”<span>Osaka · with a partner</span></blockquote>
+  </div>
+
+  <div class="reveal" style="background:var(--sea-soft);border-left-color:var(--sea)">
+    <span class="k" style="color:var(--sea)">What happens now</span>
+    <p style="margin-top:0.35rem">
+      Everything gets published back as numbers, updated as they come in — including the answers from
+      people who think this will not work, because a page showing only agreement is an advertisement.
+      If you left an email you will hear what came of it. If you offered to help, someone will
+      actually write to you.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>
+    Prototype of the instrument, not a live survey. The percentages, counts and quotes shown after
+    submitting are <b>invented</b> to demonstrate how results would be presented — no responses are
+    collected, stored or transmitted by this page. A real version would run in Japanese, collect
+    through a standard form service, and publish genuine results including the unflattering ones.
+  </p>
+</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var single = {}, multi = {};
+
+  document.querySelectorAll(".opts").forEach(function (group) {
+    var key = group.dataset.q;
+    var isMulti = group.classList.contains("multi");
+    var max = parseInt(group.dataset.max || "3", 10);
+    if (isMulti) multi[key] = [];
+
+    group.querySelectorAll(".opt").forEach(function (b) {
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () {
+        if (isMulti) {
+          var on = b.getAttribute("aria-pressed") === "true";
+          if (on) {
+            b.setAttribute("aria-pressed", "false");
+            multi[key] = multi[key].filter(function (v) { return v !== b.textContent.trim(); });
+          } else {
+            if (multi[key].length >= max) return;
+            b.setAttribute("aria-pressed", "true");
+            multi[key].push(b.textContent.trim());
+          }
+          var c = document.querySelector('.pickn[data-for="' + key + '"]');
+          if (c) c.textContent = multi[key].length + " of " + max + " chosen";
+        } else {
+          group.querySelectorAll(".opt").forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
+          b.setAttribute("aria-pressed", "true");
+          single[key] = b.textContent.trim();
+        }
+        check();
+      });
+    });
+  });
+
+  var go = document.getElementById("go"), need = document.getElementById("need");
+  function check() {
+    var ok = single.solo && single.coord;
+    go.disabled = !ok;
+    need.textContent = ok ? "Everything else is optional." : "Answer both questions in Part 4 to continue";
+  }
+
+  var SCALE = { "No": 0, "Unlikely": 1, "Maybe": 2, "Probably": 3, "Yes": 4 };
+
+  go.addEventListener("click", function () {
+    var d = SCALE[single.coord] - SCALE[single.solo];
+    var mine = document.getElementById("mine"), sub = document.getElementById("minesub");
+
+    if (d > 0) {
+      mine.textContent = "Coordination moved you " + d + (d === 1 ? " step." : " steps.");
+      sub.textContent = "On your own: “" + single.solo + "”. With fifty others: “" + single.coord +
+        "”. That shift is the thing we are trying to measure, and most people so far move the same way.";
+    } else if (d === 0) {
+      mine.textContent = "Coordination made no difference to you.";
+      sub.textContent = "You answered “" + single.solo + "” both times. That is genuinely useful — a " +
+        "survey that only hears from the people it convinces is not measuring anything.";
+    } else {
+      mine.textContent = "You would rather go alone.";
+      sub.textContent = "An unusual answer and a valuable one. Arriving with fifty other people is not " +
+        "everybody's idea of a good thing, and we would like to know why.";
+    }
+
+    document.getElementById("result").classList.add("on");
+    document.getElementById("form").style.display = "none";
+    document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(function () {
+      document.getElementById("b1").style.width = "21%";
+      document.getElementById("b2").style.width = "63%";
+    }, 220);
+  });
+})();
+</script>

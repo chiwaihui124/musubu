@@ -1,0 +1,516 @@
+<meta charset="utf-8">
+<title>Musubu — the mechanisms, drawn</title>
+
+<style>
+:root{
+  --paper:#F3F1E9; --card:#FAF8F2; --rule:#D7D2C4;
+  --ink:#1A1F24; --ink-2:#4C575E; --ink-3:#8A939A;
+  --acc:#C2551F; --acc-soft:#F1DED2;
+  --good:#3C6B4E;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#101418;--card:#171C21;--rule:#2A3239;
+    --ink:#E7E3D9;--ink-2:#A6B0B6;--ink-3:#6F7981;
+    --acc:#E0743F;--acc-soft:#2B1A12;--good:#7FA98C;}
+}
+:root[data-theme="light"]{--paper:#F3F1E9;--card:#FAF8F2;--rule:#D7D2C4;--ink:#1A1F24;--ink-2:#4C575E;--ink-3:#8A939A;--acc:#C2551F;--acc-soft:#F1DED2;--good:#3C6B4E;}
+:root[data-theme="dark"]{--paper:#101418;--card:#171C21;--rule:#2A3239;--ink:#E7E3D9;--ink-2:#A6B0B6;--ink-3:#6F7981;--acc:#E0743F;--acc-soft:#2B1A12;--good:#7FA98C;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:var(--display);font-weight:500;margin:0;line-height:1.2;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:56rem;margin-inline:auto;padding-inline:1.5rem}
+.narrow{max-width:37rem}
+header{padding-block:3rem 1rem}
+h1{font-size:clamp(1.9rem,4.6vw,2.5rem);letter-spacing:-0.02em}
+.sub{color:var(--ink-2);margin-top:1rem}
+.mock{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);padding:0.28rem 0.55rem;display:inline-block;margin-bottom:1.4rem}
+
+figure{margin:0;padding-block:2.6rem;border-top:1px solid var(--rule)}
+.fnum{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--acc);margin-bottom:0.6rem}
+figure h2{font-size:1.35rem;margin-bottom:0.7rem}
+.claim{color:var(--ink-2);max-width:37rem;margin-bottom:1.5rem}
+.figbox{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1.2rem;overflow-x:auto}
+svg{display:block;width:100%;height:auto;min-width:31rem}
+figcaption{font-size:0.85rem;color:var(--ink-3);margin-top:0.9rem;max-width:40rem}
+figcaption b{color:var(--ink-2);font-weight:600}
+.dlabel{font-family:var(--body);font-size:12px;fill:var(--ink)}
+.dsmall{font-family:var(--body);font-size:10.5px;fill:var(--ink-3)}
+.dmono{font-family:var(--mono);font-size:10px;fill:var(--ink-3)}
+.dacc{fill:var(--acc)}
+footer{padding-block:2rem 3.5rem;border-top:1px solid var(--rule)}
+footer p{font-size:0.78rem;color:var(--ink-3);max-width:42rem}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="mock">Musubu · reference sheet</span>
+  <h1>The mechanisms, drawn.</h1>
+  <p class="sub narrow">
+    Seven things this project argues that are genuinely hard to carry in a sentence. Each figure shows
+    a mechanism rather than naming one — where commitments flow, what changes between two options,
+    and which arrow disappears when a piece is removed.
+  </p>
+</header>
+
+<!-- ─────────────── 1 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 1 · what is actually wrong</div>
+  <h2>Nobody is waiting. Tokyo is simply the only option with a known shape.</h2>
+  <p class="claim">
+    Depopulation is not a standoff between people watching each other. It is two ordinary things
+    stacked: Tokyo is the default and everyone can picture it, while a town you have never lived in
+    cannot be assessed from outside — whether there is work, whether it is declining, whether you
+    would be the only one there. Choosing Tokyo is the rational move even for people who would
+    rather not.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 344" role="img" aria-label="Left: a person facing Tokyo, which is fully specified, and several rural towns rendered as question marks that cannot be assessed from outside. Right: the same person, with one town now specified — a date, a rent, named jobs, and twelve households already committed — so it can be compared to Tokyo on the same terms.">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="a1acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--acc)"/>
+        </marker>
+      </defs>
+
+      <text x="20" y="20" class="dmono">TODAY — ONE OPTION YOU CAN PICTURE</text>
+      <circle cx="46" cy="150" r="13" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <text x="46" y="180" text-anchor="middle" class="dsmall">you</text>
+
+      <line x1="64" y1="142" x2="180" y2="104" stroke="currentColor" stroke-width="1.6" marker-end="url(#a1)"/>
+      <rect x="186" y="60" width="230" height="86" rx="3" fill="var(--card)" stroke="currentColor" stroke-width="1.3"/>
+      <text x="301" y="82" text-anchor="middle" class="dlabel">Tokyo</text>
+      <g class="dsmall" text-anchor="middle">
+        <text x="301" y="102">work exists · you know the rent</text>
+        <text x="301" y="118">you know what a day looks like</text>
+        <text x="301" y="134">everyone you know can picture it</text>
+      </g>
+
+      <g stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.45" marker-end="url(#a1)">
+        <line x1="62" y1="164" x2="176" y2="206"/>
+        <line x1="62" y1="168" x2="176" y2="248"/>
+        <line x1="60" y1="172" x2="176" y2="288"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.55">
+        <rect x="182" y="190" width="82" height="32" rx="3"/>
+        <rect x="182" y="232" width="82" height="32" rx="3"/>
+        <rect x="182" y="272" width="82" height="32" rx="3"/>
+      </g>
+      <g class="dlabel" text-anchor="middle" opacity="0.6">
+        <text x="223" y="211">?</text><text x="223" y="253">?</text><text x="223" y="293">?</text>
+      </g>
+      <g class="dsmall">
+        <text x="276" y="200">Is there work? Is it declining?</text>
+        <text x="276" y="216">Would I be the only one?</text>
+        <text x="276" y="248">1,700 towns, none of which</text>
+        <text x="276" y="264">can be judged from outside</text>
+        <text x="276" y="296">so none of them is really an option</text>
+      </g>
+
+      <line x1="452" y1="34" x2="452" y2="310" stroke="currentColor" opacity="0.2" stroke-dasharray="4 4"/>
+
+      <text x="486" y="20" class="dmono">WITH COORDINATION — A SECOND THING ON THE MENU</text>
+      <circle cx="512" cy="150" r="13" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <text x="512" y="180" text-anchor="middle" class="dsmall">you</text>
+
+      <line x1="530" y1="140" x2="606" y2="112" stroke="currentColor" stroke-width="1.2" opacity="0.5" marker-end="url(#a1)"/>
+      <rect x="612" y="62" width="120" height="52" rx="3" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.55"/>
+      <text x="672" y="84" text-anchor="middle" class="dlabel" opacity="0.6">Tokyo</text>
+      <text x="672" y="102" text-anchor="middle" class="dsmall">still there, unchanged</text>
+
+      <line x1="532" y1="162" x2="606" y2="196" stroke="var(--acc)" stroke-width="1.8" marker-end="url(#a1acc)"/>
+      <rect x="612" y="150" width="232" height="126" rx="3" fill="var(--acc-soft)" stroke="var(--acc)" stroke-width="1.5"/>
+      <text x="628" y="174" class="dlabel" fill="var(--acc)">One town, fully specified</text>
+      <g class="dsmall" fill="var(--ink-2)">
+        <text x="628" y="196">30 households · arriving March</text>
+        <text x="628" y="214">6 jobs named, with wages</text>
+        <text x="628" y="232">¥38,000 · school · clinic</text>
+        <text x="628" y="250">12 committed so far — who they are</text>
+        <text x="628" y="268">nothing happens unless it fills</text>
+      </g>
+      <text x="566" y="170" text-anchor="middle" class="dsmall" fill="var(--acc)">assessable</text>
+      <text x="20" y="330" class="dsmall">The choice was never Tokyo versus the countryside. It was Tokyo versus a question mark.</text>
+    </svg>
+    <figcaption>
+      <b>What coordination adds is not persuasion — it is specification.</b> A town nobody can evaluate
+      is not an option, however good it is; it is a guess. Committing people together is what makes a
+      place describable in advance: who is coming, what the work pays, when it happens, and what
+      occurs if it does not fill. Tokyo is still on the page. It just stops being the only thing
+      anyone can picture.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 2 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 2 · why arriving together is a different product</div>
+  <h2>Loneliness is a geometry problem.</h2>
+  <p class="claim">
+    The difficulty of moving somewhere small is not the place. It is that one person arriving into an
+    established web has no edges on day one, and has to earn each of them slowly against people who
+    already have theirs.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 300" role="img" aria-label="Left: a single arrival next to an established town network has zero connections. Right: twenty people arriving together already share 190 connections between themselves before they arrive.">
+      <text x="12" y="20" class="dmono">ARRIVING ALONE</text>
+      <g stroke="currentColor" stroke-width="0.8" opacity="0.35">
+        <path d="M100 90 L150 74 M150 74 L206 96 M206 96 L188 154 M188 154 L128 168 M128 168 L100 90 M150 74 L188 154 M100 90 L188 154 M128 168 L206 96 M150 74 L128 168 M206 96 L100 90 M160 122 L100 90 M160 122 L206 96 M160 122 L128 168 M160 122 L150 74 M160 122 L188 154"/>
+      </g>
+      <g fill="currentColor" opacity="0.5">
+        <circle cx="100" cy="90" r="5"/><circle cx="150" cy="74" r="5"/><circle cx="206" cy="96" r="5"/>
+        <circle cx="188" cy="154" r="5"/><circle cx="128" cy="168" r="5"/><circle cx="160" cy="122" r="5"/>
+      </g>
+      <text x="153" y="204" text-anchor="middle" class="dsmall">the town, already connected</text>
+      <circle cx="308" cy="122" r="7" fill="var(--acc)"/>
+      <text x="308" y="152" text-anchor="middle" class="dlabel" fill="var(--acc)">you</text>
+      <line x1="222" y1="122" x2="292" y2="122" stroke="var(--acc)" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.55"/>
+      <text x="257" y="112" text-anchor="middle" class="dsmall" fill="var(--acc)">years</text>
+      <text x="308" y="238" text-anchor="middle" class="dmono" fill="var(--acc)">0 CONNECTIONS ON DAY ONE</text>
+
+      <line x1="404" y1="34" x2="404" y2="272" stroke="currentColor" opacity="0.2" stroke-dasharray="4 4"/>
+
+      <text x="452" y="20" class="dmono">ARRIVING TOGETHER</text>
+      <g stroke="currentColor" stroke-width="0.8" opacity="0.3">
+        <path d="M492 92 L540 76 M540 76 L594 98 M594 98 L578 154 M578 154 L520 168 M520 168 L492 92 M540 76 L578 154 M492 92 L578 154 M520 168 L594 98 M552 124 L492 92 M552 124 L594 98 M552 124 L520 168 M552 124 L540 76"/>
+      </g>
+      <g fill="currentColor" opacity="0.45">
+        <circle cx="492" cy="92" r="5"/><circle cx="540" cy="76" r="5"/><circle cx="594" cy="98" r="5"/>
+        <circle cx="578" cy="154" r="5"/><circle cx="520" cy="168" r="5"/><circle cx="552" cy="124" r="5"/>
+      </g>
+      <text x="543" y="204" text-anchor="middle" class="dsmall">the town</text>
+
+      <g stroke="var(--acc)" stroke-width="0.55" opacity="0.5">
+        <path d="M700 62 L760 78 M700 62 L672 108 M700 62 L744 130 M700 62 L806 116 M760 78 L672 108 M760 78 L744 130 M760 78 L806 116 M760 78 L716 168 M672 108 L744 130 M672 108 L716 168 M672 108 L788 176 M744 130 L806 116 M744 130 L716 168 M744 130 L788 176 M806 116 L788 176 M716 168 L788 176 M700 62 L716 168 M760 78 L788 176 M672 108 L806 116 M744 130 L700 62"/>
+      </g>
+      <g fill="var(--acc)">
+        <circle cx="700" cy="62" r="5.5"/><circle cx="760" cy="78" r="5.5"/><circle cx="672" cy="108" r="5.5"/>
+        <circle cx="744" cy="130" r="5.5"/><circle cx="806" cy="116" r="5.5"/><circle cx="716" cy="168" r="5.5"/>
+        <circle cx="788" cy="176" r="5.5"/>
+      </g>
+      <line x1="614" y1="122" x2="654" y2="118" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+      <text x="740" y="222" text-anchor="middle" class="dmono" fill="var(--acc)">EVERY ARRIVAL LINKED TO EVERY OTHER</text>
+      <text x="740" y="240" text-anchor="middle" class="dsmall">seven drawn · formed before anyone moves</text>
+    </svg>
+    <figcaption>
+      <b>A cohort of twenty shares 190 links on day one</b> — n(n−1)/2, none of which had to be earned
+      from an established group. Seven are drawn here because twenty would be an unreadable hairball,
+      which is itself the point. Nobody is the only new person. This is the good that cannot be bought
+      individually, because it does not exist unless everyone arrives at once.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 3 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 3 · why timing beats targeting</div>
+  <h2>Relocation is a state, not a trait.</h2>
+  <p class="claim">
+    The addressable population is not "people who like the countryside." It is people whose life is
+    already in motion — and that set empties and refills every year.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 300" role="img" aria-label="Twelve horizontal life-lines, each with a short highlighted window when moving is cheap. A vertical line marks today, crossing only the few windows currently open.">
+      <text x="12" y="20" class="dmono">TWELVE LIVES · A DECADE</text>
+      <g stroke="currentColor" opacity="0.22" stroke-width="1">
+        <line x1="120" y1="46" x2="820" y2="46"/><line x1="120" y1="66" x2="820" y2="66"/>
+        <line x1="120" y1="86" x2="820" y2="86"/><line x1="120" y1="106" x2="820" y2="106"/>
+        <line x1="120" y1="126" x2="820" y2="126"/><line x1="120" y1="146" x2="820" y2="146"/>
+        <line x1="120" y1="166" x2="820" y2="166"/><line x1="120" y1="186" x2="820" y2="186"/>
+        <line x1="120" y1="206" x2="820" y2="206"/><line x1="120" y1="226" x2="820" y2="226"/>
+        <line x1="120" y1="246" x2="820" y2="246"/><line x1="120" y1="266" x2="820" y2="266"/>
+      </g>
+      <g stroke="var(--acc)" stroke-width="5" stroke-linecap="round">
+        <line x1="196" y1="46" x2="268" y2="46"/><line x1="612" y1="46" x2="668" y2="46"/>
+        <line x1="392" y1="66" x2="452" y2="66"/>
+        <line x1="286" y1="86" x2="344" y2="86"/><line x1="700" y1="86" x2="762" y2="86"/>
+        <line x1="486" y1="106" x2="548" y2="106"/>
+        <line x1="152" y1="126" x2="212" y2="126"/><line x1="528" y1="126" x2="588" y2="126"/>
+        <line x1="618" y1="146" x2="682" y2="146"/>
+        <line x1="342" y1="166" x2="404" y2="166"/><line x1="744" y1="166" x2="800" y2="166"/>
+        <line x1="466" y1="186" x2="524" y2="186"/>
+        <line x1="238" y1="206" x2="296" y2="206"/><line x1="656" y1="206" x2="712" y2="206"/>
+        <line x1="558" y1="226" x2="616" y2="226"/>
+        <line x1="182" y1="246" x2="240" y2="246"/><line x1="424" y1="246" x2="486" y2="246"/>
+        <line x1="504" y1="266" x2="562" y2="266"/>
+      </g>
+      <g class="dsmall" text-anchor="end" fill="var(--ink-3)">
+        <text x="112" y="50">first child</text><text x="112" y="70">job ends</text>
+        <text x="112" y="90">breakup</text><text x="112" y="110">burnout</text>
+        <text x="112" y="130">graduating</text><text x="112" y="150">now remote</text>
+        <text x="112" y="170">kids leave</text><text x="112" y="190">parent needs care</text>
+        <text x="112" y="210">retiring</text><text x="112" y="230">bereavement</text>
+        <text x="112" y="250">new relationship</text><text x="112" y="270">first child</text>
+      </g>
+      <line x1="530" y1="34" x2="530" y2="284" stroke="currentColor" stroke-width="1.4"/>
+      <text x="530" y="30" text-anchor="middle" class="dmono">TODAY</text>
+      <text x="120" y="288" class="dsmall">each bar is a window when the costs of moving are already being paid</text>
+    </svg>
+    <figcaption>
+      <b>Only the bars crossing the line are reachable today — but the bars move.</b> A campaign aimed
+      at a demographic misses most of them; one that catches people at the hinge reaches a set that
+      refills every year. Knowing <i>when</i> someone is matters more than knowing who they are.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 4 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 4 · what the product actually removes</div>
+  <h2>Five negotiations that can each fail, or one decision.</h2>
+  <p class="claim">
+    Almost all the friction in relocating is assembly friction. Every platform in existence makes you
+    source the parts yourself and hope the dates line up.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 290" role="img" aria-label="Left: a person connected separately to work, housing, timing, travel and return, each an independent negotiation that can fail. Right: the same five bundled into one package with a single accept or decline.">
+      <defs>
+        <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="a4acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--acc)"/>
+        </marker>
+      </defs>
+
+      <text x="12" y="20" class="dmono">TODAY — FIVE SEPARATE PROBLEMS</text>
+      <circle cx="56" cy="150" r="17" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <text x="56" y="188" text-anchor="middle" class="dsmall">you</text>
+      <g stroke="currentColor" stroke-width="1.1" fill="none" marker-end="url(#a4)" opacity="0.8">
+        <path d="M74 138 C 130 96, 150 70, 196 62"/>
+        <path d="M76 144 C 130 122, 150 106, 196 102"/>
+        <path d="M76 150 L196 148"/>
+        <path d="M76 158 C 130 178, 150 186, 196 190"/>
+        <path d="M74 164 C 130 204, 150 222, 196 232"/>
+      </g>
+      <g fill="var(--card)" stroke="currentColor" stroke-width="1.1">
+        <rect x="198" y="46" width="112" height="30" rx="3"/>
+        <rect x="198" y="88" width="112" height="30" rx="3"/>
+        <rect x="198" y="134" width="112" height="30" rx="3"/>
+        <rect x="198" y="176" width="112" height="30" rx="3"/>
+        <rect x="198" y="218" width="112" height="30" rx="3"/>
+      </g>
+      <g class="dlabel" text-anchor="middle">
+        <text x="254" y="65">Work</text><text x="254" y="107">Housing</text>
+        <text x="254" y="153">Timing</text><text x="254" y="195">Travel</text>
+        <text x="254" y="237">Coming back</text>
+      </g>
+      <g fill="var(--acc)" class="dmono" text-anchor="middle" style="font-size:13px">
+        <text x="330" y="66">✕</text><text x="330" y="108">✕</text><text x="330" y="154">✕</text>
+        <text x="330" y="196">✕</text><text x="330" y="238">✕</text>
+      </g>
+      <text x="330" y="268" text-anchor="middle" class="dsmall" fill="var(--acc)">any one can fail alone</text>
+
+      <line x1="400" y1="34" x2="400" y2="266" stroke="currentColor" opacity="0.2" stroke-dasharray="4 4"/>
+
+      <text x="450" y="20" class="dmono">COORDINATED — ONE OBJECT</text>
+      <circle cx="490" cy="150" r="17" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <text x="490" y="188" text-anchor="middle" class="dsmall">you</text>
+      <rect x="562" y="52" width="196" height="196" rx="4" fill="var(--acc-soft)" stroke="var(--acc)" stroke-width="1.5"/>
+      <text x="660" y="76" text-anchor="middle" class="dlabel" fill="var(--acc)">the package</text>
+      <g class="dsmall" text-anchor="middle" fill="var(--ink-2)">
+        <text x="660" y="104">Work · ¥312,000</text>
+        <text x="660" y="126">Room · included</text>
+        <text x="660" y="148">Nine months, fixed</text>
+        <text x="660" y="170">Two trips home</text>
+        <text x="660" y="192">Decide at month seven</text>
+      </g>
+      <line x1="660" y1="208" x2="660" y2="208" stroke="var(--acc)"/>
+      <text x="660" y="228" text-anchor="middle" class="dmono" fill="var(--acc)">ACCEPT / DECLINE</text>
+      <line x1="510" y1="150" x2="554" y2="150" stroke="var(--acc)" stroke-width="1.6" marker-end="url(#a4acc)"/>
+      <text x="532" y="140" text-anchor="middle" class="dsmall" fill="var(--acc)">one</text>
+      <text x="770" y="150" class="dsmall">assembled</text>
+      <text x="770" y="166" class="dsmall">by someone else</text>
+    </svg>
+    <figcaption>
+      <b>Five independent failure points collapse into one decision.</b> Nothing about the countryside
+      changed — only who does the assembly. The last line matters most: <i>decide at month seven, not
+      now</i> is what removes the irreversibility fear that no subsidy can touch.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 5 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 5 · the flywheel</div>
+  <h2>Each cohort builds the housing the next cohort moves into.</h2>
+  <p class="claim">
+    Renovation labour is the largest cost in the model and skilled trades are the scarcest input.
+    Trained cohorts solve both — and then feed the next town.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 300" role="img" aria-label="A five-step cycle: cohort one trains in carpentry, builds the houses, cohort two moves into them, cohort one's certified skills enter the availability register, and the register staffs the next town's crew, returning to the start.">
+      <defs>
+        <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--acc)"/>
+        </marker>
+      </defs>
+      <g fill="var(--card)" stroke="currentColor" stroke-width="1.2">
+        <rect x="40" y="118" width="132" height="52" rx="3"/>
+        <rect x="228" y="42" width="132" height="52" rx="3"/>
+        <rect x="416" y="118" width="132" height="52" rx="3"/>
+        <rect x="604" y="42" width="132" height="52" rx="3"/>
+        <rect x="700" y="196" width="150" height="52" rx="3"/>
+      </g>
+      <g class="dlabel" text-anchor="middle">
+        <text x="106" y="140">Cohort 1 arrives</text><text x="106" y="158" class="dsmall">to learn a trade</text>
+        <text x="294" y="64">They build the houses</text><text x="294" y="82" class="dsmall">supervised, paid</text>
+        <text x="482" y="140">Cohort 2 moves in</text><text x="482" y="158" class="dsmall">to finished homes</text>
+        <text x="670" y="64">Skills are certified</text><text x="670" y="82" class="dsmall">and entered in the register</text>
+        <text x="775" y="218">Next town needs a crew</text><text x="775" y="236" class="dsmall">the register already knows who</text>
+      </g>
+      <g stroke="var(--acc)" fill="none" stroke-width="1.4" marker-end="url(#a5)">
+        <path d="M150 116 C 176 88, 198 70, 222 68"/>
+        <path d="M362 70 C 388 74, 402 100, 414 128"/>
+        <path d="M550 132 C 578 116, 584 82, 600 70"/>
+        <path d="M736 74 C 790 82, 800 152, 786 190"/>
+        <path d="M698 226 C 470 268, 180 246, 106 178"/>
+      </g>
+      <g class="dsmall" fill="var(--acc)" text-anchor="middle">
+        <text x="176" y="82">months 1–6</text>
+        <text x="402" y="96">months 6–18</text>
+        <text x="588" y="98">on completion</text>
+        <text x="820" y="136">portable</text>
+        <text x="420" y="282">or they stay, and teach cohort 3</text>
+      </g>
+    </svg>
+    <figcaption>
+      <b>The loop closes on itself.</b> The circulating-labour layer stops depending on skilled people
+      happening to appear and starts generating its own supply — which is the only self-feeding
+      mechanism anywhere in the model.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 6 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 6 · what the data is actually for</div>
+  <h2>A private wall becomes a public number becomes a policy.</h2>
+  <p class="claim">
+    Every ministry has heard that people would consider leaving Tokyo. Nobody has a ranked map of
+    what specifically stops them — and policy is written against obstacles, not desires.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 250" role="img" aria-label="A flow from one person naming a personal obstacle, through aggregation with hundreds of others, to a ranked national map, handed off to a ministry or town who act, after which the obstacle is removed and the option exists for the original person.">
+      <defs>
+        <marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="a6acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--acc)"/>
+        </marker>
+      </defs>
+      <g fill="var(--card)" stroke="currentColor" stroke-width="1.2">
+        <rect x="16" y="74" width="132" height="56" rx="3"/>
+        <rect x="196" y="74" width="132" height="56" rx="3"/>
+        <rect x="376" y="74" width="132" height="56" rx="3"/>
+        <rect x="608" y="74" width="132" height="56" rx="3"/>
+      </g>
+      <g class="dlabel" text-anchor="middle">
+        <text x="82" y="98">One person</text><text x="82" y="116" class="dsmall">“my mother needs care”</text>
+        <text x="262" y="98">412 people</text><text x="262" y="116" class="dsmall">said the same wall</text>
+        <text x="442" y="98">Ranked map</text><text x="442" y="116" class="dsmall">by segment, by region</text>
+        <text x="674" y="98">The wall moves</text><text x="674" y="116" class="dsmall">placements, hours, rules</text>
+      </g>
+      <g stroke="currentColor" fill="none" stroke-width="1.2" marker-end="url(#a6)">
+        <line x1="150" y1="102" x2="192" y2="102"/>
+        <line x1="330" y1="102" x2="372" y2="102"/>
+      </g>
+      <g class="dsmall" text-anchor="middle">
+        <text x="171" y="92">aggregate</text>
+        <text x="351" y="92">rank</text>
+      </g>
+
+      <rect x="524" y="52" width="72" height="100" rx="3" fill="none" stroke="var(--acc)" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="560" y="80" text-anchor="middle" class="dsmall" fill="var(--acc)">ministry</text>
+      <text x="560" y="98" text-anchor="middle" class="dsmall" fill="var(--acc)">prefecture</text>
+      <text x="560" y="116" text-anchor="middle" class="dsmall" fill="var(--acc)">town</text>
+      <text x="560" y="170" text-anchor="middle" class="dmono" fill="var(--acc)">NOT MUSUBU</text>
+      <line x1="510" y1="102" x2="520" y2="102" stroke="var(--acc)" stroke-width="1.2" marker-end="url(#a6acc)"/>
+      <line x1="598" y1="102" x2="604" y2="102" stroke="var(--acc)" stroke-width="1.2" marker-end="url(#a6acc)"/>
+
+      <path d="M674 134 C 674 200, 300 214, 84 138" stroke="var(--acc)" fill="none" stroke-width="1.4" marker-end="url(#a6acc)"/>
+      <text x="392" y="206" text-anchor="middle" class="dsmall" fill="var(--acc)">the option now exists for the person who named it</text>
+      <text x="16" y="34" class="dmono">BEING HEARD → OPTIONS EXISTING</text>
+    </svg>
+    <figcaption>
+      <b>The dashed box is the honest part.</b> Musubu cannot change a rule or fund a placement — it can
+      only produce the evidence and hand it to someone who can. Naming that handoff is what makes the
+      loop credible rather than magical.
+    </figcaption>
+  </div>
+</figure>
+
+<!-- ─────────────── 7 ─────────────── -->
+<figure>
+  <div class="fnum">Figure 7 · how a thing gets built, or doesn't</div>
+  <h2>Everything on the map is one of these states.</h2>
+  <p class="claim">
+    A house, a bakery, a reopened kindergarten and a nine-month work cohort are the same object with
+    different contents — which is why one interaction learned once works everywhere.
+  </p>
+  <div class="figbox">
+    <svg viewBox="0 0 880 230" role="img" aria-label="A state machine: proposed leads to gathering, which leads either to threshold met, committed, building and open, or branches to lapsed with deposits returned, from which it can be proposed again.">
+      <defs>
+        <marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="a7acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--acc)"/>
+        </marker>
+      </defs>
+      <g fill="var(--card)" stroke="currentColor" stroke-width="1.2">
+        <rect x="14" y="52" width="104" height="38" rx="3"/>
+        <rect x="158" y="52" width="104" height="38" rx="3"/>
+        <rect x="302" y="52" width="112" height="38" rx="3"/>
+        <rect x="454" y="52" width="104" height="38" rx="3"/>
+        <rect x="598" y="52" width="104" height="38" rx="3"/>
+        <rect x="742" y="52" width="104" height="38" rx="3"/>
+      </g>
+      <g class="dlabel" text-anchor="middle">
+        <text x="66" y="76">Proposed</text><text x="210" y="76">Gathering</text>
+        <text x="358" y="76">Threshold met</text><text x="506" y="76">Building</text>
+        <text x="650" y="76">Open</text><text x="794" y="76">Full</text>
+      </g>
+      <g stroke="currentColor" fill="none" stroke-width="1.2" marker-end="url(#a7)">
+        <line x1="120" y1="71" x2="154" y2="71"/>
+        <line x1="264" y1="71" x2="298" y2="71"/>
+        <line x1="416" y1="71" x2="450" y2="71"/>
+        <line x1="560" y1="71" x2="594" y2="71"/>
+        <line x1="704" y1="71" x2="738" y2="71"/>
+      </g>
+      <g class="dsmall" text-anchor="middle">
+        <text x="137" y="42">interest</text><text x="281" y="42">the number</text>
+        <text x="433" y="42">funds release</text><text x="577" y="42">work starts</text>
+        <text x="721" y="42">waitlist</text>
+      </g>
+      <rect x="158" y="152" width="132" height="38" rx="3" fill="none" stroke="var(--acc)" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="224" y="176" text-anchor="middle" class="dlabel" fill="var(--acc)">Lapsed</text>
+      <path d="M210 94 L216 148" stroke="var(--acc)" fill="none" stroke-width="1.3" marker-end="url(#a7acc)"/>
+      <text x="298" y="124" class="dsmall" fill="var(--acc)">deadline passed</text>
+      <path d="M158 171 C 86 171, 62 128, 64 96" stroke="var(--acc)" fill="none" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#a7acc)"/>
+      <text x="66" y="196" text-anchor="middle" class="dsmall" fill="var(--acc)">can be proposed again</text>
+      <text x="298" y="176" class="dsmall">deposits returned · stays visible on the map</text>
+      <text x="14" y="26" class="dmono">TILE STATES</text>
+    </svg>
+    <figcaption>
+      <b>Lapsed is a state, not a deletion.</b> A tile that failed keeps its number and stays on the
+      map, because a map with no failures on it is an advertisement — and the argument this project
+      makes about honesty has to survive contact with its own data model.
+    </figcaption>
+  </div>
+</figure>
+
+<footer>
+  <p>
+    Speculative project material. Figures 1–7 depict mechanisms proposed by the Musubu project;
+    the numbers used as examples are illustrative and unverified. Nothing here has been implemented
+    or agreed with any municipality.
+  </p>
+</footer>
+</div>

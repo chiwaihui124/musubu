@@ -1,0 +1,173 @@
+<meta charset="utf-8">
+<title>An idea about empty towns — and a favour</title>
+
+<style>
+:root{
+  --paper:#F6F4EE; --ink:#1C2126; --ink-2:#4E565C; --ink-3:#868E94;
+  --rule:#DCD8CC; --accent:#B4501F; --accent-soft:#F2E2D8; --card:#FCFBF7;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#12161A;--ink:#E8E4DA;--ink-2:#A6AEB4;--ink-3:#727A80;
+    --rule:#2B333A;--accent:#E0743F;--accent-soft:#2C1B13;--card:#191E23;}
+}
+:root[data-theme="light"]{--paper:#F6F4EE;--ink:#1C2126;--ink-2:#4E565C;--ink-3:#868E94;--rule:#DCD8CC;--accent:#B4501F;--accent-soft:#F2E2D8;--card:#FCFBF7;}
+:root[data-theme="dark"]{--paper:#12161A;--ink:#E8E4DA;--ink-2:#A6AEB4;--ink-3:#727A80;--rule:#2B333A;--accent:#E0743F;--accent-soft:#2C1B13;--card:#191E23;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.wrap{max-width:33rem;margin-inline:auto;padding:2.5rem 1.5rem 4rem}
+h1{font-family:var(--serif);font-weight:500;font-size:1.75rem;line-height:1.25;letter-spacing:-0.01em;margin:0 0 1.2rem;text-wrap:balance}
+h2{font-family:var(--sans);font-weight:600;font-size:1rem;margin:2.4rem 0 0.7rem;letter-spacing:0}
+p{margin:0 0 1rem}
+strong{font-weight:600}
+.meta{font-size:0.83rem;color:var(--ink-3);margin-bottom:1.6rem}
+
+.notice{background:var(--accent-soft);border-left:2px solid var(--accent);
+  padding:0.85rem 1rem;margin:1.6rem 0;font-size:0.92rem;color:var(--ink-2);border-radius:0 3px 3px 0}
+.notice strong{color:var(--ink)}
+
+ol.how{list-style:none;counter-reset:h;margin:0.4rem 0 1.4rem;padding:0}
+ol.how li{counter-increment:h;position:relative;padding-left:2rem;margin-bottom:0.75rem;font-size:0.97rem;color:var(--ink-2)}
+ol.how li::before{content:counter(h);position:absolute;left:0;top:0.1rem;
+  font-family:ui-monospace,Menlo,monospace;font-size:0.78rem;color:var(--accent)}
+ol.how li b{color:var(--ink);font-weight:600}
+
+.example{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.1rem 1.15rem;margin:1.3rem 0;font-size:0.94rem;color:var(--ink-2)}
+.example p{margin:0 0 0.6rem}
+.example p:last-child{margin:0}
+.example b{color:var(--ink)}
+
+ol.ask{list-style:none;counter-reset:q;margin:1rem 0 0;padding:0}
+ol.ask li{counter-increment:q;position:relative;padding-left:2rem;margin-bottom:1.15rem}
+ol.ask li::before{content:counter(q);position:absolute;left:0;top:0.15rem;
+  font-family:ui-monospace,Menlo,monospace;font-size:0.78rem;color:var(--accent)}
+ol.ask .q{font-weight:600;font-size:0.98rem}
+ol.ask .why{font-size:0.87rem;color:var(--ink-3);margin-top:0.15rem}
+
+.cta{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule)}
+.btn{display:inline-block;font-family:inherit;font-size:0.95rem;font-weight:600;
+  padding:0.7rem 1.3rem;border-radius:3px;background:var(--accent);color:var(--paper);
+  text-decoration:none;border:1px solid var(--accent)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.alt{font-size:0.9rem;color:var(--ink-2);margin-top:0.9rem}
+.forward{background:var(--card);border:1px dashed var(--rule);border-radius:3px;
+  padding:0.9rem 1rem;margin-top:1.4rem;font-size:0.9rem;color:var(--ink-2)}
+.forward b{color:var(--ink)}
+
+footer{margin-top:2.5rem;padding-top:1.3rem;border-top:1px solid var(--rule);font-size:0.8rem;color:var(--ink-3)}
+</style>
+
+<div class="wrap">
+
+  <h1>Nine hundred Japanese towns are on track to disappear. Here is an idea, and I would like to know what is wrong with it.</h1>
+
+  <p class="meta">About three minutes to read. Nothing to sign up for.</p>
+
+  <p>
+    Ask people whether they would live somewhere quieter, with more time and a house they could
+    afford, and a lot of them say yes. Almost nobody goes.
+  </p>
+
+  <p>
+    I do not think that is because people prefer cities. I think it is because <strong>Tokyo is the
+    only option with a shape you can picture.</strong> There are around 1,700 municipalities and you
+    cannot tell, from outside, which one has work you could do, which one is quietly emptying, or
+    whether you would end up being the only new person there for ten years. A town you cannot judge
+    is not really an option. It is a guess, and people are right to refuse a guess.
+  </p>
+
+  <div class="notice">
+    <strong>This does not exist.</strong> No town has agreed to anything, there is no company, and
+    nobody is being recruited. It is an idea I have been working on, and I am at the point where I
+    need people to tell me what is wrong with it before I go any further.
+  </div>
+
+  <h2>The idea</h2>
+
+  <ol class="how">
+    <li><b>A town says what it is short of</b> — not a brochure. Two teachers. Six people who will learn a building trade. Families with young children, and here is the housing we would hold for them.</li>
+    <li><b>People commit conditionally.</b> You say: I will go, <em>if</em> thirty other households go. A deposit is held. Nothing happens yet.</li>
+    <li><b>The number is public.</b> You can watch it move, and see roughly who else is in — how many families, what people do, who your neighbours would be.</li>
+    <li><b>You meet before you move.</b> Months of it. Visits, meals, questions. The community forms first, and the moving happens after.</li>
+    <li><b>It fills, or it does not.</b> If it fills, everyone goes in the same season. If it does not, the money goes back and nobody has moved anywhere.</li>
+  </ol>
+
+  <p>
+    The point is not to persuade anyone that the countryside is nice. It is that arriving somewhere
+    with thirty other households is a completely different thing from arriving alone — nobody is
+    already on the inside, and nobody is the only new person.
+  </p>
+
+  <h2>What it would look like</h2>
+
+  <div class="example">
+    <p>
+      A town of about five thousand people. A school, a clinic, a shop, work you could actually do.
+      Rent around <b>¥38,000</b> for a whole house.
+    </p>
+    <p>
+      Thirty households arrive the same spring. Six of them are learning carpentry from local
+      builders who are close to retiring and have no successors. Someone opens a café in a shopfront
+      that has been empty for eleven years, because forty households have already said they would be
+      customers. A kindergarten that closed in 2019 reopens, because there are suddenly enough
+      children.
+    </p>
+    <p>
+      Nobody's commute is more than ten minutes.
+    </p>
+  </div>
+
+  <h2>What I am actually asking</h2>
+
+  <p>
+    Not whether you would move. <strong>I need the version you would say to someone else, not the
+    version you would say to me.</strong> If you think it is naive, that is the most useful thing
+    you could tell me.
+  </p>
+
+  <ol class="ask">
+    <li>
+      <div class="q">Can you explain back what you think this is?</div>
+      <div class="why">If it does not survive being explained in one sentence, nothing else matters.</div>
+    </li>
+    <li>
+      <div class="q">What is the first thing that seems wrong, or naive?</div>
+      <div class="why">Whatever came to mind while reading. That first reaction is the useful one.</div>
+    </li>
+    <li>
+      <div class="q">Who does this remind you of?</div>
+      <div class="why">Someone you know who might actually want this — or someone who would hate it.</div>
+    </li>
+    <li>
+      <div class="q">Which words feel wrong?</div>
+      <div class="why">Anything that sounds foreign, or like marketing, or like it was written by someone who does not live here.</div>
+    </li>
+  </ol>
+
+  <div class="cta">
+    <a class="btn" href="#REPLACE-WITH-FORM-LINK">Answer these — 3 minutes, private</a>
+    <p class="alt">
+      You can answer anonymously. Or just reply to me directly, which is completely fine —
+      whichever is easier.
+    </p>
+  </div>
+
+  <div class="forward">
+    <b>If this made you think of someone, please send it to them.</b> Especially if you think they
+    would disagree with it. People who are not connected to me are more useful than people who are,
+    because they have no reason to be nice about it.
+  </div>
+
+  <footer>
+    <p>
+      An independent project, not connected to any company or government body. Bungotakada, Ōita is
+      being studied as a possible first location, but nothing has been proposed to the city and no
+      figures on this page have been agreed with anyone. The rent, the town size and the example are
+      illustrative.
+    </p>
+  </footer>
+
+</div>

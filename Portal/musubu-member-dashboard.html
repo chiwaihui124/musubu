@@ -1,0 +1,492 @@
+<meta charset="utf-8">
+<title>Musubu — 会員ダッシュボード / member dashboard</title>
+
+<style>
+:root {
+  --ground:#EFEDE6; --card:#F8F7F2; --card-2:#E5E2D8; --rule:#D6D2C6;
+  --ink:#1B2029; --ink-2:#4E5765; --ink-3:#838C99;
+  --accent:#B4501F; --accent-soft:#F0DFD4;
+  --good:#4E7048; --good-soft:#DFE7DA;
+  --dark-card:#171C24; --dark-card-ink:#E4E0D6;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,Meiryo,sans-serif;
+  --body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ground:#10141A; --card:#171C24; --card-2:#1F2530; --rule:#2B3340;
+    --ink:#E4E0D6; --ink-2:#A9B2C0; --ink-3:#6E7885;
+    --accent:#E0703F; --accent-soft:#35211A; --good:#8CA87C; --good-soft:#1D2620;
+    --dark-card:#0B0E13; }
+}
+:root[data-theme="light"]{--ground:#EFEDE6;--card:#F8F7F2;--card-2:#E5E2D8;--rule:#D6D2C6;--ink:#1B2029;--ink-2:#4E5765;--ink-3:#838C99;--accent:#B4501F;--accent-soft:#F0DFD4;--good:#4E7048;--good-soft:#DFE7DA;--dark-card:#171C24;}
+:root[data-theme="dark"]{--ground:#10141A;--card:#171C24;--card-2:#1F2530;--rule:#2B3340;--ink:#E4E0D6;--ink-2:#A9B2C0;--ink-3:#6E7885;--accent:#E0703F;--accent-soft:#35211A;--good:#8CA87C;--good-soft:#1D2620;--dark-card:#0B0E13;}
+
+*{box-sizing:border-box;}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body.ja{font-family:var(--jp);line-height:1.8;}
+h1,h2,h3{font-weight:500;margin:0;line-height:1.25;text-wrap:balance;font-family:var(--display);}
+body.ja h1,body.ja h2,body.ja h3{font-family:var(--jp);font-weight:600;}
+p{margin:0;}
+.shell{max-width:78rem;margin-inline:auto;padding:1.75rem 1.5rem 4rem;}
+.mock{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:0.28rem 0.55rem;display:inline-block;}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.3rem;}
+.lang{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden;}
+.lang button{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.06em;padding:0.32rem 0.7rem;border:0;background:transparent;color:var(--ink-3);cursor:pointer;}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--ground);}
+
+.who{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-bottom:1.1rem;border-bottom:1px solid var(--rule);margin-bottom:1.4rem;}
+.who h1{font-size:1.85rem;letter-spacing:-0.01em;}
+.who .sub{color:var(--ink-2);font-size:0.88rem;margin-top:0.25rem;}
+.arc{display:flex;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;}
+body.ja .arc{font-family:var(--jp);font-size:0.68rem;letter-spacing:0.02em;text-transform:none;}
+.arc span{padding:0.28rem 0.6rem;color:var(--ink-3);border-bottom:2px solid var(--rule);white-space:nowrap;}
+.arc span.done{color:var(--ink-2);border-bottom-color:var(--ink-3);}
+.arc span.now{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+
+.ctl{display:flex;gap:0.5rem;align-items:baseline;margin-bottom:1.1rem;}
+.ctl .lbl{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);}
+body.ja .ctl .lbl{font-family:var(--jp);letter-spacing:0.04em;text-transform:none;font-size:0.72rem;}
+.hint{font-size:0.72rem;color:var(--ink-3);margin-left:auto;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:1rem;align-items:start;}
+.mod{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:0.75rem;cursor:grab;}
+.mod.wide{grid-column:span 2;}
+@media (max-width:44rem){.mod.wide{grid-column:span 1;}}
+.mod.dragging{opacity:0.35;}
+.mod.over{outline:2px dashed var(--accent);outline-offset:2px;}
+.mod header{display:flex;align-items:baseline;justify-content:space-between;gap:0.7rem;}
+.mtitle{font-family:var(--mono);font-size:0.61rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);}
+body.ja .mtitle{font-family:var(--jp);letter-spacing:0.04em;text-transform:none;font-size:0.72rem;}
+.mod h2{font-size:1.1rem;}
+.mod p{font-size:0.85rem;color:var(--ink-2);}
+.why{font-family:var(--mono);font-size:0.65rem;color:var(--accent);border-top:1px solid var(--rule);padding-top:0.55rem;margin-top:auto;}
+body.ja .why{font-family:var(--jp);font-size:0.75rem;line-height:1.6;}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+.big{font-size:2rem;letter-spacing:-0.02em;}
+.pill{display:inline-block;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.07em;text-transform:uppercase;padding:0.15rem 0.42rem;border-radius:2px;white-space:nowrap;}
+body.ja .pill{font-family:var(--jp);letter-spacing:0.02em;text-transform:none;font-size:0.68rem;}
+.pill.acc{background:var(--accent);color:var(--card);}
+.pill.good{background:var(--good);color:var(--card);}
+.pill.quiet{background:var(--card-2);color:var(--ink-2);}
+
+.wall{border-left:2px solid var(--rule);padding-left:0.8rem;}
+.wall.cleared{border-left-color:var(--good);}
+.wall.live{border-left-color:var(--accent);}
+.wall .type{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-3);}
+body.ja .wall .type{font-family:var(--jp);letter-spacing:0.02em;text-transform:none;font-size:0.68rem;}
+.wall .w{font-size:0.85rem;color:var(--ink);margin-top:0.1rem;}
+.wall .r{font-size:0.79rem;color:var(--ink-2);margin-top:0.15rem;}
+.wall .when{font-family:var(--mono);font-size:0.63rem;color:var(--ink-3);margin-top:0.2rem;}
+body.ja .wall .when{font-family:var(--jp);font-size:0.72rem;}
+
+.offer{background:var(--accent-soft);border:1px solid var(--accent);border-radius:3px;padding:0.85rem 0.95rem;}
+.offer .rows{display:grid;grid-template-columns:5.6rem 1fr;gap:0.3rem 0.7rem;font-size:0.81rem;margin-top:0.55rem;}
+.offer .k{font-family:var(--mono);font-size:0.61rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);padding-top:0.15rem;}
+body.ja .offer .k{font-family:var(--jp);letter-spacing:0.02em;text-transform:none;font-size:0.72rem;}
+.actions{display:flex;gap:0.5rem;margin-top:0.8rem;flex-wrap:wrap;}
+.btn{font-size:0.82rem;padding:0.45rem 0.85rem;border-radius:3px;border:1px solid var(--accent);cursor:pointer;font-family:inherit;}
+.btn.primary{background:var(--accent);color:var(--card);}
+.btn.ghost{background:transparent;color:var(--accent);}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+
+.kids{display:flex;flex-wrap:wrap;gap:0.28rem;}
+.kid{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--card-2);font-size:0.55rem;display:flex;align-items:center;justify-content:center;color:var(--ink-2);}
+.kid.here{background:var(--accent);color:var(--card);}
+.kid.soon{background:transparent;border:1px dashed var(--accent);color:var(--accent);}
+
+.feed{display:flex;flex-direction:column;gap:0.55rem;}
+.ev{display:grid;grid-template-columns:3.6rem 1fr;gap:0.65rem;font-size:0.83rem;}
+.ev .t{font-family:var(--mono);font-size:0.64rem;color:var(--ink-3);padding-top:0.15rem;}
+body.ja .ev .t{font-family:var(--jp);font-size:0.73rem;}
+.ev .d{color:var(--ink-2);}
+.ev .d b{color:var(--ink);font-weight:600;}
+.ev.mine .d b{color:var(--accent);}
+
+.bars{display:flex;flex-direction:column;gap:0.45rem;}
+.brow{font-size:0.75rem;}
+.brow .lab{display:flex;justify-content:space-between;color:var(--ink-2);margin-bottom:0.18rem;}
+.track{height:6px;background:var(--card-2);border-radius:3px;overflow:hidden;}
+.track i{display:block;height:100%;border-radius:3px;}
+
+.mapmod{background:var(--dark-card);border-color:var(--dark-card);color:var(--dark-card-ink);}
+.mapmod .mtitle,.mapmod p{color:#8B94A2;}
+.mapmod h2{color:var(--dark-card-ink);}
+.mapmod .why{color:#E0703F;border-top-color:#2A3038;}
+#minimap{width:100%;height:auto;display:block;border-radius:3px;}
+.stake{display:flex;justify-content:space-between;font-size:0.79rem;color:#B4BDC9;padding:0.28rem 0;border-bottom:1px solid #262C35;}
+.stake:last-of-type{border-bottom:0;}
+.stake .n{font-family:var(--mono);color:#E0703F;}
+
+.town{display:flex;align-items:baseline;gap:0.6rem;font-size:0.83rem;padding:0.4rem 0;border-bottom:1px solid var(--rule);}
+.town:last-child{border-bottom:0;}
+.town .meta{font-family:var(--mono);font-size:0.64rem;color:var(--ink-3);margin-left:auto;white-space:nowrap;}
+body.ja .town .meta{font-family:var(--jp);font-size:0.73rem;}
+
+.give{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem 1rem;}
+.give .n{font-family:var(--mono);font-size:1.15rem;}
+.give .l{font-size:0.72rem;color:var(--ink-3);line-height:1.4;}
+
+/* browse + compare */
+.axes{display:flex;flex-direction:column;gap:0.5rem;}
+.axis{display:flex;gap:0.3rem;flex-wrap:wrap;align-items:center;}
+.axis .an{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-3);width:4.6rem;flex:none;}
+body.ja .axis .an{font-family:var(--jp);letter-spacing:0.02em;text-transform:none;font-size:0.7rem;}
+.chip{font-size:0.72rem;padding:0.2rem 0.5rem;border-radius:2px;border:1px solid var(--rule);background:transparent;color:var(--ink-2);cursor:pointer;font-family:inherit;}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--card);border-color:var(--accent);}
+.results{display:flex;flex-direction:column;gap:0.15rem;margin-top:0.3rem;}
+.res{display:flex;align-items:center;gap:0.6rem;font-size:0.83rem;padding:0.4rem 0.5rem;border:1px solid transparent;border-radius:3px;cursor:pointer;background:transparent;width:100%;text-align:left;font-family:inherit;color:var(--ink);}
+.res:hover{background:var(--card-2);}
+.res[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);}
+.res .meta{font-family:var(--mono);font-size:0.63rem;color:var(--ink-3);margin-left:auto;}
+body.ja .res .meta{font-family:var(--jp);font-size:0.72rem;}
+.cmp{display:grid;grid-template-columns:6.2rem 1fr 1fr;gap:0.25rem 0.7rem;font-size:0.79rem;margin-top:0.7rem;border-top:1px solid var(--rule);padding-top:0.7rem;}
+.cmp .k{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);padding-top:0.12rem;}
+body.ja .cmp .k{font-family:var(--jp);letter-spacing:0.02em;text-transform:none;font-size:0.7rem;}
+.cmp .h{font-weight:600;color:var(--ink);}
+
+footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding-top:1.3rem;}
+footer p{font-size:0.78rem;color:var(--ink-3);max-width:46rem;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="shell">
+  <div class="topbar">
+    <span class="mock" id="mockLabel"></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="bJa" aria-pressed="true">日本語</button>
+      <button id="bEn" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <div class="who">
+    <div><h1 id="name"></h1><p class="sub" id="sub"></p></div>
+    <div class="arc" id="arc"></div>
+  </div>
+
+  <div class="ctl"><span class="lbl" id="ctlLbl"></span><span class="hint" id="hint"></span></div>
+  <div class="grid" id="grid"></div>
+
+  <footer><p id="foot"></p></footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var lang = "ja";
+  var T = {
+    ja: {
+      mock: "架空の会員によるモックアップ · 実データではありません",
+      name: "中村 葵", sub: "豊後高田市 · 2029年3月着 · 会員5年目、在住3年目",
+      arc: ["気になる", "参加を決めた", "到着", "根づいた", "世話人"],
+      ctl: "自分のモジュール", hint: "カードをドラッグして並べ替え",
+      foot: "会員が見る画面はどうあるべきかを、ひとりの架空の人物のために組んだものです。中村葵は実在せず、数値もすべて架空です。示したいのは構造 — 自分で並べ替えるモジュール、組み立て済みで届く提案、そして「絞り込むためのデータ」ではなく「何をつくるかを決めるデータ」としてのプロフィールです。"
+    },
+    en: {
+      mock: "Speculative mockup · fictional member · no real data",
+      name: "Nakamura Aoi", sub: "Bungotakada · arrived March 2029 · five years a member, three years here",
+      arc: ["Curious", "Committed", "Arrived", "Rooted", "Steward"],
+      ctl: "Your modules", hint: "Drag any card to rearrange",
+      foot: "A mockup of what the member surface could be, built for one invented person so the ideas have somewhere to land. Nakamura Aoi does not exist and none of these figures are real. The point is the structure: modules a member arranges, offers that arrive pre-assembled, and a profile that is an input to what gets built rather than only a filter on what gets shown."
+    }
+  };
+
+  var TOWNS = [
+    { id:"namie", ja:"浪江町 · 福島", en:"Namie, Fukushima", stage:["30s"], work:["build"], set:["coast"], aff:["heritage"],
+      meta_ja:"9か月パッケージ", meta_en:"9-mo package",
+      pop:"21,400", rent:"¥0（込み）", rent_en:"¥0 (included)", kids:"31", ja_note:"再建の現場。若い職人が多い。", en_note:"Reconstruction site. Skews young and trade-heavy." },
+    { id:"kotoura", ja:"琴浦町 · 鳥取", en:"Kotoura, Tottori", stage:["family"], work:["farm"], set:["coast"], aff:["food"],
+      meta_ja:"シェアハウス 空き3", meta_en:"share house · 3 rooms",
+      pop:"16,200", rent:"¥34,000", rent_en:"¥34,000", kids:"58", ja_note:"漁と農。子育て世帯が中心。", en_note:"Fishing and farming. Mostly families." },
+    { id:"imabari", ja:"今治市 · 愛媛", en:"Imabari, Ehime", stage:["20s","30s"], work:["build","make"], set:["coast"], aff:["craft"],
+      meta_ja:"型枠の仕事 · 4〜6月", meta_en:"framing work · Q2",
+      pop:"152,000", rent:"¥46,000", rent_en:"¥46,000", kids:"210", ja_note:"造船とタオル。町としては大きい。", en_note:"Shipbuilding and towels. Much larger town." },
+    { id:"shirakawa", ja:"白川町 · 岐阜", en:"Shirakawa, Gifu", stage:["family","50s"], work:["farm","make"], set:["forest"], aff:["craft"],
+      meta_ja:"募集中 12/30", meta_en:"gathering · 12/30",
+      pop:"7,800", rent:"¥28,000", rent_en:"¥28,000", kids:"19", ja_note:"山と林業。いちばん静か。", en_note:"Mountains and forestry. The quietest option." }
+  ];
+
+  var AXES = [
+    { id:"stage", ja:"暮らしの段階", en:"Life stage", opts:[["20s","20代","20s"],["30s","30代","30s"],["family","子育て","Family"],["50s","50代〜","50s+"]] },
+    { id:"work",  ja:"仕事",         en:"Work",       opts:[["build","建設・大工","Building"],["farm","農・漁","Farming"],["make","ものづくり","Making"]] },
+    { id:"set",   ja:"場所",         en:"Setting",    opts:[["coast","海のそば","Coast"],["forest","山・森","Forest"]] },
+    { id:"aff",   ja:"共通の関心",    en:"Affinity",   opts:[["craft","伝統技術","Craft"],["food","食","Food"],["heritage","再建","Rebuilding"]] }
+  ];
+
+  var filters = {}, picked = [];
+
+  function L(o, k) { return lang === "ja" ? o[k + "_ja"] || o.ja : o[k + "_en"] || o.en; }
+
+  var MODULES = [
+    { id:"wall", render: function () {
+      return h("壁になっていること","Your obstacles", pill("1つ解消","1 cleared","good"),
+        "壁がひとつ、なくなりました。","One of your walls came down.",
+        '<div class="wall cleared"><p class="type">'+t("家族の事情","Family")+'</p>' +
+        '<p class="w">'+t("母の介護。","Your mother needing care.")+'</p>' +
+        '<p class="r">'+t("新町の家から徒歩8分に介護施設が開きました。見ていた3町のうち2町で受け入れ可能です。","An eldercare placement opened eight minutes from the Shinmachi houses. Two of the three towns you were watching can now take her.")+'</p>' +
+        '<p class="when">'+t("2027年に記入 · 2031年3月に解消","Written down 2027 · cleared March 2031")+'</p></div>' +
+        '<div class="wall live"><p class="type">'+t("仕事","Work")+'</p>' +
+        '<p class="w">'+t("蓮さんの勤務が週3日、福岡に固定。","Ren’s work is still tied to Fukuoka three days a week.")+'</p>' +
+        '<p class="r">'+t("ここは変わっていません。ただ、前回確認以降に2社が週2日勤務に移行しました。","Nothing has changed here. Two employers in the network have moved to a two-day pattern since you last looked.")+'</p>' +
+        '<p class="when">'+t("未解決 · 最終確認は4か月前","Still open · last reviewed 4 months ago")+'</p></div>' +
+        '<div class="wall live"><p class="type">'+t("制度","Policy")+'</p>' +
+        '<p class="w">'+t("9か月不在のあいだの住民票と就学の扱い。","Residency and school registration during a nine-month absence.")+'</p>' +
+        '<p class="r">'+t("同じ壁を挙げた人が全国で412人。自治体に持ち込む材料になります。","412 members nationally named this same wall. That is what gets taken to a ministry.")+'</p>' +
+        '<p class="when">'+t("制度側の課題 · 412人が同じ回答","A policy blocker · 412 members agree")+'</p></div>',
+        t("ここに書いたことは、しまい込まれません。","Nothing here is stored and forgotten."));
+    }},
+
+    { id:"offer", wide:true, render: function () {
+      return h("あなたへの提案","An offer for you", pill("あと9日","expires in 9 days","acc"),
+        "浪江町で9か月。住まいと仕事と帰り道が、ひとつの決定に。","Nine months in Namie. Housing, work and the way back, in one decision.",
+        '<p>'+t("型枠を組める人が6人必要です。昨年あなたが2度その講習を受け持ったので、公開前に届いています。","They need six people who can frame. You taught the framing module twice last year, which is why this reached you before it was posted publicly.")+'</p>' +
+        '<div class="offer"><div class="rows">' +
+        row("仕事","Work", t("浪江町復興 · 構造材 · 月312,000円","Structural timber, Namie reconstruction · ¥312,000/mo")) +
+        row("住まい","Housing", t("請戸シェアハウスの個室 · 家賃なし（差引なし）","Room in the Ukedo share house · included, not deducted")) +
+        row("期間","Term", t("9か月 · 2033年1月〜9月 · 一括で受諾","Nine months, Jan–Sep 2033 · single accept")) +
+        row("移動","Travel", t("帰省2往復ぶん支給","Two return trips home covered")) +
+        row("ひな","Hina", t("豊後高田の学籍は保持 · 家もそのまま","School place held in Bungotakada · your house is kept")) +
+        row("その後","Afterwards", t("戻る・延長・住む — 7か月目に決めます。いま決めません。","Return, extend, or stay — decided at month seven, not now")) +
+        '</div><div class="actions">' +
+        '<button class="btn primary" type="button">'+t("この提案を受ける","Accept the package")+'</button>' +
+        '<button class="btn ghost" type="button">'+t("まず質問する","Ask about it first")+'</button>' +
+        '</div></div>',
+        t("探すのではなく、組み立てて届きます。住まいを自分で解決する必要はありません。","Assembled, not searched. You are not being asked to solve the housing yourself."));
+    }},
+
+    { id:"browse", wide:true, render: function () {
+      return h("町をさがす","Browse and compare", pill(TOWNS.length+t("件","towns"),TOWNS.length+" towns","quiet"),
+        "4つの軸で絞り、2つまで並べて見られます。","Filter on four axes. Hold two side by side.",
+        '<div class="axes" id="axes"></div><div class="results" id="results"></div><div id="cmp"></div>',
+        t("町は在庫ではありません。どの軸で選んだかも、あなたのプロフィールに戻ります。","Towns are not inventory. Which axis you filtered on goes back into your profile too."));
+    }},
+
+    { id:"hina", render: function () {
+      return h("ひな · 6歳","Hina · age 6","",
+        "ひなが8歳になるまでに、同い年の子どもが11人来ます。","Eleven children her age are arriving before she turns eight.",
+        '<div class="kids" id="kids"></div>' +
+        '<p style="font-size:0.78rem;"><span style="color:var(--accent)">■</span> '+t("いま在住","here now")+' &nbsp; <span style="color:var(--accent)">▫</span> '+t("参加確定・到着予定","committed, arriving")+'</p>' +
+        '<p>'+t("成蹊幼稚園は今年74人。2028年はゼロでした。到着予定の2家族が柔道と回答しています — 夏祭りからずっと言っていたことです。","Seikei has 74 children this year — it had none in 2028. Two of the arriving families listed judo, which she has been asking about since the summer festival.")+'</p>',
+        t("親がほんとうに知りたいのは、友だちができるかどうかです。それに答えられるのはここだけです。","The question every parent actually asks is whether their child will have friends. This is the only place that can answer it."));
+    }},
+
+    { id:"week", render: function () {
+      return h("今週 · 高田","This week · Takada", pill("6件","6 things","quiet"),
+        "","",
+        '<div class="feed">' +
+        ev("今夜","TONIGHT", t("<b>公民館で持ち寄り夕食</b> · 19時、作るなら18時。17人参加。","<b>Potluck at the hall</b> · 7pm, come at 6 if you want to cook. 17 going."),false) +
+        ev("水","WED", t("<b>生協の当番</b> · あなたの番です。7〜9時。","<b>Your co-op shift</b> · yours this week. 7–9am."),true) +
+        ev("木","THU", t("<b>型枠 3週目</b> · あなたが教えます。弟子6人、うち1人は新顔。","<b>Framing, week 3</b> · you are teaching. Six apprentices, one new."),true) +
+        ev("金","FRI", t("<b>日本語教室（無料）</b> · 介護スタッフ向け。手伝える人を募集中。","<b>Free Japanese class</b> · for the care staff. Helpers wanted."),false) +
+        ev("土","SAT", t("<b>朝市</b> · 山下さんが柿を出します。7時に手伝い募集。","<b>Farmers market</b> · Yamashita-san has persimmons and wants help at 7am."),false) +
+        ev("日","SUN", t("<b>昭和の町 週末</b> · 通りが着替えます。ひなは行列に出ます。","<b>Shōwa weekend</b> · the street dresses. Hina is in the parade."),false) +
+        '</div>',
+        t("大阪の見知らぬ人が見るのと同じ画面です。それが人を動かします。","Same feed a stranger in Osaka sees. That is what convinces them."));
+    }},
+
+    { id:"map", dark:true, render: function () {
+      return h("豊後高田 · 関わっている件","Bungotakada · what you have a stake in","",
+        "あなたが関わっている2件が、まだ人を募っています。","Two things you are invested in are still gathering.",
+        '<svg id="minimap" viewBox="0 0 320 170" role="img" aria-label="'+t("土地利用図","Land use map")+'"></svg>' +
+        '<div style="margin-top:0.3rem;">' +
+        '<div class="stake"><span>'+t("パン屋（保証人）","Bakery · you vouched")+'</span><span class="n">31 / 40</span></div>' +
+        '<div class="stake"><span>'+t("第3住宅群（不成立）","Third cluster · lapsed")+'</span><span class="n">19 / 30</span></div>' +
+        '<div class="stake"><span>'+t("共同工房（出資済）","Workshop · you funded")+'</span><span class="n">'+t("開設済","open")+'</span></div>' +
+        '</div>',
+        t("共同工房を成立させた34人のうちの1人が、あなたです。","Your commitment is one of the 34 that made the workshop exist."));
+    }},
+
+    { id:"time", render: function () {
+      return h("時間","Time","",
+        '<span class="num big">4,180</span> '+t("時間","hours"), '<span class="num big">4,180</span> hours',
+        '<p>'+t("2029年以降、世田谷の1週間が奪っていた分と比べて戻ってきた時間です。174日ぶん。","Returned to you since 2029, against what your Setagaya week was costing. That is 174 days.")+'</p>' +
+        '<div class="bars">' +
+        bar(t("通勤（当時）","Commuting, then"),"11.5","96%","var(--ink-3)") +
+        bar(t("通勤（いま）","Commuting, now"),"1.2","10%","var(--accent)") +
+        bar(t("自分の、起きている、誰にも取られない時間","Yours, awake, unclaimed"),"31","74%","var(--good)") +
+        '</div>',
+        t("2027年にあなたが答えた数字と比べています。比較の相手はあなた自身です。","You answered these questions in 2027. The comparison is to your own answers."));
+    }},
+
+    { id:"given", render: function () {
+      return h("これまでの貢献","Your standing", pill("根づいた","Rooted","quiet"),
+        "あと2人の推薦で、提案する側になれます。","Two more vouches and you can propose a tile.",
+        '<div class="give">' +
+        give("2", t("講習を受け持った回数 · 型枠","cohorts taught — framing")) +
+        give("9", t("受け入れた見学者","trial visitors hosted")) +
+        give("4", t("推薦した到着者","arrivals vouched for")) +
+        give("31", t("公民館の当番","hall shifts")) +
+        '</div>',
+        t("上の段階で開くのは機能ではなく責任です。買えるものはひとつもありません。","Tiers unlock responsibility, not features. Nothing here was bought."));
+    }},
+
+    { id:"where", render: function () {
+      return h("ほかの町","Elsewhere in the network", pill("14の町","14 towns","quiet"),
+        "ここに縛られてはいません。","You are not stuck here.",
+        '<div>' + TOWNS.map(function (x) {
+          return '<div class="town"><span>'+(lang==="ja"?x.ja:x.en)+'</span><span class="meta">'+(lang==="ja"?x.meta_ja:x.meta_en)+'</span></div>';
+        }).join("") + '</div>',
+        t("出ていけると知っていることが、留まる理由の大きな部分です。","Knowing you could leave is a large part of why people stay."));
+    }}
+  ];
+
+  function t(ja, en) { return lang === "ja" ? ja : en; }
+  function pill(ja, en, cls) { return ja ? '<span class="pill '+cls+'">'+t(ja,en)+'</span>' : ""; }
+  function row(kja, ken, v) { return '<span class="k">'+t(kja,ken)+'</span><span>'+v+'</span>'; }
+  function ev(tja, ten, d, mine) { return '<div class="ev'+(mine?' mine':'')+'"><span class="t">'+t(tja,ten)+'</span><span class="d">'+d+'</span></div>'; }
+  function bar(l, n, w, c) { return '<div class="brow"><div class="lab"><span>'+l+'</span><span class="num">'+n+' h/wk</span></div><div class="track"><i style="width:'+w+';background:'+c+'"></i></div></div>'; }
+  function give(n, l) { return '<div><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+  function h(tja, ten, p, hja, hen, body, why) {
+    return '<header><span class="mtitle">'+t(tja,ten)+'</span>'+(p||"")+'</header>' +
+      (t(hja,hen) ? '<h2>'+t(hja,hen)+'</h2>' : "") + body +
+      (why ? '<p class="why">'+why+'</p>' : "");
+  }
+
+  var grid = document.getElementById("grid");
+  var order = MODULES.map(function (m) { return m.id; });
+
+  function paint() {
+    document.body.className = lang === "ja" ? "ja" : "";
+    var s = T[lang];
+    document.getElementById("mockLabel").textContent = s.mock;
+    document.getElementById("name").textContent = s.name;
+    document.getElementById("sub").textContent = s.sub;
+    document.getElementById("ctlLbl").textContent = s.ctl;
+    document.getElementById("hint").textContent = s.hint;
+    document.getElementById("foot").textContent = s.foot;
+    document.getElementById("arc").innerHTML = s.arc.map(function (a, i) {
+      return '<span class="'+(i<3?"done":i===3?"now":"")+'">'+a+'</span>';
+    }).join("");
+    document.getElementById("bJa").setAttribute("aria-pressed", lang === "ja");
+    document.getElementById("bEn").setAttribute("aria-pressed", lang === "en");
+
+    grid.innerHTML = "";
+    order.forEach(function (id) {
+      var m = MODULES.filter(function (x) { return x.id === id; })[0];
+      if (!m) return;
+      var el = document.createElement("section");
+      el.className = "mod" + (m.wide ? " wide" : "") + (m.dark ? " mapmod" : "");
+      el.setAttribute("draggable", "true");
+      el.dataset.id = m.id;
+      el.innerHTML = m.render();
+      grid.appendChild(el);
+    });
+    paintKids(); paintMap(); paintBrowse(); wireDrag();
+  }
+
+  function paintKids() {
+    var b = document.getElementById("kids"); if (!b) return;
+    b.innerHTML = "";
+    for (var i = 0; i < 19; i++) {
+      var d = document.createElement("span");
+      d.className = "kid " + (i < 8 ? "here" : "soon");
+      d.textContent = i < 8 ? "●" : "○";
+      b.appendChild(d);
+    }
+  }
+
+  function paintMap() {
+    var s = document.getElementById("minimap"); if (!s) return;
+    var NS = "http://www.w3.org/2000/svg"; s.innerHTML = "";
+    function add(tag, a) { var e = document.createElementNS(NS, tag); Object.keys(a).forEach(function (k) { e.setAttribute(k, a[k]); }); s.appendChild(e); return e; }
+    add("rect", { width:320, height:170, fill:"#1A1F27" });
+    add("path", { d:"M0 0 L320 0 L320 16 Q230 26 190 36 Q152 48 140 66 L58 78 L0 68 Z", fill:"#141920" });
+    add("path", { d:"M212 60 Q262 48 320 56 L320 170 L196 170 Q204 116 212 60 Z", fill:"#1D232A" });
+    add("path", { d:"M312 156 Q252 142 220 124 Q186 108 162 102 Q146 98 144 84 Q142 66 144 50", stroke:"#2C333C", "stroke-width":4, fill:"none", "stroke-linecap":"round" });
+    [[14,62,56,42],[16,110,64,46],[46,140,56,26]].forEach(function (r) {
+      add("rect", { x:r[0], y:r[1], width:r[2], height:r[3], fill:"#22272C", stroke:"#3A424C", "stroke-width":0.5 });
+    });
+    [[132,110,20,15],[150,88,18,13],[168,106,22,16],[122,128,17,12],[178,84,16,12],[196,116,19,14],[158,126,17,13],[142,72,15,11]].forEach(function (r, i) {
+      add("rect", { x:r[0], y:r[1], width:r[2], height:r[3], fill:i%3===0?"#8C472C":(i%3===1?"#7A4028":"#6B3822"), stroke:"#1A1F27", "stroke-width":0.8 });
+    });
+    // the two you have a stake in — full accent, ringed
+    add("rect", { x:186, y:140, width:18, height:14, fill:"#E0703F", stroke:"#F3B393", "stroke-width":1.4 });
+    add("rect", { x:104, y:94, width:20, height:15, fill:"none", stroke:"#E0703F", "stroke-width":1.4, "stroke-dasharray":"4 3" });
+  }
+
+  function paintBrowse() {
+    var ax = document.getElementById("axes"); if (!ax) return;
+    ax.innerHTML = "";
+    AXES.forEach(function (a) {
+      var d = document.createElement("div"); d.className = "axis";
+      d.innerHTML = '<span class="an">'+(lang==="ja"?a.ja:a.en)+'</span>';
+      a.opts.forEach(function (o) {
+        var b = document.createElement("button");
+        b.className = "chip"; b.type = "button";
+        b.textContent = lang === "ja" ? o[1] : o[2];
+        b.setAttribute("aria-pressed", filters[a.id] === o[0]);
+        b.addEventListener("click", function () {
+          filters[a.id] = filters[a.id] === o[0] ? null : o[0];
+          paintBrowse();
+        });
+        d.appendChild(b);
+      });
+      ax.appendChild(d);
+    });
+
+    var hits = TOWNS.filter(function (x) {
+      return AXES.every(function (a) { return !filters[a.id] || x[a.id].indexOf(filters[a.id]) >= 0; });
+    });
+
+    var rs = document.getElementById("results"); rs.innerHTML = "";
+    hits.forEach(function (x) {
+      var b = document.createElement("button");
+      b.className = "res"; b.type = "button";
+      b.setAttribute("aria-pressed", picked.indexOf(x.id) >= 0);
+      b.innerHTML = '<span>'+(lang==="ja"?x.ja:x.en)+'</span><span class="meta">'+(lang==="ja"?x.meta_ja:x.meta_en)+'</span>';
+      b.addEventListener("click", function () {
+        var i = picked.indexOf(x.id);
+        if (i >= 0) picked.splice(i, 1);
+        else { picked.push(x.id); if (picked.length > 2) picked.shift(); }
+        paintBrowse();
+      });
+      rs.appendChild(b);
+    });
+    if (!hits.length) rs.innerHTML = '<p style="font-size:0.8rem;color:var(--ink-3)">'+t("この組み合わせに合う町はまだありません。だからこそ、その回答が次に何をつくるかを決めます。","No town matches this combination yet — which is exactly how the next one gets built.")+'</p>';
+
+    var c = document.getElementById("cmp"); c.innerHTML = "";
+    if (picked.length === 2) {
+      var A = TOWNS.filter(function (x) { return x.id === picked[0]; })[0];
+      var B = TOWNS.filter(function (x) { return x.id === picked[1]; })[0];
+      c.innerHTML = '<div class="cmp">' +
+        '<span class="k"></span><span class="h">'+(lang==="ja"?A.ja:A.en)+'</span><span class="h">'+(lang==="ja"?B.ja:B.en)+'</span>' +
+        '<span class="k">'+t("人口","Population")+'</span><span class="num">'+A.pop+'</span><span class="num">'+B.pop+'</span>' +
+        '<span class="k">'+t("家賃","Rent")+'</span><span class="num">'+(lang==="ja"?A.rent:A.rent_en)+'</span><span class="num">'+(lang==="ja"?B.rent:B.rent_en)+'</span>' +
+        '<span class="k">'+t("6〜8歳の子","Kids 6–8")+'</span><span class="num">'+A.kids+'</span><span class="num">'+B.kids+'</span>' +
+        '<span class="k">'+t("様子","Character")+'</span><span>'+(lang==="ja"?A.ja_note:A.en_note)+'</span><span>'+(lang==="ja"?B.ja_note:B.en_note)+'</span>' +
+        '</div>';
+    } else {
+      c.innerHTML = '<p style="font-size:0.76rem;color:var(--ink-3);margin-top:0.55rem;">'+t("2つ選ぶと並べて比べられます。","Select two to hold them side by side.")+'</p>';
+    }
+  }
+
+  var dragId = null;
+  function wireDrag() {
+    [].forEach.call(grid.children, function (el) {
+      el.addEventListener("dragstart", function (e) {
+        dragId = el.dataset.id; el.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+        try { e.dataTransfer.setData("text/plain", dragId); } catch (err) {}
+      });
+      el.addEventListener("dragend", function () { el.classList.remove("dragging"); clearOver(); });
+      el.addEventListener("dragover", function (e) { e.preventDefault(); clearOver(); el.classList.add("over"); });
+      el.addEventListener("dragleave", function () { el.classList.remove("over"); });
+      el.addEventListener("drop", function (e) {
+        e.preventDefault(); clearOver();
+        var target = el.dataset.id;
+        if (!dragId || dragId === target) return;
+        var f = order.indexOf(dragId), o = order.indexOf(target);
+        order.splice(f, 1); order.splice(o, 0, dragId);
+        paint();
+      });
+    });
+  }
+  function clearOver() { [].forEach.call(grid.querySelectorAll(".over"), function (n) { n.classList.remove("over"); }); }
+
+  document.getElementById("bJa").addEventListener("click", function () { lang = "ja"; paint(); });
+  document.getElementById("bEn").addEventListener("click", function () { lang = "en"; paint(); });
+
+  paint();
+})();
+</script>

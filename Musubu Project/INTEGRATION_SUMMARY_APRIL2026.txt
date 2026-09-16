@@ -1,0 +1,64 @@
+MUSUBU PROJECT INTEGRATION — APRIL 2026
+========================================
+
+Three new documents have been integrated into the project structure:
+
+1. 02_Platform/musubu_platform_intelligence.md
+   ├─ Core insight: Oak House resident composition model
+   ├─ Two-layer community profile system (declared direction + revealed interest)
+   ├─ Town Intelligence Dashboard (4 tabs: Demand, Life Stage, Priorities, Direction)
+   ├─ Survey as intelligence product (most valuable market research tool for towns)
+   ├─ Living intelligence model (4 data layers over time)
+   ├─ "What made people leap" conversion optimization
+   ├─ Public composition display (self-selection mechanism)
+   ├─ Cold start solution via declared direction
+   ├─ Platform clustering effects
+   ├─ Data moat principle
+   └─ MVP vs Phase 2 features clearly delineated
+
+2. 02_Platform/musubu_platform_roadmap.md
+   ├─ Phase 1 (MVP, months 0–12): Core platform, survey, commitment flow, limited intelligence
+   ├─ Phase 2 (months 12–24): Intelligence maturity, behavioral data, fit scores, caretaker matching
+   ├─ Phase 3+ (year 2+): National coordination infrastructure, clustering, predictive layer
+   ├─ Success metrics by phase
+   ├─ Resource allocation across phases
+   └─ Open questions organized by phase (Phase 1 to solve before launch, Phase 2, Phase 3 strategic)
+
+3. 04_Pilot_Towns/musubu_eldercare_wellness_town.md
+   ├─ New archetype for Pilot 2–3 (not Pilot 1)
+   ├─ Addresses 36M elderly, 600K+ in isolation, 380K caretaker shortage
+   ├─ Physical design philosophy: walkability, community gardens, central clinic, housing variety
+   ├─ Multicultural integration as central (not peripheral): housing, food culture, language, remittance
+   ├─ Caretaker retention as structural problem solver (2–3 years → 70%+ at 2 years)
+   ├─ Economic model more stable than other archetypes (pension income floor)
+   ├─ Portal design (composition, daily texture, proof-of-life moments)
+   ├─ Matching dimensions (elderly ↔ town, caretaker ↔ town, family ↔ town)
+   ├─ Risk/mitigation pairs
+   ├─ Success metrics at 12 months, 3 years
+   └─ Open questions for Phase 2 development
+
+CHANGES TO EXISTING FILES:
+
+README.md
+├─ Updated folder structure to show new files
+├─ Added summaries for platform_intelligence.md, platform_roadmap.md, eldercare_wellness_town.md
+├─ Enhanced "Key Themes" section to include data moat, community vibe, multicultural integration
+└─ Updated "Last organized" line to April 24, 2026
+
+07_Ideas_and_Future/musubu_future_development_notes.md
+├─ Added new section: "Phase 2 Research Questions (Months 12–24)"
+├─ Migrated open questions from platform_intelligence.md (fit score, direction updates, composition visibility, etc.)
+├─ Migrated open questions from eldercare_wellness_town.md (family decision-making, caretaker recruitment, etc.)
+├─ Added adult children decision-making subsection
+└─ Preserved all existing items (messaging refinements, design principles, Phase 2 features, partnerships)
+
+STRATEGIC IMPLICATIONS:
+
+• MVP is now clearly scoped: Platform Intelligence Dashboard launches with declared direction + limited intelligence
+• Phase 2 opens the full power: fit scores, behavioral data, quarterly pipeline view, caretaker matching
+• Eldercare archetype provides high-demand, economically stable proof point for later pilots
+• Data moat argument is complete: survey → behavior → commitment → post-move intelligence cycle creates strategic advantage
+• Multicultural integration is no longer optional; it's central to economic viability
+• Phase 2 research questions are now explicitly documented and parking-lotted, not scattered
+
+All documents are cross-referenced and connected to the main README spine.

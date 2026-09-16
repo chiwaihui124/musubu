@@ -1,0 +1,707 @@
+<title>Musubu — a coordination problem, not a preference problem</title>
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   Musubu pitch page
+   Palette: aizome indigo (the working-cloth blue of rural Japan),
+   unbleached washi, kaki persimmon for thresholds, moss for committed.
+   Type: Palatino-class serif display / system sans body / mono for counts.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --ink:        #1B2A4A;
+  --ink-2:      #46577A;
+  --ink-3:      #7C89A3;
+  --paper:      #F2F1E9;
+  --paper-2:    #E8E6DB;
+  --rule:       #D3D1C4;
+  --persimmon:  #B84F26;
+  --moss:       #5C7850;
+  --band:       #1B2A4A;
+  --band-ink:   #EFEDE3;
+  --band-ink-2: #9FAAC2;
+
+  --sea:   #C3D3D8;
+  --land:  #E9E7DC;
+  --hill:  #DCDFCE;
+  --river: #A8C2CE;
+  --road:  #DCCFA8;
+
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --col: 34rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:        #E6E3D9;
+    --ink-2:      #B0B8CA;
+    --ink-3:      #7C89A3;
+    --paper:      #131A29;
+    --paper-2:    #1B2436;
+    --rule:       #2C3648;
+    --persimmon:  #DE7748;
+    --moss:       #8CA87C;
+    --band:       #0D1220;
+    --band-ink:   #E6E3D9;
+    --band-ink-2: #8F9BB4;
+
+    --sea:   #1E3040;
+    --land:  #232B38;
+    --hill:  #262F31;
+    --river: #35566A;
+    --road:  #3E3A2C;
+  }
+}
+
+:root[data-theme="light"] {
+  --ink: #1B2A4A; --ink-2: #46577A; --ink-3: #7C89A3;
+  --paper: #F2F1E9; --paper-2: #E8E6DB; --rule: #D3D1C4;
+  --persimmon: #B84F26; --moss: #5C7850;
+  --band: #1B2A4A; --band-ink: #EFEDE3; --band-ink-2: #9FAAC2;
+  --sea: #C3D3D8; --land: #E9E7DC; --hill: #DCDFCE; --river: #A8C2CE; --road: #DCCFA8;
+}
+:root[data-theme="dark"] {
+  --ink: #E6E3D9; --ink-2: #B0B8CA; --ink-3: #7C89A3;
+  --paper: #131A29; --paper-2: #1B2436; --rule: #2C3648;
+  --persimmon: #DE7748; --moss: #8CA87C;
+  --band: #0D1220; --band-ink: #E6E3D9; --band-ink-2: #8F9BB4;
+  --sea: #1E3040; --land: #232B38; --hill: #262F31; --river: #35566A; --road: #3E3A2C;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--col); margin-inline: auto; padding-inline: 1.5rem; }
+.wide { max-width: 62rem; margin-inline: auto; padding-inline: 1.5rem; }
+
+section { padding-block: 3.75rem; }
+section > .wrap > * + *, section > .wide > * + * { margin-top: 1.1rem; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; line-height: 1.18; margin: 0; }
+h2 { font-size: 1.75rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+strong { font-weight: 640; }
+em { font-style: italic; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.75rem;
+}
+
+/* ── full-bleed indigo bands: the boldness, spent in three places ── */
+.band { background: var(--band); color: var(--band-ink); }
+.band h1, .band h2 { color: var(--band-ink); }
+.band .eyebrow { color: var(--band-ink-2); }
+.band .sub { color: var(--band-ink-2); }
+
+.hero { padding-block: 5.5rem 4.5rem; }
+.knot {
+  font-family: var(--display);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--persimmon);
+  margin-bottom: 1.25rem;
+}
+.hero h1 { font-size: clamp(2rem, 5.5vw, 2.9rem); letter-spacing: -0.02em; }
+.hero .thesis {
+  font-size: 1.06rem;
+  color: var(--band-ink);
+  border-left: 2px solid var(--persimmon);
+  padding-left: 1.15rem;
+  margin-top: 1.75rem;
+}
+.hero .sub { font-size: 0.95rem; margin-top: 1.5rem; }
+
+/* ── the threshold motif: a count and a fill, used only where a count is real ── */
+.count { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.82rem; letter-spacing: 0.02em; }
+.bar { height: 3px; background: var(--rule); border-radius: 2px; overflow: hidden; margin-top: 0.4rem; }
+.bar > i { display: block; height: 100%; background: var(--persimmon); border-radius: 2px; }
+
+/* ── map ── */
+.mapfig { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+.mapgrid { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 62rem) { .mapgrid { grid-template-columns: 1fr 17rem; } }
+
+#map { display: block; width: 100%; height: auto; }
+.pin { cursor: pointer; }
+.pin circle { transition: r .12s ease; }
+.pin:hover circle, .pin:focus-visible circle { r: 15; }
+.pin:focus-visible { outline: none; }
+.pin:focus-visible circle { stroke: var(--persimmon); stroke-width: 3; }
+.pinlabel { font-family: var(--mono); font-size: 9px; font-weight: 600; fill: var(--paper); }
+.placelabel { font-family: var(--body); font-size: 9.5px; fill: var(--ink-3); }
+.alivelabel { font-family: var(--body); font-size: 8px; fill: var(--ink-3); }
+
+.panel { border-top: 1px solid var(--rule); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.8rem; }
+@media (min-width: 62rem) { .panel { border-top: 0; border-left: 1px solid var(--rule); } }
+.panel h3 { font-size: 1.05rem; }
+.panel p { font-size: 0.87rem; line-height: 1.55; color: var(--ink-2); }
+.chip {
+  display: inline-block; font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.18rem 0.5rem; border-radius: 2px; color: var(--paper);
+}
+.terms { font-size: 0.8rem; color: var(--ink-2); border-left: 2px solid var(--rule); padding-left: 0.7rem; }
+.unlocks { font-size: 0.78rem; color: var(--moss); }
+
+.scrub { border-top: 1px solid var(--rule); padding: 1rem 1.25rem 1.25rem; }
+.scrubhead { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.65rem; }
+.scrubdate { font-family: var(--display); font-size: 1.15rem; }
+.scrubpop { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.modes { display: flex; gap: 0; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; }
+.modes button {
+  font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.35rem 0.7rem; border: 0; background: transparent; color: var(--ink-2); cursor: pointer;
+}
+.modes button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+:root[data-theme="dark"] .modes button[aria-pressed="true"],
+:root:not([data-theme="light"]) .modes button[aria-pressed="true"] { color: var(--paper); }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; background: var(--rule); border-radius: 2px; }
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--persimmon); cursor: pointer; border: 3px solid var(--paper-2);
+}
+input[type=range]::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--persimmon);
+  cursor: pointer; border: 3px solid var(--paper-2);
+}
+.ticks { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.6rem; color: var(--ink-3); margin-top: 0.35rem; }
+.note { font-size: 0.75rem; color: var(--ink-3); margin-top: 0.7rem; }
+
+/* ── content structures ── */
+.exists { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.exists div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); font-size: 0.9rem; }
+.exists dt, .exists .k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.18rem; }
+@media (max-width: 34rem) { .exists div { grid-template-columns: 1fr; gap: 0.25rem; } }
+
+.moves { display: grid; gap: 1.75rem; }
+.move { display: grid; grid-template-columns: 1.6rem 1fr; gap: 1rem; }
+.move .n { font-family: var(--mono); font-size: 0.8rem; color: var(--persimmon); padding-top: 0.28rem; }
+
+.pull {
+  font-family: var(--display); font-size: 1.3rem; line-height: 1.4;
+  border-left: 2px solid var(--persimmon); padding-left: 1.15rem; color: var(--ink);
+}
+
+.rev { border-top: 1px solid var(--rule); }
+.rev > div { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+.rev .lead { font-size: 0.92rem; }
+.rev .who { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+
+.roles { display: grid; gap: 1.4rem; }
+.role { border-left: 2px solid var(--rule); padding-left: 1.1rem; }
+.role.primary { border-left-color: var(--persimmon); }
+.role h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.role p { font-size: 0.89rem; color: var(--ink-2); }
+
+.honest { background: var(--paper-2); border-radius: 3px; padding: 1.25rem 1.4rem; }
+.honest ul { margin: 0.5rem 0 0; padding-left: 1.1rem; font-size: 0.89rem; color: var(--ink-2); }
+.honest li + li { margin-top: 0.3rem; }
+
+ol.steps { counter-reset: s; list-style: none; margin: 0; padding: 0; display: grid; gap: 1.15rem; }
+/* NOT display:grid — a grid li puts the ::before in column 1 and the <strong>
+   in column 2, then wraps the trailing text node onto row 2 inside the narrow
+   first column, breaking it one word per line. Normal flow + an absolutely
+   positioned counter keeps mixed inline content intact. */
+ol.steps li { counter-increment: s; position: relative; padding-left: 2.6rem; font-size: 0.92rem; }
+ol.steps li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0.2rem; font-family: var(--mono); font-size: 0.78rem; color: var(--persimmon); }
+
+footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 3.5rem; }
+footer p { font-size: 0.8rem; color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<section class="band hero">
+  <div class="wrap">
+    <div class="knot">結</div>
+    <p class="eyebrow">Musubu · むすぶ · to tie together</p>
+    <h1>Japan's empty towns are not a preference problem. They're a coordination failure.</h1>
+    <p class="thesis">
+      Everyone who might move is waiting to see whether anyone else will — and nobody moves alone.
+      Musubu applies a threshold mechanic to migration itself. Families, employers, towns and builders
+      each declare a conditional commitment, and they all resolve at the same moment. A community
+      exists <em>before</em> anyone has to arrive into an empty one.
+    </p>
+    <p class="sub">
+      This page is not a fundraise. It's a finished project looking for a team — and a seat on it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wide">
+    <p class="eyebrow">Working prototype · Bungotakada, Oita — two hours from Fukuoka</p>
+    <h2>Every tile is something that doesn't exist yet, and will if enough people say yes.</h2>
+    <p style="color:var(--ink-2); font-size:0.95rem; max-width:34rem;">
+      Click a pin. Then drag the timeline and watch the town fill in — first with only what's
+      actually committed, then with what happens if the open thresholds are met.
+    </p>
+
+    <figure class="mapfig" style="margin:1.75rem 0 0;">
+      <div class="mapgrid">
+        <div>
+          <svg id="map" viewBox="0 0 1000 700" role="img" aria-label="Illustrated map of Bungotakada showing coordination tiles">
+            <rect width="1000" height="700" fill="var(--land)"/>
+
+            <g opacity="0.55">
+              <path d="M20 260 h370 M18 290 h372 M16 320 h374 M14 350 h376 M12 380 h378 M12 410 h378 M12 440 h378 M14 470 h376 M16 500 h374 M18 530 h372 M20 560 h370 M22 590 h368 M24 620 h366 M26 650 h364"
+                    stroke="var(--rule)" stroke-width="1" fill="none"/>
+            </g>
+
+            <path d="M660 250 Q800 200 1000 240 L1000 700 L600 700 Q640 480 660 250 Z" fill="var(--hill)"/>
+            <g opacity="0.5" stroke="var(--rule)" fill="none" stroke-width="1">
+              <path d="M700 330 Q835 300 980 330"/><path d="M698 415 Q840 386 980 412"/>
+              <path d="M688 500 Q838 472 980 496"/><path d="M672 590 Q822 566 980 588"/>
+            </g>
+
+            <path d="M0 0 L1000 0 L1000 70 Q760 96 600 128 Q470 152 432 214 Q400 268 300 288 Q160 312 0 268 Z" fill="var(--sea)"/>
+
+            <path d="M980 640 Q800 600 700 540 Q600 490 520 470 Q470 460 455 400 Q445 320 448 240 Q450 190 425 155"
+                  stroke="var(--river)" stroke-width="12" fill="none" stroke-linecap="round"/>
+            <path d="M300 700 Q330 560 400 480 Q440 440 452 400" stroke="var(--river)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+            <path d="M250 700 Q330 520 420 420 Q470 360 500 250 Q520 160 560 0" stroke="var(--road)" stroke-width="6" fill="none"/>
+            <path d="M470 470 Q640 450 820 430 Q920 420 1000 440" stroke="var(--road)" stroke-width="4" fill="none"/>
+
+            <g class="placelabel">
+              <text x="150" y="330" text-anchor="middle">周防灘</text>
+              <text x="470" y="330" text-anchor="middle">玉津</text>
+              <text x="455" y="565" text-anchor="middle">新町</text>
+              <text x="556" y="486" text-anchor="middle">高田</text>
+              <text x="792" y="470" text-anchor="middle">三和</text>
+              <text x="185" y="505" text-anchor="middle">水崎</text>
+            </g>
+
+            <g id="alive"></g>
+            <g id="tiles"></g>
+          </svg>
+        </div>
+
+        <aside class="panel" id="panel" aria-live="polite"></aside>
+      </div>
+
+      <div class="scrub">
+        <div class="scrubhead">
+          <div>
+            <span class="scrubdate" id="date">Aug 2026</span>
+            <span class="scrubpop" id="pop">pop. 22,500</span>
+          </div>
+          <div class="modes" role="group" aria-label="Projection mode">
+            <button id="mCommit" aria-pressed="true">Committed only</button>
+            <button id="mProj" aria-pressed="false">If thresholds are met</button>
+          </div>
+        </div>
+        <input type="range" id="slider" min="-12" max="24" value="0" step="1" aria-label="Timeline in months">
+        <div class="ticks"><span>−12 mo</span><span>today</span><span>+24 mo</span></div>
+        <p class="note" id="modenote">Solid pins are committed. Nothing else advances, because nothing else is certain yet.</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The insight</p>
+    <h2>Two moves, and the second one is the product.</h2>
+
+    <div class="moves" style="margin-top:1.75rem;">
+      <div class="move">
+        <div class="n">01</div>
+        <div>
+          <h3>Relocation is a state, not a trait.</h3>
+          <p style="margin-top:0.45rem; color:var(--ink-2);">
+            People don't move because they prefer the countryside. They move because their life is
+            already in motion — a first child, a breakup, burnout, kids leaving, retirement. At those
+            moments the costs of moving are already being paid for other reasons. You aren't persuading
+            anyone to uproot; you're catching people already mid-air and offering a better landing.
+            The addressable population is enormous, and it renews every year.
+          </p>
+        </div>
+      </div>
+      <div class="move">
+        <div class="n">02</div>
+        <div>
+          <h3>What Musubu sells can't be bought anywhere else.</h3>
+          <p style="margin-top:0.45rem; color:var(--ink-2);">
+            The last time most adults joined a group where everyone arrived at once and nobody was
+            already inside was university. That's why those years are the most friendship-dense of
+            most people's lives — not youth, but the absence of an established group to break into.
+            Every adult move after twenty-two is the opposite, which is why relocating is lonely, and
+            why "move to the countryside" fails for people who genuinely wanted it.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <p class="pull" style="margin-top:2rem;">
+      Musubu manufactures freshman year on demand, for adults, at any life stage. It's the one good
+      that can't exist without coordination — which is exactly why nobody sells it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What already exists</p>
+    <h2>This is the work that normally happens in the first year after funding.</h2>
+    <div class="exists" style="margin-top:1.5rem;">
+      <div><span class="k">Strategy</span><span>~20 cross-referenced documents — thesis, platform architecture, economics, government funding alignment, pilot analysis</span></div>
+      <div><span class="k">Pilot</span><span>Bungotakada, Oita. Real akiya prices (¥1M–4.8M unrenovated), real geography, a twenty-tile candidate set</span></div>
+      <div><span class="k">Prototype</span><span>The map above. Live thresholds, committed-versus-projected timeline</span></div>
+      <div><span class="k">Instrument</span><span>Intake questionnaire drafted in English and Japanese, with a deployment plan</span></div>
+      <div><span class="k">Partnerships</span><span>Share-house operator model, sweat-equity renovation economics, a national carpenter register</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why now</p>
+    <h2>The mechanic is old. The layer underneath it isn't.</h2>
+    <p style="color:var(--ink-2);">
+      Escrow and progress bars are 2009 technology. What was missing is the ability to understand
+      thousands of people well enough to propose a specific life to each of them.
+    </p>
+    <p style="color:var(--ink-2);">
+      Surveys could only ever return what their authors had already imagined, because every question
+      had to be pre-coded into options. That ceiling is gone. Open questions are now askable at
+      national scale — which means the map of <em>what actually stops people</em> can emerge from
+      what they say, rather than being invented in advance by someone in a meeting.
+    </p>
+    <p style="color:var(--ink-2);">
+      It also means a very small team can do what recently needed a large one. Which is the operative
+      fact for anyone deciding whether to start this.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why Kyushu</p>
+    <h2>A Kyushu problem with a Kyushu test site.</h2>
+    <p style="color:var(--ink-2);">
+      Bungotakada is roughly two hours from Fukuoka. Fukuoka is Japan's startup city by explicit
+      policy — a national strategic special zone, with a startup visa scheme it pioneered. Regional
+      revitalization is a funded national priority, not a niche cause.
+    </p>
+    <p style="color:var(--ink-2);">
+      And Fukuoka Growth Next occupies a converted former elementary school. A project about turning
+      closed buildings back into living ones, pitched inside a startup hub that is itself a revived
+      closed school, is not a coincidence worth wasting.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How Musubu earns</p>
+    <h2>Unglamorous near-term, government-funded, and aligned with the only metric that matters.</h2>
+
+    <div class="rev" style="margin-top:1.5rem;">
+      <div>
+        <p class="who">Municipality · near term</p>
+        <p class="lead"><strong>Coordination contract per pilot.</strong> Towns already hold revitalization budget and currently spend it on brochures and individual relocation grants with poor retention.</p>
+      </div>
+      <div>
+        <p class="who">Municipality · near term</p>
+        <p class="lead"><strong>Retention-linked placement fee.</strong> Paid per household still there at twelve months — not per household moved. The incentive points at the thing that actually decides whether any of this worked.</p>
+      </div>
+      <div>
+        <p class="who">Employers, developers · medium term</p>
+        <p class="lead"><strong>Coordination and housing margin.</strong> Company relocations, project-cohort staffing, renovation project management.</p>
+      </div>
+      <div>
+        <p class="who">Ministries, employers · the ceiling</p>
+        <p class="lead"><strong>The intent-and-blocker dataset.</strong> Every ministry has heard that people would consider leaving Tokyo; that isn't new and it doesn't move budget. What doesn't exist is a ranked, segmented, annually refreshed map of <em>what precisely stops them</em> — and policy is written against blockers, not desires.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1.4rem; color:var(--ink-2); font-size:0.92rem;">
+      A meaningful share of early cost is plausibly grant-funded: the project has a legitimate
+      simultaneous claim on reskilling, regional revitalization and cultural preservation budgets,
+      because it genuinely does all three. For an investor that means less dilution and longer
+      runway than the sector norm.
+    </p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The ask</p>
+    <h2 style="font-size:2rem;">Not money. A team.</h2>
+    <p class="sub" style="margin-top:1.25rem; font-size:1rem;">
+      A startup studio or founding team that wants to adopt this. An existing company in adjacent
+      territory — property tech, mobility, regional revitalization — that wants it as a line of
+      business. Or a funded founder looking for a thesis, who wants a strategist alongside them.
+    </p>
+    <p class="sub" style="margin-top:1rem; font-size:1rem;">
+      What's offered is the entire corpus, the prototype, the pilot research, and continued work —
+      with no claim to control.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Where I fit</p>
+    <h2>I wrote the thesis. I can't run a municipal negotiation in Japanese. Both matter.</h2>
+
+    <div class="roles" style="margin-top:1.75rem;">
+      <div class="role primary">
+        <h3>Founding strategist &amp; product</h3>
+        <p>The transition-state reframe, the archetype model, the living profile, the map, the partnership and sweat-equity models are mine. This is what I've already been doing.</p>
+      </div>
+      <div class="role">
+        <h3>Field documentation &amp; storytelling</h3>
+        <p>The core artifact is evidence that ordinary life is happening in these places — the potluck, the renovation, the arrival. That needs someone whose job is to go and be there and document it. Three and a half years living across Asia is a qualification for this, not a quirk.</p>
+      </div>
+      <div class="role">
+        <h3>International communications</h3>
+        <p>English-language press, the non-Japanese resident pipeline, and the multicultural caretaker recruitment the eldercare model treats as structurally essential rather than peripheral.</p>
+      </div>
+      <div class="role">
+        <h3>Research &amp; synthesis</h3>
+        <p>Ongoing competitive, government-programme and pilot-town research. The corpus is the evidence.</p>
+      </div>
+    </div>
+
+    <div class="honest" style="margin-top:1.75rem;">
+      <p style="font-size:0.9rem;"><strong>What I don't bring</strong> — stated plainly, because it's what makes the rest believable:</p>
+      <ul>
+        <li>Japanese-language fluency. I can't run a municipal negotiation and won't pretend otherwise.</li>
+        <li>Japanese institutional standing or existing government relationships.</li>
+        <li>Construction, real-estate or regulatory expertise.</li>
+        <li>Fundraising experience in Japan.</li>
+      </ul>
+      <p style="font-size:0.9rem; margin-top:0.9rem;">The ask, in one line: a fair wage, a real seat, and support with visa status.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">First moves</p>
+    <h2>Four things, none of which one person should be attempting alone.</h2>
+    <p style="color:var(--ink-2); margin-bottom:1.5rem;">
+      Each needs Japanese fluency, local presence, or institutional standing. That's the whole
+      argument for bringing this to people rather than trying to carry it.
+    </p>
+    <ol class="steps">
+      <li><strong>Get a renovation labour cost from a Bungotakada contractor.</strong> One conversation, in Japanese. It gates the sweat-equity model, the housing economics and the threshold size — and it's currently the one estimate sitting inside an otherwise evidenced argument.</li>
+      <li><strong>Native review and live testing of the Japanese intake instrument</strong>, then eight to ten real respondents.</li>
+      <li><strong>First contact with Bungotakada city.</strong> There's a kindergarten on the map marked 休園中 — suspended. Confirming its status is a genuine reason to call, and doubles as an opening.</li>
+      <li><strong>Approach the share-house operator</strong> with the deal shape that requires no capital from either side.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Prototype and figures are working material. The map base is an illustration drawn from
+      satellite imagery, not a survey; akiya prices are aggregator-sourced and pending verification
+      against the municipal 空き家バンク; the kindergarten's current status is unconfirmed.
+      Nothing here has been represented to Bungotakada city or to any named partner.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var ALIVE = [
+    [.562,.522,"市役所"],[.462,.408,"中央公民館"],[.470,.640,"児童館"],[.425,.150,"千嶋病院"],
+    [.575,.400,"高田中学校"],[.530,.115,"呉崎小学校"],[.660,.150,"草地小学校"],[.455,.315,"TRIAL"],
+    [.400,.560,"マックスバリュ"],[.415,.400,"AZホテル"],[.680,.275,"海神社"],[.245,.855,"田笛神社"],
+    [.780,.700,"智恩寺"],[.905,.440,"荒尾老人憩の家"],[.075,.545,"封戸保育園"]
+  ];
+
+  // id, x, y, month-open, state, cur, tgt, unit, title, terms, blurb, unlocks
+  var TILES = [
+    ["kinder",.565,.425,15,"gathering",9,24,"children","Seikei Kindergarten — reopening","Building standing · currently suspended 休園中","It is already built. It is already closed. It reopens at twenty-four children.","Cram school"],
+    ["cafe",.472,.478,11,"gathering",38,50,"pre-commits","Morning café — historic street","Shopfront available · three concepts proposed","Three people want this slot. The incoming cohort picks which one opens.","Bakery"],
+    ["shinmachi",.452,.520,9,"gathering",4,6,"households","Shinmachi akiya cluster","¥4.8M purchase · built 1969 · 133m²","Six adjacent houses in the historic core. Walkable to everything.","Café, bakery"],
+    ["tamatsu",.505,.335,7,"gathering",5,8,"people","Tamatsu big-house share","¥38,000/mo · six month minimum","A 266m² wooden house from 1977, two minutes from the town centre.","Shared workshop"],
+    ["riverside",.320,.470,14,"gathering",11,20,"people","Riverside bikeable block","¥42,000/mo · utilities and workshop access","The one part of town that doesn't need a car. Everything within a ten minute cycle.","Laundromat, co-working"],
+    ["mechanic",.560,.615,13,"gathering",31,60,"households","Mechanic / garage","Yard and workshop, south of centre","No passenger railway here. Every household is a car household — the highest-confidence business on the map.",""],
+    ["steward",.497,.415,6,"gathering",19,30,"households","Community hall steward","One paid role · nationally fundable","The building already exists. What it needs is someone whose job is to unlock the door, keep the calendar, and cook on Wednesdays.","Café, co-working"],
+    ["workshop",.535,.560,10,"gathering",8,15,"members","Shared workshop","¥6,000/mo membership","Tools, benches, and the room where the traditional building apprenticeship happens.","Apprenticeship"],
+    ["renocrew",.290,.615,8,"gathering",5,8,"workers","Akiya renovation crew","Nine month term · housing provided","Paid, housed, nine months. Come for the work and decide about the rest later.",""],
+    ["bakery",.440,.495,18,"proposed",9,40,"pre-commits","Bakery","Shopfront · unlocked by café and Shinmachi","Nearest bread is chain retail. Opens once the café and the housing cluster land.",""],
+    ["tazome",.615,.585,20,"proposed",2,8,"interested","Tazome Ikebe heritage house","Price on application · built 1948","Pre-war construction. The oldest stock on the map, and the right building to learn on.","Apprenticeship"],
+    ["apprentice",.640,.620,24,"proposed",3,6,"apprentices","Traditional building apprenticeship","Stipend and housing · twenty-four months","Learn from the last people who know how.",""],
+    ["coworking",.487,.462,-2,"open",9,12,"members","Co-working floor","¥9,000/mo · fibre","Above the community hall. Open now, three desks left.",""],
+    ["miwa",.760,.480,-4,"open",2,3,"households","Miwa hillside","¥16.5M · 2013 build","Modern house in the eastern hills. Quiet, elevated, car essential.",""],
+    ["walk",.215,.400,-8,"open",34,20,"volunteer hrs","Seaside and paddy walking route","Free · open now","Flat, quiet, and it goes all the way to the water. Maintained by whoever turns up.",""],
+    ["gym",.640,.760,null,"lapsed",15,35,"pre-commits","Fitness studio","Did not reach its threshold","Reached fifteen of thirty-five by the deadline. Deposits returned. Open to re-proposal.",""]
+  ];
+
+  var STATE = {
+    proposed:  { fill: "#8C8D80", label: "Proposed"  },
+    gathering: { fill: "#B84F26", label: "Gathering" },
+    building:  { fill: "#4E6E8C", label: "Building"  },
+    open:      { fill: "#5C7850", label: "Open"      },
+    lapsed:    { fill: "#9A6B6B", label: "Lapsed"    }
+  };
+
+  var svgNS = "http://www.w3.org/2000/svg";
+  var tilesG = document.getElementById("tiles");
+  var aliveG = document.getElementById("alive");
+  var panel  = document.getElementById("panel");
+  var slider = document.getElementById("slider");
+  var dateEl = document.getElementById("date");
+  var popEl  = document.getElementById("pop");
+  var noteEl = document.getElementById("modenote");
+  var bCommit = document.getElementById("mCommit");
+  var bProj   = document.getElementById("mProj");
+
+  var month = 0, projected = false, selected = null;
+
+  ALIVE.forEach(function (a) {
+    var g = document.createElementNS(svgNS, "g");
+    g.setAttribute("transform", "translate(" + (a[0] * 1000) + " " + (a[1] * 700) + ")");
+    var c = document.createElementNS(svgNS, "circle");
+    c.setAttribute("r", "3.5");
+    c.setAttribute("fill", "none");
+    c.setAttribute("stroke", "var(--ink-3)");
+    c.setAttribute("stroke-width", "1.2");
+    var t = document.createElementNS(svgNS, "text");
+    t.setAttribute("class", "alivelabel");
+    t.setAttribute("y", "-7");
+    t.setAttribute("text-anchor", "middle");
+    t.textContent = a[2];
+    g.appendChild(c); g.appendChild(t);
+    aliveG.appendChild(g);
+  });
+
+  function committedTrack(t) { return t[4] === "open"; }
+
+  function stateAt(t) {
+    if (t[4] === "lapsed") return month >= -2 ? "lapsed" : "gathering";
+    if (committedTrack(t)) return month >= t[3] ? "open" : "gathering";
+    if (!projected || month <= 0 || t[3] === null) return t[4];
+    if (month >= t[3]) return "open";
+    if (month >= t[3] - 3) return "building";
+    return t[4];
+  }
+
+  function ghosted(t) {
+    return projected && month > 0 && !committedTrack(t) && t[3] !== null && month >= t[3] - 3;
+  }
+
+  var nodes = TILES.map(function (t) {
+    var g = document.createElementNS(svgNS, "g");
+    g.setAttribute("transform", "translate(" + (t[1] * 1000) + " " + (t[2] * 700) + ")");
+    var inner = document.createElementNS(svgNS, "g");
+    inner.setAttribute("class", "pin");
+    inner.setAttribute("tabindex", "0");
+    inner.setAttribute("role", "button");
+    inner.setAttribute("aria-label", t[8]);
+    var c = document.createElementNS(svgNS, "circle");
+    c.setAttribute("r", "13");
+    var lab = document.createElementNS(svgNS, "text");
+    lab.setAttribute("class", "pinlabel");
+    lab.setAttribute("y", "3.2");
+    lab.setAttribute("text-anchor", "middle");
+    inner.appendChild(c); inner.appendChild(lab); g.appendChild(inner);
+    tilesG.appendChild(g);
+
+    function pick() { selected = t[0]; render(); }
+    inner.addEventListener("click", pick);
+    inner.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); }
+    });
+    return { g: g, inner: inner, c: c, lab: lab, t: t };
+  });
+
+  function render() {
+    nodes.forEach(function (n) {
+      var st = stateAt(n.t);
+      var s = STATE[st];
+      var pct = Math.min(100, Math.round(n.t[5] / n.t[6] * 100));
+      n.c.setAttribute("fill", s.fill);
+      n.c.setAttribute("stroke", "var(--paper-2)");
+      n.c.setAttribute("stroke-width", selected === n.t[0] ? "3.5" : "2");
+      n.g.setAttribute("opacity", ghosted(n.t) ? "0.5" : "1");
+      n.c.setAttribute("stroke-dasharray", ghosted(n.t) ? "3 2.5" : "none");
+      n.lab.textContent = st === "open" ? "✓" : st === "lapsed" ? "—" : pct;
+    });
+
+    var d = new Date(2026, 7, 1);
+    d.setMonth(d.getMonth() + month);
+    dateEl.textContent = d.toLocaleDateString("en-GB", { month: "short", year: "numeric" });
+
+    var extra = 0;
+    TILES.forEach(function (t) {
+      if (t[3] === null || month < t[3]) return;
+      if (!projected && t[4] !== "open") return;
+      if (t[0] === "shinmachi" || t[0] === "tamatsu" || t[0] === "riverside" || t[0] === "miwa" || t[0] === "tazome") {
+        extra += t[6] * 2.1;
+      }
+    });
+    popEl.textContent = "pop. " + Math.round(22500 + extra).toLocaleString();
+
+    noteEl.textContent = projected
+      ? "Dashed and faded means not committed. This view assumes every open threshold is met."
+      : "Solid pins are committed. Nothing else advances, because nothing else is certain yet.";
+
+    panel.innerHTML = "";
+    var t = selected && TILES.filter(function (x) { return x[0] === selected; })[0];
+    if (!t) {
+      panel.innerHTML =
+        '<p class="eyebrow" style="margin:0;">Pick a tile</p>' +
+        '<p>Each pin is a threshold. The number on it is how far along it is — and the ones already ' +
+        'drawn on the map without pins are what this town actually has right now. No tile is ever ' +
+        'placed over something that is already alive.</p>';
+      return;
+    }
+    var st = stateAt(t), s = STATE[st], pct = Math.min(100, Math.round(t[5] / t[6] * 100));
+    var isProjected = ghosted(t);
+    var h = '<span class="chip" style="background:' + s.fill + '">' + s.label + '</span>';
+    if (isProjected) h += '<span class="chip" style="background:transparent;color:var(--ink-3);border:1px dashed var(--ink-3);margin-left:0.35rem;">projected</span>';
+    h += '<h3>' + t[8] + '</h3>';
+    h += '<p>' + t[10] + '</p>';
+    if (isProjected) {
+      h += '<p class="terms" style="border-left-color:var(--ink-3);color:var(--ink-3);">' +
+           'Not committed. This is what happens <em>if</em> it reaches ' + t[6] + ' ' + t[7] + '. ' +
+           'It stands at ' + t[5] + ' today.</p>';
+    }
+    if (st !== "open" || isProjected) {
+      h += '<div><div class="count">' + t[5] + ' / ' + t[6] + ' ' + t[7] + '</div>' +
+           '<div class="bar"><i style="width:' + pct + '%"></i></div></div>';
+    }
+    h += '<p class="terms">' + t[9] + '</p>';
+    if (t[11]) h += '<p class="unlocks">Unlocks → ' + t[11] + '</p>';
+    panel.innerHTML = h;
+  }
+
+  slider.addEventListener("input", function () { month = +slider.value; render(); });
+  bCommit.addEventListener("click", function () {
+    projected = false; bCommit.setAttribute("aria-pressed", "true"); bProj.setAttribute("aria-pressed", "false"); render();
+  });
+  bProj.addEventListener("click", function () {
+    projected = true; bProj.setAttribute("aria-pressed", "true"); bCommit.setAttribute("aria-pressed", "false"); render();
+  });
+
+  render();
+})();
+</script>

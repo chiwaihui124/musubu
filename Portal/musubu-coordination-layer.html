@@ -1,0 +1,825 @@
+<meta charset="utf-8">
+<title>Musubu, Five Years In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1;
+  --card:#F8F9FA;
+  --screen:#FFFFFF;
+  --ink:#131B23;
+  --ink-2:#4B5661;
+  --ink-3:#7E8992;
+  --rule:#D3DADE;
+  --rule-soft:#E2E7EA;
+  --indigo:#1E4B76;
+  --indigo-deep:#12365A;
+  --indigo-wash:#E1E8EF;
+  --lapse:#9C5330;
+  --moss:#4A6B4F;
+
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418;
+    --card:#161E25;
+    --screen:#111A21;
+    --ink:#DEE5EA;
+    --ink-2:#9AA6B1;
+    --ink-3:#6B7780;
+    --rule:#26313A;
+    --rule-soft:#1D262D;
+    --indigo:#6EA6D6;
+    --indigo-deep:#8FBEE6;
+    --indigo-wash:#152431;
+    --lapse:#C9825A;
+    --moss:#89AE8E;
+  }
+}
+
+:root[data-theme="dark"]{
+  --paper:#0E1418;
+  --card:#161E25;
+  --screen:#111A21;
+  --ink:#DEE5EA;
+  --ink-2:#9AA6B1;
+  --ink-3:#6B7780;
+  --rule:#26313A;
+  --rule-soft:#1D262D;
+  --indigo:#6EA6D6;
+  --indigo-deep:#8FBEE6;
+  --indigo-wash:#152431;
+  --lapse:#C9825A;
+  --moss:#89AE8E;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.wrap{
+  max-width:39rem;
+  margin-inline:auto;
+  padding:3.5rem 1.5rem 5rem;
+}
+
+/* ---------- masthead ---------- */
+
+.mast{display:flex;align-items:baseline;gap:0.75rem;padding-bottom:2.75rem}
+.mast .name{font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:0.02em}
+.mast .kanji{font-family:var(--display);color:var(--indigo);font-size:1.05rem}
+.mast .stamp{margin-left:auto;font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em}
+
+/* ---------- hero ---------- */
+
+h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(1.7rem,5.2vw,2.5rem);
+  line-height:1.34;
+  letter-spacing:-0.005em;
+  margin:0 0 1.5rem;
+  text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--indigo)}
+
+.standfirst{font-size:1.05rem;color:var(--ink-2);margin:0 0 1.1rem;max-width:34rem}
+.readtime{font-family:var(--mono);font-size:0.75rem;color:var(--ink-3);letter-spacing:0.04em;margin:0 0 2.5rem}
+
+/* ---------- sections ---------- */
+
+section{padding-top:2.6rem;margin-top:2.6rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+
+h2{font-family:var(--display);font-weight:500;font-size:1.32rem;line-height:1.4;margin:0 0 1.1rem;text-wrap:balance}
+h3{
+  font-family:var(--body);font-weight:600;font-size:0.95rem;
+  margin:2rem 0 0.5rem;display:flex;align-items:baseline;gap:0.6rem;flex-wrap:wrap;
+}
+
+p{margin:0 0 1.05rem;max-width:34rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+.chip{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.12rem 0.42rem;border:1px solid var(--rule);border-radius:2px;
+  color:var(--ink-3);font-weight:400;white-space:nowrap;
+}
+.chip.proven{color:var(--indigo);border-color:var(--indigo)}
+.chip.sketch{color:var(--lapse);border-color:var(--lapse)}
+
+/* ---------- the screen ---------- */
+
+.screen{
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin:2rem 0 0.85rem;
+  background:var(--screen);
+  box-shadow:0 1px 2px rgba(19,27,35,0.04),0 8px 24px -14px rgba(19,27,35,0.18);
+}
+.chrome{
+  display:flex;align-items:center;gap:0.55rem;
+  padding:0.6rem 0.9rem;
+  border-bottom:1px solid var(--rule-soft);
+  background:var(--card);
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.04em;color:var(--ink-3);
+}
+.chrome .dot{width:7px;height:7px;border-radius:50%;background:var(--moss);flex:none}
+.chrome .right{margin-left:auto}
+
+.feed{display:flex;flex-direction:column;gap:1px;background:var(--rule-soft)}
+.tile{background:var(--screen);padding:1.05rem 1.1rem 1.15rem}
+.tile .lane{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.5rem;
+}
+.tile.forming .lane{color:var(--indigo)}
+.tile.life .lane{color:var(--moss)}
+.tile h4{
+  font-family:var(--body);font-weight:600;font-size:1rem;line-height:1.45;
+  margin:0 0 0.28rem;color:var(--ink);
+}
+.tile .where{font-size:0.86rem;color:var(--ink-3);margin:0;line-height:1.55}
+
+.meter{
+  height:6px;border-radius:3px;background:var(--rule-soft);
+  margin:0.95rem 0 0.6rem;overflow:hidden;
+}
+.meter .fill{
+  display:block;height:100%;width:0;border-radius:3px;background:var(--indigo);
+  transition:width 1100ms cubic-bezier(.22,.61,.36,1) 180ms;
+}
+.screen.lit .meter .fill{width:var(--pct)}
+
+.count{
+  display:flex;align-items:baseline;gap:0.6rem;flex-wrap:wrap;
+  font-size:0.88rem;color:var(--ink-2);font-variant-numeric:tabular-nums;
+}
+.count b{font-family:var(--mono);font-size:1.05rem;color:var(--ink);font-weight:500}
+.count .left{
+  margin-left:auto;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--lapse);
+}
+
+.who{margin:1rem 0 0.85rem}
+.who .cap{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.45rem;
+}
+.stack{display:flex;height:10px;border-radius:2px;overflow:hidden;gap:1px}
+.stack span{flex:0 0 var(--w)}
+.s1{background:var(--indigo)}
+.s2{background:color-mix(in srgb,var(--indigo) 62%,var(--card))}
+.s3{background:color-mix(in srgb,var(--indigo) 30%,var(--card))}
+
+.legend{
+  list-style:none;margin:0.55rem 0 0;padding:0;
+  display:flex;flex-wrap:wrap;gap:0.35rem 1rem;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.02em;color:var(--ink-2);
+}
+.legend li{display:flex;align-items:center;gap:0.4rem}
+.legend i{width:0.6rem;height:0.6rem;border-radius:2px;flex:none}
+
+.fine{font-size:0.82rem;color:var(--ink-3);line-height:1.6;margin:0.85rem 0 0;max-width:none}
+
+.caption{font-size:0.84rem;color:var(--ink-3);line-height:1.6;margin:0 0 0;max-width:34rem}
+
+/* ---------- module panels ---------- */
+
+.panels{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;
+  overflow:hidden;margin:1.7rem 0 1rem;
+}
+@media (max-width:36rem){.panels{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:24rem){.panels{grid-template-columns:1fr}}
+
+.panel{background:var(--card);padding:0.9rem 0.95rem 1rem;display:flex;flex-direction:column;gap:0.4rem}
+.panel .pcap{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);line-height:1.4;
+}
+.panel .pval{
+  font-family:var(--mono);font-size:1.32rem;line-height:1.15;color:var(--ink);
+  font-variant-numeric:tabular-nums;font-weight:500;
+}
+.panel .pval small{font-size:0.78rem;color:var(--ink-3);font-weight:400}
+.panel .pnote{font-size:0.78rem;line-height:1.5;color:var(--ink-2);margin:0;max-width:none}
+
+.pbar{height:4px;border-radius:2px;background:var(--rule-soft);overflow:hidden}
+.pbar span{display:block;height:100%;border-radius:2px;width:var(--pct);background:var(--indigo)}
+.panel.done .pbar span{background:var(--moss)}
+.panel.stalled .pbar span{background:var(--lapse)}
+
+.state{
+  align-self:flex-start;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.09em;
+  text-transform:uppercase;padding:0.1rem 0.36rem;border-radius:2px;
+  border:1px solid var(--indigo);color:var(--indigo);
+}
+.panel.done .state{border-color:var(--moss);color:var(--moss)}
+.panel.stalled .state{border-color:var(--lapse);color:var(--lapse)}
+
+
+
+/* ---------- notice ---------- */
+
+.notice{
+  background:var(--indigo-wash);border-left:2px solid var(--indigo);
+  padding:0.95rem 1.15rem;margin:1.9rem 0;font-size:0.94rem;line-height:1.65;
+  color:var(--ink-2);border-radius:0 2px 2px 0;
+}
+.notice strong{color:var(--ink)}
+.notice p{max-width:none}
+
+/* ---------- the loop ---------- */
+
+ol.loop{
+  list-style:none;counter-reset:l;margin:1.7rem 0 1.3rem;padding:0 0 0 1.6rem;
+  display:flex;flex-direction:column;gap:1.5rem;position:relative;
+}
+ol.loop::before{
+  content:"";position:absolute;left:0.32rem;top:0.55rem;bottom:0.55rem;
+  width:1px;background:var(--rule);
+}
+ol.loop li{counter-increment:l;position:relative;max-width:33rem}
+ol.loop li::before{
+  content:"";position:absolute;left:-1.6rem;top:0.5rem;
+  width:0.68rem;height:0.68rem;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--indigo);
+}
+ol.loop li b{display:block;font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:0.15rem}
+ol.loop li span{display:block;font-size:0.94rem;line-height:1.65;color:var(--ink-2)}
+
+.loop-close{
+  font-size:0.94rem;color:var(--ink-2);border-top:1px solid var(--rule-soft);
+  padding-top:1.2rem;margin:0;
+}
+
+/* ---------- diagram ---------- */
+
+figure{margin:1.9rem 0 1.2rem;padding:0}
+.diagram{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.4rem 1.1rem 1.1rem}
+.diagram svg{display:block;width:100%;height:auto}
+figcaption{font-size:0.84rem;color:var(--ink-3);margin-top:0.75rem;line-height:1.6}
+
+.d-box{fill:var(--paper);stroke:var(--rule);stroke-width:1}
+.d-bar{fill:var(--indigo-wash);stroke:var(--indigo);stroke-width:1}
+.d-label{font-family:var(--body);font-size:13px;font-weight:600;fill:var(--ink)}
+.d-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:0.06em;fill:var(--ink-3)}
+.d-line{stroke:var(--indigo);stroke-width:1}
+.d-arrow{fill:var(--indigo)}
+
+/* ---------- three renderings ---------- */
+
+.renders{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:1.6rem 0 1rem;
+}
+@media (max-width:36rem){.renders{grid-template-columns:1fr}}
+.render{background:var(--card);padding:1rem 1.05rem 1.15rem}
+.render .whocap{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--indigo);display:block;margin-bottom:0.7rem;
+}
+.render .said{font-size:0.9rem;line-height:1.6;color:var(--ink-2);margin:0;max-width:none}
+
+/* ---------- table ---------- */
+
+.tablewrap{overflow-x:auto;margin:1.5rem 0 1.2rem}
+table{border-collapse:collapse;width:100%;min-width:29rem;font-size:0.9rem}
+th{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;text-align:left;padding:0 0.9rem 0.6rem 0;
+  border-bottom:1px solid var(--rule);
+}
+td{padding:0.58rem 0.9rem 0.58rem 0;border-bottom:1px solid var(--rule-soft);color:var(--ink-2);vertical-align:top;line-height:1.55}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+
+/* ---------- rules ---------- */
+
+ol.rules{list-style:none;counter-reset:r;margin:1.4rem 0 0;padding:0;display:flex;flex-direction:column;gap:0.95rem}
+ol.rules li{
+  counter-increment:r;position:relative;padding-left:2.1rem;
+  font-size:0.96rem;line-height:1.65;color:var(--ink-2);max-width:34rem;
+}
+ol.rules li::before{
+  content:counter(r);position:absolute;left:0;top:0.26rem;
+  font-family:var(--mono);font-size:0.72rem;color:var(--indigo);
+}
+ol.rules li b{color:var(--ink);font-weight:600}
+
+/* ---------- open items ---------- */
+
+.open{margin:1.3rem 0 0;border-top:1px solid var(--rule-soft)}
+.open-row{
+  display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:0.9rem 0;
+  border-bottom:1px solid var(--rule-soft);align-items:start;
+}
+@media (max-width:33rem){.open-row{grid-template-columns:1fr;gap:0.25rem}}
+.open-row .lbl{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--lapse);padding-top:0.34rem;
+}
+.open-row .txt{font-size:0.94rem;line-height:1.62;color:var(--ink-2)}
+.open-row .txt b{color:var(--ink);font-weight:600}
+
+/* ---------- pull quote ---------- */
+
+blockquote{
+  margin:1.9rem 0;padding:0 0 0 1.2rem;border-left:2px solid var(--indigo);
+  font-family:var(--display);font-size:1.12rem;line-height:1.62;color:var(--ink);
+  max-width:33rem;
+}
+blockquote p{max-width:none;margin:0 0 0.6rem}
+blockquote p:last-child{margin:0}
+
+/* ---------- the question ---------- */
+
+.question{
+  border:1px solid var(--indigo);border-radius:3px;padding:1.5rem 1.4rem;
+  margin-top:1.5rem;background:var(--card);
+}
+.question .cap{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.9rem;
+}
+.question .q{
+  font-family:var(--display);font-size:1.22rem;line-height:1.5;color:var(--ink);
+  margin:0 0 1rem;max-width:none;text-wrap:balance;
+}
+.question .after{font-size:0.93rem;color:var(--ink-2);margin:0;max-width:none}
+
+ol.asks{
+  list-style:none;counter-reset:a;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:1.05rem;
+}
+ol.asks li{
+  counter-increment:a;position:relative;padding-left:1.9rem;
+  font-size:0.96rem;line-height:1.62;color:var(--ink-2);max-width:none;
+}
+ol.asks li::before{
+  content:counter(a);position:absolute;left:0;top:0.22rem;
+  font-family:var(--mono);font-size:0.72rem;color:var(--indigo);
+}
+ol.asks li b{color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:3.2rem;padding-top:1.6rem;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.03em;color:var(--ink-3);line-height:1.9;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .meter .fill{transition:none;width:var(--pct)}
+}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <span class="name">Musubu</span>
+  <span class="kanji">結</span>
+  <span class="stamp">CONCEPT NOTE · 2026</span>
+</div>
+
+<h1>Forty-nine people already said yes. <em>Seven spots left.</em></h1>
+
+<p class="standfirst">This is Musubu five years in, drawn as a screen. A share house in a town of four thousand, most of the rooms taken, a deadline, and everyone's deposit back if it does not fill. Every number on it was put there by somebody else who decided first.</p>
+
+<p class="readtime">7 MIN · NOTHING IS BUILT YET · EVERY SCREEN HERE IS ILLUSTRATIVE</p>
+
+<section>
+
+<div class="screen" id="screen">
+  <div class="chrome">
+    <span class="dot"></span>
+    <span>musubu.jp / kamisato</span>
+    <span class="right">SIGNED IN</span>
+  </div>
+
+  <div class="feed">
+
+    <article class="tile forming">
+      <span class="lane">Forming</span>
+      <h4>Share house in the old Ōhashi ryokan</h4>
+      <p class="where">Kamisato, Ōita · doors open April 2027 · ¥42,000 a month including utilities</p>
+
+      <div class="meter"><span class="fill" style="--pct:87.5%"></span></div>
+      <div class="count"><b>49</b> of 56 committed <span class="left">7 spots left</span></div>
+
+      <div class="who">
+        <span class="cap">Who is coming</span>
+        <div class="stack" aria-hidden="true">
+          <span class="s1" style="--w:41%"></span>
+          <span class="s2" style="--w:38%"></span>
+          <span class="s3" style="--w:21%"></span>
+        </div>
+        <ul class="legend">
+          <li><i class="s1"></i>20s · 41%</li>
+          <li><i class="s2"></i>30s · 38%</li>
+          <li><i class="s3"></i>40s and up · 21%</li>
+        </ul>
+      </div>
+
+      <p class="fine">Closes 14 March. Fully refundable until then. If it does not fill, nothing happens and everybody gets their deposit back.</p>
+    </article>
+
+    <article class="tile forming">
+      <span class="lane">Forming</span>
+      <h4>Clinic reception, three days a week</h4>
+      <p class="where">Kamisato Medical Co-op · the co-op opens the post when four of the six roles it needs are spoken for</p>
+      <div class="meter"><span class="fill" style="--pct:50%"></span></div>
+      <div class="count"><b>3</b> of 6 roles claimed</div>
+    </article>
+
+    <article class="tile">
+      <span class="lane">Happening</span>
+      <h4>Town hall: what to do with the sawmill</h4>
+      <p class="where">Thursday 19:00 · Central Community Hall · open to anyone, including people who have not moved yet</p>
+    </article>
+
+    <article class="tile life">
+      <span class="lane">Life</span>
+      <h4>The Nakamuras arrived on Tuesday</h4>
+      <p class="where">From Kawasaki, two kids, six and nine. Welcome dinner Saturday, bring something.</p>
+    </article>
+
+  </div>
+</div>
+
+<p class="caption">Illustrative. Kamisato is not a real town and none of these numbers are real. The shape of the screen is the argument, not the figures on it.</p>
+
+</section>
+
+<section>
+<h2>What that screen does that a brochure cannot</h2>
+
+<p>Every relocation campaign in Japan is a brochure. Photographs of rice terraces, a subsidy figure, a phone number. A brochure asks you to believe a description of a place. It cannot tell you the one thing you actually need, which is <strong>whether anybody else is coming.</strong></p>
+
+<p>The share house tile answers four questions at once, and none of them are answered with adjectives. Forty-nine people have already decided, so you would not be first. Most of them are in their twenties and thirties, so you can picture the kitchen. It opens in April 2027, so it is a date rather than a someday. And the deposit comes back if it does not fill, so saying yes early costs you nothing.</p>
+
+<p>Underneath it there is a clinic that opens when enough people claim the roles, a town hall meeting you are allowed to attend before you live there, and a family who arrived on Tuesday. That is not a marketing site. <strong>It is a place with a schedule, and you can see your own name fitting into it.</strong></p>
+</section>
+
+<section>
+<h2>The rest of the instrument</h2>
+
+<p>That card sits on a town page carrying a great deal more, because a town running its own renewal has a great deal to keep track of. Population against what would have happened anyway. Which builds are funded and how far. Which participation thresholds are live, which are still short, and which quietly lapsed. What opened in the last twelve months. What each phase of a programme still needs before it moves.</p>
+
+<div class="panels">
+
+  <div class="panel">
+    <span class="pcap">Town cohort</span>
+    <span class="pval">31<small> / 50 families</small></span>
+    <div class="pbar"><span style="--pct:62%"></span></div>
+    <p class="pnote">Launches together at 50. Closes in nine weeks.</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">Population</span>
+    <span class="pval">2,847</span>
+    <p class="pnote">Up 2.3% on last year, against a projected decline of 1.5%.</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">Digital hub build</span>
+    <span class="pval">84%</span>
+    <div class="pbar"><span style="--pct:84%"></span></div>
+    <p class="pnote">¥38M of ¥45M committed. Opens Q2 2028.</p>
+  </div>
+
+  <div class="panel done">
+    <span class="pcap">Community garden</span>
+    <span class="pval">18<small> / 15</small></span>
+    <span class="state">Threshold met</span>
+    <p class="pnote">Oversubscribed. A second plot is being surveyed.</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">Childcare place</span>
+    <span class="pval">12<small> / 20</small></span>
+    <div class="pbar"><span style="--pct:60%"></span></div>
+    <p class="pnote">Eight more households and it staffs.</p>
+  </div>
+
+  <div class="panel stalled">
+    <span class="pcap">Local brewery</span>
+    <span class="pval">0<small> / 25</small></span>
+    <span class="state">Lapsed</span>
+    <p class="pnote">Proposed in March, nobody signed. Stays on the page.</p>
+  </div>
+
+</div>
+
+<p class="caption">Illustrative. Six of the panels a town page would carry, on a town that does not exist.</p>
+
+<p style="margin-top:1.6rem">None of these are decoration, because every one of them is something a real person has to decide about. And no two towns need the same set. A town with no brewery has no brewery panel. A panel appears when the thing it measures starts existing, and it stays there when the thing stalls, because a surface that only shows wins is a surface nobody can plan against.</p>
+
+<p><strong>That is the property worth designing for.</strong> Not a product with a fixed set of screens shipped to every town, but an instrument a town and the people arriving in it assemble together, and keep rearranging as what they are doing changes. The signals a place needs in year one are not the signals it needs in year four.</p>
+</section>
+
+<section>
+<h2>The loop underneath</h2>
+
+<p>The screen is the output. The thing that produces it is a loop, and the loop is the part worth building.</p>
+
+<ol class="loop">
+  <li>
+    <b>You say what would actually stop you</b>
+    <span>In your own words, in a poll that is not eight checkboxes somebody else wrote. The most useful answer in fifty thousand is usually the one nobody thought to offer as an option.</span>
+  </li>
+  <li>
+    <b>It becomes a number</b>
+    <span>Ranked, segmented, national. Every ministry in Japan has heard that people would consider moving. Nobody holds a map of exactly what stops them, by life stage and by place.</span>
+  </li>
+  <li>
+    <b>Somebody removes one</b>
+    <span>Policy is written against blockers far more readily than against desires. A childcare place, a bus that runs after seven, a building converted, a subsidy condition loosened, a job that did not exist last year.</span>
+  </li>
+  <li>
+    <b>The option appears on the screen</b>
+    <span>And it is now a real thing a real person can commit to, with a count and a deadline on it.</span>
+  </li>
+</ol>
+
+<p class="loop-close">Then the person who named the blocker gets to watch it move. That is the mechanic worth leaning on. Not a relocation website, but a way for people to say what is in the way and then see it taken out of the way.</p>
+</section>
+
+<section>
+<h2>Three parties, one record</h2>
+
+<p>The loop only closes because individuals, towns and the national programmes that fund regional policy are writing into the same place. Today each of the three guesses at the other two, and the guessing is most of the problem.</p>
+
+<figure>
+<div class="diagram">
+<svg viewBox="0 0 660 300" role="img" aria-label="Three boxes labelled Individuals, Towns and Government, each connected by two-way arrows to a single shared record of commitments, thresholds, deadlines, blockers and refunds.">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="d-arrow"></path>
+    </marker>
+  </defs>
+
+  <rect class="d-box" x="8" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="106" y="34" text-anchor="middle">Individuals</text>
+  <text class="d-sub" x="106" y="52" text-anchor="middle">WHAT I WANT · WHAT STOPS ME</text>
+
+  <rect class="d-box" x="232" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="330" y="34" text-anchor="middle">Towns</text>
+  <text class="d-sub" x="330" y="52" text-anchor="middle">WHAT WE HAVE · WHAT WE NEED</text>
+
+  <rect class="d-box" x="456" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="554" y="34" text-anchor="middle">Government</text>
+  <text class="d-sub" x="554" y="52" text-anchor="middle">WHAT WE FUND · ON WHAT TERMS</text>
+
+  <line class="d-line" x1="74" y1="78" x2="74" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="138" y1="186" x2="138" y2="78" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="298" y1="78" x2="298" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="362" y1="186" x2="362" y2="78" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="522" y1="78" x2="522" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="586" y1="186" x2="586" y2="78" marker-end="url(#ah)"></line>
+
+  <text class="d-sub" x="68" y="136" text-anchor="end">SAYS</text>
+  <text class="d-sub" x="144" y="136">SEES</text>
+  <text class="d-sub" x="292" y="136" text-anchor="end">SAYS</text>
+  <text class="d-sub" x="368" y="136">SEES</text>
+  <text class="d-sub" x="516" y="136" text-anchor="end">SAYS</text>
+  <text class="d-sub" x="592" y="136">SEES</text>
+
+  <rect class="d-bar" x="8" y="194" width="644" height="66" rx="3"></rect>
+  <text class="d-label" x="330" y="222" text-anchor="middle">One shared record</text>
+  <text class="d-sub" x="330" y="240" text-anchor="middle">COMMITMENTS · THRESHOLDS · DEADLINES · BLOCKERS · REFUNDS · WHAT LAPSED</text>
+</svg>
+</div>
+<figcaption>Everyone writes into the same record and reads a different view out of it. The record is the product. The views are the interface.</figcaption>
+</figure>
+
+<p>Which means one event has to arrive in three vocabularies at once. The Nakamuras committing to Kamisato is the same fact three times over.</p>
+
+<div class="renders">
+  <div class="render">
+    <span class="whocap">You see</span>
+    <p class="said">Nine more households and the primary school forms a class for next April. Your deposit is refundable until the deadline.</p>
+  </div>
+  <div class="render">
+    <span class="whocap">The town clerk sees</span>
+    <p class="said">Enrolment crosses the class formation threshold at Q3 arrival. The budget request window closes in November.</p>
+  </div>
+  <div class="render">
+    <span class="whocap">The ministry sees</span>
+    <p class="said">Committed families with children under ten, up quarter on quarter in this prefecture. Two municipalities now within reach of an existing relocation grant.</p>
+  </div>
+</div>
+
+<p class="caption">Illustrative. One commitment event, three renderings.</p>
+</section>
+
+<section>
+<h2>Why the number can be trusted <span class="chip proven">Proven</span></h2>
+
+<p>All of it rests on the count being real. The mechanic that makes it real is old and boring: all or nothing conditional commitment, with a public number, a fixed deadline and a genuine refund. Nothing releases until the threshold clears, and everyone can watch the number climb while they decide.</p>
+
+<p>It generalises past households, which is the part that turns a website into infrastructure.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Party</th><th>Commits</th><th>Released when</th></tr></thead>
+<tbody>
+<tr><td>Household</td><td>Deposit in escrow, arrival date</td><td>Cohort threshold met</td></tr>
+<tr><td>Small employer</td><td>Lease and opening date</td><td>Customer pre-commitments met</td></tr>
+<tr><td>Industrial employer</td><td>Capital expenditure</td><td>Worker headcount met</td></tr>
+<tr><td>Developer</td><td>Renovation or build start</td><td>Housing units pre-claimed</td></tr>
+<tr><td>Municipality</td><td>Budget line, subsidy application</td><td>Population commitment met</td></tr>
+<tr><td>School district</td><td>Class formation</td><td>Enrolment count met</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Kickstarter shipped this in 2009 and Japan has run the social version for centuries. 講 (kō) are mutual aid associations where members pool contributions and take turns receiving the pot: a threshold mechanic with several hundred years of local precedent, which is worth more here than any argument about software.</p>
+
+<p>The count only stays worth trusting if the surface around it refuses to flatter anybody. Five rules, and they are not concessions, they are the reason a stranger would believe the screen at all.</p>
+
+<ol class="rules">
+<li><b>Empty is shown as empty.</b> A town with nothing happening shows a feed with nothing on it. No filler, no stock photography, no coming soon.</li>
+<li><b>Failure stays visible.</b> Lapsed thresholds stay on the map. Closed businesses stay on the page. A resident who left stays listed and contactable.</li>
+<li><b>Only the people who live there post.</b> No marketing team writing a town's feed for it. Slightly bad photographs taken by participants are a trust signal.</li>
+<li><b>No ranking, no engagement optimisation, no infinite scroll.</b> It is a village noticeboard. The moment it optimises for attention it stops being true.</li>
+<li><b>Committed and projected are never mixed.</b> The forward curve of who is arriving shows commitments only, because it is the number both families and businesses would make irreversible decisions against.</li>
+</ol>
+</section>
+
+<section>
+<h2>Where the AI does the work</h2>
+
+<p>The record itself is dumb on purpose: pledges, counts, deadlines, refunds, in an ordinary auditable store. The reasoning sits around it, in five places where the work is genuinely not a database query.</p>
+
+<h3>The poll can ask an open question <span class="chip">Testable</span></h3>
+<p>A pre-coded survey returns only what its authors already imagined, because the categories are the ceiling. Open text can now be read, clustered and quoted at national scale, so the instrument can ask <em>what would still stop you</em> and learn from answers nobody anticipated. Step one of the loop depends entirely on this.</p>
+
+<h3>A proposal written for one person <span class="chip">Testable</span></h3>
+<p>Matching across life stage, hard constraints, income floor, social appetite, mobility and timing is a judgement call with a dozen competing considerations. The output is a specific life described to a specific person, citing their own stated reasons back to them. Producing fifty thousand of those was impossible at any price a few years ago.</p>
+
+<h3>Learning from what people turn down <span class="chip">Testable</span></h3>
+<p>Show three options, read why they were rejected in free text, choose the next questions accordingly. Somebody writes <em>too isolated, and I would feel like I was performing all the time</em>, and the second half of that sentence matters more than the first. People cannot say what they want, but they can instantly say what is wrong with something in front of them.</p>
+
+<h3>One record, three registers <span class="chip sketch">Sketch</span></h3>
+<p>This is the piece with no precedent to point at. Every event has to reach a household, a municipal clerk and a ministry analyst in the terms each of them works in. Today that translation is done by people, slowly, and mostly it is not done at all, which is exactly why the three parties have never had a shared view.</p>
+
+<h3>Reading the country in its own language <span class="chip proven">Proven</span></h3>
+<p>Municipal data, prefecture statistics and programme documentation become readable as primary sources rather than through whatever happens to have been translated. The same capability lets the poll run in Japanese, English, Vietnamese, Tagalog, Portuguese and Nepali at once, which matters because caretaker migration is structurally central to the economics here rather than peripheral to it.</p>
+
+<div class="notice">
+<p><strong>The consequence worth saying out loud.</strong> A team of three can now run what would have needed fifteen: town intelligence, poll analysis, programme research, translation, portal content, and the continuous synthesis a project like this lives on. That is not a cost saving. It is the difference between this being a thing that requires a large institution and a thing a few people who want to build it can actually start.</p>
+</div>
+</section>
+
+<section>
+<h2>What is true today</h2>
+
+<div class="open">
+  <div class="open-row"><span class="lbl">Built</span><span class="txt">A strategy corpus and a handful of prototype pages. <b>No running system, no cohort, no town partnership, nobody polled yet.</b></span></div>
+  <div class="open-row"><span class="lbl">Unvalidated</span><span class="txt">Whether a proposal was good is only knowable after somebody moves and stays, so the matching has no ground truth for years.</span></div>
+  <div class="open-row"><span class="lbl">Unresolved</span><span class="txt">Escrow. Who holds household deposits, under what licence, in what jurisdiction.</span></div>
+  <div class="open-row"><span class="lbl">Unknown</span><span class="txt">Whether an industrial employer will take a public conditional position, or whether commercial confidentiality kills it outright.</span></div>
+  <div class="open-row"><span class="lbl">Possible</span><span class="txt">That the reasoning layer is decoration and the first working version is three tables, a nightly job and a progress bar. That would be good news.</span></div>
+  <div class="open-row"><span class="lbl">Parked</span><span class="txt">The national version below. Named, labelled, and deliberately not being worked on yet.</span></div>
+</div>
+
+<p style="margin-top:1.6rem">The first version does not need a town, a ministry or a partnership. It needs a public count with nothing behind it yet, and enough people willing to put their name against a thing that does not exist. That is the cheapest possible test of the only assumption that matters.</p>
+</section>
+
+<section>
+<h2>The bigger version <span class="chip sketch">Sketch</span></h2>
+
+<p>The share house is the small version, and it is the one worth building first. The larger idea underneath it is a standing national record of what people actually want and what is actually in their way. Not a survey, which is a snapshot that starts decaying the day it closes, but something any citizen can write into and keep updating as their own life moves.</p>
+
+<p>That record would be worth something to everyone touching it. A person gets to see that four thousand others in their situation said the same thing, which is the difference between a private frustration and a visible constituency. A town gets real demand instead of a guess about what city families want. A ministry gets a ranked, segmented map of blockers, which is the shape policy is actually written in.</p>
+
+<p>The part that could only be attempted now is that it would not have to be designed once and then frozen. It could be asked in open language rather than in checkboxes, read at national scale, and allowed to <strong>keep changing shape</strong> as people need different things from it and as the tools to build those things arrive. A living register rather than a finished product.</p>
+
+<p class="caption">Labelled a sketch because that is what it is. Unspecified, uncosted, untested, and parked rather than solved. It is here because it is why the small version is worth starting.</p>
+</section>
+
+<section>
+<h2>The invitation</h2>
+
+<p>Underneath the mechanism there is a plainer offer, and it is closer to why anyone would care than any sentence about housing costs.</p>
+
+<blockquote>
+<p>A live, evolving, adaptable thing, where you can see options, and build options, and there is actual shared knowledge and intention, and you get to experiment.</p>
+<p>How many people get to do that? To try a different life. To live with more intention. To be part of something.</p>
+</blockquote>
+
+<p>Most adults get one real shot at choosing how they live, take it under pressure at twenty-two, and never get a structured second attempt. What is on offer here is a legitimate way to run the experiment, with other people, with a way back, and without having to be brave alone.</p>
+
+<div class="question">
+  <span class="cap">What this note is for</span>
+  <p class="q">Is there a seed of something here?</p>
+  <p class="after" style="margin-bottom:1.4rem">That is the whole question, and the more specific versions of it are below. Answers to any one of them are worth more than agreement with all of it.</p>
+
+  <ol class="asks">
+    <li><b>Is the national version realistic?</b> A shared ledger of knowledge that any citizen can write into, legible enough that policy can actually be written against it. Agents are the only reason it could be readable at that scale. Does that hold up, or does it fall apart somewhere obvious?</li>
+    <li><b>Is building for change a strength or an excuse?</b> The thing is meant to keep growing new tools and interfaces as people need them, rather than being designed once. That is either the whole point or a very good way to never ship anything.</li>
+    <li><b>Would it change anything, and is it worth pursuing?</b> Said plainly, because the honest answer might be no and that is useful to know now.</li>
+    <li><b>What would you improve, and which thread would you pull first?</b> The order of the work is the part that is hardest to see from inside it.</li>
+    <li><b>What blockers do you see that are not already listed above?</b> The known ones are escrow, no ground truth on matching for years, and needing a town to say yes. The interesting ones are the ones nobody in the project has thought of.</li>
+  </ol>
+</div>
+</section>
+
+<footer>
+MUSUBU 結 · A CONCEPT, NOT A PRODUCT<br>
+NOTHING HERE IS COMMITTED. EVERY SCREEN AND FIGURE IS ILLUSTRATIVE AND SAYS SO.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var s = document.getElementById('screen');
+  if(!s || !('IntersectionObserver' in window)){ if(s) s.classList.add('lit'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('lit'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.25});
+  io.observe(s);
+})();
+</script>
+
+<!-- ====================================================================
+     DEV ONLY. Surfaces review notes visibly, on localhost and file://.
+     Inert on any other host, so notes cannot appear on the published page.
+     Self-contained: delete this block and nothing else changes.
+
+     The marker is built as '@'+'@' on purpose. A literal one here would
+     make tools/review-check.sh flag this block forever and the clean
+     gate would never pass.
+     ==================================================================== -->
+<script>
+(function(){
+  var dev = location.protocol === 'file:' ||
+            ['localhost','127.0.0.1','[::1]'].indexOf(location.hostname) !== -1;
+  if(!dev) return;
+
+  var MARK = '@' + '@';
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.devnote{display:inline-block;font-family:var(--mono);font-size:0.72rem;' +
+      'line-height:1.5;color:var(--paper);background:var(--lapse);' +
+      'padding:0.1rem 0.45rem;border-radius:2px;margin:0 0.2rem;cursor:pointer}' +
+    '.devnote.on{outline:2px solid var(--ink);outline-offset:2px}' +
+    '#devbar{position:fixed;right:0.9rem;bottom:0.9rem;z-index:99;' +
+      'font-family:var(--mono);font-size:0.72rem;background:var(--lapse);' +
+      'color:var(--paper);border:none;padding:0.4rem 0.7rem;' +
+      'border-radius:3px;cursor:pointer}' +
+    '@media print{.devnote,#devbar{display:none}}';
+  document.head.appendChild(css);
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+  var notes = [], n, el;
+  while((n = walker.nextNode())){
+    if(n.nodeValue.indexOf(MARK) === -1) continue;
+    el = document.createElement('span');
+    el.className = 'devnote';
+    el.textContent = n.nodeValue.split(MARK).pop().trim() || '(empty note)';
+    n.parentNode.insertBefore(el, n.nextSibling);
+    notes.push(el);
+  }
+  if(!notes.length) return;
+
+  var i = -1;
+  var bar = document.createElement('button');
+  bar.id = 'devbar';
+  bar.textContent = notes.length + (notes.length === 1 ? ' note' : ' notes');
+  bar.title = 'Jump to the next note';
+  bar.addEventListener('click', function(){
+    if(notes[i]) notes[i].classList.remove('on');
+    i = (i + 1) % notes.length;
+    notes[i].classList.add('on');
+    notes[i].scrollIntoView({block:'center', behavior:'smooth'});
+  });
+  document.body.appendChild(bar);
+})();
+</script>

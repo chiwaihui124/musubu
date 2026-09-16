@@ -1,0 +1,633 @@
+<meta charset="utf-8">
+<title>Bungotakada — town page</title>
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   Town public page. Each town in the network carries its own accent
+   drawn from the place — Bungotakada is the Suo-nada sea and kaki
+   persimmon. Sea is identity; persimmon is reserved for what the
+   town is asking for, so the ask never competes with the atmosphere.
+   ───────────────────────────────────────────────────────────── */
+:root{
+  --paper:#F4F1E8; --paper-2:#EAE6DA; --card:#FBF9F3; --rule:#DAD5C6;
+  --ink:#1A2328; --ink-2:#4A585F; --ink-3:#818D93;
+  --sea:#1F4A55; --sea-2:#2E6B78; --sea-soft:#DDE7E7;
+  --kaki:#B8501F; --kaki-soft:#F2DFD3;
+  --straw:#C2A85C;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#111619; --paper-2:#171E22; --card:#1A2226; --rule:#2A353B;
+    --ink:#E7E3D8; --ink-2:#A6B2B7; --ink-3:#6F7C82;
+    --sea:#79B4BE; --sea-2:#5A98A4; --sea-soft:#17272C;
+    --kaki:#E0743F; --kaki-soft:#2C1C15; --straw:#C2A85C;}
+}
+:root[data-theme="light"]{--paper:#F4F1E8;--paper-2:#EAE6DA;--card:#FBF9F3;--rule:#DAD5C6;--ink:#1A2328;--ink-2:#4A585F;--ink-3:#818D93;--sea:#1F4A55;--sea-2:#2E6B78;--sea-soft:#DDE7E7;--kaki:#B8501F;--kaki-soft:#F2DFD3;}
+:root[data-theme="dark"]{--paper:#111619;--paper-2:#171E22;--card:#1A2226;--rule:#2A353B;--ink:#E7E3D8;--ink-2:#A6B2B7;--ink-3:#6F7C82;--sea:#79B4BE;--sea-2:#5A98A4;--sea-soft:#17272C;--kaki:#E0743F;--kaki-soft:#2C1C15;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;line-height:1.2;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+
+.wrap{max-width:56rem;margin-inline:auto;padding-inline:1.5rem}
+.narrow{max-width:38rem}
+section{padding-block:3.25rem;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.eyebrow{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.9rem}
+h2{font-size:1.55rem;letter-spacing:-0.01em}
+.lede{color:var(--ink-2);margin-top:0.8rem;font-size:1rem}
+
+/* masthead */
+.mast{background:var(--sea);color:#F1EFE6;padding-block:3.5rem 3rem;border:0}
+.mast .eyebrow{color:#9EC3CB}
+.mast h1{font-size:clamp(2.1rem,6vw,3.1rem);letter-spacing:-0.02em;color:#F6F4EC}
+.mast .where{color:#A9C8CE;font-size:0.95rem;margin-top:0.5rem}
+.mastgrid{display:grid;gap:1.6rem;margin-top:2.2rem}
+@media(min-width:44rem){.mastgrid{grid-template-columns:1.35fr 1fr;gap:2.5rem}}
+.mast p.intro{color:#DCE7E8;font-size:1.02rem}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem 1.2rem}
+.fact .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.25rem;color:#F6F4EC}
+.fact .l{font-size:0.75rem;color:#9EC3CB;line-height:1.35}
+
+/* the ask */
+.ask{background:var(--kaki-soft);border-top:1px solid var(--rule)}
+.ask .eyebrow{color:var(--kaki)}
+.asklist{display:grid;gap:0.55rem;margin-top:1.3rem}
+.askrow{display:grid;grid-template-columns:1.6rem 1fr auto;gap:0.9rem;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid var(--rule)}
+.askrow:last-child{border-bottom:0}
+.askrow .i{font-family:var(--mono);font-size:0.72rem;color:var(--kaki)}
+.askrow .w{font-size:0.97rem}
+.askrow .w small{display:block;color:var(--ink-2);font-size:0.83rem;margin-top:0.1rem}
+.askrow .s{font-family:var(--mono);font-size:0.7rem;color:var(--ink-3);white-space:nowrap}
+
+/* generic cards */
+.cards{display:grid;gap:0.9rem;margin-top:1.5rem}
+@media(min-width:44rem){.cards.two{grid-template-columns:1fr 1fr}.cards.three{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.05rem 1.1rem}
+.card h3{font-size:1.02rem}
+.card p{font-size:0.87rem;color:var(--ink-2);margin-top:0.35rem}
+.k{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3)}
+
+/* non-discrimination framing */
+.notfilter{margin-top:1.1rem;background:var(--card);border-left:2px solid var(--kaki);padding:0.85rem 1rem;font-size:0.86rem;color:var(--ink-2);max-width:38rem;border-radius:0 3px 3px 0}
+.notfilter b{color:var(--ink);display:block;margin-bottom:0.2rem}
+
+/* photo slots — the layout accounts for images even though this mockup has none */
+.ph{background:var(--paper-2);border:1px dashed var(--rule);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;text-align:center;padding:0.8rem;line-height:1.5}
+.ph.wide{aspect-ratio:21/9}
+.ph.sq{aspect-ratio:4/3}
+.ph.tall{aspect-ratio:3/4}
+.mast .ph{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.22);color:#9EC3CB}
+.phgrid{display:grid;gap:0.7rem;margin-top:1.5rem}
+@media(min-width:44rem){.phgrid.four{grid-template-columns:repeat(4,1fr)}}
+
+/* units legend */
+.units{font-size:0.76rem;color:var(--ink-3);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap}
+.units .sw{width:14px;height:6px;border-radius:3px;display:inline-block}
+.units .sw.solid{background:var(--sea-2)}
+.units .sw.dash{background:repeating-linear-gradient(90deg,var(--kaki) 0 5px,transparent 5px 9px)}
+.crow .lab b em{font-style:normal;font-family:var(--body);font-weight:400;font-size:0.74rem;color:var(--ink-3);margin-left:0.12rem}
+
+/* resident view toggle */
+.viewbar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--rule);padding:0.55rem 0}
+.viewbar .inner{max-width:56rem;margin-inline:auto;padding-inline:1.5rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap}
+.viewbar .lbl{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-3)}
+.seg{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.05em;padding:0.3rem 0.7rem;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sea);color:#F1EFE6}
+.viewnote{font-size:0.74rem;color:var(--ink-3);margin-left:auto}
+
+/* resident-only affordances.
+   Specificity matters here: a bare .resident-only{display:none} loses to any
+   later single-class rule (.postbar{display:flex}). Scoping to body:not() wins
+   on specificity and lets each element keep its own display value when shown. */
+body:not(.resident) .resident-only{display:none}
+.postbar{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem;padding:0.75rem 0.85rem;background:var(--sea-soft);border:1px solid var(--sea-2);border-radius:3px;align-items:center}
+.postbar .pl{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--sea);margin-right:0.2rem}
+.postbar button{font-family:inherit;font-size:0.8rem;padding:0.35rem 0.7rem;border-radius:2px;border:1px solid var(--sea-2);background:var(--card);color:var(--sea);cursor:pointer}
+.postbar button:focus-visible{outline:2px solid var(--kaki);outline-offset:2px}
+
+/* time shift */
+.tshift{display:grid;gap:1.4rem;margin-top:1.5rem}
+@media(min-width:48rem){.tshift{grid-template-columns:15rem 1fr;gap:2rem}}
+.tperson .ph{margin-bottom:0.8rem}
+.tperson .nm{font-family:var(--display);font-size:1.12rem}
+.tperson .meta{font-family:var(--mono);font-size:0.68rem;color:var(--ink-3);margin-top:0.2rem;line-height:1.5}
+.tperson blockquote{margin:0.7rem 0 0;font-family:var(--display);font-size:0.98rem;line-height:1.45;color:var(--ink-2)}
+.wk{display:grid;grid-template-columns:9.5rem 1fr 1fr;gap:0.3rem 0.8rem;align-items:center;font-size:0.85rem}
+.wk .hd{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-3);padding-bottom:0.3rem;border-bottom:1px solid var(--rule)}
+.wk .rl{color:var(--ink-2)}
+.wk .v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:0.9rem}
+.wk .v.was{color:var(--ink-3)}
+.wk .v.now{color:var(--sea)}
+.gained{margin-top:1.3rem;border-top:1px solid var(--rule);padding-top:1rem}
+.gained .hd{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--kaki);margin-bottom:0.7rem}
+.gbar{display:flex;height:26px;border-radius:3px;overflow:hidden;margin-bottom:0.6rem}
+.gbar span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.66rem;color:#F6F4EC}
+.gkey{display:flex;flex-wrap:wrap;gap:0.5rem 1rem;font-size:0.79rem;color:var(--ink-2)}
+.gkey i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:0.32rem}
+
+/* composition */
+.comp{display:grid;gap:1.1rem;margin-top:1.4rem}
+@media(min-width:44rem){.comp{grid-template-columns:1fr 1fr}}
+.crow{margin-bottom:0.75rem}
+.crow .lab{display:flex;justify-content:space-between;font-size:0.83rem;color:var(--ink-2);margin-bottom:0.22rem}
+.crow .lab b{color:var(--ink);font-weight:600;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.trk{height:7px;background:var(--paper-2);border-radius:4px;overflow:hidden}
+.trk i{display:block;height:100%;border-radius:4px;background:var(--sea-2)}
+.trk i.soon{background:repeating-linear-gradient(90deg,var(--kaki) 0 5px,transparent 5px 9px)}
+
+/* schedule */
+.sched{margin-top:1.3rem}
+.ev{display:grid;grid-template-columns:5.2rem 1fr auto;gap:1rem;padding:0.7rem 0;border-bottom:1px solid var(--rule);font-size:0.9rem;align-items:baseline}
+.ev:last-child{border-bottom:0}
+.ev .d{font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em}
+.ev .t b{font-weight:600}
+.ev .t small{display:block;color:var(--ink-2);font-size:0.81rem;margin-top:0.08rem}
+.ev .n{font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);white-space:nowrap}
+.tagline{display:inline-block;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.14rem 0.4rem;border-radius:2px;background:var(--sea-soft);color:var(--sea);margin-left:0.4rem}
+
+/* building */
+.build{display:grid;gap:0.75rem;margin-top:1.4rem}
+.bitem{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.9rem 1rem}
+.bhead{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;flex-wrap:wrap}
+.bhead h3{font-size:0.99rem}
+.bhead .st{font-family:var(--mono);font-size:0.68rem;color:var(--kaki);white-space:nowrap}
+.bhead .st.done{color:var(--sea-2)}
+.bar{height:5px;background:var(--paper-2);border-radius:3px;overflow:hidden;margin-top:0.55rem}
+.bar i{display:block;height:100%;border-radius:3px;background:var(--kaki)}
+.bar i.done{background:var(--sea-2)}
+.bitem p{font-size:0.84rem;color:var(--ink-2);margin-top:0.45rem}
+
+/* vote */
+.vote{background:var(--sea-soft);border:1px solid var(--sea-2);border-radius:3px;padding:1.15rem 1.2rem;margin-top:1.4rem}
+.vote .opts{display:grid;gap:0.6rem;margin-top:0.9rem}
+.opt{display:grid;grid-template-columns:1fr 3.4rem;gap:0.8rem;align-items:center}
+.opt .nm{font-size:0.9rem}
+.opt .nm small{display:block;color:var(--ink-2);font-size:0.8rem}
+.opt .pct{font-family:var(--mono);font-size:0.82rem;text-align:right;color:var(--sea)}
+.opt .trk{grid-column:1/-1;margin-top:-0.35rem}
+.votefoot{font-size:0.8rem;color:var(--ink-2);margin-top:0.9rem;border-top:1px solid var(--rule);padding-top:0.7rem}
+
+/* voices */
+.voices{display:grid;gap:0.9rem;margin-top:1.4rem}
+@media(min-width:44rem){.voices{grid-template-columns:1fr 1fr}}
+.voice{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.05rem 1.1rem}
+.voice .who{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.05em;color:var(--ink-3)}
+.voice blockquote{margin:0.5rem 0 0;font-family:var(--display);font-size:1.02rem;line-height:1.45}
+.voice .aft{font-size:0.82rem;color:var(--ink-2);margin-top:0.55rem}
+
+/* trials */
+.trials{display:grid;gap:0.9rem;margin-top:1.4rem}
+@media(min-width:44rem){.trials{grid-template-columns:repeat(3,1fr)}}
+.trial{border:1px solid var(--rule);border-radius:3px;padding:1rem;background:var(--card);display:flex;flex-direction:column;gap:0.4rem}
+.trial .dur{font-family:var(--mono);font-size:0.68rem;color:var(--kaki);letter-spacing:0.06em}
+.trial h3{font-size:1rem}
+.trial p{font-size:0.83rem;color:var(--ink-2)}
+.trial .cost{font-family:var(--mono);font-size:0.78rem;margin-top:auto;padding-top:0.6rem;color:var(--ink)}
+
+/* honest numbers */
+.demo{display:grid;gap:1rem;margin-top:1.4rem}
+@media(min-width:44rem){.demo{grid-template-columns:repeat(4,1fr)}}
+.dstat .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.5rem}
+.dstat .l{font-size:0.76rem;color:var(--ink-3);line-height:1.35;margin-top:0.15rem}
+.dstat .d{font-family:var(--mono);font-size:0.72rem;margin-top:0.2rem}
+.dstat .d.up{color:var(--sea-2)}
+.dstat .d.dn{color:var(--kaki)}
+
+.cta{background:var(--sea);color:#F1EFE6;border:0}
+.cta h2{color:#F6F4EC;font-size:1.7rem}
+.cta p{color:#C8DCDE;margin-top:0.8rem}
+.btns{display:flex;gap:0.6rem;margin-top:1.4rem;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:0.9rem;padding:0.6rem 1.1rem;border-radius:3px;cursor:pointer;border:1px solid #F1EFE6}
+.btn.p{background:#F1EFE6;color:var(--sea)}
+.btn.g{background:transparent;color:#F1EFE6}
+.btn:focus-visible{outline:2px solid var(--straw);outline-offset:2px}
+
+footer{padding-block:2rem 3.5rem}
+footer p{font-size:0.78rem;color:var(--ink-3)}
+</style>
+
+<div class="viewbar">
+  <div class="inner">
+    <span class="lbl">Viewing as</span>
+    <div class="seg" role="group" aria-label="View mode">
+      <button id="vVisitor" aria-pressed="true">Visitor</button>
+      <button id="vResident" aria-pressed="false">Resident</button>
+    </div>
+    <span class="viewnote" id="viewnote">The public page. Everything here is visible to anyone.</span>
+  </div>
+</div>
+
+<section class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Musubu town page · Ōita Prefecture</p>
+    <h1>Bungotakada</h1>
+    <p class="where">豊後高田市 · on the Suo-nada sea · 2 hours from Fukuoka, 45 minutes from Ōita City</p>
+
+    <div class="mastgrid">
+      <div>
+        <p class="intro">
+          A river town where the paddy meets the sea, with a Shōwa-era shopping street that never got
+          rebuilt and is now the reason people visit. We have been losing about 1.5% of our population
+          every year since 2005. In 2027 we started doing something about it differently — not
+          advertising for individuals, but coordinating arrivals so that people land together.
+        </p>
+      </div>
+      <div class="facts">
+        <div class="fact"><div class="n">22,500</div><div class="l">people</div></div>
+        <div class="fact"><div class="n">1,200</div><div class="l">empty houses on record</div></div>
+        <div class="fact"><div class="n">4</div><div class="l">schools still open</div></div>
+        <div class="fact"><div class="n">0</div><div class="l">passenger rail — this is a car town</div></div>
+      </div>
+    </div>
+
+    <div class="phgrid four">
+      <div class="ph sq">photo — the Shōwa street on a Sunday</div>
+      <div class="ph sq">photo — paddy toward the sea</div>
+      <div class="ph sq">photo — the hall kitchen mid-potluck</div>
+      <div class="ph sq">photo — restoration crew on a roof</div>
+    </div>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="wrap">
+    <p class="eyebrow">What we are asking for</p>
+    <h2 class="narrow">We would rather say this plainly than write a brochure.</h2>
+    <p class="lede narrow">
+      Decided by the town assembly in April and reviewed every six months. If what you do is on this
+      list, we will help with housing and the paperwork, and you will not be the only one arriving.
+    </p>
+    <p class="notfilter">
+      <b>This is what the town is short of. It is not a list of who is welcome.</b>
+      Anyone may move to Bungotakada, and anyone may join the programme — nothing here is a
+      condition of entry. These are the gaps we can actively help you fill, because we hold housing
+      and posts against them. If what you do is not on this list, you are no less welcome; you will
+      just be arranging more of it yourself.
+    </p>
+
+    <div class="asklist">
+      <div class="askrow"><span class="i">01</span>
+        <span class="w">Families with children under ten
+          <small>Seikei Kindergarten reopened in 2029 and has room. Two elementary schools are one class short of stable.</small></span>
+        <span class="s">housing held · 6 units</span></div>
+      <div class="askrow"><span class="i">02</span>
+        <span class="w">Two teachers — primary, and one for special needs
+          <small>Municipal posts, permanent, starting April. We have been advertising these for three years.</small></span>
+        <span class="s">urgent</span></div>
+      <div class="askrow"><span class="i">03</span>
+        <span class="w">People who want to learn a building trade
+          <small>Paid apprenticeship on real akiya restoration, with carpenters who came out of retirement to teach it.</small></span>
+        <span class="s">6 places · Jan</span></div>
+      <div class="askrow"><span class="i">04</span>
+        <span class="w">Care workers, including from overseas
+          <small>Japanese support provided, free, twice a week. Four of our care staff arrived this way since 2030.</small></span>
+        <span class="s">ongoing</span></div>
+      <div class="askrow"><span class="i">05</span>
+        <span class="w">Someone to take on the bakery unit
+          <small>Shōwa street, 3 Shinmachi. Ovens are in. See the decision below — the town is choosing.</small></span>
+        <span class="s">deciding</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Who is here, and who is coming</p>
+    <h2 class="narrow">You are not choosing a house. You are choosing who your neighbours will be.</h2>
+    <p class="lede narrow">
+      The solid bar is people already living here who arrived through the programme. The dashed bar is
+      people who have committed and have not moved yet. Everyone else — the great majority of this
+      town — is not on this chart, because they were here first.
+    </p>
+
+    <div class="comp">
+      <div>
+        <p class="k" style="margin-bottom:0.25rem">By life stage</p>
+        <p class="units"><span class="sw solid"></span>households here now &nbsp;·&nbsp; <span class="sw dash"></span>households committed, not yet moved</p>
+        <div class="crow"><div class="lab"><span>Families with young children</span><b>58 <em>here</em> &nbsp;19 <em>coming</em></b></div><div class="trk"><i style="width:64%"></i></div><div class="trk" style="margin-top:2px"><i class="soon" style="width:22%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Couples, twenties and thirties</span><b>31 <em>here</em> &nbsp;11 <em>coming</em></b></div><div class="trk"><i style="width:34%"></i></div><div class="trk" style="margin-top:2px"><i class="soon" style="width:13%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Solo, remote or trade</span><b>26 <em>here</em> &nbsp;14 <em>coming</em></b></div><div class="trk"><i style="width:29%"></i></div><div class="trk" style="margin-top:2px"><i class="soon" style="width:16%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Sixties and over</span><b>12 <em>here</em> &nbsp;3 <em>coming</em></b></div><div class="trk"><i style="width:13%"></i></div><div class="trk" style="margin-top:2px"><i class="soon" style="width:4%"></i></div></div>
+      </div>
+      <div>
+        <p class="k" style="margin-bottom:0.25rem">What people do</p>
+        <p class="units">adults who arrived through the programme, by main occupation</p>
+        <div class="crow"><div class="lab"><span>Care and health</span><b>41 <em>people</em></b></div><div class="trk"><i style="width:46%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Building and restoration</span><b>34 <em>people</em></b></div><div class="trk"><i style="width:38%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Remote — employed elsewhere</span><b>29 <em>people</em></b></div><div class="trk"><i style="width:32%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Farming and fishing</span><b>18 <em>people</em></b></div><div class="trk"><i style="width:20%"></i></div></div>
+        <div class="crow"><div class="lab"><span>Teaching and childcare</span><b>11 <em>people</em></b></div><div class="trk"><i style="width:12%"></i></div></div>
+        <p style="font-size:0.8rem;color:var(--ink-3);margin-top:0.9rem">
+          Nine nationalities among arrivals since 2027. The largest groups after Japanese are
+          Vietnamese and Filipino, mostly in care work.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What a week actually looks like</p>
+    <h2 class="narrow">Kenji got thirty hours a week back. Here is what he did with them.</h2>
+    <p class="lede narrow">
+      The hardest thing to show about a place is time. Money is easy to compare and time is not, so
+      we asked people to write down both weeks — the one they left and the one they have now.
+    </p>
+
+    <div class="tshift">
+      <div class="tperson">
+        <div class="ph tall">photo — Kenji at the workshop</div>
+        <div class="nm">Kenji, 41</div>
+        <p class="meta">Moved 2029 · from Setagaya, Tokyo<br>Was: logistics coordinator<br>Now: restoration crew, three days a week</p>
+        <blockquote>“I didn’t leave Tokyo because I hated it. I left because I was awake for sixteen hours and about ninety minutes of that was mine.”</blockquote>
+      </div>
+
+      <div>
+        <div class="wk">
+          <span class="hd">Hours per week</span><span class="hd">Setagaya</span><span class="hd">Here</span>
+          <span class="rl">Commuting</span><span class="v was">11.5</span><span class="v now">1.2</span>
+          <span class="rl">At work</span><span class="v was">52</span><span class="v now">34</span>
+          <span class="rl">Work obligation<br><small style="color:var(--ink-3)">drinks, weekend calls</small></span><span class="v was">6</span><span class="v now">0</span>
+          <span class="rl">Errands &amp; logistics</span><span class="v was">9</span><span class="v now">6</span>
+          <span class="rl">Asleep</span><span class="v was">38</span><span class="v now">49</span>
+          <span class="rl"><b>Genuinely his</b></span><span class="v was">4</span><span class="v now" style="font-size:1.05rem">34</span>
+        </div>
+
+        <div class="gained">
+          <p class="hd">Where the thirty hours went</p>
+          <div class="gbar">
+            <span style="width:23%;background:var(--sea)">7</span>
+            <span style="width:20%;background:var(--sea-2)">6</span>
+            <span style="width:17%;background:var(--straw);color:#2A2410">5</span>
+            <span style="width:20%;background:var(--kaki)">6</span>
+            <span style="width:20%;background:var(--ink-3)">6</span>
+          </div>
+          <div class="gkey">
+            <span><i style="background:var(--sea)"></i>Friends and neighbours</span>
+            <span><i style="background:var(--sea-2)"></i>Walking, outside</span>
+            <span><i style="background:var(--straw)"></i>Music — he plays again</span>
+            <span><i style="background:var(--kaki)"></i>The workshop</span>
+            <span><i style="background:var(--ink-3)"></i>Nothing in particular</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--ink-2);margin-top:0.9rem">
+            He earns about ¥2.1M less a year than he did in Tokyo, and his housing costs went down by
+            more than that. He says the “nothing in particular” column is the one he would defend
+            hardest.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <p class="lede narrow" style="margin-top:1.6rem">
+      Four other residents have published their two weeks. None of them look the same — one works
+      more here than she did before, by choice, because the work is hers now.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The community hall this week</p>
+    <h2 class="narrow">The building is open every day. Someone is paid to make sure of it.</h2>
+    <p class="lede narrow">
+      Central Community Hall, by the river. This is the actual calendar, posted by residents and by
+      the hall steward — not a programme of events written for visitors.
+    </p>
+
+    <div class="phgrid four">
+      <div class="ph sq">photo — Friday potluck, long table</div>
+      <div class="ph sq">photo — repair table, Tuesday</div>
+      <div class="ph sq">photo — Japanese class</div>
+      <div class="ph sq">photo — Saturday market stalls</div>
+    </div>
+
+    <div class="postbar resident-only">
+      <span class="pl">Resident tools</span>
+      <button type="button">Post something</button>
+      <button type="button">Add to the calendar</button>
+      <button type="button">Ask for help</button>
+      <button type="button">Book the big room</button>
+    </div>
+
+    <div class="sched">
+      <div class="ev"><span class="d">MON</span><span class="t"><b>Morning walk</b><small>Meets at the hall, 6:30. Goes to the estuary and back.</small></span><span class="n">every day</span></div>
+      <div class="ev"><span class="d">TUE</span><span class="t"><b>Repair table</b><small>Bring anything broken. Tools provided. Kazuo fixes radios.</small></span><span class="n">9 last week</span></div>
+      <div class="ev"><span class="d">WED</span><span class="t"><b>Japanese class</b> <span class="tagline">free</span><small>For care staff and family. Two levels, volunteers welcome.</small></span><span class="n">14 regulars</span></div>
+      <div class="ev"><span class="d">THU</span><span class="t"><b>Framing, week 3</b><small>Apprenticeship teaching session. Open to watch.</small></span><span class="n">6 apprentices</span></div>
+      <div class="ev"><span class="d">FRI</span><span class="t"><b>Potluck</b><small>7pm. Come at 6 if you want to cook. Everyone, always.</small></span><span class="n">17 last week</span></div>
+      <div class="ev"><span class="d">SAT</span><span class="t"><b>Morning market</b><small>In front of the hall. Persimmons now, mikan from November.</small></span><span class="n">weekly</span></div>
+      <div class="ev"><span class="d">SUN</span><span class="t"><b>Shōwa weekend</b> <span class="tagline">seasonal</span><small>The street dresses for the day. Residents take part if they want to.</small></span><span class="n">Apr–Nov</span></div>
+    </div>
+
+    <div class="cards three" style="margin-top:1.7rem">
+      <div class="card"><p class="k">Coming up</p><h3>Autumn festival</h3><p>14–15 October. The shrine procession, and the first year the apprentices are building the float themselves.</p></div>
+      <div class="card"><p class="k">Coming up</p><h3>Harbour jazz night</h3><p>2 November. Started by a resident who moved here in 2030 and missed playing. Now sixty people come.</p></div>
+      <div class="card"><p class="k">Coming up</p><h3>Rice planting</h3><p>Late May. Anyone can join. It is hard and everyone eats afterwards.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Being built now</p>
+    <h2 class="narrow">Nothing here starts until enough people say yes.</h2>
+    <p class="lede narrow">
+      Each of these has a threshold and a deadline. If it does not fill, deposits are returned and it
+      stays on this page as unbuilt — we would rather show you that than pretend.
+    </p>
+
+    <div class="build">
+      <div class="bitem">
+        <div class="bhead"><h3>Riverside block — 20 homes</h3><span class="st done">funded · building</span></div>
+        <div class="bar"><i class="done" style="width:100%"></i></div>
+        <p>West bank, flat, everything within a ten minute cycle. The only part of town that does not need a car. Completion spring 2033.</p>
+      </div>
+      <div class="bitem">
+        <div class="bhead"><h3>Bakery — 3 Shinmachi</h3><span class="st">31 of 40 pre-commits · closes 30 Sept</span></div>
+        <div class="bar"><i style="width:78%"></i></div>
+        <p>Unit and ovens are in place. Which bakery opens is being decided below.</p>
+      </div>
+      <div class="bitem">
+        <div class="bhead"><h3>Akiya cluster, Tamatsu — 6 houses</h3><span class="st">4 of 6 households · closes 15 Dec</span></div>
+        <div class="bar"><i style="width:67%"></i></div>
+        <p>Six adjacent houses, ¥1.4–4.8M each, restored by the apprenticeship programme. Two remaining.</p>
+      </div>
+      <div class="bitem">
+        <div class="bhead"><h3>Third housing cluster — did not fill</h3><span class="st" style="color:var(--ink-3)">19 of 30 · lapsed June 2031</span></div>
+        <div class="bar"><i style="width:63%;background:var(--ink-3)"></i></div>
+        <p>Deposits returned. The land is still paddy and still listed. It can be proposed again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Open to a vote right now</p>
+    <h2 class="narrow">Residents decide. So do the people who have committed to move here.</h2>
+    <p class="lede narrow">
+      Three people want the bakery unit on the Shōwa street. Rather than a landlord picking, the
+      people who will actually be the customers are choosing — including the ones who have not
+      arrived yet.
+    </p>
+
+    <div class="vote">
+      <p class="k">3 Shinmachi · closes 14 September · advisory to the assembly</p>
+      <div class="opts">
+        <div class="opt"><span class="nm">Morning bakery and coffee<small>Yamaguchi, currently in Nakatsu. Opens 6am for the market crowd.</small></span><span class="pct">44%</span><div class="trk"><i style="width:44%"></i></div></div>
+        <div class="opt"><span class="nm">Bakery with a reading room<small>The Ōkubo family. Half the floor as a place to sit with a book.</small></span><span class="pct">37%</span><div class="trk"><i style="width:37%"></i></div></div>
+        <div class="opt"><span class="nm">Bread plus bicycle repair<small>Tran, arriving on the January cohort. Two trades in one unit.</small></span><span class="pct">19%</span><div class="trk"><i style="width:19%"></i></div></div>
+      </div>
+      <p class="votefoot">
+        84 people have weighed in — 61 residents and 23 committed arrivals. The vote advises; the
+        assembly and the property owner decide, because they carry the risk.
+      </p>
+    </div>
+
+    <div class="cards two" style="margin-top:1.6rem">
+      <div class="card"><p class="k">Next decision</p><h3>What the old Kuresaki school building becomes</h3><p>Proposals open until December. Current suggestions: workshop annexe, indoor sports space, or housing. Anyone in the network may propose.</p></div>
+      <div class="card"><p class="k">Planned, not yet funded</p><h3>Bus route to Usa station, evenings</h3><p>Costed at ¥4.1M a year. The assembly will fund it at 40 more households, because that is where the numbers work.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">People who live here</p>
+    <h2 class="narrow">Ask them, not us.</h2>
+    <p class="lede narrow">
+      Each of these people has agreed to be contacted. Nothing is passed through us — you get what
+      they chose to share, and they answer or they do not.
+    </p>
+
+    <div class="voices">
+      <div class="voice">
+        <p class="who">Moved 2029 · from Setagaya, Tokyo · logistics → carpentry</p>
+        <blockquote>“The first winter was harder than anyone told me. The second one I knew forty people and it was the best year of my life.”</blockquote>
+        <p class="aft">Teaches the framing module. Happy to talk to anyone thinking about the apprenticeship.</p>
+      </div>
+      <div class="voice">
+        <p class="who">Moved 2030 · from Cebu · care worker</p>
+        <blockquote>“I came for the job. I stayed because my daughter has a school where the teachers know her name.”</blockquote>
+        <p class="aft">Runs the Wednesday Japanese class now. Will answer questions in English or Tagalog.</p>
+      </div>
+      <div class="voice">
+        <p class="who">Here all along · third generation · farms 2.1 hectares</p>
+        <blockquote>“I was against it at the assembly. I said so loudly. I was wrong about the young ones and I have said that too.”</blockquote>
+        <p class="aft">Will tell you honestly what has been difficult about the arrivals.</p>
+      </div>
+      <div class="voice">
+        <p class="who">Moved 2031 · from Osaka · remote, left after 14 months</p>
+        <blockquote>“It wasn’t for me. Too quiet, and I missed being anonymous. No hard feelings in either direction.”</blockquote>
+        <p class="aft">Agreed to stay listed. If you want to know why people leave, ask this one first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Come and see first</p>
+    <h2 class="narrow">Nobody should move somewhere they have not slept.</h2>
+
+    <div class="trials">
+      <div class="trial">
+        <div class="ph sq" style="margin-bottom:0.5rem">photo — the annexe room</div>
+        <span class="dur">A weekend</span>
+        <h3>Stay for the potluck</h3>
+        <p>Friday to Sunday. A room at the hall annexe, dinner on Friday, the market on Saturday. You will meet thirty people whether you plan to or not.</p>
+        <span class="cost">Free · 4 rooms a month</span>
+      </div>
+      <div class="trial">
+        <div class="ph sq" style="margin-bottom:0.5rem">photo — the trial house kitchen</div>
+        <span class="dur">Two weeks</span>
+        <h3>Live like local</h3>
+        <p>A house of your own, a bicycle, and someone whose job is to introduce you. Work remotely if you need to — the fibre is good.</p>
+        <span class="cost">¥18,000 · returned if you commit</span>
+      </div>
+      <div class="trial">
+        <div class="ph sq" style="margin-bottom:0.5rem">photo — restoration crew, week one</div>
+        <span class="dur">Nine months</span>
+        <h3>Come for a project</h3>
+        <p>Paid work on the restoration crew, a room included, and a decision point at month seven. Come for the job, decide about the life later.</p>
+        <span class="cost">¥295,000/mo · housing included</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The honest numbers</p>
+    <h2 class="narrow">Where we actually are.</h2>
+
+    <div class="demo">
+      <div class="dstat"><div class="n">22,810</div><div class="l">population</div><div class="d up">+2,261 against trend</div></div>
+      <div class="dstat"><div class="n">176</div><div class="l">households arrived since 2027</div><div class="d up">88% still here</div></div>
+      <div class="dstat"><div class="n">62</div><div class="l">empty houses restored</div><div class="d dn">of 1,200 — this is the beginning</div></div>
+      <div class="dstat"><div class="n">39.8%</div><div class="l">of residents are 65 or over</div><div class="d dn">was 41.2% in 2027</div></div>
+    </div>
+
+    <p class="lede narrow" style="margin-top:1.6rem">
+      Three businesses opened through the programme and closed again. Twelve percent of the people
+      who arrived have left. One housing cluster never filled. We publish these because a town page
+      with no failures on it is an advertisement, and you would be right not to trust it.
+    </p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap narrow">
+    <h2>If any of this sounds like your next few years.</h2>
+    <p>
+      There is no application. Tell us where you are in your life and what is stopping you, and we
+      will tell you honestly whether this is the right town — including when it is not.
+    </p>
+    <div class="btns">
+      <button class="btn p" type="button">Book a weekend</button>
+      <button class="btn g" type="button">Ask a resident</button>
+      <button class="btn g" type="button">Follow this town</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Speculative mockup for the Musubu project. Bungotakada is a real municipality; the programme,
+      the figures, the residents quoted and the votes shown here are all invented, and nothing on
+      this page has been represented to the city or to any person named. Geographic details —
+      population, the absence of passenger rail, the Shōwa shopping street, the community hall — are
+      drawn from public sources and still need verification. Photo slots are marked where images
+      would carry the weight — the layout accounts for them, this mockup does not contain them.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var vis = document.getElementById("vVisitor");
+  var res = document.getElementById("vResident");
+  var note = document.getElementById("viewnote");
+
+  function set(resident) {
+    document.body.classList.toggle("resident", resident);
+    vis.setAttribute("aria-pressed", String(!resident));
+    res.setAttribute("aria-pressed", String(resident));
+    note.textContent = resident
+      ? "Signed in as a resident. Posting tools appear; governance and budget would too."
+      : "The public page. Everything here is visible to anyone.";
+  }
+  vis.addEventListener("click", function () { set(false); });
+  res.addEventListener("click", function () { set(true); });
+  set(false);
+})();
+</script>

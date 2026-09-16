@@ -1,0 +1,18 @@
+<svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (transparent) -->
+  <!-- Interlocking circles representing connection/binding -->
+  <!-- Using traditional Japanese colors: Ai (indigo) and Shu (vermillion) -->
+  <!-- Left circle - families/individuals -->
+  <circle cx="55" cy="70" r="32" fill="none" stroke="#1e4d78" stroke-width="6"/>
+  <!-- Middle circle - the connection/coordination -->
+  <circle cx="90" cy="70" r="32" fill="none" stroke="#2d5a87" stroke-width="6"/>
+  <!-- Right circle - communities/towns -->
+  <circle cx="125" cy="70" r="32" fill="none" stroke="#c53d43" stroke-width="6"/>
+  <!-- Highlight the intersection points with small knot accents -->
+  <circle cx="72" cy="70" r="4" fill="#1e4d78"/>
+  <circle cx="107" cy="70" r="4" fill="#c53d43"/>
+  <!-- Wordmark: Musubu -->
+<text x="170" y="65" font-family="Georgia, serif" font-size="42" font-weight="400" fill="#1e4d78" letter-spacing="3">Musubu</text>
+  <!-- Japanese subtitle -->
+<text x="170" y="95" font-family="Georgia, serif" font-size="18" fill="#666" letter-spacing="6">結ぶ</text>
+</svg>

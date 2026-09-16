@@ -1,0 +1,816 @@
+<meta charset="utf-8">
+<title>Musubu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1;
+  --card:#F8F9FA;
+  --ink:#131B23;
+  --ink-2:#4B5661;
+  --ink-3:#7E8992;
+  --rule:#D3DADE;
+  --rule-soft:#E2E7EA;
+  --indigo:#1E4B76;
+  --indigo-deep:#12365A;
+  --indigo-wash:#E1E8EF;
+  --lapse:#9C5330;
+
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418;
+    --card:#161E25;
+    --ink:#DEE5EA;
+    --ink-2:#9AA6B1;
+    --ink-3:#6B7780;
+    --rule:#26313A;
+    --rule-soft:#1D262D;
+    --indigo:#6EA6D6;
+    --indigo-deep:#8FBEE6;
+    --indigo-wash:#152431;
+    --lapse:#C9825A;
+  }
+}
+
+:root[data-theme="dark"]{
+  --paper:#0E1418;
+  --card:#161E25;
+  --ink:#DEE5EA;
+  --ink-2:#9AA6B1;
+  --ink-3:#6B7780;
+  --rule:#26313A;
+  --rule-soft:#1D262D;
+  --indigo:#6EA6D6;
+  --indigo-deep:#8FBEE6;
+  --indigo-wash:#152431;
+  --lapse:#C9825A;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.wrap{
+  max-width:39rem;
+  margin-inline:auto;
+  padding:3.5rem 1.5rem 5rem;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+/* ---------- masthead ---------- */
+
+.mast{
+  display:flex;
+  align-items:baseline;
+  gap:0.75rem;
+  padding-bottom:2.75rem;
+}
+.mast .name{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:1.05rem;
+  letter-spacing:0.02em;
+}
+.mast .kanji{
+  font-family:var(--display);
+  color:var(--indigo);
+  font-size:1.05rem;
+}
+.mast .stamp{
+  margin-left:auto;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+}
+
+/* ---------- hero ---------- */
+
+h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(1.7rem,5.2vw,2.5rem);
+  line-height:1.34;
+  letter-spacing:-0.005em;
+  margin:0 0 1.5rem;
+  text-wrap:balance;
+}
+h1 em{
+  font-style:normal;
+  color:var(--indigo);
+}
+
+.standfirst{
+  font-size:1.05rem;
+  color:var(--ink-2);
+  margin:0 0 1.1rem;
+  max-width:34rem;
+}
+.readtime{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+  margin:0 0 2.5rem;
+}
+
+/* ---------- sections ---------- */
+
+section{
+  padding-top:2.6rem;
+  margin-top:2.6rem;
+  border-top:1px solid var(--rule-soft);
+}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+
+h2{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:1.32rem;
+  line-height:1.4;
+  letter-spacing:0;
+  margin:0 0 1.1rem;
+  text-wrap:balance;
+}
+
+h3{
+  font-family:var(--body);
+  font-weight:600;
+  font-size:0.95rem;
+  margin:1.9rem 0 0.5rem;
+}
+
+p{margin:0 0 1.05rem;max-width:34rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+/* ---------- the standing notice ---------- */
+
+.notice{
+  background:var(--indigo-wash);
+  border-left:2px solid var(--indigo);
+  padding:0.95rem 1.15rem;
+  margin:1.9rem 0;
+  font-size:0.94rem;
+  line-height:1.65;
+  color:var(--ink-2);
+  border-radius:0 2px 2px 0;
+}
+.notice strong{color:var(--ink)}
+
+/* ---------- the resolve block ---------- */
+
+.resolve{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  margin:1.9rem 0 1.4rem;
+  overflow:hidden;
+}
+@media (max-width:33rem){
+  .resolve{grid-template-columns:1fr}
+}
+.panel{
+  background:var(--card);
+  padding:1.1rem 1.15rem 1.25rem;
+}
+.panel .cap{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  display:block;
+  margin-bottom:0.85rem;
+}
+.panel.after .cap{color:var(--indigo)}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:0.75rem;
+  padding:0.42rem 0;
+  border-bottom:1px dotted var(--rule);
+  font-size:0.88rem;
+}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink-3);white-space:nowrap}
+.row .v{
+  font-family:var(--mono);
+  font-size:0.82rem;
+  color:var(--ink);
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.panel.before .row .v{
+  color:var(--ink-3);
+  filter:blur(2.6px);
+  user-select:none;
+}
+
+.panel.after .row .v{
+  opacity:0;
+  filter:blur(5px);
+  transition:opacity 620ms ease,filter 620ms ease;
+}
+.panel.after.lit .row .v{opacity:1;filter:blur(0)}
+.panel.after.lit .row:nth-child(2) .v{transition-delay:60ms}
+.panel.after.lit .row:nth-child(3) .v{transition-delay:180ms}
+.panel.after.lit .row:nth-child(4) .v{transition-delay:300ms}
+.panel.after.lit .row:nth-child(5) .v{transition-delay:420ms}
+
+@media (prefers-reduced-motion:reduce){
+  .panel.after .row .v{opacity:1;filter:blur(0);transition:none}
+}
+
+.resolve-note{
+  font-size:0.86rem;
+  color:var(--ink-3);
+  margin:0 0 0;
+  max-width:34rem;
+}
+
+/* ---------- the sequence ---------- */
+
+ol.steps{
+  list-style:none;
+  counter-reset:s;
+  margin:1.4rem 0 1.3rem;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:0.9rem;
+}
+ol.steps li{
+  counter-increment:s;
+  position:relative;
+  padding-left:2.1rem;
+  font-size:0.97rem;
+  line-height:1.65;
+  color:var(--ink-2);
+}
+ol.steps li::before{
+  content:counter(s);
+  position:absolute;
+  left:0;
+  top:0.28rem;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--indigo);
+  letter-spacing:0.02em;
+}
+ol.steps li b{color:var(--ink);font-weight:600}
+
+/* ---------- plain lists ---------- */
+
+ul.plain{
+  list-style:none;
+  margin:1.1rem 0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:0.85rem;
+}
+ul.plain li{
+  position:relative;
+  padding-left:1.1rem;
+  font-size:0.97rem;
+  line-height:1.65;
+  color:var(--ink-2);
+  max-width:34rem;
+}
+ul.plain li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0.72rem;
+  width:0.4rem;
+  height:1px;
+  background:var(--indigo);
+}
+ul.plain li b{color:var(--ink);font-weight:600}
+
+/* ---------- illustrative example ---------- */
+
+.scene{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:1.2rem 1.25rem;
+  margin:1.6rem 0 1.1rem;
+  font-size:0.95rem;
+  line-height:1.7;
+  color:var(--ink-2);
+}
+.scene p{margin:0 0 0.75rem;max-width:none}
+.scene p:last-child{margin:0}
+.scene b{color:var(--ink);font-weight:600}
+.scene .tag{
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  display:block;
+  margin-bottom:0.75rem;
+}
+
+/* ---------- obstacles ---------- */
+
+.blockers{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin:1.3rem 0 0;
+  border-top:1px solid var(--rule-soft);
+}
+.blocker{
+  display:grid;
+  grid-template-columns:5.5rem 1fr;
+  gap:1rem;
+  padding:0.95rem 0;
+  border-bottom:1px solid var(--rule-soft);
+  align-items:start;
+}
+@media (max-width:33rem){
+  .blocker{grid-template-columns:1fr;gap:0.3rem}
+}
+.blocker .lbl{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--lapse);
+  padding-top:0.32rem;
+}
+.blocker .txt{font-size:0.94rem;line-height:1.62;color:var(--ink-2)}
+.blocker .txt b{color:var(--ink);font-weight:600}
+
+/* ---------- the ask ---------- */
+
+.ask{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:1.35rem 1.3rem;
+  margin-top:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.1rem;
+}
+.ask-item .h{
+  font-weight:600;
+  font-size:0.97rem;
+  margin-bottom:0.2rem;
+}
+.ask-item .d{
+  font-size:0.9rem;
+  color:var(--ink-2);
+  line-height:1.62;
+}
+
+.slot{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  color:var(--lapse);
+  border-bottom:1px dashed var(--lapse);
+}
+
+footer{
+  margin-top:3.2rem;
+  padding-top:1.4rem;
+  border-top:1px solid var(--rule);
+  font-size:0.79rem;
+  line-height:1.7;
+  color:var(--ink-3);
+}
+footer p{max-width:34rem;margin:0 0 0.7rem}
+footer p:last-child{margin:0}
+</style>
+
+<div class="wrap">
+
+  <div class="mast">
+    <span class="name">Musubu</span>
+    <span class="kanji">結</span>
+    <span class="stamp">Concept · not a company <!-- @@ is this needed? would people actually think this is a company? should we put more emphasis and signals that this is just a concept? --></span>
+  </div>
+
+  <h1>The choice was never Tokyo versus the countryside. It was Tokyo versus <em>a question mark</em>.</h1>
+
+  <p class="standfirst">
+    Musubu is a concept I have been working on. It borrows a mechanic that already works elsewhere,
+    conditional pledges, and points it at moving house. This page is the whole of it.
+  </p>
+
+  <p class="readtime">About five minutes. Nothing to sign up for.</p>
+
+  <section>
+
+
+<!-- @@ It feels hard to know where to start with this page.  -->
+
+
+
+
+
+    <h2>What I think is actually happening</h2>
+
+    <p>
+      Ask people whether they would live somewhere quieter, with more time and a house they could
+      afford, and a lot of them say yes. Almost nobody goes.
+    </p>
+
+    <p>
+      I do not think that is because people prefer cities. I think it is because
+      <strong>Tokyo is the only option with a shape you can picture.</strong> There are around 1,700
+      municipalities and you cannot tell, from outside, which one has work you could do, which one is
+      quietly emptying, or whether you would be the only new person there for ten years.
+    </p>
+
+    <!-- @@ Even people who lean towards slowing down or moving to somewhere rural, don't really know wether they are joining a town that is declining or on the rise, really. One thought was, what if, resources were allocated to build con focus effort in a few cities, if there was a sort of movement, if i know many people we interested and wanted to move to one particualar town, it feels like it would a an opportunity to be a part of something big, that can build momemtum, grow large in scope, give people a choice. -->
+
+    <p>
+      A town nobody can evaluate is not an option. It is a guess, and people are right to refuse a
+      guess.
+    </p>
+
+    <p>
+      So what is missing is not persuasion. It is <strong>specification</strong>. Someone has to be
+      able to say, in advance, who is coming, what the work pays, when it happens, what the rent is,
+      and what occurs if it does not fill.
+    </p>
+
+    <div class="resolve">
+      <div class="panel before">
+        <span class="cap">A town, from outside</span>
+        <div class="row"><span class="k">Who else is going</span><span class="v">unknown</span></div>
+        <div class="row"><span class="k">Work</span><span class="v">unclear</span></div>
+        <div class="row"><span class="k">Rent</span><span class="v">no idea</span></div>
+        <div class="row"><span class="k">When</span><span class="v">whenever</span></div>
+        <div class="row"><span class="k">If it goes wrong</span><span class="v">your problem</span></div>
+      </div>
+      <div class="panel after" id="afterPanel">
+        <span class="cap">The same town, coordinated</span>
+        <div class="row"><span class="k">Who else is going</span><span class="v">30 households</span></div>
+        <div class="row"><span class="k">Work</span><span class="v">2 teaching posts</span></div>
+        <div class="row"><span class="k">Rent</span><span class="v">¥38,000</span></div>
+        <div class="row"><span class="k">When</span><span class="v">one spring</span></div>
+        <div class="row"><span class="k">If it goes wrong</span><span class="v">deposit returns</span></div>
+      </div>
+    </div>
+
+    <p class="resolve-note">
+      Illustrative figures. Nothing on the right has been agreed with any town.
+    </p>
+  </section>
+
+  <section>
+    <h2>The concept</h2>
+
+    <div class="notice">
+      <strong>This does not exist.</strong> No town has agreed to anything, there is no company, and
+      nobody is being recruited. It is an idea I have been working on for about eighteen months.
+    </div>
+
+    <ol class="steps">
+      <li><b>A town says what it is short of.</b> Not a brochure. Two teachers. Six people who will learn a building trade. Families with young children, and here is the housing we would hold for them.</li>
+      <li><b>People commit conditionally.</b> You say: I will go, <em>if</em> thirty other households go. A deposit is held. Nothing happens yet.</li>
+      <li><b>The number is public.</b> You can watch it move, and see roughly who else is in. How many families, what people do, who your neighbours would be.</li>
+      <li><b>You meet before you move.</b> Months of it. Visits, meals, questions. The group forms first and the moving happens after.</li>
+      <li><b>It fills, or it does not.</b> If it fills, everyone goes in the same season. If it does not, the money goes back and nobody has moved anywhere.</li>
+    </ol>
+
+    <p>
+      The point is not to convince anyone that the countryside is nice. It is that arriving somewhere
+      with thirty other households is a completely different thing from arriving alone. Nobody is
+      already on the inside, and nobody is the only new person.
+    </p>
+
+    <p>
+      The last time most adults joined a group where everyone turned up at once and nobody had
+      seniority was university, or a first job intake, or a dorm. People describe those years as the
+      most friendship-dense of their lives and usually credit being young. I think the mechanism is
+      simpler than that. Nobody was already inside.
+    </p>
+
+    <h3>A word that was already there</h3>
+
+    <p>
+      Japan has its own vocabulary for this and it is much older than crowdfunding. <strong>結
+      (yui)</strong> is reciprocal labour exchange: neighbours work each other's fields and rethatch
+      each other's roofs in rotation. Nobody pays. Everybody is owed and owes.
+      <strong>講 (kō)</strong> is a mutual-aid association where members pool contributions and take
+      turns receiving the pot, which is a threshold mechanic with several centuries of Japanese
+      precedent behind it.
+    </p>
+
+    <p>
+      Musubu is 結ぶ, to tie together. I would rather describe this as 結 with a ledger than as a
+      Silicon Valley mechanism arriving in the countryside. I would also want a Japanese reader to
+      tell me whether that reads as respectful or as presumptuous, because I genuinely cannot judge
+      it.
+    </p>
+  </section>
+
+  <section>
+    <h2>What it would look like</h2>
+
+    <div class="scene">
+      <span class="tag">Illustrative · no town has agreed to this</span>
+      <p>
+        A town of about five thousand people. A school, a clinic, a shop, work you could actually do.
+        Rent around <b>¥38,000</b> for a whole house.
+      </p>
+      <p>
+        Thirty households arrive the same spring. Six of them are learning carpentry from local
+        builders who are close to retiring and have no successors. Someone opens a café in a shopfront
+        that has been empty for eleven years, because forty households have already said they would be
+        customers. A kindergarten that closed in 2019 reopens, because there are suddenly enough
+        children.
+      </p>
+      <p>
+        Nobody's commute is more than ten minutes.
+      </p>
+    </div>
+
+    <p>
+      Then it happens again, in the next town, and the one after that. Clusters of places built
+      deliberately rather than by accident, at sizes people chose.
+    </p>
+  </section>
+
+  <section>
+    <h2>What I am hoping for</h2>
+
+    <p>
+      I would like one town to try this once. Not fourteen towns and not a national programme. One
+      cohort, in one place, small enough to finish.
+    </p>
+
+    <p>
+      Underneath the mechanism there is a plainer thing I keep coming back to. Most adults get one
+      real shot at choosing how they live, make it under pressure at twenty-two, and never get a
+      structured second attempt. What this is actually offering is a legitimate way to run the
+      experiment, with other people, with a way back, and without having to be brave alone.
+    </p>
+
+    <p>
+      <strong>It would be great if this became real, with or without me involved.</strong> I am not
+      trying to own it. I would rather it existed.
+    </p>
+  </section>
+
+  <section>
+    <h2>What is in the way</h2>
+
+    <p>
+      These are the real ones, not a modest list. Any of them could sink it.
+    </p>
+
+    <div class="blockers">
+      <div class="blocker">
+        <span class="lbl">Language</span>
+        <span class="txt"><b>I do not speak or read Japanese well enough to run a municipal conversation.</b> Almost every genuine next step needs Japanese fluency, local presence, or institutional standing, and none of them are things one person outside Japan should be attempting alone.</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">Untested</span>
+        <span class="txt">Nobody has been asked to conditionally commit to anything. The entire concept rests on people saying yes to a conditional offer, and that has never been tested with a single real respondent.</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">Numbers</span>
+        <span class="txt">Several figures I was using confidently turned out to be <b>my own estimates</b>. The renovation labour share is the worst one, because the sweat-equity housing model turns entirely on it and it has no source.</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">Money</span>
+        <span class="txt">Who pays for the coordination is answerable on paper and unanswered in practice. Towns hold revitalization budget, but nobody has agreed to spend any of it on this.</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">Mechanics</span>
+        <span class="txt">Holding deposits, releasing them, and doing that across households, employers and a municipality is a regulated activity I have not properly examined.</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">Sameness</span>
+        <span class="txt">One template applied to fourteen towns is a documented Japanese failure mode, not an efficiency. Uniformity has to be designed against, which makes the thing harder to scale on purpose.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I learned</h2>
+
+    <ul class="plain">
+      <li>
+        <b>My first diagnosis was wrong.</b> I had been describing this as a standoff, everyone
+        waiting on everyone else. That is a tidy diagram and nobody actually experiences the decision
+        that way. It is not a standoff. It is that you cannot assess a place you have never lived in.
+      </li>
+      <li>
+        <b>People do not relocate because they prefer the countryside.</b> They relocate because their
+        life is already in motion. A first child, a breakup, burnout, kids leaving, retirement. At
+        those moments the costs of moving are already being paid for other reasons. Knowing
+        <em>when</em> someone is matters more than knowing who they are.
+      </li>
+      <li>
+        <b>Japan has already run a version of the experiment.</b> The 地域おこし協力隊 programme
+        places people in rural towns, and roughly eight in ten stay in the region afterwards. Around
+        half report that the reality did not match what they were told. Placement works. Matching is
+        what is broken.
+      </li>
+      <li>
+        <b>The people who studied a decade of failed policy reached my argument before I did.</b> The
+        most-cited explanation for why 地方創生 did not work is that an adaptive problem was treated
+        as a technical one, with subsidies and buildings instead of changes to how people actually
+        live together. I thought I had a clever idea. It turns out I had the same conclusion as the
+        critique literature, which is a much better position to be in.
+      </li>
+      <li>
+        <b>I had to build a register of my own claims and tier them.</b> Doing that was uncomfortable
+        and it is the single most useful thing in the project. Anything invented is now labelled as
+        invented.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Where it could go</h2>
+
+    <p>
+      Three things I find genuinely interesting and have not resolved.
+    </p>
+
+    <ul class="plain">
+      <li>
+        <b>Coordinated arrival may be worth more to a foreign arrival than a Japanese one.</b>
+        Everything that makes moving to a Japanese town hard, no network, no way in, being the only
+        new person, is worse if you are not Japanese, which means the mechanism helps more. This cuts
+        across the whole concept and I have barely examined it.
+      </li>
+      <li>
+        <b>The by-product might be worth more than the platform.</b> Every ministry already knows
+        people would consider leaving Tokyo. What does not exist anywhere is a ranked, refreshed map
+        of <em>what precisely stops them</em>. Policy is written against blockers, not desires.
+      </li>
+      <li>
+        <b>Asking properly is only recently possible.</b> Surveys used to return what their authors
+        had already imagined, because every question had to be pre-coded. That ceiling is gone, which
+        means the list of what stops people can come from what they actually say. It also means a very
+        small team can do what used to need a large one.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>If you have something to say about it</h2>
+
+    <p>
+      I would rather hear that it is naive than hear nothing. The first reaction you had while
+      reading is the useful one, and the version you would say to someone else is more useful than
+      the version you would say to me.
+    </p>
+
+    <div class="ask">
+      <div class="ask-item">
+        <div class="h">Comment on this page</div>
+        <div class="d">
+          Anywhere you disagree, anything that seems obviously wrong, any word that sounds foreign or
+          like marketing. Short is fine.
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="h">Or reach out directly</div>
+        <div class="d">
+          Questions, suggestions, or if you know someone this should get in front of.
+          <span class="slot">contact method to be added</span>
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="h">If you want the whole thing, ask and I will send it</div>
+        <div class="d">
+          Around twenty cross-referenced documents: the thesis, the platform architecture, the
+          economics, the government funding alignment, the pilot town research, an intake survey
+          drafted in English and Japanese, and a set of working prototypes. It is yours if it is
+          useful. No conditions.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      An independent project, not connected to any company or government body. Bungotakada, Ōita is
+      being studied as a possible first location. Nothing has been proposed to the city and no figure
+      on this page has been agreed with anyone.
+    </p>
+    <p>
+      Everything here describing what could happen is a scenario, not a forecast. The rent, the town
+      size, the household count and the example are illustrative.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var panel = document.getElementById('afterPanel');
+  if(!panel) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){
+    panel.classList.add('lit');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        panel.classList.add('lit');
+        io.disconnect();
+      }
+    });
+  }, {threshold:0.45});
+  io.observe(panel);
+})();
+</script>
+
+<!-- ====================================================================
+     DEV ONLY. Surfaces review notes visibly, on localhost and file://.
+     Inert on any other host, so notes cannot appear on the published page.
+     Self-contained: delete this block and nothing else changes.
+
+     The marker is built as '@'+'@' on purpose. A literal one here would
+     make tools/review-check.sh flag this block forever and the clean
+     gate would never pass.
+     ==================================================================== -->
+<script>
+(function(){
+  var dev = location.protocol === 'file:' ||
+            ['localhost','127.0.0.1','[::1]'].indexOf(location.hostname) !== -1;
+  if(!dev) return;
+
+  var MARK = '@' + '@';
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.devnote{display:inline-block;font-family:var(--mono);font-size:0.72rem;' +
+      'line-height:1.5;color:var(--paper);background:var(--lapse);' +
+      'padding:0.1rem 0.45rem;border-radius:2px;margin:0 0.2rem;cursor:pointer}' +
+    '.devnote.on{outline:2px solid var(--ink);outline-offset:2px}' +
+    '#devbar{position:fixed;right:0.9rem;bottom:0.9rem;z-index:99;' +
+      'font-family:var(--mono);font-size:0.72rem;background:var(--lapse);' +
+      'color:var(--paper);border:none;padding:0.4rem 0.7rem;' +
+      'border-radius:3px;cursor:pointer}' +
+    '@media print{.devnote,#devbar{display:none}}';
+  document.head.appendChild(css);
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+  var notes = [], n, el;
+  while((n = walker.nextNode())){
+    if(n.nodeValue.indexOf(MARK) === -1) continue;
+    el = document.createElement('span');
+    el.className = 'devnote';
+    el.textContent = n.nodeValue.split(MARK).pop().trim() || '(empty note)';
+    n.parentNode.insertBefore(el, n.nextSibling);
+    notes.push(el);
+  }
+  if(!notes.length) return;
+
+  var i = -1;
+  var bar = document.createElement('button');
+  bar.id = 'devbar';
+  bar.textContent = notes.length + (notes.length === 1 ? ' note' : ' notes');
+  bar.title = 'Jump to the next note';
+  bar.addEventListener('click', function(){
+    if(notes[i]) notes[i].classList.remove('on');
+    i = (i + 1) % notes.length;
+    notes[i].classList.add('on');
+    notes[i].scrollIntoView({block:'center', behavior:'smooth'});
+  });
+  document.body.appendChild(bar);
+})();
+</script>

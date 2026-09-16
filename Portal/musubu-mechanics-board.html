@@ -1,0 +1,930 @@
+<meta charset="utf-8">
+<title>Musubu — mechanics board</title>
+
+<style>
+  :root {
+    --paper:      #F3F1EA;
+    --paper-2:    #EBE8DF;
+    --card:       #FAF8F3;
+    --ink:        #1B2233;
+    --ink-2:      #4E5568;
+    --ink-3:      #7C8296;
+    --rule:       #D6D2C6;
+    --rule-soft:  #E3DFD4;
+
+    --proven:     #4A6741;
+    --precedent:  #2F4268;
+    --testable:   #68718A;
+    --sketch:     #A96633;
+    --rejected:   #9A968C;
+
+    --sel:        #A96633;
+    --sel-bg:     #F6EDE1;
+    --quote-bg:   #EFEDE4;
+
+    --serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#14171F; --paper-2:#1A1E28; --card:#1B1F2A;
+      --ink:#E8E4DA; --ink-2:#A8AEBF; --ink-3:#767D91;
+      --rule:#2E3441; --rule-soft:#262B36;
+      --proven:#7FA173; --precedent:#7A97CE; --testable:#98A1B8;
+      --sketch:#D5945B; --rejected:#6B7080;
+      --sel:#D5945B; --sel-bg:#2A2318; --quote-bg:#20252F;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F3F1EA; --paper-2:#EBE8DF; --card:#FAF8F3;
+    --ink:#1B2233; --ink-2:#4E5568; --ink-3:#7C8296;
+    --rule:#D6D2C6; --rule-soft:#E3DFD4;
+    --proven:#4A6741; --precedent:#2F4268; --testable:#68718A;
+    --sketch:#A96633; --rejected:#9A968C;
+    --sel:#A96633; --sel-bg:#F6EDE1; --quote-bg:#EFEDE4;
+  }
+  :root[data-theme="dark"] {
+    --paper:#14171F; --paper-2:#1A1E28; --card:#1B1F2A;
+    --ink:#E8E4DA; --ink-2:#A8AEBF; --ink-3:#767D91;
+    --rule:#2E3441; --rule-soft:#262B36;
+    --proven:#7FA173; --precedent:#7A97CE; --testable:#98A1B8;
+    --sketch:#D5945B; --rejected:#6B7080;
+    --sel:#D5945B; --sel-bg:#2A2318; --quote-bg:#20252F;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; padding-bottom: 210px;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .masthead { border-bottom: 1px solid var(--rule); padding: 40px 0 26px; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 400; line-height: 1.08; letter-spacing: -0.015em;
+    margin: 0 0 12px; text-wrap: balance;
+  }
+
+  .standfirst { max-width: 64ch; color: var(--ink-2); font-size: 16px; margin: 0 0 10px; }
+  .standfirst em { color: var(--ink); font-style: italic; }
+
+  .state {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); margin-top: 24px;
+  }
+  .state-cell { background: var(--paper); padding: 13px 14px; }
+  .state-n {
+    font-family: var(--mono); font-size: 23px; font-variant-numeric: tabular-nums;
+    line-height: 1; display: block; margin-bottom: 6px;
+  }
+  .state-l {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .state-cell[data-s="proven"]    .state-n { color: var(--proven); }
+  .state-cell[data-s="precedent"] .state-n { color: var(--precedent); }
+  .state-cell[data-s="testable"]  .state-n { color: var(--testable); }
+  .state-cell[data-s="sketch"]    .state-n { color: var(--sketch); }
+  .state-cell[data-s="rejected"]  .state-n { color: var(--rejected); }
+
+  .controls {
+    position: sticky; top: 0; z-index: 40; background: var(--paper);
+    border-bottom: 1px solid var(--rule); padding: 11px 0 10px; margin-bottom: 8px;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+  .row + .row { margin-top: 7px; }
+
+  .axis {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-3); margin-right: 4px;
+    width: 58px; flex-shrink: 0;
+  }
+
+  .filt {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+    text-transform: uppercase; padding: 5px 10px; background: transparent;
+    color: var(--ink-2); border: 1px solid var(--rule); border-radius: 2px;
+    cursor: pointer; transition: background .12s, color .12s, border-color .12s;
+  }
+  .filt:hover { border-color: var(--ink-3); color: var(--ink); }
+  .filt:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+  .filt[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .filt .tally {
+    font-variant-numeric: tabular-nums; opacity: .55; margin-left: 5px;
+  }
+
+  .count {
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    margin-left: auto; font-variant-numeric: tabular-nums;
+  }
+
+  .group { margin-top: 32px; }
+  .group[hidden] { display: none; }
+
+  .group-head {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 1px solid var(--rule); padding-bottom: 7px; margin-bottom: 16px;
+  }
+  .group-key { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .group-name { font-family: var(--serif); font-size: 21px; font-weight: 400; margin: 0; letter-spacing: -0.01em; }
+  .group-note { font-size: 12.5px; color: var(--ink-3); margin-left: auto; text-align: right; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+  /* border style encodes confidence */
+  .card {
+    position: relative; background: var(--card);
+    border: 1px solid var(--rule); border-left-width: 3px; border-radius: 2px;
+    padding: 13px 15px 14px; cursor: pointer; text-align: left;
+    font: inherit; color: inherit; display: flex; flex-direction: column; gap: 7px;
+    transition: border-color .12s, transform .12s, box-shadow .12s;
+  }
+  .card:hover { transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,.07); }
+  .card:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+  .card[hidden] { display: none; }
+
+  .card[data-s="proven"]    { border-left-color: var(--proven); }
+  .card[data-s="precedent"] { border-left-color: var(--precedent); }
+  .card[data-s="testable"]  { border-left-color: var(--testable); }
+  .card[data-s="sketch"]    { border-left-color: var(--sketch); border-style: dashed; border-left-style: solid; }
+  .card[data-s="rejected"]  { border-left-color: var(--rejected); border-style: dotted; border-left-style: solid; opacity: .7; }
+  .card[data-s="rejected"]:hover { opacity: 1; }
+
+  .card.sel { border-color: var(--sel); background: var(--sel-bg); }
+  .card.sel::after {
+    content: attr(data-slot); position: absolute; top: -8px; right: -8px;
+    width: 20px; height: 20px; border-radius: 50%; background: var(--sel);
+    color: #fff; font-family: var(--mono); font-size: 11px; display: grid; place-items: center;
+  }
+
+  .card-top { display: flex; align-items: baseline; gap: 8px; }
+  .ref {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    font-variant-numeric: tabular-nums; flex-shrink: 0;
+  }
+  .job {
+    font-family: var(--mono); font-size: 9px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3);
+    border: 1px solid var(--rule); padding: 1px 5px; border-radius: 2px;
+  }
+  .chip {
+    font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
+    text-transform: uppercase; margin-left: auto; flex-shrink: 0;
+  }
+  .chip[data-s="proven"]    { color: var(--proven); }
+  .chip[data-s="precedent"] { color: var(--precedent); }
+  .chip[data-s="testable"]  { color: var(--testable); }
+  .chip[data-s="sketch"]    { color: var(--sketch); }
+  .chip[data-s="rejected"]  { color: var(--rejected); }
+
+  .card h3 {
+    font-family: var(--serif); font-size: 17.5px; font-weight: 400;
+    line-height: 1.2; margin: 0; letter-spacing: -0.005em;
+  }
+  .card[data-s="rejected"] h3 {
+    text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: var(--rejected);
+  }
+
+  .card p.what { margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+
+  .felt {
+    margin: 0; padding: 8px 11px; background: var(--quote-bg);
+    border-left: 2px solid var(--rule);
+    font-family: var(--serif); font-size: 14.5px; font-style: italic;
+    line-height: 1.42; color: var(--ink);
+  }
+
+  .move {
+    font-size: 12.5px; color: var(--ink-2); line-height: 1.45;
+    padding-top: 2px;
+  }
+  .move b {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-3); font-weight: 400;
+    display: block; margin-bottom: 2px;
+  }
+
+  .card-foot {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+    margin-top: auto; padding-top: 4px; display: flex; gap: 8px;
+  }
+  .isnew { color: var(--sel); }
+  .ispromoted { color: var(--proven); }
+
+  .card[data-promoted] { box-shadow: inset 3px 0 0 -1px var(--proven); }
+  .card[data-promoted] .ref::after {
+    content: "↑";
+    color: var(--proven);
+    margin-left: 4px;
+  }
+
+  .detail {
+    margin-top: 2px; padding-top: 10px; border-top: 1px solid var(--rule-soft);
+    font-size: 13px; color: var(--ink-2); line-height: 1.55;
+  }
+  .detail[hidden] { display: none; }
+  .detail strong { color: var(--ink); font-weight: 600; }
+
+  .exp-list { display: flex; flex-direction: column; gap: 10px; }
+  .exp {
+    border: 1px dashed var(--rule); border-left: 3px solid var(--sketch);
+    border-radius: 2px; background: var(--card); padding: 13px 15px;
+  }
+  .exp-refs { font-family: var(--mono); font-size: 11px; color: var(--sketch); margin-bottom: 5px; }
+  .exp h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; margin: 0 0 5px; }
+  .exp p { margin: 0; font-size: 13.5px; color: var(--ink-2); }
+
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; background: var(--paper-2);
+    border-top: 1px solid var(--rule); z-index: 50;
+    transform: translateY(100%); transition: transform .22s ease;
+  }
+  .dock.open { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .dock, .card { transition: none; } }
+
+  .dock-inner { max-width: 1180px; margin: 0 auto; padding: 14px 24px 18px; }
+  .dock-head {
+    display: flex; align-items: baseline; gap: 12px; font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 10px;
+  }
+  .dock-clear {
+    margin-left: auto; background: none; border: none; cursor: pointer;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-3); padding: 2px 4px;
+  }
+  .dock-clear:hover { color: var(--ink); }
+  .dock-clear:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+
+  .dock-pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; }
+  .dock-slot h4 { font-family: var(--serif); font-size: 16px; font-weight: 400; margin: 0 0 3px; }
+  .dock-slot .ref { display: block; margin-bottom: 2px; }
+  .dock-slot p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 13.5px; color: var(--ink-2); }
+  .dock-slot.empty { color: var(--ink-3); font-family: var(--mono); font-size: 11.5px; }
+  .dock-plus { font-family: var(--serif); font-size: 22px; color: var(--ink-3); }
+
+  .dock-prompt { margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); }
+  .dock-prompt em { color: var(--ink); }
+
+  .colophon {
+    margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--rule);
+    font-size: 12.5px; color: var(--ink-3); max-width: 74ch;
+  }
+  .colophon code { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); }
+  .colophon strong { color: var(--ink-2); }
+
+  @media (max-width: 620px) {
+    .dock-pair { grid-template-columns: 1fr; }
+    .dock-plus, .group-note, .axis { display: none; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Musubu · internal reference · 9 Aug 2026 · third pass</p>
+    <h1>The mechanics board</h1>
+    <p class="standfirst">
+      Every coordination mechanic in the project. Each one carries what we know
+      (<em>confidence</em>), what to do next (<em>next move</em>), and what it produces in a
+      person (<em>felt as</em>). A mechanic that can't produce a felt-as line probably isn't
+      worth building — coordination nobody feels is administration.
+    </p>
+    <p class="standfirst">
+      <em>Line quality carries confidence:</em> solid is settled, dashed is a sketch,
+      dotted and struck is rejected.
+    </p>
+
+    <div class="state">
+      <div class="state-cell" data-s="proven"><span class="state-n">3</span><span class="state-l">Proven</span></div>
+      <div class="state-cell" data-s="precedent"><span class="state-n">5</span><span class="state-l">Precedent</span></div>
+      <div class="state-cell" data-s="testable"><span class="state-n">15</span><span class="state-l">Testable</span></div>
+      <div class="state-cell" data-s="sketch"><span class="state-n">16</span><span class="state-l">Sketch</span></div>
+      <div class="state-cell" data-s="rejected"><span class="state-n">7</span><span class="state-l">Rejected</span></div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="row">
+      <span class="axis">Confidence</span>
+      <button class="filt" data-f="all" aria-pressed="true">All</button>
+      <button class="filt" data-f="proven" aria-pressed="false">Proven</button>
+      <button class="filt" data-f="precedent" aria-pressed="false">Precedent</button>
+      <button class="filt" data-f="testable" aria-pressed="false">Testable</button>
+      <button class="filt" data-f="sketch" aria-pressed="false">Sketch</button>
+      <button class="filt" data-f="rejected" aria-pressed="false">Rejected</button>
+      <button class="filt" data-f="new" aria-pressed="false">New</button>
+      <button class="filt" data-f="gap" aria-pressed="false">No spec</button>
+      <button class="filt" data-f="moved" aria-pressed="false">Moved<span class="tally">1</span></button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="row">
+      <span class="axis">Feeling</span>
+      <button class="filt" data-f="job:illegible" aria-pressed="false">Can't picture it<span class="tally">15</span></button>
+      <button class="filt" data-f="job:trust" aria-pressed="false">Don't believe it<span class="tally">7</span></button>
+      <button class="filt" data-f="job:belonging" aria-pressed="false">Want a part in it<span class="tally">6</span></button>
+      <button class="filt" data-f="job:irreversible" aria-pressed="false">Couldn't come back<span class="tally">5</span></button>
+      <button class="filt" data-f="job:alone" aria-pressed="false">I'd be the only one<span class="tally">4</span></button>
+      <button class="filt" data-f="job:momentum" aria-pressed="false">It's happening without me<span class="tally">2</span></button>
+    </div>
+  </div>
+
+  <main id="board"></main>
+
+  <section class="group" id="experiments">
+    <div class="group-head">
+      <span class="group-key">EXP</span>
+      <h2 class="group-name">Seeded combinations</h2>
+      <span class="group-note">what happens when two mechanics run together</span>
+    </div>
+    <div class="exp-list" id="exp-list"></div>
+  </section>
+
+  <p class="colophon">
+    Source of truth is <code>02_Platform/musubu_mechanics_registry.md</code> — this board is a view
+    over it, not a second copy. Section letters and § numbers match exactly, so <code>§25</code> or
+    <code>§S2</code> means the same thing in both places.
+    <strong>Standing rule on figures:</strong> a number is fine as a parameter of a mechanic, and a
+    problem as a claim about a real place.
+    <strong>Note the feeling row:</strong> momentum is served by two mechanics out of thirty-one, and
+    momentum is what converts a visitor once anything is actually running. That's the clearest gap here.
+    <strong>First movement, 9 Aug:</strong> §S1 promoted from <code>SKETCH</code> to <code>TESTABLE</code>
+    once its economics were modelled. Labels only mean something if things can move in both directions —
+    nothing has been demoted yet.
+  </p>
+
+</div>
+
+<div class="dock" id="dock">
+  <div class="dock-inner">
+    <div class="dock-head">
+      <span>Combination bench</span>
+      <button class="dock-clear" id="dock-clear">Clear</button>
+    </div>
+    <div class="dock-pair">
+      <div class="dock-slot empty" id="slot-0">Select a mechanic</div>
+      <div class="dock-plus">+</div>
+      <div class="dock-slot empty" id="slot-1">Select a second</div>
+    </div>
+    <div class="dock-prompt" id="dock-prompt"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var GROUPS = [
+    { key:"A", name:"Commitment & threshold", note:"the engine" },
+    { key:"B", name:"State & lifecycle",      note:"how a tile moves and dies" },
+    { key:"C", name:"Trust & integrity",      note:"why anyone believes the board" },
+    { key:"D", name:"Discovery & entry",      note:"how a person arrives" },
+    { key:"E", name:"Business & capital",     note:"where the money comes from" },
+    { key:"F", name:"Retention & belonging",  note:"why anyone stays" },
+    { key:"G", name:"Speculative wing",       note:"no spec, no proof — not for pitches" },
+    { key:"H", name:"Rejected",               note:"the felt-as line is the reason" }
+  ];
+
+  var M = [
+    // ---- A ----
+    { id:"1", g:"A", s:"proven", j:"alone", n:"All-or-nothing cohort pledge",
+      w:"When n households commit before a deadline, everyone binds at once. Nobody binds if it misses.",
+      f:"I won't be the only one.",
+      mv:"Put the binding question in the demand test — would you commit a date conditionally?",
+      spec:"coordination_architecture",
+      d:"The load-bearing word is <strong>guaranteed</strong>. Kickstarter proved the mechanic at enormous scale; the open question is whether people will bind a <strong>life decision</strong> on the terms they'll bind ¥5,000." },
+
+    { id:"2", g:"A", s:"testable", j:"illegible", n:"Generalised threshold",
+      w:"Household, employer, developer, municipality, worker cohort, school district — all stuck in the same “I will if they will”.",
+      f:"Everyone's been waiting for everyone else. Now we can all say it at once.",
+      mv:"Nothing directly — it's the frame. Tested through §1 and §5.",
+      spec:"coordination_architecture §1",
+      d:"<strong>The intellectual core of the project.</strong> The threshold is where every party can declare a conditional position before any of them has to act." },
+
+    { id:"3", g:"A", s:"precedent", j:"illegible", n:"Per-institution thresholds",
+      w:"A school needs a different number of arrivals than a laundromat.",
+      f:"The school needs more of us than the laundromat does. Fine — tell me the number.",
+      mv:"Derive the figures from the population-tier research into density_ladder.",
+      spec:"density_ladder — extend", gap:true, isnew:true,
+      d:"Turns the density ladder from an essay into a calculator. See also §31 — some of these are ratios, not counts." },
+
+    { id:"4", g:"A", s:"proven", j:"illegible", n:"Remaining-count display",
+      w:"Show “need 17 more”, never “32%”.",
+      f:"Seventeen more. I could probably find three of those myself.",
+      mv:"Adopt everywhere. No test required.",
+      spec:"—", gap:true, isnew:true,
+      d:"A remaining count is an instruction; a percentage is a status report. Settled by crowdfunding UX years ago." },
+
+    { id:"5", g:"A", s:"testable", j:"illegible", n:"Conditional capital release",
+      w:"“We release capex when 70 committed workers exist. Not before.”",
+      f:"I'll sign the capex the day the roster is real. Not on a hope.",
+      mv:"One conversation with one Kansai manufacturer. A question for company_survey, not a pilot. Cost: an afternoon.",
+      spec:"coordination_architecture §1",
+      d:"Inverts the usual exposure — the party with the most at stake is the one waiting on the threshold. It's what makes large employers possible at all." },
+
+    { id:"6", g:"A", s:"precedent", j:"alone", n:"Pre-assembled cohort recruitment",
+      w:"One 50-person company is one conversation. Fifty households is a year of grinding.",
+      f:"We're not sending thirty people into the unknown. We're sending them together.",
+      mv:"Interview someone who ran the Awaji or Kamiyama moves — find out what actually broke.",
+      spec:"coordination_architecture §4",
+      d:"Both moves are real, and both were slower and messier than the headlines suggest." },
+
+    // ---- B ----
+    { id:"7", g:"B", s:"testable", j:"illegible", n:"Tile state machine",
+      w:"proposed → gathering → threshold_met → committed → building → open → full, with lapsed branching off.",
+      f:"I can see exactly what stage this is at, and what has to happen next.",
+      mv:"Build the four missing states into map v2 — the spec is ahead of the prototype.",
+      spec:"map_spec §3", d:"" },
+
+    { id:"8", g:"B", s:"testable", j:"trust", n:"Visible failure",
+      w:"Lapsed tiles stay up with the number they reached and why they stalled. Full stays too, with a waitlist.",
+      f:"They show the ones that didn't work. So I believe the ones that did.",
+      mv:"Nothing to test — enforce it as a rule.",
+      spec:"map_spec §3",
+      d:"Every 2024 prototype hid failure, and every one of them read as marketing." },
+
+    { id:"9", g:"B", s:"sketch", j:"momentum", n:"Over-subscription → spawn",
+      w:"35 / 10 isn't just success — it's a signal to open a second one.",
+      f:"It worked so well they're opening another.",
+      mv:"Define the spawn trigger. Who decides, and does the waitlist auto-seed the second instance.",
+      spec:"—", gap:true, isnew:true,
+      d:"A town where things visibly multiply is a different story from one where things fill up. <strong>One of only two momentum mechanics on the board.</strong>" },
+
+    { id:"10", g:"B", s:"sketch", j:"trust", n:"At-risk state",
+      w:"Cleared its threshold but is now slipping — commitments withdrawing, timeline drifting, funding stalled.",
+      f:"This one's wobbling. Good — they told me before I committed.",
+      mv:"Write an objective trigger, or drop it. Without one it becomes a vibe.",
+      spec:"—", gap:true, isnew:true, d:"" },
+
+    { id:"11", g:"B", s:"sketch", j:"illegible", n:"Tile dependency graph",
+      w:"The cram school tracks the kindergarten. The laundromat follows the riverside block.",
+      f:"The cram school comes because the kindergarten came. It's not a wish list, it's an order.",
+      mv:"Model dependencies as a field on the tile.",
+      spec:"—", gap:true, isnew:true,
+      d:"<strong>Highest-leverage unbuilt item on the board.</strong> Machine-readable dependencies are what let the scrubber compute cascades instead of replaying hand-authored ones." },
+
+    { id:"12", g:"B", s:"testable", j:"trust", n:"Time scrubber, dual projection",
+      w:"−24 to +36 months, with a “committed only” / “if gathering succeeds” toggle.",
+      f:"That's what's actually committed. And that's what happens if it fills. I can tell the difference.",
+      mv:"Already prototyped — test comprehension with five strangers who've never seen it.",
+      spec:"map_spec §4",
+      d:"The ambitious version can be shown without anyone being lied to, because the reader does the flipping." },
+
+    // ---- C ----
+    { id:"13", g:"C", s:"testable", j:"trust", n:"Provenance labelling",
+      w:"Every number carries its origin: municipal / member-reported / derived / illustrative.",
+      f:"It says where that number came from. Nobody's performing certainty at me.",
+      mv:"Adopt as a rule and retrofit the existing prototypes.",
+      spec:"registry", isnew:true,
+      d:"Illustrative is allowed and isn't shameful — it's how you demonstrate a mechanic nobody has run. It just has to be labelled." },
+
+    { id:"14", g:"C", s:"testable", j:"trust", n:"Two-population data standard",
+      w:"Members tracked precisely. The town at large not tracked at all — link the municipality's own figures.",
+      f:"They're not pretending to know the whole town. They know their own part of it.",
+      mv:"Adopt, and delete town-wide demographics from every surface.",
+      spec:"registry", isnew:true,
+      d:"The metric that matters is <strong>the delta the programme is responsible for</strong> — the only number ever worth defending." },
+
+    { id:"15", g:"C", s:"testable", j:"belonging", n:"Vouching → standing",
+      w:"Cohorts taught, arrivals vouched for, hall shifts. Standing unlocks the right to propose.",
+      f:"Two more and I can put something on the map myself.",
+      mv:"Design the ladder — what counts, and what each rung unlocks.",
+      spec:"portal_taxonomy",
+      d:"Tiers unlock <strong>responsibility, not features</strong>. The anti-gamification clause is the important half." },
+
+    { id:"16", g:"C", s:"testable", j:"belonging", n:"Walls, with clearing dates",
+      w:"“Your mother needing care. Written 2027 · cleared March 2031.”",
+      f:"Someone wrote down why I couldn't come. And then it stopped being true.",
+      mv:"Confirm the clearing field exists in the intake instrument.",
+      spec:"living_profile",
+      d:"Tracking obstacles over time <em>including the ones that resolved</em> is both the retention mechanic and the honesty mechanic." },
+
+    { id:"17", g:"C", s:"sketch", j:"belonging", n:"Blocker aggregation → policy evidence",
+      w:"“412 members recorded this same wall.”",
+      f:"Four hundred and twelve of us are stuck on the same rule. That's not my problem any more — it's a policy problem.",
+      mv:"One municipality, one blocker. Cheapest real-world test on the board.",
+      spec:"living_profile",
+      d:"The mechanic that gives Musubu leverage with a ministry, and it only exists at scale." },
+
+    // ---- D ----
+    { id:"18", g:"D", s:"proven", j:"illegible", n:"Interest-first entry",
+      w:"Ask intent before geography.",
+      f:"Nobody asked me to pick a prefecture. They asked what I'm trying to do.",
+      mv:"Adopt — it's a form.",
+      spec:"—", gap:true, isnew:true,
+      d:"The map is town-first, but a person arrives person-first. Complements the life-stage doors already specified." },
+
+    { id:"19", g:"D", s:"sketch", j:"illegible", n:"Cross-town project feed",
+      w:"Projects listed across towns rather than inside one.",
+      f:"I didn't choose the town. I chose the boatyard, and the town came with it.",
+      mv:"Sketch the surface. Needs two or more towns to mean anything.",
+      spec:"—", gap:true, isnew:true,
+      d:"Turns the network into an opportunity board rather than a directory of places." },
+
+    { id:"20", g:"D", s:"testable", j:"trust", n:"Visitor / resident dual view",
+      w:"One canonical page, two truths, no marketing microsite.",
+      f:"This is the same page my sister in Osaka is looking at.",
+      mv:"Finish the access matrix — partly done in portal_taxonomy.",
+      spec:"portal_taxonomy", d:"" },
+
+    // ---- E ----
+    { id:"21", g:"E", s:"precedent", j:"illegible", n:"Business slot with capital + timeline",
+      w:"Co-working ¥8–15M / 6–12mo. Artisan workshop ¥2–5M / 4–8mo.",
+      f:"Three to eight million and I could be open by autumn. That's a decision, not a daydream.",
+      mv:"Add capitalRange and timeToOpen to the business-slot tile.",
+      spec:"business_coordination — extend", isnew:true,
+      d:"The current tile has a shopfront and proposals but no price tag." },
+
+    { id:"22", g:"E", s:"testable", j:"belonging", n:"Demand signal → proposal → judging",
+      w:"Residents signal what's missing; entrepreneurs propose; the future customers pick which opens.",
+      f:"The people who'll eat there every week picked which café opens.",
+      mv:"Run one round with real residents on one real slot.",
+      spec:"business_coordination",
+      d:"The slot goes to the best fit, not the highest bidder." },
+
+    { id:"23", g:"E", s:"precedent", j:"illegible", n:"Incentive stack per town",
+      w:"Grants, incubator support, tax abatement, per-hire subsidy — assembled per town.",
+      f:"Half the corporate tax for three years and ¥200,000 a hire. Now it's a spreadsheet.",
+      mv:"Assemble Bungotakada's actual stack. Sourceable today.",
+      spec:"government_alignment",
+      d:"Real programmes exist (地方創生, 企業版ふるさと納税, prefecture and municipal relocation subsidies). <strong>The most persuasive single screen for a business.</strong>" },
+
+    { id:"24", g:"E", s:"testable", j:"trust", n:"Funding-source split per tile",
+      w:"Municipal / private / member / crowdfunded — not just a progress percentage.",
+      f:"I can see whose money this is. Some of it is mine.",
+      mv:"Design the two-threshold tile — households and yen, shown together.",
+      spec:"—", gap:true, isnew:true,
+      d:"“Needs 12 more households <strong>and</strong> ¥4M, of which the town has committed half.”" },
+
+    { id:"25", g:"E", s:"sketch", j:"illegible", n:"Business relocation ladder",
+      w:"Necessities unlock · mom-and-pop recruited · mid-tier amenity · employers.",
+      f:"First the pharmacy, then the café, then somewhere to take the kids on a Sunday.",
+      mv:"Write it up properly as its own document.",
+      spec:"— biggest gap", gap:true, isnew:true,
+      d:"Where the private-money question gets answered — a relocating employer isn't a donor, it's a customer with a payback model. A company won't move to a town of 4,000; a company <em>will</em> move if it can see 200 households pre-committed, a building secured and staff in the pipeline. <strong>Realistic v1 is the satellite office at 10–40 people, not the HQ</strong> — reversible for the firm, which is what makes it sayable-yes-to." },
+
+    { id:"26", g:"E", s:"precedent", j:"illegible", n:"Municipal infrastructure layer",
+      w:"The road, the fibre, the clinic, the bridge — budget and completion date.",
+      f:"The bridge is done in 2029. That's before she starts school.",
+      mv:"Pull Bungotakada's published works schedule. Public data.",
+      spec:"—", gap:true, isnew:true,
+      d:"The portal covers only what <em>residents</em> coordinate, with no layer for what the municipality is already building." },
+
+    // ---- F ----
+    { id:"27", g:"F", s:"testable", j:"irreversible", n:"The assembled offer",
+      w:"Housing + work + return trips + school place held + “decided at month seven, not now”, on one Accept.",
+      f:"It's one yes. I don't have to solve housing, work and school separately.",
+      mv:"Test the package against a plain job listing, side by side, in the demand test.",
+      spec:"portal_taxonomy",
+      d:"Migration services hand you a search box; this hands you a decision." },
+
+    { id:"28", g:"F", s:"testable", j:"illegible", n:"Peers-for-your-child",
+      w:"“Eleven children her age are arriving before she turns eight.”",
+      f:"There'll be eleven kids her age.",
+      mv:"Adopt as the family-facing headline metric, replacing population.",
+      spec:"—", gap:true,
+      d:"Population says nothing; this decides the move." },
+
+    { id:"29", g:"F", s:"sketch", j:"irreversible", n:"Exit visibility",
+      w:"Showing the rest of the network from inside a town.",
+      f:"I could leave. That's most of why I'm staying.",
+      mv:"Ask it directly in the survey — does knowing you could leave make you likelier to go?",
+      spec:"portal_taxonomy", d:"" },
+
+    { id:"30", g:"F", s:"sketch", j:"momentum", n:"Momentum visible from outside",
+      w:"A thing that is filling, not a thing that needs filling.",
+      f:"That share house is 85% full and they're my age. I want in before it goes.",
+      mv:"Can't be tested until something is running. Design it for the second cohort.",
+      spec:"—", gap:true, isnew:true,
+      d:"<strong>A different emotional engine from §1, and it was missing.</strong> All-or-nothing is “nothing happens unless enough of us commit” — fear of being alone, and it's an ask. Momentum is “this is filling, get in before it's gone” — and it's an invitation. Opposite mechanics; you need both, at different stages. Momentum can't do cold start, but it very likely converts better than anything else here once there's something real to show." },
+
+    { id:"31", g:"F", s:"sketch", j:"illegible", n:"Paired thresholds",
+      w:"Two counts that must clear in ratio, not independently.",
+      f:"They won't take forty of us until there are twelve people to look after us properly.",
+      mv:"Set the caregiver-to-elder ratio with someone who actually runs a facility.",
+      spec:"—", gap:true, isnew:true,
+      d:"Forty elders and three caregivers isn't a partial success — it's a crisis. Applies wherever a service has a staffing floor: eldercare (elders ↔ carers), school (children ↔ teachers), clinic (patients ↔ staff). Connects the eldercare doc to §3." },
+
+    // ---- G ----
+    { id:"S1", g:"G", s:"testable", j:"irreversible", n:"The funded return", promoted:true,
+      w:"Leave within 24 months and your move back is paid. Modelled at ¥25k–270k per household, against a state grant of ¥1M–3M.",
+      f:"If it doesn't work, I'm not stranded. The way back is already paid.",
+      mv:"Ask one municipality what it currently spends on 上乗せ top-ups, and whether it would spend a fraction of that on a return guarantee instead. No national permission required.",
+      spec:"funded_return_model",
+      d:"<strong>First entry to change status on this board.</strong> You can offer a funded return to roughly <strong>twenty households for the price of granting one household ¥1M</strong>.<br><br>The finding that mattered wasn't the cost — it was the <strong>clawback</strong>. 移住支援金 demands full repayment if you leave within three years, half within five. A family of four taking the full ¥3M owes about <strong>¥3.2M to exit in year two.</strong> The state's flagship migration instrument doesn't fail to reduce irreversibility — <em>it manufactures it.</em><br><br>That puts this in tension with the grant rather than alongside it: <strong>pay for the option to come back, not for the promise to stay.</strong> Clawbacks buy retention from people who already decided to go — but the binding constraint is the far larger population who never attempt the move, and a clawback taxes exactly the fear that's stopping them.<br><br><strong>Where the clawback lives — answered 9 Aug.</strong> It's a grant condition on national money (国 ½ · 都道府県 ¼ · 市町村 ¼) set in Cabinet Office notices, not statute. No town can switch it off. But <strong>上乗せ top-up money carries no national conditions</strong> — so the ask isn't “waive the clawback,” it's <strong>“spend your top-up budget on a return guarantee instead of a bigger grant.”</strong> That's within one town's gift, needs no national approval, and would make them the only municipality in Japan offering one. This is a municipal product decision, not a ministry campaign.<br><br><strong>Design boundary: cover the move, never the clawback.</strong> Covering repayment takes exposure from ¥250k to ¥3M a claim and reintroduces the moral hazard this otherwise avoids." },
+
+    { id:"S2", g:"G", s:"sketch", j:"alone", n:"Named mutual conditionals",
+      w:"“I'll go if the Satos go.” Resolve the graph, surface completed loops.",
+      f:"I'll go if the Satos go. And it turns out they said the same about us.",
+      mv:"Sketch the graph resolution; test appetite in the demand test.",
+      spec:"—", gap:true, isnew:true,
+      d:"Turns a cohort from a statistical aggregate into a real social unit. Double opt-in, so nobody is exposed by declaring." },
+
+    { id:"S3", g:"G", s:"sketch", j:"irreversible", n:"The term, not the move",
+      w:"Nine months is the default unit for everything.",
+      f:"It's nine months. I'm not emigrating, I'm trying something.",
+      mv:"Reframe the offer card and A/B the language.",
+      spec:"—", gap:true, isnew:true,
+      d:"Moving is what happens when someone keeps renewing." },
+
+    { id:"S4", g:"G", s:"sketch", j:"belonging", n:"Sunset thresholds",
+      w:"A tile must re-clear its threshold every n years or wind down.",
+      f:"Everything here is here because people said yes again this year.",
+      mv:"Decide which tile types it suits. Probably not schools.",
+      spec:"—", gap:true, isnew:true,
+      d:"Prevents zombie institutions and creates a recurring moment where people renew commitment publicly." },
+
+    { id:"S5", g:"G", s:"sketch", j:"alone", n:"Ambient co-presence",
+      w:"“23 people are considering this town this week.”",
+      f:"Twenty-three other people are looking at this town this week. So it's not just me.",
+      mv:"Cheapest thing on the board — build it into the first live surface.",
+      spec:"—", gap:true, isnew:true,
+      d:"Reduces the alone-feeling at the <strong>browse</strong> stage, before any commitment exists — where the funnel leaks most. No honesty problem: it's a real number." },
+
+    { id:"S6", g:"G", s:"sketch", j:"illegible", n:"Company as anchor tenant",
+      w:"30 staff = an instant tier jump.",
+      f:"The firm's coming, and it brought a town's worth of payroll with it.",
+      mv:"Fold into the §25 write-up.",
+      spec:"—", gap:true, isnew:true,
+      d:"Everything in tiers 0–2 of the business ladder can be underwritten against it." },
+
+    { id:"S7", g:"G", s:"sketch", j:"belonging", n:"Municipal matching multiplier",
+      w:"“We match ¥X per committed household.”",
+      f:"The town's putting its own money behind each of us. They're in it too.",
+      mv:"Ask one municipal officer whether it's politically sayable.",
+      spec:"—", gap:true, isnew:true,
+      d:"Converts the municipality from gatekeeper into <strong>participant in the threshold</strong>." },
+
+    { id:"S8", g:"G", s:"sketch", j:"irreversible", n:"The three-generation package",
+      w:"Eldercare and childcare co-located, offered as one thing.",
+      f:"My mother is cared for and my daughter has a childhood. In the same place.",
+      mv:"Connect the eldercare doc to the family lane.",
+      spec:"—", gap:true, isnew:true,
+      d:"For many target households the reason they <em>can't</em> move is a parent needing care, and the reason they <em>would</em> is a child needing a childhood." },
+
+    // ---- H ----
+    { id:"R1", g:"H", s:"rejected", j:"", n:"Star ratings on towns", w:"Replit, 2024.",
+      f:"Someone gave the place I live four stars out of five.",
+      mv:"Closed.", spec:"—", d:"Turns towns into hotels. Unrecoverable." },
+    { id:"R2", g:"H", s:"rejected", j:"", n:"Composite quality-of-life score", w:"Replit, 2024.",
+      f:"Eighty-five out of a hundred. Out of what, exactly?",
+      mv:"Closed.", spec:"—", d:"Unfalsifiable index. Hides its inputs by construction." },
+    { id:"R3", g:"H", s:"rejected", j:"", n:"Population bar toward a target", w:"Bolt + Lovable, 2024.",
+      f:"This town is 68% full. Of what? Of who?",
+      mv:"Closed.", spec:"—", d:"Frames a town as a container to be filled, and implies a target the town never agreed to. Replaced by §28." },
+    { id:"R4", g:"H", s:"rejected", j:"", n:"Age & gender distribution", w:"Bolt + Lovable, 2024.",
+      f:"Why does a stranger need to know the gender split of my village?",
+      mv:"Closed.", spec:"—", d:"Only children-by-age-band survives." },
+    { id:"R5", g:"H", s:"rejected", j:"", n:"Satisfaction score / volunteer rate", w:"Bolt, 2024.",
+      f:"Nine point two out of ten. Says who?",
+      mv:"Closed.", spec:"—", d:"Invented soft metrics that read as marketing and can't be sourced." },
+    { id:"R6", g:"H", s:"rejected", j:"", n:"Platform vanity counters", w:"All three prototypes.",
+      f:"2,847 families. None of them are near me.",
+      mv:"Closed.", spec:"—", d:"Superseded by the delta metric." },
+    { id:"R7", g:"H", s:"rejected", j:"", n:"Per-town growth-rate headline", w:"All three prototypes.",
+      f:"It says the town grew 25% last year. I live there. It didn't.",
+      mv:"Closed.", spec:"—", d:"<strong>Never ship a growth rate without a municipal source.</strong>" }
+  ];
+
+  var EXP = [
+    { refs:"§S1 + §S3", n:"The reversible term",
+      d:"A nine-month term with a funded way out. The ask stops being migration entirely — it becomes a trial with a known exit, which is a thing people say yes to without a family meeting." },
+    { refs:"§1 + §30", n:"Ask, then invite",
+      d:"All-or-nothing gets the first cohort in. Momentum gets every cohort after. Same town, two completely different sentences — and the switchover point is the moment the first threshold clears." },
+    { refs:"§S2 + §1", n:"Thresholds on a social graph",
+      d:"The cohort resolves on named loops rather than an anonymous headcount. “50 strangers” becomes “12 groups who each said yes to each other.”" },
+    { refs:"§3 + §11 + §12", n:"A scrubber that computes",
+      d:"Typed thresholds plus a machine-readable dependency graph means the scrubber derives cascades instead of replaying hand-authored ones. Move the slider, and the laundromat opens because the arithmetic says so." },
+    { refs:"§25 + §S6 + §24", n:"The anchor underwrites the ladder",
+      d:"One relocating employer at 30 staff clears the household threshold for tiers 0–2 in a single move, and the funding split shows exactly which part of each tile that arrival paid for." },
+    { refs:"§17 + §S7", n:"Pricing the wall",
+      d:"The town sees which specific blocker is stopping its own inbound cohort — and the matching multiplier gives it a way to spend money removing that blocker rather than on generic recruitment." },
+    { refs:"§31 + §S8", n:"The ratio that makes a family possible",
+      d:"Paired thresholds are what let the three-generation package be an actual promise rather than a hope: the eldercare place exists because the carer count cleared alongside the elder count." }
+  ];
+
+  var JOB_LABEL = {
+    alone: "I'd be the only one",
+    illegible: "Can't picture it",
+    irreversible: "Couldn't come back",
+    belonging: "Want a part in it",
+    momentum: "Happening without me",
+    trust: "Don't believe it"
+  };
+
+  var byId = {};
+  M.forEach(function (m) { byId[m.id] = m; });
+
+  var board = document.getElementById("board");
+
+  GROUPS.forEach(function (grp) {
+    var items = M.filter(function (m) { return m.g === grp.key; });
+    if (!items.length) return;
+
+    var sec = document.createElement("section");
+    sec.className = "group";
+    sec.setAttribute("data-group", grp.key);
+
+    var head = document.createElement("div");
+    head.className = "group-head";
+    head.innerHTML = '<span class="group-key"></span><h2 class="group-name"></h2><span class="group-note"></span>';
+    head.querySelector(".group-key").textContent = grp.key;
+    head.querySelector(".group-name").textContent = grp.name;
+    head.querySelector(".group-note").textContent = grp.note;
+    sec.appendChild(head);
+
+    var grid = document.createElement("div");
+    grid.className = "grid";
+
+    items.forEach(function (m) {
+      var card = document.createElement("button");
+      card.className = "card";
+      card.type = "button";
+      card.setAttribute("data-s", m.s);
+      card.setAttribute("data-id", m.id);
+      if (m.j) card.setAttribute("data-j", m.j);
+      if (m.isnew) card.setAttribute("data-new", "1");
+      if (m.gap) card.setAttribute("data-gap", "1");
+      if (m.promoted) card.setAttribute("data-promoted", "1");
+
+      var ref = m.id.charAt(0) === "R" ? "—" : "§" + m.id;
+
+      card.innerHTML =
+        '<div class="card-top">' +
+          '<span class="ref"></span>' +
+          '<span class="job"></span>' +
+          '<span class="chip" data-s="' + m.s + '"></span>' +
+        '</div>' +
+        '<h3></h3>' +
+        '<p class="what"></p>' +
+        '<p class="felt"></p>' +
+        '<div class="move"><b>Next move</b><span></span></div>' +
+        '<div class="detail" hidden></div>' +
+        '<div class="card-foot"><span class="spec"></span></div>';
+
+      card.querySelector(".ref").textContent = ref;
+      card.querySelector(".chip").textContent = m.s;
+      card.querySelector("h3").textContent = m.n;
+      card.querySelector(".what").textContent = m.w;
+      card.querySelector(".felt").textContent = "“" + m.f + "”";
+      card.querySelector(".move span").textContent = m.mv;
+      card.querySelector(".spec").textContent = m.spec;
+
+      var jobEl = card.querySelector(".job");
+      if (m.j) jobEl.textContent = JOB_LABEL[m.j];
+      else jobEl.remove();
+
+      var det = card.querySelector(".detail");
+      if (m.d) det.innerHTML = m.d; else det.remove();
+
+      if (m.isnew) {
+        var nb = document.createElement("span");
+        nb.className = "isnew";
+        nb.textContent = "· new";
+        card.querySelector(".card-foot").appendChild(nb);
+      }
+      if (m.promoted) {
+        var pb = document.createElement("span");
+        pb.className = "ispromoted";
+        pb.textContent = "· promoted from sketch, 9 Aug";
+        card.querySelector(".card-foot").appendChild(pb);
+      }
+
+      grid.appendChild(card);
+    });
+
+    sec.appendChild(grid);
+    board.appendChild(sec);
+  });
+
+  // ---- expand / select ----
+
+  var selected = [];
+
+  board.addEventListener("click", function (e) {
+    var card = e.target.closest(".card");
+    if (!card) return;
+    if (e.shiftKey || e.metaKey || e.ctrlKey) { toggleSelect(card); return; }
+    var det = card.querySelector(".detail");
+    if (det) det.hidden = !det.hidden;
+  });
+
+  board.addEventListener("dblclick", function (e) {
+    var card = e.target.closest(".card");
+    if (card) toggleSelect(card);
+  });
+
+  function toggleSelect(card) {
+    var id = card.getAttribute("data-id");
+    var i = selected.indexOf(id);
+    if (i > -1) selected.splice(i, 1);
+    else { selected.push(id); if (selected.length > 2) selected.shift(); }
+    renderSelection();
+  }
+
+  function renderSelection() {
+    Array.prototype.forEach.call(document.querySelectorAll(".card"), function (c) {
+      var idx = selected.indexOf(c.getAttribute("data-id"));
+      c.classList.toggle("sel", idx > -1);
+      if (idx > -1) c.setAttribute("data-slot", String(idx + 1));
+      else c.removeAttribute("data-slot");
+    });
+
+    for (var i = 0; i < 2; i++) {
+      var slot = document.getElementById("slot-" + i);
+      var m = selected[i] ? byId[selected[i]] : null;
+      if (m) {
+        slot.className = "dock-slot";
+        slot.innerHTML = '<span class="ref"></span><h4></h4><p></p>';
+        slot.querySelector(".ref").textContent =
+          (m.id.charAt(0) === "R" ? "rejected" : "§" + m.id) + " · " + m.s +
+          (m.j ? " · " + JOB_LABEL[m.j].toLowerCase() : "");
+        slot.querySelector("h4").textContent = m.n;
+        slot.querySelector("p").textContent = "“" + m.f + "”";
+      } else {
+        slot.className = "dock-slot empty";
+        slot.textContent = i === 0 ? "Select a mechanic" : "Select a second";
+      }
+    }
+
+    var prompt = document.getElementById("dock-prompt");
+    if (selected.length === 2) {
+      var a = byId[selected[0]], b = byId[selected[1]];
+      prompt.innerHTML = "What does <em>" + a.n.toLowerCase() + "</em> make possible once <em>" +
+        b.n.toLowerCase() + "</em> is running — and does either one stop needing the other? " +
+        "Worth recording in the registry if the answer is interesting.";
+    } else {
+      prompt.innerHTML = "Shift-click or double-click any two cards to bench them together.";
+    }
+
+    document.getElementById("dock").classList.toggle("open", selected.length > 0);
+  }
+
+  document.getElementById("dock-clear").addEventListener("click", function () {
+    selected = [];
+    renderSelection();
+  });
+
+  // ---- filters ----
+
+  var filters = Array.prototype.slice.call(document.querySelectorAll(".filt"));
+  var countEl = document.getElementById("count");
+
+  filters.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filters.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+      applyFilter(btn.getAttribute("data-f"));
+    });
+  });
+
+  function applyFilter(f) {
+    var shown = 0;
+    Array.prototype.forEach.call(document.querySelectorAll(".card"), function (c) {
+      var ok;
+      if (f === "all") ok = true;
+      else if (f === "new") ok = c.hasAttribute("data-new");
+      else if (f === "gap") ok = c.hasAttribute("data-gap");
+      else if (f === "moved") ok = c.hasAttribute("data-promoted");
+      else if (f.indexOf("job:") === 0) ok = c.getAttribute("data-j") === f.slice(4);
+      else ok = c.getAttribute("data-s") === f;
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".group[data-group]"), function (sec) {
+      sec.hidden = !sec.querySelector(".card:not([hidden])");
+    });
+
+    countEl.textContent = shown + " of " + M.length + " shown";
+  }
+
+  // ---- experiments ----
+
+  var expList = document.getElementById("exp-list");
+  EXP.forEach(function (x) {
+    var el = document.createElement("article");
+    el.className = "exp";
+    el.innerHTML = '<div class="exp-refs"></div><h3></h3><p></p>';
+    el.querySelector(".exp-refs").textContent = x.refs;
+    el.querySelector("h3").textContent = x.n;
+    el.querySelector("p").textContent = x.d;
+    expList.appendChild(el);
+  });
+
+  applyFilter("all");
+  renderSelection();
+})();
+</script>

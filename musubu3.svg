@@ -1,0 +1,47 @@
+<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Thicker, bolder mizuhiki-style knot -->
+  <!-- Left loop - outer stroke -->
+<ellipse cx="50" cy="70" rx="35" ry="40" 
+        fill="none" 
+        stroke="#c53d43" 
+        stroke-width="12"
+        stroke-linecap="round"/>
+  <!-- Right loop - outer stroke -->
+<ellipse cx="100" cy="70" rx="35" ry="40" 
+        fill="none" 
+        stroke="#d64a4a" 
+        stroke-width="12"
+        stroke-linecap="round"/>
+  <!-- White/background knockout for the weave effect at intersection -->
+  <ellipse cx="75" cy="70" rx="18" ry="25" fill="white"/>
+  <!-- Re-draw intersection strands to show weaving -->
+  <!-- Back strand (left loop going behind) -->
+<path d="M 62 45 Q 75 65, 62 95" 
+     fill="none" 
+     stroke="#c53d43" 
+     stroke-width="10"
+     stroke-linecap="round"/>
+  <!-- Front strand (right loop going over) -->
+<path d="M 88 45 Q 75 65, 88 95" 
+     fill="none" 
+     stroke="#d64a4a" 
+     stroke-width="10"
+     stroke-linecap="round"/>
+  <!-- Three dots in center - coordination/match points -->
+  <circle cx="68" cy="70" r="6" fill="#1e4d78"/>
+  <circle cx="82" cy="70" r="6" fill="#1e4d78"/>
+  <circle cx="75" cy="55" r="6" fill="#1e4d78"/>
+  <!-- Wordmark -->
+<text x="160" y="78" 
+     font-family="Georgia, 'Hiragino Mincho Pro', serif" 
+     font-size="56" 
+     font-weight="400" 
+     fill="#1e4d78" 
+     letter-spacing="3">Musubu</text>
+  <!-- Kanji subtitle -->
+<text x="162" y="115" 
+     font-family="Georgia, 'Hiragino Mincho Pro', serif" 
+     font-size="20" 
+     fill="#8b7355" 
+     letter-spacing="10">結ぶ · coordinated migration</text>
+</svg>

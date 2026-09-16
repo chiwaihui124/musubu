@@ -1,0 +1,581 @@
+<meta charset="utf-8">
+<title>Bungotakada 2032 — one version of it going well</title>
+
+<style>
+:root {
+  --ground:   #0E1620;
+  --panel:    #151F2C;
+  --panel-2:  #1B2634;
+  --rule:     #2A3646;
+  --ink:      #E4E0D6;
+  --ink-2:    #A3AEBF;
+  --ink-3:    #6C7A8D;
+  --accent:   #D4694A;
+
+  /* Base is near-monochrome — it behaves like desaturated aerial photography.
+     Only the intervention carries colour. One accent, never two. */
+  --land:      #1D2027;
+  --paddy:     #262A2C;
+  --hill:      #212528;
+  --sea:       #171A20;
+  --river:     #2C3138;
+  --existing:  #2A2E36;
+  --hair:      #6F7885;
+
+  /* the single accent, stepped by tone rather than hue */
+  --a-100:     #E0703F;
+  --a-70:      #B85C36;
+  --a-45:      #8C472C;
+  --a-line:    #E0703F;
+
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --ground: #EDEAE0; --panel: #F5F3EB; --panel-2: #E7E4D9; --rule: #D2CEC0;
+    --ink: #1C2531; --ink-2: #4E5A69; --ink-3: #7E8896;
+    --land: #DEDBD2; --paddy: #D3D1C6; --hill: #D7D5CB; --sea: #E4E2DA; --river: #C6C8C4;
+    --existing: #CBC8BE; --hair: #7C8188;
+    --a-100: #B4501F; --a-70: #C2764C; --a-45: #CC9A79; --a-line: #B4501F;
+  }
+}
+:root[data-theme="light"] {
+  --ground: #EDEAE0; --panel: #F5F3EB; --panel-2: #E7E4D9; --rule: #D2CEC0;
+  --ink: #1C2531; --ink-2: #4E5A69; --ink-3: #7E8896;
+  --land: #DEDBD2; --paddy: #D3D1C6; --hill: #D7D5CB; --sea: #E4E2DA; --river: #C6C8C4;
+  --existing: #CBC8BE; --hair: #7C8188;
+  --a-100: #B4501F; --a-70: #C2764C; --a-45: #CC9A79; --a-line: #B4501F;
+}
+:root[data-theme="dark"] {
+  --ground: #0E1620; --panel: #151F2C; --panel-2: #1B2634; --rule: #2A3646;
+  --ink: #E4E0D6; --ink-2: #A3AEBF; --ink-3: #6C7A8D;
+  --land: #1D2027; --paddy: #262A2C; --hill: #212528; --sea: #171A20; --river: #2C3138;
+  --existing: #2A2E36; --hair: #6F7885;
+  --a-100: #E0703F; --a-70: #B85C36; --a-45: #8C472C; --a-line: #E0703F;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; line-height: 1.2; text-wrap: balance; }
+p { margin: 0; }
+
+.shell { max-width: 74rem; margin-inline: auto; padding: 2.5rem 1.5rem 4rem; }
+
+header { margin-bottom: 1.75rem; }
+.kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.7rem; }
+header h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: -0.015em; }
+header .sub { color: var(--ink-2); font-size: 0.95rem; margin-top: 0.8rem; max-width: 44rem; }
+
+.stage { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 64rem) { .stage { grid-template-columns: 1fr 20rem; } }
+
+.mapcard { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+#map { display: block; width: 100%; height: auto; }
+.parcel { cursor: pointer; transition: opacity .45s ease; }
+.parcel:focus-visible { outline: none; }
+
+/* ── time control: the year is the instrument ── */
+.timebar { border-top: 1px solid var(--rule); padding: 1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.timehead { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.year { font-family: var(--mono); font-size: 2.1rem; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; line-height: 1; }
+.playbtn {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--accent); color: #12161C; border: 0; border-radius: 3px;
+  padding: 0.5rem 0.95rem; cursor: pointer;
+}
+.playbtn:hover { filter: brightness(1.08); }
+.playbtn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.phase { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-3); letter-spacing: 0.06em; margin-left: auto; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; background: var(--rule); border-radius: 2px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); border: 3px solid var(--panel); cursor: pointer; }
+input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); border: 3px solid var(--panel); cursor: pointer; }
+.yearticks { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.6rem; color: var(--ink-3); }
+
+/* ── rail ── */
+.rail { display: flex; flex-direction: column; gap: 1rem; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 1.1rem 1.15rem; }
+.card h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
+.cardlabel { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-3); }
+
+.bignum { font-family: var(--mono); font-size: 2rem; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1.05; }
+.delta { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
+.caption { font-size: 0.78rem; color: var(--ink-2); line-height: 1.5; margin-top: 0.55rem; }
+
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1rem; }
+.stat .n { font-family: var(--mono); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.stat .l { font-size: 0.72rem; color: var(--ink-3); line-height: 1.35; }
+
+.legend { display: flex; flex-direction: column; gap: 0.45rem; }
+.legend div { display: flex; align-items: center; gap: 0.55rem; font-size: 0.76rem; color: var(--ink-2); }
+.sw { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+.legend .ct { margin-left: auto; font-family: var(--mono); font-size: 0.7rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+.inspect .was { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-3); letter-spacing: 0.04em; }
+.inspect .story { font-size: 0.82rem; color: var(--ink-2); line-height: 1.55; margin-top: 0.5rem; }
+.inspect .meta { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-3); margin-top: 0.6rem; font-variant-numeric: tabular-nums; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.15rem 0.42rem; border-radius: 2px; color: #12161C; }
+
+.foot { margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1.5rem; display: grid; gap: 1rem; }
+@media (min-width: 52rem) { .foot { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+.foot p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.6; }
+.foot h3 { font-size: 0.95rem; color: var(--ink); margin-bottom: 0.4rem; }
+
+@media (prefers-reduced-motion: reduce) { .parcel { transition: none; } }
+</style>
+
+<div class="shell">
+  <header>
+    <p class="kicker">Speculative · one version of it going well</p>
+    <h1>Bungotakada, 2032</h1>
+    <p class="sub">
+      Six years after the first cohort. This is not a forecast — it's a picture of what success would
+      actually look like if the model worked, drawn to be modest enough to be believable. Drag the
+      year, or press play and watch the land change use.
+    </p>
+  </header>
+
+  <div class="stage">
+    <div class="mapcard">
+      <svg id="map" viewBox="0 0 1000 660" role="img" aria-label="Land-use map of Bungotakada showing change over time">
+        <rect width="1000" height="660" fill="var(--land)"/>
+        <path d="M660 230 Q800 185 1000 222 L1000 660 L600 660 Q640 450 660 230 Z" fill="var(--hill)"/>
+        <path d="M0 0 L1000 0 L1000 62 Q760 88 600 118 Q470 142 432 200 Q400 252 300 272 Q160 296 0 252 Z" fill="var(--sea)"/>
+        <path d="M980 604 Q800 566 700 508 Q600 460 520 442 Q470 432 455 376 Q445 300 448 226 Q450 178 425 146"
+              stroke="var(--river)" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <path d="M300 660 Q330 528 400 452 Q440 414 452 376" stroke="var(--river)" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M250 660 Q330 490 420 396 Q470 340 500 236 Q520 150 560 0" stroke="var(--rule)" stroke-width="4" fill="none" opacity="0.65"/>
+        <path d="M470 442 Q640 424 820 406 Q920 396 1000 414" stroke="var(--rule)" stroke-width="3" fill="none" opacity="0.5"/>
+
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="var(--hair)" stroke-width="1.1" opacity="0.55"/>
+          </pattern>
+          <!-- worked fields: the furrow texture that makes paddy read as farmland -->
+          <pattern id="field" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-12)">
+            <rect width="5" height="5" fill="var(--paddy)"/>
+            <line x1="0" y1="0" x2="5" y2="0" stroke="var(--hair)" stroke-width="0.7" opacity="0.42"/>
+          </pattern>
+        </defs>
+
+        <g id="districts"></g>
+        <g id="parcels"></g>
+
+        <g id="places" font-family="var(--body)" font-size="9" fill="var(--ink-3)" opacity="0.6">
+          <text x="150" y="312" text-anchor="middle">周防灘</text>
+          <text x="180" y="486" text-anchor="middle">水崎</text>
+          <text x="800" y="452" text-anchor="middle">三和</text>
+        </g>
+
+        <g id="statstrip"></g>
+      </svg>
+
+      <div class="timebar">
+        <div class="timehead">
+          <span class="year" id="year">2026</span>
+          <button class="playbtn" id="play">▶ Play</button>
+          <span class="phase" id="phase">before the first cohort</span>
+        </div>
+        <input type="range" id="slider" min="2026" max="2032" step="1" value="2026" aria-label="Year">
+        <div class="yearticks"><span>2026</span><span>2028</span><span>2030</span><span>2032</span></div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="card">
+        <p class="cardlabel">Population — against the line it was on</p>
+        <div style="display:flex; align-items:baseline; gap:0.6rem; margin-top:0.35rem;">
+          <span class="bignum" id="pop">22,500</span>
+          <span class="delta" id="delta">±0</span>
+        </div>
+        <svg id="chart" viewBox="0 0 260 86" style="width:100%; height:auto; margin-top:0.7rem;" role="img" aria-label="Population against the projected decline"></svg>
+        <p class="caption" id="popcap">
+          The measure of success was never growth. It was the moment the line stopped falling.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="cardlabel">Through the programme</p>
+        <div class="stats" style="margin-top:0.75rem;">
+          <div class="stat"><div class="n" id="sHouse">0</div><div class="l">households arrived</div></div>
+          <div class="stat"><div class="n" id="sRet">—</div><div class="l">still here</div></div>
+          <div class="stat"><div class="n" id="sBiz">0</div><div class="l">businesses open</div></div>
+          <div class="stat"><div class="n" id="sKids">0</div><div class="l">children enrolled</div></div>
+          <div class="stat"><div class="n" id="sAkiya">0</div><div class="l">akiya converted</div></div>
+          <div class="stat"><div class="n" id="sTrained">0</div><div class="l">trained in the build programme</div></div>
+        </div>
+      </div>
+
+      <div class="card" id="inspector">
+        <p class="cardlabel">Land use</p>
+        <div class="legend" id="legend" style="margin-top:0.6rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>
+      <h3>Why the numbers are small</h3>
+      <p>
+        176 households over six years is not a boom. It's roughly four hundred people in a town of
+        twenty-two thousand — under two percent. That is deliberately what success looks like here:
+        enough arrivals, concentrated closely enough in time and place, to reopen a kindergarten and
+        make a café viable. A picture showing the town doubling would be a fantasy, and anyone who
+        knows these towns would stop reading.
+      </p>
+    </div>
+    <div>
+      <h3>What's still shown as failed</h3>
+      <p>
+        Three businesses opened and closed. Twelve percent of arrived households left again. One
+        housing cluster never reached its threshold and the land is still paddy. These are on the map
+        on purpose — a version of the future with no failures in it is marketing, and the whole
+        argument of this project is that the honest version is more persuasive than the polished one.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* One accent, stepped by tone. The base is drawn, not coloured — only what the
+     programme made carries the accent, which is the grammar the reference board uses. */
+  var CAT = {
+    paddy:    { c: "var(--paddy)",    label: "Farmland, still farmed",           base: true },
+    existing: { c: "var(--existing)", label: "The town that was already here",   base: true },
+    vacant:   { c: "var(--existing)", label: "Empty before the programme",       base: true, hatch: true },
+    housing:  { c: "var(--a-100)",    label: "Housing through the programme" },
+    business: { c: "var(--a-70)",     label: "Business opened through it" },
+    civic:    { c: "var(--a-70)",     label: "Civic — reopened or restored" },
+    making:   { c: "var(--a-45)",     label: "Workshops and making" },
+    closed:   { c: "none",            label: "Tried, and closed",                outline: true, hatch: true },
+    open:     { c: "none",            label: "Drawn, never filled",              outline: true }
+  };
+
+  /* district boundaries — hairline, dashed, with the label hung off a drop-line */
+  var DISTRICTS = [
+    { d: "M292 258 L406 244 L424 486 L300 500 Z", label: "WEST PADDY",   lx: 348, ly: 232, tx: 348, ty: 244 },
+    { d: "M410 240 L580 224 L600 500 L424 512 Z", label: "OLD CENTRE",   lx: 500, ly: 200, tx: 500, ty: 224 },
+    { d: "M584 220 L720 208 L734 470 L604 484 Z", label: "EAST SLOPE",   lx: 660, ly: 186, tx: 660, ty: 208 },
+    { d: "M438 176 L572 162 L580 222 L444 236 Z", label: "TAMATSU",      lx: 508, ly: 142, tx: 508, ty: 162 }
+  ];
+
+  // id, path, was, becomes, year, name, story, meta
+  var P = [
+    ["ex1","M300 400 L392 386 L404 452 L316 468 Z","existing","existing",0,"Mizusaki housing","Streets that were already here. Most of this town is this colour, and that is the point.",""],
+    ["ex2","M430 350 L520 338 L534 402 L444 416 Z","existing","existing",0,"Takada centre","The old centre, the shopfronts, the shrine. Nothing on this map replaced it.",""],
+    ["ex3","M540 396 L618 386 L628 442 L550 452 Z","existing","existing",0,"Hamamachi","",""],
+    ["ex4","M470 250 L556 240 L566 300 L480 312 Z","existing","existing",0,"Tamatsu","",""],
+
+    ["pd1","M60 300 L280 276 L296 400 L76 424 Z","paddy","paddy",0,"West paddy","Still rice. Six years on, the farmland that was farmed is still farmed — the programme took vacant houses, not fields.",""],
+    ["pd2","M70 440 L300 418 L316 540 L88 562 Z","paddy","paddy",0,"Lower west paddy","",""],
+    ["pd3","M120 570 L330 552 L344 640 L136 656 Z","paddy","paddy",0,"Saigi paddy","",""],
+    ["pd4","M600 470 L700 458 L712 520 L612 532 Z","paddy","paddy",0,"Kunawa paddy","",""],
+
+    ["h1","M414 456 L470 448 L478 496 L422 504 Z","paddy","housing",2027,"Shinmachi cluster","Six adjacent akiya, bought at about ¥4.8M each and renovated by the first build cohort. The first twelve households landed here together in March 2027.","12 households · first wave"],
+    ["h2","M482 264 L544 254 L552 306 L490 316 Z","existing","housing",2027,"Tamatsu house share","A 266m² wooden house from 1977, empty for nine years. Eight people moved in at once.","8 residents"],
+    ["h3","M318 356 L400 344 L410 400 L328 412 Z","paddy","housing",2029,"Riverside block","The flat west bank — the one part of town you can cycle. Twenty units, purpose-built, the largest single thing the programme has made.","34 households"],
+    ["h4","M736 420 L804 410 L814 462 L746 472 Z","existing","housing",2028,"Miwa hillside","Quiet, elevated, car essential. Where the people who wanted distance went.","9 households"],
+    ["h5","M398 496 L466 486 L476 538 L408 548 Z","paddy","housing",2030,"Shinmachi south","The second cluster. It filled in eleven weeks, because by then people could see the first one.","22 households"],
+    ["h6","M528 486 L596 476 L606 528 L538 538 Z","existing","housing",2031,"Mizutori terraces","","19 households"],
+    ["h7","M446 206 L510 196 L518 244 L454 254 Z","paddy","housing",2032,"Tamatsu north","Finished this spring. The waiting list is longer than the building.","16 households"],
+
+    ["b1","M456 420 L494 414 L500 448 L462 454 Z","existing","business",2028,"Morning café","Three people proposed a concept for the empty shopfront. The incoming cohort chose between them. It opens at six, and it is where everyone ends up.","opened 2028"],
+    ["b2","M436 428 L456 424 L462 452 L442 456 Z","existing","business",2029,"Bakery","Unlocked by the café and the Shinmachi cluster — it needed both to be viable.","opened 2029"],
+    ["b3","M544 448 L594 440 L602 482 L552 490 Z","existing","business",2028,"Garage","No passenger railway here, so every household is a car household. It was the safest bet on the map and it opened first.","opened 2028"],
+    ["b4","M392 372 L428 366 L434 398 L398 404 Z","existing","business",2030,"Laundromat","","opened 2030"],
+    ["b5","M584 402 L626 394 L632 430 L590 438 Z","existing","business",2031,"Cram school","Followed the children, not the other way round.","opened 2031"],
+    ["b6","M424 296 L470 288 L476 326 L430 334 Z","existing","business",2032,"Grocer","The first new food shop in the old centre in nineteen years.","opened 2032"],
+    ["b7","M636 462 L678 454 L684 490 L642 498 Z","existing","business",2030,"Clinic — extended hours","The hospital always existed. The evening hours did not.","opened 2030"],
+
+    ["c1","M556 352 L610 344 L618 392 L564 400 Z","vacant","civic",2029,"Seikei Kindergarten","Closed in 2019. Reopened in April 2029 with twenty-six children, of whom nineteen arrived through the programme. This is the parcel people point at.","reopened 2029 · 74 children today"],
+    ["c2","M478 330 L528 322 L534 362 L484 370 Z","existing","civic",2027,"Central Community Hall","The building was always there. What it needed was one person whose job was to unlock the door and cook on Wednesdays.","steward since 2027"],
+    ["c3","M614 340 L662 332 L670 376 L622 384 Z","existing","civic",2031,"Takada JHS — class restored","One class year that would otherwise have merged.","2031"],
+
+    ["m1","M500 452 L546 444 L554 486 L508 494 Z","existing","making",2027,"Shared workshop","Where the build programme runs. Every house on this map with a warm colour came partly out of this room.","since 2027 · 61 trained"],
+    ["m2","M486 388 L524 382 L530 416 L492 422 Z","existing","making",2028,"Co-working floor","Above the community hall. Full since 2029.","since 2028"],
+    ["m3","M646 508 L700 498 L710 546 L656 556 Z","existing","making",2030,"Heritage building school","The 1948 house at Tazome, and the carpenters who came for six weeks at a time to teach on it.","since 2030 · 4 masters"],
+
+    ["x1","M660 566 L708 558 L716 600 L668 608 Z","existing","closed",2029,"Fitness studio","Opened 2029, closed 2031. Never found its second year. The unit is empty again and listed.","closed 2031"],
+    ["x2","M356 314 L392 308 L398 340 L362 346 Z","existing","closed",2030,"Craft shop","Eighteen months. The owner stayed in town and now works at the workshop.","closed 2031"],
+    ["x3","M578 300 L616 294 L622 328 L584 334 Z","existing","closed",2031,"Second café","Two cafés was one too many for twenty-two thousand people. An honest lesson about the population maths.","closed 2032"],
+
+    ["o1","M340 470 L404 460 L412 512 L348 522 Z","paddy","open",0,"Never reached threshold","A third housing cluster that stalled at nineteen of thirty households. The deposits went back. The land is still paddy, and it is still listed.","19 / 30 · lapsed 2031"],
+    ["o2","M712 462 L768 454 L776 500 L720 508 Z","paddy","open",0,"Gathering now","Proposed for 2033. Currently at eleven of twenty-four.","11 / 24"]
+  ];
+
+  var SERIES = {
+    2026: { pop: 22500, cf: 22500, hh: 0,   ret: null, biz: 0,  kids: 0,  ak: 0,  tr: 0,  phase: "before the first cohort" },
+    2027: { pop: 22380, cf: 22163, hh: 12,  ret: 100,  biz: 0,  kids: 9,  ak: 8,  tr: 11, phase: "first cohort lands" },
+    2028: { pop: 22410, cf: 21830, hh: 34,  ret: 97,   biz: 2,  kids: 24, ak: 21, tr: 24, phase: "the first shops open" },
+    2029: { pop: 22520, cf: 21503, hh: 71,  ret: 94,   biz: 3,  kids: 41, ak: 38, tr: 38, phase: "the kindergarten reopens" },
+    2030: { pop: 22640, cf: 21180, hh: 112, ret: 92,   biz: 6,  kids: 58, ak: 49, tr: 47, phase: "the line crosses" },
+    2031: { pop: 22730, cf: 20862, hh: 148, ret: 90,   biz: 7,  kids: 67, ak: 57, tr: 55, phase: "second wave settles" },
+    2032: { pop: 22810, cf: 20549, hh: 176, ret: 88,   biz: 11, kids: 74, ak: 62, tr: 61, phase: "six years in" }
+  };
+
+  var YEARS = [2026,2027,2028,2029,2030,2031,2032];
+  var svgNS = "http://www.w3.org/2000/svg";
+  var year = 2026, playing = false, timer = null, selected = null;
+
+  var pg = document.getElementById("parcels");
+  var nodes = P.map(function (p) {
+    var el = document.createElementNS(svgNS, "path");
+    el.setAttribute("d", p[1]);
+    el.setAttribute("class", "parcel");
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", p[5]);
+    el.addEventListener("click", function () { selected = p[0]; render(); });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selected = p[0]; render(); }
+    });
+    pg.appendChild(el);
+    return { el: el, p: p };
+  });
+
+  /* hairline district boundaries with labels hung off drop-lines */
+  (function () {
+    var g = document.getElementById("districts");
+    DISTRICTS.forEach(function (d) {
+      var p = document.createElementNS(svgNS, "path");
+      p.setAttribute("d", d.d);
+      p.setAttribute("fill", "none");
+      p.setAttribute("stroke", "var(--hair)");
+      p.setAttribute("stroke-width", "0.9");
+      p.setAttribute("stroke-dasharray", "7 5");
+      p.setAttribute("opacity", "0.5");
+      g.appendChild(p);
+
+      var drop = document.createElementNS(svgNS, "line");
+      drop.setAttribute("x1", d.lx); drop.setAttribute("y1", d.ly + 4);
+      drop.setAttribute("x2", d.tx); drop.setAttribute("y2", d.ty);
+      drop.setAttribute("stroke", "var(--hair)");
+      drop.setAttribute("stroke-width", "0.7");
+      drop.setAttribute("stroke-dasharray", "1.5 2.5");
+      drop.setAttribute("opacity", "0.6");
+      g.appendChild(drop);
+
+      var t = document.createElementNS(svgNS, "text");
+      t.setAttribute("x", d.lx); t.setAttribute("y", d.ly);
+      t.setAttribute("text-anchor", "middle");
+      t.setAttribute("font-family", "var(--mono)");
+      t.setAttribute("font-size", "7.5");
+      t.setAttribute("letter-spacing", "1.6");
+      t.setAttribute("fill", "var(--ink-3)");
+      t.textContent = d.label;
+      g.appendChild(t);
+    });
+  })();
+
+  function catAt(p) {
+    if (p[4] === 0) return p[3];
+    return year >= p[4] ? p[3] : p[2];
+  }
+
+  function render() {
+    var d = SERIES[year];
+
+    nodes.forEach(function (n) {
+      var cat = catAt(n.p), c = CAT[cat];
+      var isNew = n.p[4] !== 0 && year === n.p[4];
+      var sel = selected === n.p[0];
+
+      n.el.setAttribute("fill", c.hatch && c.outline ? "url(#hatch)" : c.c);
+      n.el.setAttribute("fill-opacity", c.base ? "0.9" : (c.outline ? "1" : "0.94"));
+
+      if (c.outline) {
+        n.el.setAttribute("stroke", "var(--a-line)");
+        n.el.setAttribute("stroke-width", sel ? "2.2" : "1.3");
+        n.el.setAttribute("stroke-dasharray", "5 4");
+      } else if (c.base) {
+        n.el.setAttribute("stroke", sel ? "var(--ink)" : "var(--hair)");
+        n.el.setAttribute("stroke-width", sel ? "2" : "0.6");
+        n.el.setAttribute("stroke-dasharray", "none");
+        if (cat === "vacant") n.el.setAttribute("fill", "url(#hatch)");
+        if (cat === "paddy")  n.el.setAttribute("fill", "url(#field)");
+      } else {
+        n.el.setAttribute("stroke", sel ? "var(--ink)" : "var(--ground)");
+        n.el.setAttribute("stroke-width", sel ? "2.2" : "0.8");
+        n.el.setAttribute("stroke-dasharray", "none");
+      }
+
+      n.el.style.opacity = isNew ? "0.35" : "1";
+      if (isNew) { setTimeout(function () { n.el.style.opacity = "1"; }, 80); }
+    });
+
+    drawStats();
+
+    document.getElementById("year").textContent = year;
+    document.getElementById("phase").textContent = d.phase;
+    document.getElementById("pop").textContent = d.pop.toLocaleString();
+    var gap = d.pop - d.cf;
+    document.getElementById("delta").textContent = (gap >= 0 ? "+" : "") + gap.toLocaleString() + " vs. trend";
+    document.getElementById("sHouse").textContent = d.hh;
+    document.getElementById("sRet").textContent = d.ret === null ? "—" : d.ret + "%";
+    document.getElementById("sBiz").textContent = d.biz;
+    document.getElementById("sKids").textContent = d.kids;
+    document.getElementById("sAkiya").textContent = d.ak;
+    document.getElementById("sTrained").textContent = d.tr;
+
+    drawChart();
+    drawPanel();
+  }
+
+  /* hard-number strip, drawn onto the map in the accent — the reference board's
+     "5 BUILDINGS / 2100 ROOMS / 2.6 HECTARES" move */
+  function drawStats() {
+    var g = document.getElementById("statstrip");
+    g.innerHTML = "";
+    var d = SERIES[year];
+    var rows = [
+      d.hh + " HOUSEHOLDS",
+      d.ak + " AKIYA CONVERTED",
+      d.biz + " BUSINESSES OPEN",
+      d.kids + " CHILDREN ENROLLED"
+    ];
+    var x = 40, y0 = 560;
+    var rule = document.createElementNS(svgNS, "line");
+    rule.setAttribute("x1", x); rule.setAttribute("y1", y0 - 14);
+    rule.setAttribute("x2", x + 44); rule.setAttribute("y2", y0 - 14);
+    rule.setAttribute("stroke", "var(--a-line)"); rule.setAttribute("stroke-width", "1.4");
+    g.appendChild(rule);
+
+    rows.forEach(function (r, i) {
+      var t = document.createElementNS(svgNS, "text");
+      t.setAttribute("x", x); t.setAttribute("y", y0 + i * 15);
+      t.setAttribute("font-family", "var(--mono)");
+      t.setAttribute("font-size", "9");
+      t.setAttribute("letter-spacing", "1.1");
+      t.setAttribute("fill", "var(--a-line)");
+      t.textContent = r;
+      g.appendChild(t);
+    });
+
+    var yr = document.createElementNS(svgNS, "text");
+    yr.setAttribute("x", x); yr.setAttribute("y", y0 - 26);
+    yr.setAttribute("font-family", "var(--mono)");
+    yr.setAttribute("font-size", "8");
+    yr.setAttribute("letter-spacing", "2");
+    yr.setAttribute("fill", "var(--ink-3)");
+    yr.textContent = "THROUGH THE PROGRAMME · " + year;
+    g.appendChild(yr);
+  }
+
+  function drawChart() {
+    var c = document.getElementById("chart");
+    c.innerHTML = "";
+    var W = 260, H = 86, pad = 4;
+    var lo = 20300, hi = 22950;
+    function X(y) { return pad + (y - 2026) / 6 * (W - pad * 2); }
+    function Y(v) { return H - pad - (v - lo) / (hi - lo) * (H - pad * 2); }
+
+    var upto = YEARS.filter(function (y) { return y <= year; });
+    var areaD = "M" + X(2026) + " " + Y(SERIES[2026].pop);
+    upto.forEach(function (y) { areaD += " L" + X(y) + " " + Y(SERIES[y].pop); });
+    for (var i = upto.length - 1; i >= 0; i--) { areaD += " L" + X(upto[i]) + " " + Y(SERIES[upto[i]].cf); }
+    areaD += " Z";
+
+    var area = document.createElementNS(svgNS, "path");
+    area.setAttribute("d", areaD);
+    area.setAttribute("fill", "var(--accent)");
+    area.setAttribute("fill-opacity", "0.16");
+    c.appendChild(area);
+
+    function line(key, colour, dash) {
+      var d = "";
+      YEARS.forEach(function (y, i) { d += (i ? " L" : "M") + X(y) + " " + Y(SERIES[y][key]); });
+      var p = document.createElementNS(svgNS, "path");
+      p.setAttribute("d", d); p.setAttribute("fill", "none");
+      p.setAttribute("stroke", colour); p.setAttribute("stroke-width", "1.6");
+      if (dash) p.setAttribute("stroke-dasharray", "4 3");
+      p.setAttribute("opacity", dash ? "0.6" : "1");
+      c.appendChild(p);
+    }
+    line("cf", "var(--ink-3)", true);
+
+    var d2 = "";
+    upto.forEach(function (y, i) { d2 += (i ? " L" : "M") + X(y) + " " + Y(SERIES[y].pop); });
+    var actual = document.createElementNS(svgNS, "path");
+    actual.setAttribute("d", d2); actual.setAttribute("fill", "none");
+    actual.setAttribute("stroke", "var(--accent)"); actual.setAttribute("stroke-width", "2");
+    c.appendChild(actual);
+
+    var dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", X(year)); dot.setAttribute("cy", Y(SERIES[year].pop));
+    dot.setAttribute("r", "3"); dot.setAttribute("fill", "var(--accent)");
+    dot.setAttribute("stroke", "var(--panel)"); dot.setAttribute("stroke-width", "1.5");
+    c.appendChild(dot);
+
+    var lbl = document.createElementNS(svgNS, "text");
+    lbl.setAttribute("x", X(2026) + 2); lbl.setAttribute("y", Y(SERIES[2032].cf) - 4);
+    lbl.setAttribute("font-family", "var(--mono)"); lbl.setAttribute("font-size", "7");
+    lbl.setAttribute("fill", "var(--ink-3)");
+    lbl.textContent = "if nothing had changed";
+    c.appendChild(lbl);
+  }
+
+  function drawPanel() {
+    var box = document.getElementById("inspector");
+    var sel = selected && P.filter(function (x) { return x[0] === selected; })[0];
+
+    if (!sel) {
+      var counts = {};
+      nodes.forEach(function (n) { var c = catAt(n.p); counts[c] = (counts[c] || 0) + 1; });
+      var h = '<p class="cardlabel">Land use</p><div class="legend" style="margin-top:0.6rem;">';
+      Object.keys(CAT).forEach(function (k) {
+        if (!counts[k]) return;
+        var sw = CAT[k].outline
+          ? '<span class="sw" style="border:1.3px dashed var(--a-line)"></span>'
+          : '<span class="sw" style="background:' + CAT[k].c + (CAT[k].base ? ';border:0.5px solid var(--hair)' : '') + '"></span>';
+        h += '<div>' + sw + '<span>' + CAT[k].label + '</span><span class="ct">' + counts[k] + '</span></div>';
+      });
+      h += '</div><p class="caption">Click any parcel to see what it was before.</p>';
+      box.innerHTML = h;
+      box.className = "card";
+      return;
+    }
+
+    var cat = catAt(sel), changed = sel[4] !== 0 && year >= sel[4];
+    var t = '<p class="cardlabel">Parcel</p>';
+    if (CAT[cat].outline) {
+      t += '<span class="tag" style="background:transparent;color:var(--a-line);border:1px dashed var(--a-line)">' + CAT[cat].label + '</span>';
+    } else if (CAT[cat].base) {
+      t += '<span class="tag" style="background:var(--panel-2);color:var(--ink-2);border:1px solid var(--rule)">' + CAT[cat].label + '</span>';
+    } else {
+      t += '<span class="tag" style="background:' + CAT[cat].c + '">' + CAT[cat].label + '</span>';
+    }
+    t += '<h3 style="margin-top:0.5rem;">' + sel[5] + '</h3>';
+    if (changed) t += '<p class="was">' + CAT[sel[2]].label.toLowerCase() + ' until ' + sel[4] + '</p>';
+    else if (sel[4] !== 0) t += '<p class="was">' + CAT[sel[2]].label.toLowerCase() + ' · changes in ' + sel[4] + '</p>';
+    if (sel[6]) t += '<p class="story">' + sel[6] + '</p>';
+    if (sel[7] && (changed || sel[4] === 0)) t += '<p class="meta">' + sel[7] + '</p>';
+    t += '<p class="meta" style="margin-top:0.8rem;"><a href="#" id="clr" style="color:var(--ink-3)">← all land use</a></p>';
+    box.innerHTML = t;
+    box.className = "card inspect";
+    var clr = document.getElementById("clr");
+    if (clr) clr.addEventListener("click", function (e) { e.preventDefault(); selected = null; render(); });
+  }
+
+  var slider = document.getElementById("slider");
+  slider.addEventListener("input", function () { stop(); year = +slider.value; render(); });
+
+  var btn = document.getElementById("play");
+  function stop() { playing = false; clearInterval(timer); btn.textContent = "▶ Play"; }
+  btn.addEventListener("click", function () {
+    if (playing) { stop(); return; }
+    playing = true; btn.textContent = "❚❚ Pause";
+    if (year >= 2032) { year = 2026; slider.value = year; render(); }
+    timer = setInterval(function () {
+      if (year >= 2032) { stop(); return; }
+      year++; slider.value = year; render();
+    }, 1100);
+  });
+
+  render();
+})();
+</script>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musubu — Bungotakada Map v1</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Noto Sans JP', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+  .bg-cream { background-color: #fffbf5; }
+  .bg-warm { background-color: #fef7f0; }
+  .text-warm { color: #8b5a3c; }
+  /* scale must live on an INNER group — a CSS transform here would override the
+     SVG translate on the parent and teleport the pin to the origin. */
+  .pin { cursor: pointer; transition: transform .15s ease; transform-box: fill-box; transform-origin: center; }
+  .pin:hover { transform: scale(1.18); }
+  .pin-sel { filter: drop-shadow(0 0 6px rgba(217,119,6,.9)); }
+  input[type=range] { -webkit-appearance: none; height: 4px; border-radius: 4px; background: #e7d3c1; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #d97706; cursor: pointer; border: 3px solid #fffbf5; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+  .scroll-thin::-webkit-scrollbar { width: 6px; }
+  .scroll-thin::-webkit-scrollbar-thumb { background: #e7d3c1; border-radius: 3px; }
+</style>
+</head>
+<body class="bg-cream">
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+/* ─────────────────────────────────────────────────────────────
+   L1 — ALREADY ALIVE.  Never claimable. Read from Mapbox captures.
+   ───────────────────────────────────────────────────────────── */
+const ALIVE = [
+  { x:.562, y:.522, en:'City Hall',              ja:'豊後高田市役所',        k:'civic' },
+  { x:.462, y:.408, en:'Central Community Hall', ja:'豊後高田市中央公民館',  k:'commons' },
+  { x:.470, y:.640, en:"Children's Centre",      ja:'豊後高田市児童館',      k:'civic' },
+  { x:.425, y:.150, en:'Chishima Hospital',      ja:'積善会千嶋病院',        k:'health' },
+  { x:.575, y:.400, en:'Takada Junior High',     ja:'市立高田中学校',        k:'school' },
+  { x:.530, y:.115, en:'Kuresaki Elementary',    ja:'市立呉崎小学校',        k:'school' },
+  { x:.660, y:.150, en:'Kusachi Elementary',     ja:'市立草地小学校',        k:'school' },
+  { x:.700, y:.905, en:'Kawachi Junior High',    ja:'市立河内中学校',        k:'school' },
+  { x:.455, y:.315, en:'TRIAL',                  ja:'トライアル',            k:'shop' },
+  { x:.400, y:.560, en:'Maxvalu Tokai',          ja:'マックスバリュ東海',    k:'shop' },
+  { x:.360, y:.520, en:'7-Eleven',               ja:'セブン-イレブン',       k:'shop' },
+  { x:.415, y:.400, en:'AZ Hotel',               ja:'AZホテル',              k:'shop' },
+  { x:.680, y:.275, en:'Kai Shrine',             ja:'海神社',                k:'shrine' },
+  { x:.245, y:.855, en:'Tabue Shrine',           ja:'田笛神社',              k:'shrine' },
+  { x:.780, y:.700, en:'Chion-ji',               ja:'智恩寺',                k:'shrine' },
+  { x:.545, y:.140, en:'Ikeda Elders’ House',    ja:'池田区老人憩の家',      k:'elder' },
+  { x:.905, y:.440, en:'Arao Elders’ House',     ja:'荒尾老人憩の家',        k:'elder' },
+  { x:.360, y:.870, en:'Narabayashi Elders’ H.', ja:'楢林老人憩の家',        k:'elder' },
+  { x:.055, y:.775, en:'Rokugō-en',              ja:'六郷園',                k:'elder' },
+  { x:.075, y:.545, en:'Fūdo Nursery',           ja:'封戸保育園',            k:'elder' },
+  { x:.812, y:.858, en:'Sano Kurakake Castle',   ja:'佐野鞍懸城',            k:'shrine' },
+  { x:.085, y:.845, en:'Citizens’ Ground',       ja:'高田市民グラウンド',    k:'civic' },
+];
+
+const ALIVE_ICON = { civic:'▣', commons:'❖', health:'✚', school:'✎', shop:'▢', shrine:'⛩', elder:'☗' };
+
+/* ─────────────────────────────────────────────────────────────
+   TILES.  m = month offset from today when it opens / is projected.
+   ───────────────────────────────────────────────────────────── */
+const T = (o) => ({ media:[], unlocks:[], walkTo:[], ...o });
+
+const TILES = [
+  /* ── Housing ───────────────────────────────────────────── */
+  T({ id:'shinmachi', type:'housing_cluster', state:'gathering', x:.452, y:.520, m:9,
+      en:'Shinmachi akiya cluster', ja:'新町 空き家クラスター',
+      cur:4, tgt:6, unit:'households', deadline:'2026-12-15',
+      rent:'¥4.8M purchase · 1969 · 133m²',
+      blurb:'Six adjacent houses in the historic core, west bank. Walkable to everything.',
+      walkTo:[['Community Hall',5],['Bus station',6],['Maxvalu',9]],
+      unlocks:['cafe','bakery'],
+      comp:{ '20s–30s':3, '30s–40s':4, '40s+':2 },
+      hist:[[-3,0],[-2,1],[-1,3],[0,4]] }),
+
+  T({ id:'tamatsu', type:'co_living_build', state:'gathering', x:.505, y:.335, m:7,
+      en:'Tamatsu big-house share', ja:'玉津 シェアハウス',
+      cur:5, tgt:8, unit:'people', deadline:'2026-11-30',
+      rent:'¥38,000/mo · 6 month minimum',
+      blurb:'A 266m² wooden house from 1977. Two minutes to the town centre, next to TRIAL.',
+      walkTo:[['TRIAL',4],['Town centre',2],['River path',7]],
+      unlocks:['workshop'],
+      comp:{ '20s–30s':4, '30s–40s':1 },
+      hist:[[-2,0],[-1,2],[0,5]] }),
+
+  T({ id:'kamikagachi', type:'housing_cluster', state:'gathering', x:.180, y:.680, m:12,
+      en:'Kamikagachi pair', ja:'上香々地 二軒',
+      cur:1, tgt:2, unit:'households', deadline:'2027-01-31',
+      rent:'¥1,000,000 each · 1970 · 414m² land',
+      blurb:'Two traditional houses, side by side, on the flat western plain. The cheapest way in.',
+      walkTo:[['Paddy walk',1],['Nearest shop',14]],
+      comp:{ '30s–40s':1 },
+      hist:[[-1,0],[0,1]] }),
+
+  T({ id:'riverside', type:'co_living_build', state:'gathering', x:.320, y:.470, m:14,
+      en:'Riverside bikeable block', ja:'川沿い 自転車圏ブロック',
+      cur:11, tgt:20, unit:'people', deadline:'2027-02-28',
+      rent:'¥42,000/mo · utilities + workshop access',
+      blurb:'New build on the flat west bank. Everything within a ten minute cycle — the one part of town that does not need a car.',
+      walkTo:[['Community Hall',9],['Kindergarten',11],['River path',1]],
+      unlocks:['laundromat','coworking'],
+      comp:{ '20s–30s':7, '30s–40s':3, '40s+':1 },
+      hist:[[-4,0],[-3,2],[-2,5],[-1,8],[0,11]] }),
+
+  T({ id:'tazome', type:'housing_cluster', state:'proposed', x:.615, y:.585, m:20,
+      en:'Tazome Ikebe heritage house', ja:'田染池部 古民家',
+      cur:2, tgt:8, unit:'expressions of interest', deadline:'2027-03-31',
+      rent:'Price on application · built 1948',
+      blurb:'Pre-war construction. The oldest stock on the map, and the right building to learn on.',
+      walkTo:[['Workshop',3]],
+      unlocks:['apprentice'],
+      comp:{ '20s–30s':2 },
+      hist:[[-1,0],[0,2]] }),
+
+  T({ id:'miwa', type:'housing_cluster', state:'open', x:.760, y:.480, m:-4,
+      en:'Miwa hillside', ja:'三和 丘の家',
+      cur:2, tgt:3, unit:'households', deadline:null,
+      rent:'¥16.5M · 2013 build · 74m²',
+      blurb:'Modern house in the eastern hills. Quiet, elevated, car essential.',
+      walkTo:[['Nobe pond',6]],
+      comp:{ '30s–40s':1, '40s+':1 },
+      hist:[[-6,0],[-4,1],[0,2]] }),
+
+  /* ── Business slots ────────────────────────────────────── */
+  T({ id:'cafe', type:'business_slot', state:'gathering', x:.472, y:.478, m:11,
+      en:'Morning café — historic street', ja:'朝のカフェ — 昭和の町',
+      cur:38, tgt:50, unit:'pre-commits', deadline:'2026-10-01',
+      rent:'Shopfront available · 3 concepts proposed',
+      blurb:'Three people want this slot. The incoming cohort picks which one opens.',
+      walkTo:[['Community Hall',3],['Shinmachi',4]],
+      unlocks:['bakery'],
+      comp:{ '20s–30s':17, '30s–40s':14, '40s+':7 },
+      hist:[[-3,6],[-2,12],[-1,26],[0,38]] }),
+
+  T({ id:'bakery', type:'business_slot', state:'proposed', x:.440, y:.495, m:18,
+      en:'Bakery', ja:'パン屋',
+      cur:9, tgt:40, unit:'pre-commits', deadline:'2027-01-15',
+      rent:'Shopfront · unlocked by café + Shinmachi',
+      blurb:'Nearest bread is chain retail. Opens once the café and the Shinmachi cluster land.',
+      walkTo:[['Café',1]],
+      comp:{ '30s–40s':6, '20s–30s':3 },
+      hist:[[0,9]] }),
+
+  T({ id:'mechanic', type:'business_slot', state:'gathering', x:.560, y:.615, m:13,
+      en:'Mechanic / garage', ja:'自動車整備工場',
+      cur:31, tgt:60, unit:'households', deadline:'2027-02-01',
+      rent:'Yard + workshop, south of centre',
+      blurb:'No passenger railway here. Every household is a car household — this is the highest-confidence business on the map.',
+      walkTo:[['City Hall',8]],
+      comp:{ '30s–40s':14, '40s+':11, '20s–30s':6 },
+      hist:[[-3,9],[-2,18],[-1,25],[0,31]] }),
+
+  T({ id:'laundromat', type:'business_slot', state:'proposed', x:.395, y:.435, m:16,
+      en:'Laundromat', ja:'コインランドリー',
+      cur:12, tgt:40, unit:'households', deadline:'2027-02-28',
+      rent:'Small unit, west bank',
+      blurb:'Standard second-tier service. Follows the riverside block.',
+      comp:{ '20s–30s':7, '30s–40s':5 },
+      hist:[[0,12]] }),
+
+  T({ id:'juku', type:'business_slot', state:'proposed', x:.600, y:.455, m:22,
+      en:'Cram school 塾', ja:'学習塾',
+      cur:4, tgt:25, unit:'children', deadline:'2027-04-30',
+      rent:'Room near Takada Junior High',
+      blurb:'Arrives with the children. Tracks the kindergarten tile.',
+      walkTo:[['Takada JHS',2]],
+      comp:{},
+      hist:[[0,4]] }),
+
+  T({ id:'clinic', type:'business_slot', state:'proposed', x:.445, y:.190, m:26,
+      en:'Clinic — extended hours', ja:'診療所 時間延長',
+      cur:22, tgt:80, unit:'households', deadline:'2027-06-30',
+      rent:'Builds on Chishima Hospital',
+      blurb:'Healthcare access is the number one dealbreaker nationally. The hospital exists; the hours do not.',
+      walkTo:[['Chishima Hospital',2]],
+      comp:{ '40s+':13, '30s–40s':9 },
+      hist:[[0,22]] }),
+
+  /* ── Work & civic ──────────────────────────────────────── */
+  T({ id:'kindergarten', type:'civic', state:'gathering', x:.565, y:.425, m:15,
+      en:'Seikei Kindergarten — reopening', ja:'成蹊幼稚園 — 再開',
+      cur:9, tgt:24, unit:'children', deadline:'2027-03-01',
+      rent:'Building standing · currently suspended 休園中',
+      blurb:'It is already built. It is already closed. It reopens at twenty-four children.',
+      walkTo:[['Takada JHS',2],['Community Hall',6]],
+      unlocks:['juku'],
+      comp:{},
+      hist:[[-4,1],[-3,3],[-2,5],[-1,7],[0,9]] }),
+
+  T({ id:'workshop', type:'workspace', state:'gathering', x:.535, y:.560, m:10,
+      en:'Shared workshop', ja:'共同工房',
+      cur:8, tgt:15, unit:'members', deadline:'2026-12-31',
+      rent:'¥6,000/mo membership',
+      blurb:'Tools, benches, and the space where the traditional building apprenticeship happens.',
+      walkTo:[['City Hall',4]],
+      unlocks:['apprentice'],
+      comp:{ '20s–30s':5, '30s–40s':2, '40s+':1 },
+      hist:[[-2,2],[-1,5],[0,8]] }),
+
+  T({ id:'coworking', type:'workspace', state:'open', x:.487, y:.462, m:-2,
+      en:'Co-working floor', ja:'コワーキング',
+      cur:9, tgt:12, unit:'members', deadline:null,
+      rent:'¥9,000/mo · fibre',
+      blurb:'Above the community hall. Open now, three desks left.',
+      walkTo:[['Community Hall',0]],
+      comp:{ '20s–30s':4, '30s–40s':5 },
+      hist:[[-5,0],[-2,4],[0,9]] }),
+
+  T({ id:'apprentice', type:'project_cohort', state:'proposed', x:.640, y:.620, m:24,
+      en:'Traditional building apprenticeship', ja:'古民家再生 弟子入り',
+      cur:3, tgt:6, unit:'apprentices', deadline:'2027-05-31',
+      rent:'Stipend + housing · 24 months',
+      blurb:'Learn from the last people who know how. Paired with the 1948 house.',
+      comp:{ '20s–30s':3 },
+      hist:[[0,3]] }),
+
+  T({ id:'renocrew', type:'project_cohort', state:'gathering', x:.290, y:.615, m:8,
+      en:'Akiya renovation crew', ja:'空き家改修チーム',
+      cur:5, tgt:8, unit:'workers', deadline:'2026-11-15',
+      rent:'9 month term · housing provided',
+      blurb:'Nine months, paid, housed. The circulating-cohort pilot — come for the work, decide about the rest later.',
+      comp:{ '20s–30s':4, '30s–40s':1 },
+      hist:[[-2,1],[-1,3],[0,5]] }),
+
+  /* ── Commons & character ───────────────────────────────── */
+  T({ id:'steward', type:'commons', state:'gathering', x:.497, y:.415, m:6,
+      en:'Community Hall steward', ja:'公民館の管理人',
+      cur:19, tgt:30, unit:'households', deadline:'2026-11-01',
+      rent:'One paid role · 協力隊 fundable',
+      blurb:'The building already exists. What it needs is someone whose job is to unlock the door, keep the calendar, and cook on Wednesdays.',
+      walkTo:[['Community Hall',0]],
+      unlocks:['cafe','coworking'],
+      comp:{ '20s–30s':6, '30s–40s':8, '40s+':5 },
+      hist:[[-3,4],[-2,9],[-1,14],[0,19]] }),
+
+  T({ id:'showa', type:'civic', state:'proposed', x:.462, y:.455, m:19,
+      en:'Shōwa weekend programme', ja:'昭和の町 週末プログラム',
+      cur:7, tgt:20, unit:'households', deadline:'2027-03-31',
+      rent:'Fri–Sun · normal life Mon–Thu',
+      blurb:'Period life on the weekend, ordinary careers the rest of the week. The tourists already come; nobody lives it yet.',
+      comp:{ '30s–40s':4, '40s+':3 },
+      hist:[[0,7]] }),
+
+  T({ id:'walk', type:'civic', state:'open', x:.215, y:.400, m:-8,
+      en:'Seaside & paddy walking route', ja:'海と田んぼの散歩道',
+      cur:34, tgt:20, unit:'volunteer hours/mo', deadline:null,
+      rent:'Free · open now',
+      blurb:'Flat, quiet, and it goes all the way to the water. Maintained by whoever turns up.',
+      comp:{},
+      hist:[[-10,0],[-8,12],[-4,28],[0,34]] }),
+
+  /* ── A lapsed tile.  Shown honestly. ───────────────────── */
+  T({ id:'lapsed_gym', type:'business_slot', state:'lapsed', x:.640, y:.760, m:null,
+      en:'Fitness studio', ja:'フィットネススタジオ',
+      cur:15, tgt:35, unit:'pre-commits', deadline:'2026-06-30',
+      rent:'Did not reach threshold',
+      blurb:'Reached 15 of 35 by the deadline. Deposits returned. Can be re-proposed once the riverside block lands.',
+      comp:{},
+      hist:[[-8,3],[-6,9],[-4,14],[-2,15]] }),
+];
+
+/* ─────────────────────────────────────────────────────────── */
+const STATE_STYLE = {
+  proposed:     { fill:'#c9b8a8', ring:'#a89482', label:'Proposed',  ja:'構想中' },
+  gathering:    { fill:'#f59e0b', ring:'#b45309', label:'Gathering', ja:'募集中' },
+  threshold_met:{ fill:'#84cc16', ring:'#4d7c0f', label:'Threshold met', ja:'達成' },
+  committed:    { fill:'#65a30d', ring:'#3f6212', label:'Committed', ja:'確定' },
+  building:     { fill:'#0ea5e9', ring:'#0369a1', label:'Building',  ja:'建設中' },
+  open:         { fill:'#10b981', ring:'#047857', label:'Open',      ja:'公開中' },
+  full:         { fill:'#6b7280', ring:'#374151', label:'Full',      ja:'満室' },
+  lapsed:       { fill:'#fca5a5', ring:'#b91c1c', label:'Lapsed',    ja:'不成立' },
+};
+
+const TYPE_LABEL = {
+  housing_cluster:'Housing', co_living_build:'Co-living', business_slot:'Business slot',
+  workspace:'Workspace', project_cohort:'Project cohort', civic:'Civic', commons:'Commons',
+};
+
+const LAYERS = [
+  { id:'alive',  en:'Already here',   ja:'すでにある' },
+  { id:'char',   en:'District character', ja:'地区の性格' },
+  { id:'tiles',  en:'Tiles',          ja:'タイル' },
+  { id:'people', en:'Who’s arriving', ja:'来る人たち' },
+];
+
+const DISTRICTS = [
+  { d:'M 380 260 L 620 250 L 660 420 L 560 520 L 400 470 Z', c:'#f59e0b', en:'Lively — historic core', ja:'にぎやか' },
+  { d:'M 400 130 L 620 140 L 630 250 L 380 258 Z',           c:'#fbbf24', en:'Mixed', ja:'ほどほど' },
+  { d:'M 40 300 L 380 262 L 400 470 L 330 700 L 40 660 Z',   c:'#84cc16', en:'Quiet — west plain', ja:'しずか（西の平野）' },
+  { d:'M 680 300 L 980 320 L 980 700 L 640 660 Z',           c:'#a3e635', en:'Quiet — east hills', ja:'しずか（東の丘）' },
+];
+
+/* ═══════════════════════════════════════════════════════════ */
+function App(){
+  const [lang,setLang]        = useState('en');
+  const [sel,setSel]          = useState(null);
+  const [month,setMonth]      = useState(0);
+  const [projected,setProj]   = useState(false);
+  const [layers,setLayers]    = useState({ alive:true, char:false, tiles:true, people:false });
+  const L = (o,k='en') => lang==='ja' ? (o.ja ?? o[k]) : o[k];
+
+  /* Is this tile on the committed track — i.e. does it happen regardless? */
+  const isCommitted = (t) => ['open','building','committed','threshold_met'].includes(t.state);
+
+  /* State of a tile at the scrubbed month.
+     Committed tiles advance on their own. Gathering/proposed tiles only advance
+     in projected mode — in committed mode they stay frozen, which is the honest view. */
+  const stateAt = (t) => {
+    if (t.state==='lapsed') return month >= -2 ? 'lapsed' : 'gathering';
+    if (isCommitted(t)) {
+      if (t.m === null) return t.state;
+      return month >= t.m ? 'open' : (month >= t.m - 3 ? 'building' : 'gathering');
+    }
+    if (!projected || month <= 0 || t.m === null) return t.state;
+    if (month >= t.m)     return 'open';
+    if (month >= t.m - 3) return 'building';
+    return t.state;
+  };
+
+  /* Everything stays on the map. Uncertainty is communicated by styling, never by hiding. */
+  const isGhost = (t) => projected && month > 0 && !isCommitted(t) && month >= t.m - 3;
+
+  const pop = useMemo(()=>{
+    const base = 22500;
+    const committedPer = 2.1;
+    let n = 0;
+    TILES.forEach(t=>{
+      if (t.m===null) return;
+      if (!projected && (t.state==='gathering'||t.state==='proposed')) return;
+      if (month >= t.m && ['housing_cluster','co_living_build'].includes(t.type)) n += t.tgt*committedPer;
+    });
+    return Math.round(base + n);
+  },[month,projected]);
+
+  const monthLabel = (m)=>{
+    const d = new Date(2026,7,1); d.setMonth(d.getMonth()+m);
+    return d.toLocaleDateString(lang==='ja'?'ja-JP':'en-GB',{month:'short',year:'numeric'});
+  };
+
+  return (
+    <div className="min-h-screen bg-cream">
+      {/* header */}
+      <div className="border-b border-amber-100 bg-warm">
+        <div className="max-w-[1500px] mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <h1 className="font-display text-2xl text-warm">
+              {lang==='ja' ? '結ぶ — 豊後高田' : 'Musubu — Bungotakada'}
+            </h1>
+            <p className="text-xs text-amber-700/70 mt-0.5">
+              {lang==='ja' ? '起こりうることの地図 — v1 試作' : 'The map of what could happen — v1 prototype'}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            {LAYERS.map(l=>(
+              <button key={l.id} onClick={()=>setLayers(s=>({...s,[l.id]:!s[l.id]}))}
+                className={`px-3 py-1.5 rounded-full text-xs border transition ${layers[l.id]
+                  ? 'bg-amber-600 text-white border-amber-600'
+                  : 'bg-white text-amber-800 border-amber-200 hover:border-amber-400'}`}>
+                {L(l)}
+              </button>
+            ))}
+            <button onClick={()=>setLang(lang==='en'?'ja':'en')}
+              className="ml-2 px-3 py-1.5 rounded-full text-xs bg-white border border-amber-200 text-amber-800">
+              {lang==='en' ? '日本語' : 'EN'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-[1500px] mx-auto px-6 py-5 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5">
+
+        {/* ── MAP ── */}
+        <div>
+          <div className="rounded-2xl overflow-hidden border border-amber-100 shadow-sm bg-[#f6f1e7]">
+            <svg viewBox="0 0 1000 700" className="w-full block">
+              <defs>
+                <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#a8d5e2"/><stop offset="100%" stopColor="#cfe6ed"/>
+                </linearGradient>
+                <linearGradient id="hill" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#e4e9d8"/><stop offset="100%" stopColor="#cfd9bd"/>
+                </linearGradient>
+              </defs>
+
+              {/* land base */}
+              <rect width="1000" height="700" fill="#f3ecdf"/>
+
+              {/* paddy plain texture, west */}
+              <g opacity=".5">
+                {Array.from({length:26}).map((_,i)=>(
+                  <line key={i} x1="20" y1={250+i*17} x2="390" y2={238+i*17} stroke="#e2dcc6" strokeWidth="1.5"/>
+                ))}
+                {Array.from({length:14}).map((_,i)=>(
+                  <line key={'v'+i} x1={30+i*27} y1="245" x2={26+i*27} y2="690" stroke="#e2dcc6" strokeWidth="1"/>
+                ))}
+              </g>
+
+              {/* hills, east + southeast */}
+              <path d="M 660 250 Q 800 200 1000 240 L 1000 700 L 600 700 Q 640 480 660 250 Z" fill="url(#hill)"/>
+              <g opacity=".45" stroke="#b9c5a2" fill="none" strokeWidth="1.2">
+                <path d="M 700 320 Q 830 290 980 320"/>
+                <path d="M 700 400 Q 840 372 980 400"/>
+                <path d="M 690 490 Q 840 462 980 486"/>
+                <path d="M 670 580 Q 820 556 980 578"/>
+                <path d="M 655 660 Q 810 640 980 662"/>
+              </g>
+
+              {/* sea — Suo-nada, opening north-west */}
+              <path d="M 0 0 L 1000 0 L 1000 70 Q 760 96 600 128
+                       Q 470 152 432 214 Q 400 268 300 288
+                       Q 160 312 0 268 Z" fill="url(#sea)"/>
+
+              {/* Katsura river: SE → centre → north to sea */}
+              <path d="M 980 640 Q 800 600 700 540 Q 600 490 520 470 Q 470 460 455 400 Q 445 320 448 240 Q 450 190 425 155"
+                    stroke="#9ec9dd" strokeWidth="13" fill="none" strokeLinecap="round"/>
+              <path d="M 300 700 Q 330 560 400 480 Q 440 440 452 400"
+                    stroke="#9ec9dd" strokeWidth="7" fill="none" strokeLinecap="round"/>
+
+              {/* roads */}
+              <path d="M 250 700 Q 330 520 420 420 Q 470 360 500 250 Q 520 160 560 0"
+                    stroke="#efc75e" strokeWidth="7" fill="none"/>
+              <path d="M 0 620 Q 200 600 340 640 Q 500 690 700 660"
+                    stroke="#e9d9b0" strokeWidth="5" fill="none"/>
+              <path d="M 470 470 Q 640 450 820 430 Q 920 420 1000 440"
+                    stroke="#e9d9b0" strokeWidth="5" fill="none"/>
+
+              {/* district character */}
+              {layers.char && DISTRICTS.map((d,i)=>(
+                <path key={i} d={d.d} fill={d.c} opacity=".17" stroke={d.c} strokeWidth="1.5" strokeDasharray="5 4"/>
+              ))}
+              {layers.char && DISTRICTS.map((d,i)=>{
+                const pts = d.d.match(/-?\d+(\.\d+)?/g).map(Number);
+                const xs=[],ys=[]; for(let j=0;j<pts.length;j+=2){xs.push(pts[j]);ys.push(pts[j+1]);}
+                const cx = xs.reduce((a,b)=>a+b,0)/xs.length, cy = ys.reduce((a,b)=>a+b,0)/ys.length;
+                return <text key={'t'+i} x={cx} y={cy} textAnchor="middle"
+                  className="text-[11px]" fill="#7a6a52" opacity=".85">{L(d)}</text>;
+              })}
+
+              {/* place labels */}
+              <g fill="#8a7a62" className="text-[10px]" opacity=".8">
+                <text x="470" y="330" textAnchor="middle">Tamatsu 玉津</text>
+                <text x="455" y="560" textAnchor="middle">Shinmachi 新町</text>
+                <text x="545" y="480" textAnchor="middle">Takada 高田</text>
+                <text x="790" y="470" textAnchor="middle">Miwa 三和</text>
+                <text x="180" y="500" textAnchor="middle">Mizusaki 水崎</text>
+                <text x="150" y="330" textAnchor="middle">Suo-nada 周防灘</text>
+                <text x="850" y="620" textAnchor="middle">Mori 森</text>
+              </g>
+
+              {/* L1 already alive */}
+              {layers.alive && ALIVE.map((a,i)=>(
+                <g key={i} transform={`translate(${a.x*1000} ${a.y*700})`}>
+                  <circle r="9" fill="#fffbf5" stroke="#c8b49a" strokeWidth="1.5"/>
+                  <text y="3.5" textAnchor="middle" className="text-[9px]" fill="#8b7355">{ALIVE_ICON[a.k]}</text>
+                  <text y="-13" textAnchor="middle" className="text-[8.5px]" fill="#8b7355" opacity=".9">{L(a)}</text>
+                </g>
+              ))}
+
+              {/* people layer */}
+              {layers.people && TILES.filter(t=>Object.keys(t.comp||{}).length).map(t=>{
+                const n = Object.values(t.comp).reduce((a,b)=>a+b,0);
+                return <circle key={'p'+t.id} cx={t.x*1000} cy={t.y*700} r={Math.min(46,10+n*1.5)}
+                  fill="#f59e0b" opacity=".13"/>;
+              })}
+
+              {/* TILES */}
+              {layers.tiles && TILES.map(t=>{
+                const st = stateAt(t);
+                const s  = STATE_STYLE[st];
+                const isSel = sel===t.id;
+                const pct = Math.min(1, t.cur/t.tgt);
+                const ghost = isGhost(t);
+                return (
+                  <g key={t.id} transform={`translate(${t.x*1000} ${t.y*700})`} opacity={ghost?.55:1}>
+                    <g className={`pin ${isSel?'pin-sel':''}`} onClick={()=>setSel(isSel?null:t.id)}>
+                      <circle r="16" fill={s.fill} stroke={s.ring} strokeWidth="2.5"
+                              strokeDasharray={ghost?'4 3':'none'}/>
+                      {['gathering','proposed'].includes(st) && (
+                        <path d={describeArc(0,0,16,0,pct*360)} fill="none" stroke="#fffbf5"
+                              strokeWidth="3.5" strokeLinecap="round"/>
+                      )}
+                      <text y="4" textAnchor="middle" className="text-[10px] font-bold" fill="#fffbf5">
+                        {st==='open'?'✓':st==='lapsed'?'—':Math.round(pct*100)}
+                      </text>
+                    </g>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+
+          {/* ── SCRUBBER ── */}
+          <div className="mt-4 rounded-2xl border border-amber-100 bg-warm p-4">
+            <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+              <div className="flex items-baseline gap-3">
+                <span className="font-display text-lg text-warm">{monthLabel(month)}</span>
+                <span className="text-xs text-amber-700/70">
+                  {lang==='ja' ? `推定人口 ${pop.toLocaleString()}` : `population ${pop.toLocaleString()}`}
+                </span>
+              </div>
+              <div className="flex gap-1.5 bg-white rounded-full p-1 border border-amber-200">
+                <button onClick={()=>setProj(false)}
+                  className={`px-3 py-1 rounded-full text-[11px] ${!projected?'bg-emerald-600 text-white':'text-amber-800'}`}>
+                  {lang==='ja'?'確定分のみ':'Committed only'}
+                </button>
+                <button onClick={()=>setProj(true)}
+                  className={`px-3 py-1 rounded-full text-[11px] ${projected?'bg-amber-500 text-white':'text-amber-800'}`}>
+                  {lang==='ja'?'募集中も含む（見込み）':'If gathering succeeds'}
+                </button>
+              </div>
+            </div>
+            <input type="range" min="-24" max="36" value={month}
+                   onChange={e=>setMonth(+e.target.value)} className="w-full"/>
+            <div className="flex justify-between text-[10px] text-amber-700/60 mt-1.5">
+              <span>−24 {lang==='ja'?'ヶ月':'mo'}</span><span>{lang==='ja'?'今日':'today'}</span><span>+36 {lang==='ja'?'ヶ月':'mo'}</span>
+            </div>
+            {projected && (
+              <p className="mt-2 text-[11px] text-amber-700 bg-amber-100/70 rounded-lg px-3 py-2">
+                {lang==='ja'
+                  ? '破線＝まだ確定していません。募集中のタイルがすべて成立した場合の見込みです。'
+                  : 'Dashed = not committed. This view assumes every gathering tile reaches its threshold.'}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* ── SIDE PANEL ── */}
+        <div className="lg:sticky lg:top-5 h-fit">
+          {sel ? <TileCard t={TILES.find(x=>x.id===sel)} lang={lang} L={L}
+                           onClose={()=>setSel(null)} onJump={setSel}/>
+               : <Legend lang={lang} L={L}/>}
+        </div>
+      </div>
+
+      <div className="max-w-[1500px] mx-auto px-6 pb-10 pt-2">
+        <p className="text-[11px] text-amber-700/60 leading-relaxed">
+          {lang==='ja'
+            ? '試作版。地形は Mapbox のスクリーンショットから起こした概略図で、測量ではありません。空き家価格は集約サイト由来の参考値で、市の空き家バンクでの確認が必要です。成蹊幼稚園は地図上「休園中」と表示されており、現況は市への確認が必要です。'
+            : 'Prototype. The base is an illustrated approximation drawn from the supplied Mapbox captures — not a survey. Akiya prices are aggregator-sourced and need verification against the municipal 空き家バンク. Seikei Kindergarten is labelled 休園中 (suspended) on the map; current status needs confirming with the city.'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── tile card ── */
+function TileCard({t,lang,L,onClose,onJump}){
+  const s = STATE_STYLE[t.state];
+  const pct = Math.min(100, Math.round(t.cur/t.tgt*100));
+  const total = Object.values(t.comp||{}).reduce((a,b)=>a+b,0);
+  return (
+    <div className="rounded-2xl border border-amber-200 bg-white shadow-sm overflow-hidden">
+      <div className="px-5 py-4" style={{background:`linear-gradient(135deg, ${s.fill}22, ${s.fill}0a)`}}>
+        <div className="flex justify-between items-start gap-3">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium text-white" style={{background:s.ring}}>
+                {lang==='ja'?s.ja:s.label}
+              </span>
+              <span className="text-[10px] text-amber-800/70">{TYPE_LABEL[t.type]}</span>
+            </div>
+            <h2 className="font-display text-lg text-warm leading-snug">{L(t)}</h2>
+          </div>
+          <button onClick={onClose} className="text-amber-700/50 hover:text-amber-800 text-lg leading-none">×</button>
+        </div>
+      </div>
+
+      <div className="px-5 py-4 space-y-4 max-h-[64vh] overflow-y-auto scroll-thin">
+        <p className="text-sm text-stone-600 leading-relaxed">{t.blurb}</p>
+
+        {/* the number */}
+        {t.state!=='open' && (
+          <div>
+            <div className="flex justify-between items-baseline mb-1.5">
+              <span className="text-sm font-semibold text-warm">{t.cur} / {t.tgt} <span className="font-normal text-xs text-stone-500">{t.unit}</span></span>
+              {t.deadline && <span className="text-[11px] text-amber-700/70">by {t.deadline}</span>}
+            </div>
+            <div className="h-2.5 rounded-full bg-amber-100 overflow-hidden">
+              <div className="h-full rounded-full transition-all" style={{width:pct+'%',background:s.fill}}/>
+            </div>
+          </div>
+        )}
+
+        {/* terms */}
+        <div className="rounded-xl bg-warm px-3 py-2.5">
+          <div className="text-[10px] uppercase tracking-wide text-amber-700/60 mb-0.5">
+            {lang==='ja'?'条件':'Terms'}
+          </div>
+          <div className="text-sm text-stone-700">{t.rent}</div>
+        </div>
+
+        {/* walk to */}
+        {t.walkTo.length>0 && (
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-amber-700/60 mb-1.5">
+              {lang==='ja'?'徒歩圏':'Walk to'}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {t.walkTo.map(([w,m],i)=>(
+                <span key={i} className="text-[11px] bg-stone-100 rounded-full px-2.5 py-1 text-stone-600">
+                  {w} · {m}min
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* who else is in */}
+        {total>0 && (
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-amber-700/60 mb-1.5">
+              {lang==='ja'?`すでに参加している ${total}人`:`Who else is in — ${total}`}
+            </div>
+            <div className="flex h-6 rounded-lg overflow-hidden">
+              {Object.entries(t.comp).map(([k,v],i)=>(
+                <div key={k} title={`${k}: ${v}`}
+                     style={{width:(v/total*100)+'%', background:['#f59e0b','#fbbf24','#fcd34d'][i%3]}}
+                     className="flex items-center justify-center text-[9px] text-white font-medium">
+                  {v}
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-3 mt-1.5">
+              {Object.keys(t.comp).map((k,i)=>(
+                <span key={k} className="text-[10px] text-stone-500 flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-sm" style={{background:['#f59e0b','#fbbf24','#fcd34d'][i%3]}}/>{k}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* what it unlocks */}
+        {t.unlocks.length>0 && (
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 px-3 py-2.5">
+            <div className="text-[10px] uppercase tracking-wide text-emerald-800/70 mb-1">
+              {lang==='ja'?'これが成立すると':'What this unlocks'}
+            </div>
+            {t.unlocks.map(u=>{
+              const o = TILES.find(x=>x.id===u); if(!o) return null;
+              return (
+                <button key={u} onClick={()=>onJump(u)}
+                  className="block text-left text-[12px] text-emerald-800 hover:underline">
+                  → {L(o)}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* the ask */}
+        <div className="pt-1 space-y-2">
+          {t.state==='lapsed' ? (
+            <div className="text-[12px] text-stone-500 bg-stone-50 rounded-xl px-3 py-2.5">
+              {lang==='ja'
+                ? '期限までに人数が集まりませんでした。預り金は返金済みです。再提案できます。'
+                : 'Did not reach its threshold by the deadline. Deposits returned. Open to re-proposal.'}
+            </div>
+          ) : (
+            <>
+              <button className="w-full py-2.5 rounded-xl text-white text-sm font-medium"
+                      style={{background:s.ring}}>
+                {t.state==='open'
+                  ? (lang==='ja'?'空きを確保する':'Take a place')
+                  : (lang==='ja'?'参加を確定する':'Commit')}
+              </button>
+              <button className="w-full py-2.5 rounded-xl border border-amber-200 text-amber-800 text-sm">
+                {lang==='ja'?'まずは関心を伝える':'Just register interest'}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── legend / empty state ── */
+function Legend({lang,L}){
+  const counts = {};
+  TILES.forEach(t=>counts[t.state]=(counts[t.state]||0)+1);
+  return (
+    <div className="rounded-2xl border border-amber-100 bg-white p-5">
+      <h3 className="font-display text-lg text-warm mb-1">
+        {lang==='ja'?'タイルを選んでください':'Pick a tile'}
+      </h3>
+      <p className="text-sm text-stone-500 leading-relaxed mb-4">
+        {lang==='ja'
+          ? '一つひとつが「まだ無いけれど、人が集まれば起こること」です。クリックすると、あと何人必要かが分かります。'
+          : 'Each one is something that does not exist yet, and will if enough people say yes. Click to see how many that is.'}
+      </p>
+      <div className="space-y-2">
+        {Object.entries(STATE_STYLE).filter(([k])=>counts[k]).map(([k,s])=>(
+          <div key={k} className="flex items-center gap-2.5 text-sm">
+            <span className="w-3.5 h-3.5 rounded-full shrink-0" style={{background:s.fill,border:`2px solid ${s.ring}`}}/>
+            <span className="text-stone-600">{lang==='ja'?s.ja:s.label}</span>
+            <span className="ml-auto text-stone-400 text-xs">{counts[k]}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 pt-4 border-t border-amber-100">
+        <p className="text-[11px] text-stone-500 leading-relaxed">
+          {lang==='ja'
+            ? '「すでにある」レイヤーは、いま現にこの町にあるもの — お店、学校、病院、神社。タイルは決してその上には置きません。'
+            : 'The “already here” layer is what this town actually has right now — shops, schools, the hospital, the shrines. No tile is ever placed over any of it.'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* svg arc helper for the progress ring */
+function polar(cx,cy,r,deg){ const a=(deg-90)*Math.PI/180; return {x:cx+r*Math.cos(a), y:cy+r*Math.sin(a)}; }
+function describeArc(cx,cy,r,start,end){
+  if (end<=0) return '';
+  if (end>=360) end = 359.9;
+  const s=polar(cx,cy,r,end), e=polar(cx,cy,r,start);
+  const large = end-start<=180?'0':'1';
+  return `M ${s.x} ${s.y} A ${r} ${r} 0 ${large} 0 ${e.x} ${e.y}`;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

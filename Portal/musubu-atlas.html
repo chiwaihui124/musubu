@@ -1,0 +1,362 @@
+<meta charset="utf-8">
+<title>Musubu Project Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#EEF0F1;--card:#F8F9FA;--ink:#131B23;--ink-2:#4B5661;--ink-3:#7E8992;
+  --rule:#D3DADE;--rule-soft:#E2E7EA;--indigo:#1E4B76;--indigo-wash:#E1E8EF;
+  --lapse:#9C5330;--moss:#4A6B4F;--amber:#8A6A1F;
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0E1418;--card:#161E25;--ink:#DEE5EA;--ink-2:#9AA6B1;--ink-3:#6B7780;
+  --rule:#26313A;--rule-soft:#1D262D;--indigo:#6EA6D6;--indigo-wash:#152431;
+  --lapse:#C9825A;--moss:#89AE8E;--amber:#C9AC63;}}
+:root[data-theme="dark"]{
+  --paper:#0E1418;--card:#161E25;--ink:#DEE5EA;--ink-2:#9AA6B1;--ink-3:#6B7780;
+  --rule:#26313A;--rule-soft:#1D262D;--indigo:#6EA6D6;--indigo-wash:#152431;
+  --lapse:#C9825A;--moss:#89AE8E;--amber:#C9AC63;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:48rem;margin-inline:auto;padding:3.5rem 1.5rem 5rem}
+.mast{display:flex;align-items:baseline;gap:.75rem;padding-bottom:2.5rem}
+.mast .name{font-family:var(--display);font-weight:500;font-size:1.05rem}
+.mast .kanji{font-family:var(--display);color:var(--indigo);font-size:1.05rem}
+.mast .stamp{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.04em}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,5vw,2.35rem);line-height:1.34;margin:0 0 1.4rem;text-wrap:balance}
+h1 em{font-style:normal;color:var(--indigo)}
+.standfirst{font-size:1.05rem;color:var(--ink-2);margin:0 0 1rem;max-width:36rem}
+.readtime{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);letter-spacing:.04em;margin:0 0 2.2rem}
+section{padding-top:2.5rem;margin-top:2.5rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-family:var(--display);font-weight:500;font-size:1.3rem;line-height:1.4;margin:0 0 1rem;text-wrap:balance}
+p{margin:0 0 1rem;max-width:36rem}p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+code{font-family:var(--mono);font-size:.88em;color:var(--ink-2)}
+.caption{font-size:.84rem;color:var(--ink-3);line-height:1.6;margin:.7rem 0 0;max-width:36rem}
+.notice{background:var(--indigo-wash);border-left:2px solid var(--indigo);padding:.95rem 1.15rem;margin:1.7rem 0;font-size:.94rem;line-height:1.65;color:var(--ink-2);border-radius:0 2px 2px 0}
+.notice strong{color:var(--ink)}.notice p{max-width:none}
+/* legends */
+.legend{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:1.5rem 0}
+.bl,.sl{background:var(--card);padding:.7rem .95rem;display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:baseline;font-size:.9rem}
+.bl b{font-weight:600;color:var(--ink);min-width:5.6rem}
+.bl span,.sl span:not(.pill){color:var(--ink-2);font-size:.88rem}
+.bl i,.sl i{font-family:var(--mono);font-style:normal;font-size:.76rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.sl{grid-template-columns:5.8rem 1fr auto}
+/* pills */
+.pill{font-family:var(--mono);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;padding:.14rem .4rem;border-radius:2px;border:1px solid;white-space:nowrap;display:inline-block}
+.pill.settled{border-color:var(--moss);color:var(--moss)}
+.pill.live{border-color:var(--indigo);color:var(--indigo)}
+.pill.thin{border-color:var(--amber);color:var(--amber)}
+.pill.superseded{border-color:var(--ink-3);color:var(--ink-3)}
+/* chips */
+.filters{display:flex;flex-direction:column;gap:.6rem;margin:1.5rem 0 .4rem}
+.frow{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.frow>.flab{font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);min-width:4.2rem}
+.chip{font-family:var(--mono);font-size:.68rem;letter-spacing:.03em;padding:.24rem .55rem;border-radius:2px;border:1px solid var(--rule);background:var(--card);color:var(--ink-2);cursor:pointer;font-weight:400}
+.chip i{font-style:normal;color:var(--ink-3);margin-left:.2rem}
+.chip:hover{border-color:var(--indigo);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--paper)}
+.chip[aria-pressed="true"] i{color:var(--paper);opacity:.75}
+.chip:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.chip.clear{border-style:dashed}
+.tally{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);letter-spacing:.03em;margin:.7rem 0 0}
+/* table */
+.tw{overflow-x:auto;margin:1rem 0 0;border-top:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;min-width:34rem}
+tbody tr{border-bottom:1px solid var(--rule-soft)}
+tbody tr.hide{display:none}
+td{padding:.7rem .8rem .75rem 0;vertical-align:top}
+td.st{width:5.6rem}
+td.fn b{display:block;font-family:var(--mono);font-size:.82rem;color:var(--ink);font-weight:500}
+td.fn .dd{display:block;font-size:.86rem;color:var(--ink-2);line-height:1.5;margin-top:.15rem;max-width:30rem}
+td.br{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);letter-spacing:.04em;white-space:nowrap;text-align:right}
+td.w{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.t{text-align:right;width:2.6rem}
+.th{font-family:var(--mono);font-size:.68rem;color:var(--lapse);border:1px solid var(--lapse);border-radius:2px;padding:.05rem .3rem}
+.dash{color:var(--ink-3)}
+/* threads */
+ul.threads{list-style:none;margin:1rem 0 0;padding:0;border-top:1px solid var(--rule)}
+ul.threads li{display:grid;grid-template-columns:5.6rem 1fr;gap:.3rem .9rem;padding:.8rem 0;border-bottom:1px solid var(--rule-soft)}
+ul.threads li.hide{display:none}
+.tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.09em;padding:.14rem .4rem;border-radius:2px;border:1px solid var(--indigo);color:var(--indigo);align-self:start;text-align:center}
+.tag.decide{border-color:var(--moss);color:var(--moss)}
+.tag.japanese{border-color:var(--lapse);color:var(--lapse)}
+.tag.legal{border-color:var(--amber);color:var(--amber)}
+.tag.test,.tag.build{border-color:var(--ink-3);color:var(--ink-3)}
+.tag.answered{border-color:var(--rule);color:var(--ink-3)}
+.qn{font-size:.93rem;line-height:1.55;color:var(--ink-2)}
+.src{grid-column:2;font-family:var(--mono);font-size:.66rem;color:var(--ink-3);letter-spacing:.03em}
+@media (max-width:32rem){ul.threads li{grid-template-columns:1fr}.src,.qn{grid-column:1}}
+ul.plain{list-style:none;margin:1rem 0;padding:0;display:flex;flex-direction:column;gap:.8rem}
+ul.plain li{position:relative;padding-left:1.1rem;font-size:.96rem;line-height:1.6;color:var(--ink-2);max-width:36rem}
+ul.plain li::before{content:"";position:absolute;left:0;top:.72rem;width:.4rem;height:1px;background:var(--indigo)}
+ul.plain li b{color:var(--ink);font-weight:600}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:.72rem;color:var(--ink-3);line-height:1.9}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <span class="name">Musubu</span><span class="kanji">結</span>
+  <span class="stamp">ATLAS · 30 AUG 2026</span>
+</div>
+
+<h1>Fifty-one documents, sixty open threads, and one thing <em>nobody could find</em>.</h1>
+
+<p class="standfirst">The whole corpus on one page, filterable by branch and by how much each document actually rests on. Built after a full scan of the project directory, which turned up five documents the index had never mentioned.</p>
+
+<p class="readtime">51 DOCUMENTS · 124,000 WORDS · 60 OPEN THREADS · ALL COUNTS MEASURED</p>
+
+<section>
+<h2>The thing nobody could find</h2>
+
+<p>Five corpus documents were absent from the README entirely. Three of them were written on the same day, 9 August, and together they are <strong>a complete and immediately actionable first move</strong> on a town nobody has been talking about.</p>
+
+<ul class="plain">
+<li><b><code>musubu_tokyo_corridor_candidates</code></b> scores towns on an axis the main pilot analysis never used: how far the town is from the people you are trying to move. It surfaces 奥多摩町 Okutama and 檜原村 Hinohara, both inside Tokyo Prefecture, through an eligibility door the document says nobody uses.</li>
+<li><b><code>musubu_success_thresholds</code></b> reverse-engineers what success would actually mean for Okutama from the town's own arithmetic, and lands a finding that should change recruitment: <b>cohorts must be age-clustered, not merely large.</b> A school does not reopen because forty people arrived. It reopens because enough of them have six-year-olds. That qualifies the fifty-family threshold used everywhere else in the corpus.</li>
+<li><b><code>musubu_first_contact_drafts</code></b> contains outreach drafted <b>in Japanese</b>, with a section headed <em>what is actually sendable today</em>, aimed at Okutama on the school roll and at ふるさと回帰支援センター.</li>
+</ul>
+
+<div class="notice">
+<p><strong>A scored candidate town, the arithmetic for what would count as success there, and Japanese-language letters ready to send.</strong> All three have been sitting in the folder since 9 August, and none of them was reachable from the index everyone was told to start at. That is the whole argument for doing this, and it is a better one than any structure I could have proposed.</p>
+</div>
+</section>
+
+<section>
+<h2>How to read the two axes</h2>
+
+<p>Every document now carries two facts instead of one. <strong>Branch</strong> is where it sits, which is roughly the existing folders. <strong>State</strong> is how much it rests on, which did not exist for anything except the mechanics and the numbers.</p>
+
+<div class="legend"><div class="bl"><b>Argument</b><span>Why anyone would move at all</span><i>5</i></div><div class="bl"><b>Ground</b><span>What is true about Japan, independent of this project</span><i>2</i></div><div class="bl"><b>Mechanism</b><span>How the thing works</span><i>11</i></div><div class="bl"><b>Money</b><span>What it costs, who pays, what comes back</span><i>7</i></div><div class="bl"><b>Place</b><span>Where, and what kind of town</span><i>8</i></div><div class="bl"><b>Motion</b><span>How it starts</span><i>11</i></div><div class="bl"><b>Parked</b><span>Not being worked on yet</span><i>2</i></div><div class="bl"><b>Index</b><span>Instruments that govern the rest</span><i>5</i></div></div>
+<div class="legend"><div class="sl"><span class="pill settled">Settled</span><span>specified enough to act from</span><i>15</i></div><div class="sl"><span class="pill live">Live</span><span>current thinking, still a proposal</span><i>28</i></div><div class="sl"><span class="pill thin">Thin</span><span>real but underdeveloped</span><i>3</i></div><div class="sl"><span class="pill superseded">Superseded</span><span>kept for lineage</span><i>5</i></div></div>
+
+<p class="caption">States are a first pass and a judgement call. They are meant to be argued with, which is the point of writing them down.</p>
+</section>
+
+<section>
+<h2>The corpus</h2>
+
+<div class="filters" id="docfilters">
+  <div class="frow"><span class="flab">Branch</span><button class="chip" data-f="br" data-v="Argument">Argument <i>5</i></button><button class="chip" data-f="br" data-v="Ground">Ground <i>2</i></button><button class="chip" data-f="br" data-v="Mechanism">Mechanism <i>11</i></button><button class="chip" data-f="br" data-v="Money">Money <i>7</i></button><button class="chip" data-f="br" data-v="Place">Place <i>8</i></button><button class="chip" data-f="br" data-v="Motion">Motion <i>11</i></button><button class="chip" data-f="br" data-v="Parked">Parked <i>2</i></button><button class="chip" data-f="br" data-v="Index">Index <i>5</i></button></div>
+  <div class="frow"><span class="flab">State</span><button class="chip" data-f="st" data-v="settled">Settled <i>15</i></button><button class="chip" data-f="st" data-v="live">Live <i>28</i></button><button class="chip" data-f="st" data-v="thin">Thin <i>3</i></button><button class="chip" data-f="st" data-v="superseded">Superseded <i>5</i></button>
+    <button class="chip clear" id="docclear">Clear</button></div>
+</div>
+<p class="tally" id="doctally"></p>
+
+<div class="tw">
+<table>
+<tbody id="docbody">
+<tr data-br="Argument" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_voice_and_posture</b><span class="dd">The three words, the tone rules, vision artifact versus day-one artifact. Governs everything.</span></td><td class="br">Argument</td><td class="w">1,396</td><td class="t"><span class='th'>3</span></td></tr>
+<tr data-br="Argument" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_life_stage_doors</b><span class="dd">Four entry points. The argument for letting the twenties go first.</span></td><td class="br">Argument</td><td class="w">1,353</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Argument" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_time_revolution</b><span class="dd">What rural life gives back in hours. Carries a Tier 4 time-dividend figure.</span></td><td class="br">Argument</td><td class="w">3,203</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Argument" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_transition_thesis</b><span class="dd">The core insight. People relocate because their life is already in motion, so timing beats targeting.</span></td><td class="br">Argument</td><td class="w">2,053</td><td class="t"><span class='th'>4</span></td></tr>
+<tr data-br="Argument" data-st="superseded"><td class="st"><span class="pill superseded">superseded</span></td><td class="fn"><b>musubu_project_overview</b><span class="dd">The original spine. Two of its central claims are corrected in transition_thesis.</span></td><td class="br">Argument</td><td class="w">1,676</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Ground" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_government_alignment</b><span class="dd">How the model maps onto Japan&#x27;s existing national funding programmes.</span></td><td class="br">Ground</td><td class="w">2,226</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Ground" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_precedent_research</b><span class="dd">Why a decade of revitalisation policy did not work. The best evidence document in the corpus.</span></td><td class="br">Ground</td><td class="w">2,223</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_mechanics_registry</b><span class="dd">All 31 mechanics with a confidence, a next move and a felt-as. A standing instrument.</span></td><td class="br">Mechanism</td><td class="w">4,878</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_portal_feed_spec</b><span class="dd">Three lanes, twelve post types, the integrity rules. Buildable from as written.</span></td><td class="br">Mechanism</td><td class="w">2,172</td><td class="t"><span class='th'>6</span></td></tr>
+<tr data-br="Mechanism" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_portal_taxonomy</b><span class="dd">Who gets a portal, who gets an interface, what a module is. Holds the whole five-year vision.</span></td><td class="br">Mechanism</td><td class="w">2,769</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Mechanism" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_ai_enablement</b><span class="dd">Why this is buildable now, with an honest-limits section.</span></td><td class="br">Mechanism</td><td class="w">923</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_business_coordination</b><span class="dd">Population thresholds for services, and the tipping effect between them.</span></td><td class="br">Mechanism</td><td class="w">3,082</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_coordination_architecture</b><span class="dd">The generalised threshold, district hosting, circulating cohorts, the arrival curve.</span></td><td class="br">Mechanism</td><td class="w">2,306</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Mechanism" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_map_spec</b><span class="dd">Tile state machine and visible failure. Has a working prototype behind it.</span></td><td class="br">Mechanism</td><td class="w">1,971</td><td class="t"><span class='th'>6</span></td></tr>
+<tr data-br="Mechanism" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_platform_intelligence</b><span class="dd">The two-layer community profile and the town dashboard.</span></td><td class="br">Mechanism</td><td class="w">2,006</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="thin"><td class="st"><span class="pill thin">thin</span></td><td class="fn"><b>musubu_platform_roadmap</b><span class="dd">Feature phasing for a platform with no first user. Rewrite when something is real.</span></td><td class="br">Mechanism</td><td class="w">1,997</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="superseded"><td class="st"><span class="pill superseded">superseded</span></td><td class="fn"><b>musubu_platform_vision</b><span class="dd">Kept for lineage. v2 replaced it.</span></td><td class="br">Mechanism</td><td class="w">2,466</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Mechanism" data-st="superseded"><td class="st"><span class="pill superseded">superseded</span></td><td class="fn"><b>musubu_platform_vision_v2</b><span class="dd">Largely absorbed into coordination_architecture and portal_taxonomy. Merge candidate.</span></td><td class="br">Mechanism</td><td class="w">2,549</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_funded_return_model</b><span class="dd">What it costs to pay for someone&#x27;s way back. Figures sourced, provenance marked.</span></td><td class="br">Money</td><td class="w">2,230</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_success_thresholds</b><span class="dd">Reverse-engineers the pilot target from a town&#x27;s arithmetic. Cohorts must be age-clustered.</span></td><td class="br">Money</td><td class="w">1,647</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_akiya_strategy</b><span class="dd">Apprenticeship economy, co-living conversion, mobile master-apprentice teams. Just promoted.</span></td><td class="br">Money</td><td class="w">3,555</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_build_partnership_model</b><span class="dd">Who does the renovation work and what they are paid. Holds the most important missing number.</span></td><td class="br">Money</td><td class="w">1,838</td><td class="t"><span class='th'>6</span></td></tr>
+<tr data-br="Money" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_coop_strategy</b><span class="dd">Member-owned co-operatives as the cost-of-living mechanism.</span></td><td class="br">Money</td><td class="w">4,395</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_economic_models</b><span class="dd">The underlying cost and income modelling.</span></td><td class="br">Money</td><td class="w">2,046</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Money" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_housing_coordination_strategy</b><span class="dd">How housing gets matched, renovated and allocated.</span></td><td class="br">Money</td><td class="w">3,432</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>bungotakada_deep_dive</b><span class="dd">The pilot town in detail, read off maps and public sources.</span></td><td class="br">Place</td><td class="w">4,831</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_tokyo_corridor_candidates</b><span class="dd">Okutama, Hinohara, Yuzawa, Nanmoku. Scores proximity to the source population.</span></td><td class="br">Place</td><td class="w">1,717</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>bungotakada_tile_candidates</b><span class="dd">Specific tiles the map could open with.</span></td><td class="br">Place</td><td class="w">1,623</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_archetype_axes</b><span class="dd">What kind of town, on four axes rather than six fixed types.</span></td><td class="br">Place</td><td class="w">1,648</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_density_ladder</b><span class="dd">Clusters of towns at different sizes, and transfer rather than rupture.</span></td><td class="br">Place</td><td class="w">1,225</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_eldercare_wellness_town</b><span class="dd">The archetype where multicultural caretaker integration is structurally central.</span></td><td class="br">Place</td><td class="w">2,817</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_pilot_scaling_strategy</b><span class="dd">From one town to several.</span></td><td class="br">Place</td><td class="w">2,709</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Place" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_pilot_town_analysis</b><span class="dd">Candidate scoring on receptiveness, model fit and replication.</span></td><td class="br">Place</td><td class="w">2,871</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_demand_test</b><span class="dd">The smallest thing that turns the central assumption into evidence.</span></td><td class="br">Motion</td><td class="w">1,953</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Motion" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_first_contact_drafts</b><span class="dd">Japanese-language outreach, drafted and ready. The most actionable document here.</span></td><td class="br">Motion</td><td class="w">1,361</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_fukuoka_pitch</b><span class="dd">Written to be sent. A contribution rather than a fundraise.</span></td><td class="br">Motion</td><td class="w">2,096</td><td class="t"><span class='th'>4</span></td></tr>
+<tr data-br="Motion" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>musubu_intake_instrument</b><span class="dd">The working question set. Every question must change a proposal.</span></td><td class="br">Motion</td><td class="w">2,580</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Motion" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_dhh_outreach</b><span class="dd">A friendly note about the concept page. Two sentences still to be written by Wai.</span></td><td class="br">Motion</td><td class="w">919</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_intake_ja_draft</b><span class="dd">日本語ドラフト. Needs native review before it goes anywhere.</span></td><td class="br">Motion</td><td class="w">1,369</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_living_profile</b><span class="dd">The survey as a standing register rather than an event.</span></td><td class="br">Motion</td><td class="w">1,795</td><td class="t"><span class='th'>5</span></td></tr>
+<tr data-br="Motion" data-st="thin"><td class="st"><span class="pill thin">thin</span></td><td class="fn"><b>musubu_company_survey</b><span class="dd">The business-side companion survey.</span></td><td class="br">Motion</td><td class="w">1,437</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="thin"><td class="st"><span class="pill thin">thin</span></td><td class="fn"><b>musubu_implementation_roadmap</b><span class="dd">The only end-to-end sequence. Famichi-era, so the months are stale.</span></td><td class="br">Motion</td><td class="w">2,784</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="superseded"><td class="st"><span class="pill superseded">superseded</span></td><td class="fn"><b>musubu_national_survey</b><span class="dd">The 33-question form. intake_instrument replaced it.</span></td><td class="br">Motion</td><td class="w">2,796</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Motion" data-st="superseded"><td class="st"><span class="pill superseded">superseded</span></td><td class="fn"><b>musubu_survey_strategy</b><span class="dd">The event model. living_profile replaced it.</span></td><td class="br">Motion</td><td class="w">6,773</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Parked" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_2032_vision</b><span class="dd">One version of it going well, failures included.</span></td><td class="br">Parked</td><td class="w">1,314</td><td class="t"><span class='th'>4</span></td></tr>
+<tr data-br="Parked" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>musubu_future_development_notes</b><span class="dd">The parking lot, working as intended. Now also holds the Singapore district idea.</span></td><td class="br">Parked</td><td class="w">2,324</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Index" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>CLAIMS_REGISTER</b><span class="dd">Every load-bearing number, tiered by what it rests on. Check before anything ships.</span></td><td class="br">Index</td><td class="w">1,492</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Index" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>OPEN_THREADS</b><span class="dd">All 60 unresolved questions, tagged by what would close them.</span></td><td class="br">Index</td><td class="w">1,829</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Index" data-st="settled"><td class="st"><span class="pill settled">settled</span></td><td class="fn"><b>README</b><span class="dd">The master index. Now covers all 51 documents and everything outside the folder.</span></td><td class="br">Index</td><td class="w">11,528</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Index" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>INTEGRATION_SUMMARY_AUGUST2026</b><span class="dd">What changed and why, August 2026.</span></td><td class="br">Index</td><td class="w">4,423</td><td class="t"><span class='dash'>·</span></td></tr>
+<tr data-br="Index" data-st="live"><td class="st"><span class="pill live">live</span></td><td class="fn"><b>PORTAL_REVIEW_APRIL2026</b><span class="dd">Gap analysis: the prototypes against the intelligence system.</span></td><td class="br">Index</td><td class="w">1,944</td><td class="t"><span class='dash'>·</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>Sixty open threads</h2>
+
+<p>Every unresolved question in the corpus, pulled into one list and tagged by <strong>what would actually close it</strong>. That turns out to be more useful than a status: a question nobody can answer yet is a completely different thing from one waiting on a decision somebody could make this afternoon.</p>
+
+<div class="notice">
+<p><strong>The distribution is the finding.</strong> 24 threads are decisions that need no new information at all. 9 need a Japanese speaker, which is the project's known structural gap and the clearest evidence yet for the team-first strategy. 4 need a lawyer. 10 cannot move until something is actually running, which is the real cost of nothing being built.</p>
+</div>
+
+<div class="filters" id="thfilters">
+  <div class="frow"><span class="flab">Closes by</span><button class="chip" data-f="tag" data-v="DECIDE">DECIDE <i>24</i></button><button class="chip" data-f="tag" data-v="RESEARCH">RESEARCH <i>11</i></button><button class="chip" data-f="tag" data-v="TEST">TEST <i>10</i></button><button class="chip" data-f="tag" data-v="JAPANESE">JAPANESE <i>9</i></button><button class="chip" data-f="tag" data-v="LEGAL">LEGAL <i>4</i></button><button class="chip" data-f="tag" data-v="ANSWERED">ANSWERED <i>1</i></button><button class="chip" data-f="tag" data-v="BUILD">BUILD <i>1</i></button>
+    <button class="chip clear" id="thclear">Clear</button></div>
+</div>
+<p class="tally" id="thtally"></p>
+
+<ul class="threads" id="thbody">
+<li data-tag="RESEARCH" data-br="Argument"><span class="tag research">RESEARCH</span><span class="qn">Does a young-first cohort make the town harder to sell to a municipal assembly? A town office may want families, and twenty single people in their twenties is a different political proposition.</span><span class="src">Argument · musubu_life_stage_doors</span></li>
+<li data-tag="TEST" data-br="Argument"><span class="tag test">TEST</span><span class="qn">What holds a 23-year-old at 27? Their hinge recurs faster than any other segment&#x27;s — the density ladder may be doing more work here than anywhere else.</span><span class="src">Argument · musubu_life_stage_doors</span></li>
+<li data-tag="DECIDE" data-br="Argument"><span class="tag decide">DECIDE</span><span class="qn">Are the four doors four campaigns, four landing pages, or one page that branches? (Instinct: separate pages, one mechanism explained identically on all of them.)</span><span class="src">Argument · musubu_life_stage_doors</span></li>
+<li data-tag="TEST" data-br="Argument"><span class="tag test">TEST</span><span class="qn">Does the honest-downsides section actually help conversion, or is it only good ethics? Testable, and worth testing.</span><span class="src">Argument · musubu_life_stage_doors</span></li>
+<li data-tag="DECIDE" data-br="Argument"><span class="tag decide">DECIDE</span><span class="qn">Immigration cuts across all four doors and is treated as a sub-theme everywhere. See below.</span><span class="src">Argument · musubu_life_stage_doors</span></li>
+<li data-tag="TEST" data-br="Argument"><span class="tag test">TEST</span><span class="qn">Does transition-state self-reporting hold up, or do people describe themselves as stable right up until they move?</span><span class="src">Argument · musubu_transition_thesis</span></li>
+<li data-tag="RESEARCH" data-br="Argument"><span class="tag research">RESEARCH</span><span class="qn">What&#x27;s the realistic window between a hinge event and a relocation decision? If it&#x27;s 3 months, the platform must be fast. If it&#x27;s 18, it must be patient.</span><span class="src">Argument · musubu_transition_thesis</span></li>
+<li data-tag="TEST" data-br="Argument"><span class="tag test">TEST</span><span class="qn">Can the same town host multiple life stages simultaneously, or does cohort coherence require single-stage towns?</span><span class="src">Argument · musubu_transition_thesis</span></li>
+<li data-tag="DECIDE" data-br="Argument"><span class="tag decide">DECIDE</span><span class="qn">Does simultaneous arrival wear off? What replaces it as the offer for arrival cohort #3 in an established town?</span><span class="src">Argument · musubu_transition_thesis</span></li>
+<li data-tag="JAPANESE" data-br="Argument"><span class="tag japanese">JAPANESE</span><span class="qn">Does &quot;hope&quot; survive contact with a municipal assembly, or does the register need to be more bureaucratic in government-facing material?</span><span class="src">Argument · musubu_voice_and_posture</span></li>
+<li data-tag="ANSWERED" data-br="Argument"><span class="tag answered">ANSWERED</span><span class="qn">~~Is there a Japanese phrase that carries &quot;let&#x27;s build it together&quot; without the startup connotation?~~ **Answered — see below.**</span><span class="src">Argument · musubu_voice_and_posture</span></li>
+<li data-tag="LEGAL" data-br="Mechanism"><span class="tag legal">LEGAL</span><span class="qn">Legal structure for escrow on household deposits — who holds it, under what licence?</span><span class="src">Mechanism · musubu_coordination_architecture</span></li>
+<li data-tag="RESEARCH" data-br="Mechanism"><span class="tag research">RESEARCH</span><span class="qn">Does an industrial employer realistically accept a public conditional position, or does commercial confidentiality kill it?</span><span class="src">Mechanism · musubu_coordination_architecture</span></li>
+<li data-tag="DECIDE" data-br="Mechanism"><span class="tag decide">DECIDE</span><span class="qn">For circulating cohorts: what happens to housing continuity for someone who moves between towns repeatedly?</span><span class="src">Mechanism · musubu_coordination_architecture</span></li>
+<li data-tag="DECIDE" data-br="Mechanism"><span class="tag decide">DECIDE</span><span class="qn">District-hosting: does it dilute the mission, or is it the honest on-ramp? (The rural outcome may still require the rural town.)</span><span class="src">Mechanism · musubu_coordination_architecture</span></li>
+<li data-tag="RESEARCH" data-br="Mechanism"><span class="tag research">RESEARCH</span><span class="qn">What is the minimum viable cohort size where simultaneous arrival still produces the social effect? Twelve households may be below the threshold for a functioning social environment.</span><span class="src">Mechanism · musubu_coordination_architecture</span></li>
+<li data-tag="RESEARCH" data-br="Mechanism"><span class="tag research">RESEARCH</span><span class="qn">Does a town office have the capacity to maintain a portal, or does the steward do it on their behalf?</span><span class="src">Mechanism · musubu_portal_taxonomy</span></li>
+<li data-tag="JAPANESE" data-br="Mechanism"><span class="tag japanese">JAPANESE</span><span class="qn">Who signs off on a town&#x27;s outward signal — the mayor, a committee, the residents? A town declaring &quot;we want young people&quot; is a political statement.</span><span class="src">Mechanism · musubu_portal_taxonomy</span></li>
+<li data-tag="DECIDE" data-br="Mechanism"><span class="tag decide">DECIDE</span><span class="qn">Can a member belong to more than one cohort portal at once (e.g. exploring two towns)?</span><span class="src">Mechanism · musubu_portal_taxonomy</span></li>
+<li data-tag="DECIDE" data-br="Mechanism"><span class="tag decide">DECIDE</span><span class="qn">Does the cohort portal&#x27;s dissolution need to be automatic, or negotiated by the group?</span><span class="src">Mechanism · musubu_portal_taxonomy</span></li>
+<li data-tag="BUILD" data-br="Mechanism"><span class="tag build">BUILD</span><span class="qn">How much of the member portal should exist before someone commits to anything — i.e. what does a Curious-tier dashboard actually contain?</span><span class="src">Mechanism · musubu_portal_taxonomy</span></li>
+<li data-tag="RESEARCH" data-br="Money"><span class="tag research">RESEARCH</span><span class="qn">Would Oak House actually entertain deal shape B, or does listing a property they don&#x27;t operate dilute their brand promise?</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="RESEARCH" data-br="Money"><span class="tag research">RESEARCH</span><span class="qn">What&#x27;s the realistic labour share of a Japanese akiya renovation? **The single most important number to obtain.**</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="RESEARCH" data-br="Money"><span class="tag research">RESEARCH</span><span class="qn">How many master carpenters would realistically say yes to a six-week teaching residency, and what would it pay?</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="DECIDE" data-br="Money"><span class="tag decide">DECIDE</span><span class="qn">Does a trainee who leaves after three months keep any claim?</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="LEGAL" data-br="Money"><span class="tag legal">LEGAL</span><span class="qn">Can non-Japanese participants legally join on a training basis, and under which status? (Directly relevant to the multicultural argument in `musubu_eldercare_wellness_town.md`.)</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="RESEARCH" data-br="Money"><span class="tag research">RESEARCH</span><span class="qn">Does the sweat-equity house end up cheaper but slower — and if so, does the timeline break cohort synchrony?</span><span class="src">Money · musubu_build_partnership_model</span></li>
+<li data-tag="TEST" data-br="Place"><span class="tag test">TEST</span><span class="qn">How many axes can a member express preference on before the intake becomes tedious?</span><span class="src">Place · musubu_archetype_axes</span></li>
+<li data-tag="DECIDE" data-br="Place"><span class="tag decide">DECIDE</span><span class="qn">Does affinity strength decay? A town built on one anime is exposed if the fandom cools — does affinity need to be broad (&quot;anime&quot;) or narrow (&quot;this work&quot;) to be durable?</span><span class="src">Place · musubu_archetype_axes</span></li>
+<li data-tag="DECIDE" data-br="Place"><span class="tag decide">DECIDE</span><span class="qn">Do era towns risk becoming theme parks, and does the weekend-rhythm model actually prevent that?</span><span class="src">Place · musubu_archetype_axes</span></li>
+<li data-tag="DECIDE" data-br="Place"><span class="tag decide">DECIDE</span><span class="qn">Who arbitrates when a town&#x27;s declared axis position and its revealed incoming cohort diverge sharply?</span><span class="src">Place · musubu_archetype_axes</span></li>
+<li data-tag="LEGAL" data-br="Place"><span class="tag legal">LEGAL</span><span class="qn">Is there a licensing/IP problem with building residency around a specific copyrighted work, and does that force affinity towns toward genre rather than title?</span><span class="src">Place · musubu_archetype_axes</span></li>
+<li data-tag="RESEARCH" data-br="Place"><span class="tag research">RESEARCH</span><span class="qn">Is a cluster politically possible? It requires several municipalities to agree that one of them is the service town and others are not — which is a status conversation, not a planning one.</span><span class="src">Place · musubu_density_ladder</span></li>
+<li data-tag="DECIDE" data-br="Place"><span class="tag decide">DECIDE</span><span class="qn">Who decides a town&#x27;s held size, and what happens when demand exceeds it? Turning people away is the opposite of everything else this project does.</span><span class="src">Place · musubu_density_ladder</span></li>
+<li data-tag="JAPANESE" data-br="Place"><span class="tag japanese">JAPANESE</span><span class="qn">Does the ladder require a single regional coordinating body, and does that body have any precedent in Japanese local government? (定住自立圏 / 連携中枢都市圏 are candidates — unresearched.)</span><span class="src">Place · musubu_density_ladder</span></li>
+<li data-tag="TEST" data-br="Place"><span class="tag test">TEST</span><span class="qn">Is forty minutes actually close enough for &quot;transfer not rupture&quot;? Untested, and the whole mobility argument rests on it.</span><span class="src">Place · musubu_density_ladder</span></li>
+<li data-tag="DECIDE" data-br="Place"><span class="tag decide">DECIDE</span><span class="qn">Does publishing a held size read as exclusionary — the same risk as the town&#x27;s ask list?</span><span class="src">Place · musubu_density_ladder</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Should the pitch lead with the mission or with the prototype? *(Instinct: the prototype. Let them play with it, then explain what it means.)*</span><span class="src">Motion · musubu_fukuoka_pitch</span></li>
+<li data-tag="TEST" data-br="Motion"><span class="tag test">TEST</span><span class="qn">Is &quot;I don&#x27;t want to own it&quot; read as admirable clarity or as low conviction? Worth testing on one friendly contact first.</span><span class="src">Motion · musubu_fukuoka_pitch</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Does the project need a Japanese co-founder identified before any of these conversations, or is finding one part of the ask?</span><span class="src">Motion · musubu_fukuoka_pitch</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Should the revenue model appear in the first conversation, or is leading with it a mistake when the ask isn&#x27;t money?</span><span class="src">Motion · musubu_fukuoka_pitch</span></li>
+<li data-tag="JAPANESE" data-br="Motion"><span class="tag japanese">JAPANESE</span><span class="qn">Does the fifty-household framing read as reassuring or as overwhelming in Japanese? The number may need testing at 10 / 50 / 200.</span><span class="src">Motion · musubu_demand_test</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Should the imagined town be specific (Bungotakada, named) or generic? Specific is more vivid and risks testing that town rather than the mechanic.</span><span class="src">Motion · musubu_demand_test</span></li>
+<li data-tag="JAPANESE" data-br="Motion"><span class="tag japanese">JAPANESE</span><span class="qn">Is a five-point scale right, or does a Japanese respondent pool cluster on the midpoint enough to flatten the delta?</span><span class="src">Motion · musubu_demand_test</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Does showing results immediately bias later respondents toward the visible majority? Almost certainly yes — is that acceptable, given the alternative is a much lower completion rate?</span><span class="src">Motion · musubu_demand_test</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Who fields it, given nobody on the project speaks Japanese?</span><span class="src">Motion · musubu_demand_test</span></li>
+<li data-tag="TEST" data-br="Motion"><span class="tag test">TEST</span><span class="qn">How many rounds before drop-off? The loop only works if round two feels earned rather than endless.</span><span class="src">Motion · musubu_intake_instrument</span></li>
+<li data-tag="JAPANESE" data-br="Motion"><span class="tag japanese">JAPANESE</span><span class="qn">Does the blocker question work in Japanese without reading as complaint-solicitation? Needs native testing.</span><span class="src">Motion · musubu_intake_instrument</span></li>
+<li data-tag="TEST" data-br="Motion"><span class="tag test">TEST</span><span class="qn">Is a five-day window too short for word-of-mouth to reach beyond the already-converted?</span><span class="src">Motion · musubu_intake_instrument</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">What&#x27;s the minimum credible n for publishing segment-level blocker data without misrepresenting small groups?</span><span class="src">Motion · musubu_intake_instrument</span></li>
+<li data-tag="JAPANESE" data-br="Motion"><span class="tag japanese">JAPANESE</span><span class="qn">Does the time-poverty mirror risk feeling like a guilt trip rather than a revelation? Tone test required.</span><span class="src">Motion · musubu_intake_instrument</span></li>
+<li data-tag="TEST" data-br="Motion"><span class="tag test">TEST</span><span class="qn">What&#x27;s the realistic return rate on profile updates without becoming annoying?</span><span class="src">Motion · musubu_living_profile</span></li>
+<li data-tag="JAPANESE" data-br="Motion"><span class="tag japanese">JAPANESE</span><span class="qn">Does asking about relationship/children intentions read as intrusive, even when optional and private? Needs testing with Japanese respondents specifically.</span><span class="src">Motion · musubu_living_profile</span></li>
+<li data-tag="LEGAL" data-br="Motion"><span class="tag legal">LEGAL</span><span class="qn">Is there a legal classification issue in Japan for holding this category of personal data at national scale? (APPI compliance — needs proper review before launch.)</span><span class="src">Motion · musubu_living_profile</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Can the aggregate mirror be gamed or misread if early samples are small and unrepresentative?</span><span class="src">Motion · musubu_living_profile</span></li>
+<li data-tag="DECIDE" data-br="Motion"><span class="tag decide">DECIDE</span><span class="qn">Who owns the dataset if the project fails, and what does the member get told at signup about that?</span><span class="src">Motion · musubu_living_profile</span></li>
+<li data-tag="DECIDE" data-br="Parked"><span class="tag decide">DECIDE</span><span class="qn">Should there be a *failure* version — the same map where the thresholds didn&#x27;t fill? It would be honest and might be more persuasive to a sceptic. Risk: it&#x27;s the image that sticks.</span><span class="src">Parked · musubu_2032_vision</span></li>
+<li data-tag="RESEARCH" data-br="Parked"><span class="tag research">RESEARCH</span><span class="qn">Does the counterfactual line need a source before it can be shown to a ministry? (Almost certainly yes — the 1.5% decline rate should come from actual municipal projections, not an assumption.)</span><span class="src">Parked · musubu_2032_vision</span></li>
+<li data-tag="JAPANESE" data-br="Parked"><span class="tag japanese">JAPANESE</span><span class="qn">Should existing residents appear as a category at all, or does naming them &quot;the town that was already here&quot; read as othering?</span><span class="src">Parked · musubu_2032_vision</span></li>
+<li data-tag="DECIDE" data-br="Parked"><span class="tag decide">DECIDE</span><span class="qn">Is six years the right horizon, or does ten tell a better story?</span><span class="src">Parked · musubu_2032_vision</span></li>
+</ul>
+
+<p class="caption">Source of truth stays each document's own Open Questions section. Regenerate <code>OPEN_THREADS.md</code> after any writing session.</p>
+</section>
+
+<section>
+<h2>What changed today</h2>
+
+<ul class="plain">
+<li><b>Five documents indexed for the first time</b>, including the Okutama cluster above. The README now covers all 51.</li>
+<li><b>Two orphans promoted into the corpus.</b> <code>musubu_akiya_strategy</code> (3,555 words on the apprenticeship economy and akiya conversion) and <code>musubu_implementation_roadmap</code> (the only end-to-end sequence on file). Both had sat in the project root with no home.</li>
+<li><b>Sixteen superseded Famichi-era files archived</b> to <code>_archive/famichi-era/</code> with a mapping table. Nothing deleted. The project root is now two files instead of eighteen.</li>
+<li><b>Twelve Portal pages were missing a charset declaration</b> and rendered Japanese as mojibake. Nine needed the fix and got it; three already had one properly placed and were left alone.</li>
+<li><b>Everything outside the corpus folder is now indexed:</b> the fifteen Portal prototypes, the four external syntheses in <code>Gemini Notebook/</code>, and the eighteen loose research files that make up most of the Ground branch.</li>
+<li><b><code>OPEN_THREADS.md</code> created</b> as a standing instrument alongside the claims register.</li>
+</ul>
+</section>
+
+<section>
+<h2>What is still worth doing</h2>
+
+<ul class="plain">
+<li><b>The eighteen loose research files should be summarised into the corpus.</b> They are most of the evidence base about Japan, they are binaries, and nothing can link to a claim inside a <code>.docx</code>. The population-tier research in particular is the ground under <code>musubu_business_coordination</code>, which currently asserts its service thresholds without pointing anywhere.</li>
+<li><b>Lift the comparison table out of the Gemini synthesis.</b> Musubu against Kickstarter, participatory budgeting, Decidim, Loomio, community wealth building and civic asset mapping. It exists nowhere in the corpus and belongs in <code>musubu_precedent_research</code>.</li>
+<li><b>Twenty-four threads are decisions waiting on nobody.</b> Filter the list above by <code>DECIDE</code> and a real number of them could close in an afternoon.</li>
+<li><b>Settle where an execution roadmap lives.</b> It is filed under Motion because that folder is really the ignition branch, but it is not a survey and the name will confuse the next person.</li>
+</ul>
+</section>
+
+<footer>
+MUSUBU 結 · ATLAS, 30 AUGUST 2026<br>
+COUNTS MEASURED FROM THE FILES. STATES ARE A FIRST PASS AND ARE MEANT TO BE ARGUED WITH.
+</footer>
+</div>
+
+<script>
+(function(){
+  function wire(scope, bodySel, itemSel, tally, keys){
+    var box=document.getElementById(scope), body=document.querySelector(bodySel);
+    if(!box||!body) return;
+    var items=Array.prototype.slice.call(body.querySelectorAll(itemSel));
+    var active={}; keys.forEach(function(k){ active[k]=new Set(); });
+    function apply(){
+      var shown=0;
+      items.forEach(function(el){
+        var ok=keys.every(function(k){
+          return active[k].size===0 || active[k].has(el.getAttribute('data-'+k));
+        });
+        el.classList.toggle('hide', !ok);
+        if(ok) shown++;
+      });
+      document.getElementById(tally).textContent=
+        shown===items.length ? ('Showing all '+items.length) : ('Showing '+shown+' of '+items.length);
+    }
+    box.addEventListener('click', function(ev){
+      var b=ev.target.closest('.chip'); if(!b) return;
+      if(b.classList.contains('clear')){
+        keys.forEach(function(k){ active[k].clear(); });
+        box.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+        apply(); return;
+      }
+      var k=b.getAttribute('data-f'), v=b.getAttribute('data-v');
+      if(active[k].has(v)){ active[k].delete(v); b.setAttribute('aria-pressed','false'); }
+      else { active[k].add(v); b.setAttribute('aria-pressed','true'); }
+      apply();
+    });
+    box.querySelectorAll('.chip').forEach(function(c){
+      if(!c.classList.contains('clear')) c.setAttribute('aria-pressed','false');
+    });
+    apply();
+  }
+  wire('docfilters','#docbody','tr','doctally',['br','st']);
+  wire('thfilters','#thbody','li','thtally',['tag']);
+})();
+</script>
+

@@ -1,0 +1,330 @@
+<meta charset="utf-8">
+<title>You're 23. There's a third option.</title>
+
+<style>
+:root{
+  --bg:#F7F6F2; --bg-2:#ECEAE3; --card:#FFFFFF; --rule:#D9D6CC;
+  --ink:#101214; --ink-2:#4A5055; --ink-3:#878D92;
+  --hot:#D23A24; --hot-soft:#FBE4DF;
+  --good:#2C5F3E; --good-soft:#DFEBE2;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0E1012;--bg-2:#16191C;--card:#1A1E21;--rule:#2A2F34;
+    --ink:#F0EEE8;--ink-2:#A8AFB4;--ink-3:#6E767C;
+    --hot:#F05436;--hot-soft:#2A1512;--good:#6FA982;--good-soft:#16241B;}
+}
+:root[data-theme="light"]{--bg:#F7F6F2;--bg-2:#ECEAE3;--card:#FFFFFF;--rule:#D9D6CC;--ink:#101214;--ink-2:#4A5055;--ink-3:#878D92;--hot:#D23A24;--hot-soft:#FBE4DF;--good:#2C5F3E;--good-soft:#DFEBE2;}
+:root[data-theme="dark"]{--bg:#0E1012;--bg-2:#16191C;--card:#1A1E21;--rule:#2A2F34;--ink:#F0EEE8;--ink-2:#A8AFB4;--ink-3:#6E767C;--hot:#F05436;--hot-soft:#2A1512;--good:#6FA982;--good-soft:#16241B;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-0.025em;line-height:1.05;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:54rem;margin-inline:auto;padding-inline:1.5rem}
+section{padding-block:3.5rem;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.lbl{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--hot);margin-bottom:1rem}
+.lbl.q{color:var(--ink-3)}
+h1{font-size:clamp(2.4rem,7.5vw,4.2rem)}
+h2{font-size:clamp(1.5rem,3.6vw,2.1rem)}
+h3{font-size:1.05rem;letter-spacing:-0.01em}
+.sub{color:var(--ink-2);font-size:1.05rem;margin-top:1.3rem;max-width:34rem}
+.mock{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);padding:0.3rem 0.55rem;display:inline-block;margin-bottom:1.8rem}
+
+.hero{padding-block:3rem 3.5rem}
+.hero .third{color:var(--hot)}
+
+/* money */
+.money{display:grid;gap:0;margin-top:1.8rem;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--card)}
+@media(min-width:44rem){.money{grid-template-columns:1fr 1fr}}
+.col{padding:1.3rem 1.35rem}
+.col+.col{border-top:1px solid var(--rule)}
+@media(min-width:44rem){.col+.col{border-top:0;border-left:1px solid var(--rule)}}
+.col h3{font-size:0.95rem;margin-bottom:0.15rem}
+.col .cap{font-family:var(--mono);font-size:0.66rem;color:var(--ink-3);letter-spacing:0.05em}
+.line{display:flex;justify-content:space-between;font-size:0.88rem;padding:0.38rem 0;border-bottom:1px solid var(--rule);color:var(--ink-2)}
+.line:last-of-type{border-bottom:0}
+.line b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+.left{margin-top:1rem;padding-top:0.9rem;border-top:2px solid var(--ink)}
+.left .n{font-family:var(--mono);font-size:1.85rem;font-variant-numeric:tabular-nums;letter-spacing:-0.03em;line-height:1}
+.left .t{font-size:0.78rem;color:var(--ink-3);margin-top:0.25rem}
+.col.win .left .n{color:var(--good)}
+.punch{font-size:1.15rem;margin-top:1.4rem;font-weight:600;max-width:34rem}
+.punch em{font-style:normal;color:var(--hot)}
+
+/* people */
+.grid20{display:grid;grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr));gap:0.5rem;margin-top:1.6rem}
+.p{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.6rem 0.7rem}
+.p .a{font-family:var(--mono);font-size:0.9rem;color:var(--hot)}
+.p .w{font-size:0.8rem;color:var(--ink-2);margin-top:0.1rem;line-height:1.35}
+.pnote{font-size:0.86rem;color:var(--ink-3);margin-top:1rem}
+
+/* work */
+.jobs{display:grid;gap:0.7rem;margin-top:1.6rem}
+@media(min-width:44rem){.jobs{grid-template-columns:1fr 1fr}}
+.job{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1rem 1.1rem}
+.job .top{display:flex;justify-content:space-between;gap:0.8rem;align-items:baseline}
+.job .pay{font-family:var(--mono);font-size:0.85rem;color:var(--good);white-space:nowrap}
+.job p{font-size:0.85rem;color:var(--ink-2);margin-top:0.4rem}
+.job .learn{font-family:var(--mono);font-size:0.68rem;color:var(--ink-3);margin-top:0.55rem;letter-spacing:0.04em}
+
+/* costs */
+.costs{display:grid;gap:0.7rem;margin-top:1.6rem}
+@media(min-width:40rem){.costs{grid-template-columns:1fr 1fr}}
+.cost{border-left:2px solid var(--hot);padding:0.15rem 0 0.15rem 0.9rem}
+.cost h3{font-size:0.95rem}
+.cost p{font-size:0.85rem;color:var(--ink-2);margin-top:0.25rem}
+
+/* leave */
+.steps{display:grid;gap:0.6rem;margin-top:1.5rem}
+.step{display:grid;grid-template-columns:2.4rem 1fr;gap:0.9rem;align-items:start;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:0.85rem 1rem}
+.step .n{font-family:var(--mono);font-size:0.78rem;color:var(--hot);padding-top:0.15rem}
+.step p{font-size:0.86rem;color:var(--ink-2);margin-top:0.15rem}
+
+.big{background:var(--ink);color:var(--bg);border-radius:4px;padding:1.6rem 1.5rem;margin-top:1.8rem}
+.big h2{color:var(--bg);font-size:1.5rem}
+.big p{color:var(--ink-3);margin-top:0.8rem;max-width:34rem}
+:root[data-theme="dark"] .big p,:root:not([data-theme="light"]) .big p{color:#9AA2A8}
+.btns{display:flex;gap:0.6rem;margin-top:1.3rem;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:0.92rem;font-weight:600;padding:0.65rem 1.2rem;border-radius:3px;border:1px solid var(--bg);background:var(--bg);color:var(--ink);cursor:pointer}
+.btn.g{background:transparent;color:var(--bg)}
+.btn:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+
+/* doors */
+.doors{display:grid;gap:0.7rem;margin-top:1.5rem}
+@media(min-width:46rem){.doors{grid-template-columns:repeat(3,1fr)}}
+.door{background:var(--bg-2);border-radius:4px;padding:1rem 1.05rem}
+.door .age{font-family:var(--mono);font-size:0.72rem;color:var(--hot);letter-spacing:0.06em}
+.door h3{font-size:0.98rem;margin-top:0.3rem}
+.door p{font-size:0.83rem;color:var(--ink-2);margin-top:0.35rem}
+
+footer{padding-block:2rem 3.5rem;border-top:1px solid var(--rule)}
+footer p{font-size:0.78rem;color:var(--ink-3);max-width:44rem}
+</style>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="mock">Speculative · figures illustrative · not a real offer</span>
+    <h1>You're deciding between staying put and going to Tokyo.<br><span class="third">There's a third option.</span></h1>
+    <p class="sub">
+      Twenty people around your age moving to the same small town in the same season. Not to retire.
+      To work, learn something, and have a life that costs a fifth of what Tokyo charges for a worse
+      version of it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl">Start with the money, because everything else is easier to argue about</p>
+    <h2>What's actually left at the end of the month.</h2>
+
+    <div class="money">
+      <div class="col">
+        <h3>Tokyo</h3>
+        <p class="cap">1K apartment, 25 min out · entry-level or non-regular work</p>
+        <div style="margin-top:1rem">
+          <div class="line"><span>Rent</span><b>¥75,000</b></div>
+          <div class="line"><span>Utilities and internet</span><b>¥12,000</b></div>
+          <div class="line"><span>Transport</span><b>¥12,000</b></div>
+          <div class="line"><span>Food</span><b>¥45,000</b></div>
+          <div class="line"><span>Phone</span><b>¥5,000</b></div>
+          <div class="line"><span>Take-home</span><b>¥170,000</b></div>
+        </div>
+        <div class="left">
+          <div class="n">¥21,000</div>
+          <div class="t">left over each month</div>
+        </div>
+      </div>
+
+      <div class="col win">
+        <h3>A share house in a town of 5,000</h3>
+        <p class="cap">Own room, shared kitchen and workshop · trade, remote or local work</p>
+        <div style="margin-top:1rem">
+          <div class="line"><span>Room, utilities and internet</span><b>¥32,000</b></div>
+          <div class="line"><span>Transport — bike, shared van</span><b>¥6,000</b></div>
+          <div class="line"><span>Food — a lot of it shared</span><b>¥32,000</b></div>
+          <div class="line"><span>Phone</span><b>¥5,000</b></div>
+          <div class="line"><span>Take-home</span><b>¥178,000</b></div>
+          <div class="line" style="color:var(--ink-3)"><span>Commute</span><b style="color:var(--ink-3)">—</b></div>
+        </div>
+        <div class="left">
+          <div class="n">¥103,000</div>
+          <div class="t">left over each month</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="punch">
+      Roughly <em>five times</em> the money you actually get to decide what to do with — and about
+      ten hours a week back from not being on a train.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl">The question you actually care about</p>
+    <h2>Who else is going.</h2>
+    <p class="sub">
+      Nobody moves unless all twenty do. You can see who's in before you decide, and they can see you.
+      This is the entire point — arriving alone into a small town is a genuinely bad idea and you'd be
+      right to refuse it.
+    </p>
+
+    <div class="grid20">
+      <div class="p"><div class="a">24</div><div class="w">Carpentry apprentice</div></div>
+      <div class="p"><div class="a">22</div><div class="w">Just finished, undecided</div></div>
+      <div class="p"><div class="a">26</div><div class="w">Remote dev, quit Tokyo</div></div>
+      <div class="p"><div class="a">23</div><div class="w">Wants to run a kitchen</div></div>
+      <div class="p"><div class="a">28</div><div class="w">Care worker, from Cebu</div></div>
+      <div class="p"><div class="a">25</div><div class="w">Farm co-op</div></div>
+      <div class="p"><div class="a">21</div><div class="w">Apprentice, first job</div></div>
+      <div class="p"><div class="a">27</div><div class="w">Photographer + guesthouse</div></div>
+      <div class="p"><div class="a">24</div><div class="w">Left a job she hated</div></div>
+      <div class="p"><div class="a">29</div><div class="w">Starting something, unclear what</div></div>
+      <div class="p"><div class="a">23</div><div class="w">Fisheries, third generation</div></div>
+      <div class="p"><div class="a">25</div><div class="w">Remote design</div></div>
+      <div class="p"><div class="a">22</div><div class="w">Music, works at the café</div></div>
+      <div class="p"><div class="a">26</div><div class="w">Welding, moving from Osaka</div></div>
+      <div class="p"><div class="a">24</div><div class="w">Care worker, from Hanoi</div></div>
+      <div class="p"><div class="a">28</div><div class="w">Brewing, wants to start a brewery</div></div>
+      <div class="p"><div class="a">21</div><div class="w">Undecided, curious</div></div>
+      <div class="p"><div class="a">27</div><div class="w">Teacher, primary</div></div>
+      <div class="p"><div class="a">25</div><div class="w">Roofing and restoration</div></div>
+      <div class="p"><div class="a">23</div><div class="w">Bakery, has never run one</div></div>
+    </div>
+    <p class="pnote">
+      Nine of them have never lived outside a city. Four are not Japanese. Six have no idea what they
+      want to do, which is not a problem — it is most of the reason to come.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl">What you'd actually do</p>
+    <h2>Real work, and you'd learn something you can take anywhere.</h2>
+
+    <div class="jobs">
+      <div class="job">
+        <div class="top"><h3>Timber framing apprenticeship</h3><span class="pay">¥215,000</span></div>
+        <p>Restoring empty houses with carpenters who came out of retirement to teach. Two years, and you finish able to build.</p>
+        <p class="learn">TRANSFERS ANYWHERE · CERTIFIABLE</p>
+      </div>
+      <div class="job">
+        <div class="top"><h3>Care work + Japanese support</h3><span class="pay">¥228,000</span></div>
+        <p>Real shortage, real training, free language classes twice a week. The most reliable work in the region.</p>
+        <p class="learn">QUALIFICATION · VISA-ELIGIBLE ROUTE</p>
+      </div>
+      <div class="job">
+        <div class="top"><h3>Bring your own remote job</h3><span class="pay">whatever you earn</span></div>
+        <p>Fibre is good. Desk in the shared workshop. Your Tokyo salary against a ¥32,000 room is the whole trade.</p>
+        <p class="learn">NO CHANGE REQUIRED · BEST MARGIN</p>
+      </div>
+      <div class="job">
+        <div class="top"><h3>Start the thing you keep talking about</h3><span class="pay">unit + 40 pre-commits</span></div>
+        <p>Empty shopfronts, low rent, and fifty households who have already said they'd be customers before you open.</p>
+        <p class="learn">DEMAND VISIBLE BEFORE YOU COMMIT</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl q">What it costs you — said properly, not in a footnote</p>
+    <h2>This is worse than Tokyo at several things.</h2>
+
+    <div class="costs">
+      <div class="cost">
+        <h3>The dating pool is small</h3>
+        <p>Twenty people your age is twenty people. It is not a city. Some couples form and some people find it lonely in a way the money does not fix.</p>
+      </div>
+      <div class="cost">
+        <h3>There is no career ladder here</h3>
+        <p>If you want to be a consultant at a big firm, this is the wrong move and we would rather you knew now.</p>
+      </div>
+      <div class="cost">
+        <h3>Not much happens on a Wednesday</h3>
+        <p>No gigs most nights, no galleries, nothing open at 3am. You will make your own things to do or you will be bored.</p>
+      </div>
+      <div class="cost">
+        <h3>You will be visible</h3>
+        <p>Everyone will know who you are and roughly what you did last weekend. For some people that is the appeal and for others it is unbearable.</p>
+      </div>
+      <div class="cost">
+        <h3>People will ask why you left</h3>
+        <p>Some of them will assume you failed at something. That is their problem, but you will have to hear it at every New Year for a while.</p>
+      </div>
+      <div class="cost">
+        <h3>The town is not a blank slate</h3>
+        <p>Around 5,000 people already live there and did not ask for you. Most will be glad. Some will not. Both are reasonable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl">And the thing that makes it not a gamble</p>
+    <h2>You can leave. That's designed in, not a loophole.</h2>
+
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div><h3>Come for a weekend first</h3><p>Free. You will meet most of them at Friday dinner whether you plan to or not.</p></div></div>
+      <div class="step"><span class="n">2</span><div><h3>Then nine months, not forever</h3><p>Paid work, room included, and the decision about staying happens at month seven — not now.</p></div></div>
+      <div class="step"><span class="n">3</span><div><h3>If it's too small, move up rather than back</h3><p>There's a town of 22,000 forty minutes away with a hospital, high schools and more going on. Leaving the village does not mean going back to Tokyo.</p></div></div>
+      <div class="step"><span class="n">4</span><div><h3>If nobody comes, nothing happens</h3><p>Under twenty and the whole thing is called off. Deposits back. You will not be the person who moved and then watched everyone else pull out.</p></div></div>
+    </div>
+
+    <div class="big">
+      <h2>Twenty people, one season, one town.</h2>
+      <p>
+        Being 23 is the cheapest time in your life to try something — no mortgage, no school year to
+        work around, nobody's career but your own. That is not a reason to be reckless. It is a reason
+        to spend it on something you would actually learn from.
+      </p>
+      <div class="btns">
+        <button class="btn" type="button">See who's in so far</button>
+        <button class="btn g" type="button">Come for a weekend</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lbl q">Not 23</p>
+    <h2>Three other doors into the same thing.</h2>
+    <div class="doors">
+      <div class="door">
+        <span class="age">30s</span>
+        <h3>Ten years in a job you stopped liking</h3>
+        <p>You are not starting over. You are taking skills somewhere they count for more, with your housing cost cut in half and a reason to be somewhere.</p>
+      </div>
+      <div class="door">
+        <span class="age">50s</span>
+        <h3>Savings, and something you always meant to start</h3>
+        <p>Cheap premises, low overheads, and a town that will tell you before you sign whether the customers exist. Better odds than the same shop in a city.</p>
+      </div>
+      <div class="door">
+        <span class="age">Retired</span>
+        <h3>Not somewhere to be looked after — somewhere to be useful</h3>
+        <p>Arriving with others your age, near a clinic, with people who need what you know. The thing most people miss is not care, it is being needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Speculative mockup for the Musubu project. The cost comparison, wages, cohort and jobs shown
+      are illustrative and have not been verified against real listings, real employers or a real
+      town. No such cohort is currently forming and nothing here is an offer. The Tokyo figures are
+      typical rather than sourced.
+    </p>
+  </div>
+</footer>

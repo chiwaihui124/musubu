@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Musubu — the mechanism (draft)</title>
+<style>
+  :root{
+    --paper:#F7F4EE; --ink:#1D1B17; --ink-2:#4E483F; --ink-3:#8D8579;
+    --rule:#E0D9CB; --accent:#2F6B5F; --warm:#B4703A; --unknown:#C9C1B3;
+    --serif:'Hiragino Mincho ProN',Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:660px;margin:0 auto;padding:56px 24px 90px}
+
+  .tag{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+       margin-bottom:14px}
+  h1{font-family:var(--serif);font-size:clamp(27px,5vw,38px);font-weight:400;
+     line-height:1.25;letter-spacing:-.01em;margin:0 0 18px}
+  .sub{font-size:17.5px;color:var(--ink-2);margin:0 0 14px;max-width:52ch}
+
+  .town{border:1px solid var(--rule);border-radius:5px;background:#fff;
+        margin:44px 0 0;overflow:hidden}
+  .town__head{padding:20px 22px 16px;border-bottom:1px solid var(--rule)}
+  .town__name{font-family:var(--serif);font-size:23px;margin:0 0 3px;font-weight:400}
+  .town__meta{font-size:12.5px;color:var(--ink-3)}
+
+  .meter{padding:20px 22px}
+  .meter__count{font-family:var(--serif);font-size:29px;line-height:1}
+  .meter__need{font-size:12.5px;color:var(--ink-3)}
+  .bar{height:7px;background:#EFEAE0;border-radius:99px;overflow:hidden;margin-top:9px}
+  .bar__fill{height:100%;width:0;background:var(--accent);border-radius:99px;
+             transition:width .45s cubic-bezier(.4,0,.2,1)}
+
+  .facts{border-top:1px solid var(--rule);padding:6px 22px 20px}
+  .fact{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #F0EBE1;
+        align-items:baseline}
+  .fact:last-child{border-bottom:none}
+  .fact__k{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+           color:var(--ink-3);flex:0 0 96px}
+  .fact__v{font-size:15.5px;color:var(--ink);transition:filter .5s ease,color .5s ease}
+  .fact[data-state="unknown"] .fact__v{filter:blur(4.5px);color:var(--unknown);
+                                        user-select:none}
+
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  button{font:inherit;font-size:14.5px;padding:11px 17px;border-radius:4px;
+         border:1px solid var(--accent);background:var(--accent);color:#fff;
+         cursor:pointer;transition:opacity .15s}
+  button:hover{opacity:.87}
+  button.ghost{background:transparent;color:var(--ink-2);border-color:var(--rule)}
+  button:disabled{opacity:.4;cursor:default}
+
+  .status{margin-top:22px;padding:16px 18px;border-radius:4px;font-size:15px;
+          border:1px solid var(--rule);color:var(--ink-2);background:#fff}
+  .status strong{color:var(--ink)}
+  .status.done{border-color:var(--accent);color:var(--accent)}
+  .status.done strong{color:var(--accent)}
+
+  .after{margin-top:52px;padding-top:30px;border-top:1px solid var(--rule)}
+  .after h2{font-family:var(--serif);font-size:20px;font-weight:400;margin:0 0 12px}
+  .after p{font-size:16.5px;color:var(--ink-2);margin:0 0 14px;max-width:56ch}
+  .after em{color:var(--ink);font-style:normal;border-bottom:1px solid var(--warm)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="tag">The mechanism</div>
+  <h1>The choice was never Tokyo versus the countryside.<br>It was Tokyo versus a question mark.</h1>
+  <p class="sub">
+    You cannot evaluate a town you have never lived in. Not the work, not the rent,
+    not whether you would be the only one there. A place nobody can assess is not an
+    option — it is a guess.
+  </p>
+  <p class="sub">
+    So here is the whole idea in one screen. Watch what happens to the unknowns as
+    people commit.
+  </p>
+
+  <div class="town">
+    <div class="town__head">
+      <h2 class="town__name">Example Town</h2>
+      <div class="town__meta">Illustrative only — not a real cohort, not a forecast</div>
+    </div>
+
+    <div class="meter">
+      <div>
+        <span class="meter__count" id="count">0</span>
+        <span class="meter__need">of 20 households committed</span>
+      </div>
+      <div class="bar"><div class="bar__fill" id="fill"></div></div>
+    </div>
+
+    <div class="facts" id="facts">
+      <div class="fact" data-state="unknown" data-at="4">
+        <div class="fact__k">Work</div>
+        <div class="fact__v" data-known="Three trades hiring, one remote-hub desk">Something, maybe, possibly</div>
+      </div>
+      <div class="fact" data-state="unknown" data-at="8">
+        <div class="fact__k">Rent</div>
+        <div class="fact__v" data-known="A fraction of a Tokyo one-bedroom">Cheaper? Nobody has said</div>
+      </div>
+      <div class="fact" data-state="unknown" data-at="13">
+        <div class="fact__k">Neighbours</div>
+        <div class="fact__v" data-known="Nineteen others, arriving the same week">Strangers, already settled</div>
+      </div>
+      <div class="fact" data-state="unknown" data-at="17">
+        <div class="fact__k">School</div>
+        <div class="fact__v" data-known="Reopens — enough children to fill it">Closed, or closing, unclear</div>
+      </div>
+      <div class="fact" data-state="unknown" data-at="20">
+        <div class="fact__k">Start</div>
+        <div class="fact__v" data-known="1 April — everyone moves together">Someday. If ever</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="add">Someone commits</button>
+    <button id="jump" class="ghost">Jump to full</button>
+    <button id="reset" class="ghost">Reset</button>
+  </div>
+
+  <div class="status" id="status">
+    <strong>Nothing has happened yet.</strong> Nobody has moved, nobody has paid,
+    nobody has given notice on a flat. Every commitment here is conditional — it only
+    becomes real if the town fills.
+  </div>
+
+  <div class="after">
+    <h2>What coordination actually adds</h2>
+    <p>
+      Not persuasion. <em>Specification.</em> Committing people together is what makes a
+      place describable in advance — who is coming, what the work pays, when it happens,
+      what the rent is, and what occurs if it does not fill.
+    </p>
+    <p>
+      That is the whole trick. It borrows the conditional-pledge mechanic that already
+      works elsewhere and points it at the one thing you cannot buy on your own:
+      arriving somewhere at the same moment as everyone else, where nobody is already
+      inside.
+    </p>
+    <p>
+      And if it does not fill, nothing happens. Nobody is left having moved alone.
+      That is what makes committing early cheap enough to be worth doing.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  var TOTAL = 20;
+  var n = 0;
+
+  var countEl  = document.getElementById('count');
+  var fillEl   = document.getElementById('fill');
+  var statusEl = document.getElementById('status');
+  var addBtn   = document.getElementById('add');
+  var facts    = Array.prototype.slice.call(document.querySelectorAll('.fact'));
+
+  function render(){
+    countEl.textContent = n;
+    fillEl.style.width = (n / TOTAL * 100) + '%';
+
+    facts.forEach(function(f){
+      var at = parseInt(f.dataset.at, 10);
+      var v  = f.querySelector('.fact__v');
+      if (!v.dataset.blurred) v.dataset.blurred = v.textContent;
+
+      if (n >= at && f.dataset.state === 'unknown'){
+        f.dataset.state = 'known';
+        v.textContent = v.dataset.known;
+      } else if (n < at && f.dataset.state === 'known'){
+        f.dataset.state = 'unknown';
+        v.textContent = v.dataset.blurred;
+      }
+    });
+
+    addBtn.disabled = n >= TOTAL;
+
+    if (n === 0){
+      statusEl.className = 'status';
+      statusEl.innerHTML = '<strong>Nothing has happened yet.</strong> Nobody has moved, ' +
+        'nobody has paid, nobody has given notice on a flat. Every commitment here is ' +
+        'conditional — it only becomes real if the town fills.';
+    } else if (n < TOTAL){
+      statusEl.className = 'status';
+      statusEl.innerHTML = '<strong>' + n + ' committed, ' + (TOTAL - n) + ' to go.</strong> ' +
+        'Still nobody has moved. Every one of them can walk away at no cost — and the ' +
+        'town is already easier to picture than it was a moment ago.';
+    } else {
+      statusEl.className = 'status done';
+      statusEl.innerHTML = '<strong>The threshold is met.</strong> Now it becomes real, ' +
+        'and everyone arrives together. Nobody is the first one there.';
+    }
+  }
+
+  addBtn.onclick                           = function(){ if (n < TOTAL) n++; render(); };
+  document.getElementById('jump').onclick  = function(){ n = TOTAL; render(); };
+  document.getElementById('reset').onclick = function(){ n = 0; render(); };
+  render();
+</script>
+</body>
+</html>

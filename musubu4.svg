@@ -1,0 +1,24 @@
+<svg viewBox="0 0 480 140" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ultra-clean Venn-knot mark -->
+  <!-- Left circle -->
+<circle cx="52" cy="70" r="38" 
+       fill="none" 
+       stroke="#c53d43" 
+       stroke-width="10"/>
+  <!-- Right circle -->
+<circle cx="98" cy="70" r="38" 
+       fill="none" 
+       stroke="#c53d43" 
+       stroke-width="10"/>
+  <!-- Three coordination dots in the intersection -->
+  <circle cx="65" cy="60" r="6" fill="#1e4d78"/>
+  <circle cx="85" cy="60" r="6" fill="#1e4d78"/>
+  <circle cx="75" cy="78" r="6" fill="#1e4d78"/>
+  <!-- Wordmark -->
+<text x="165" y="82" 
+     font-family="Georgia, 'Hiragino Mincho Pro', serif" 
+     font-size="60" 
+     font-weight="400" 
+     fill="#1e4d78" 
+     letter-spacing="2">Musubu</text>
+</svg>

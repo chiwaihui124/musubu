@@ -1,0 +1,33 @@
+# Track the corpus, the Portal pages, tools and project config only.
+# Everything binary or loose at the root stays out (design files, screenshots,
+# Pinterest references with unclear rights, decks, docx exports).
+.DS_Store
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.fig
+*.af
+*.afphoto
+*~lock~
+*.pptx
+*.docx
+*.pdf
+*.rtf
+*.pages
+*.numbers
+*.csv
+*.zip
+*.mp4
+*.m4a
+japan-budget-clarified
+/2040/
+/Famichi Project/
+/Gemini Notebook/
+/Towns/
+/from google flow/
+/from pinterest/
+/google earth of Buk/
+/imagine with claude/
+/.baselines/
+/.claude/settings.local.json
