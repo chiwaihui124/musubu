@@ -107,9 +107,13 @@ on honest artifacts, so committed-vs-projected must never be blurred.
 | | |
 |---|---|
 | Strategy corpus | `Musubu Project/` — `01_Foundation` → `08_Pitch`, with `README.md` as master index (all 51 docs indexed as of 2026-08-30) |
-| **Where to start** | `Musubu Project/OPEN_THREADS.md` — all 60 unresolved questions, tagged by what would close them |
+| **Where to start (a stranger)** | `Musubu Project/00_START_HERE.md` — written for a first-time reader, Sept 2026 |
+| **Where to start (working)** | `Musubu Project/OPEN_THREADS.md` — all 68 unresolved questions, tagged by what would close them |
+| **Front door** | `Portal/index.html` — opens on the share-house screen, three ways in. Sept 2026. Not yet published. |
+| Theory | `Musubu Project/01_Foundation/musubu_coordination_theory.md` — the mechanism in eight disciplines, five new mechanics. Claude-drafted, labelled as such. |
+| Critique | `Musubu Project/THREE_READERS_SEPT2026.md` — what an officer, a founder and a 23-year-old would say |
 | Navigable atlas | `Portal/musubu-atlas.html` → https://claude.ai/code/artifact/7300e6a3-e971-466b-9975-a1420f25652d (private) |
-| Retired files | `_archive/famichi-era/` — 16 superseded Famichi-era duplicates, with a mapping table. Nothing deleted. |
+| Retired files | `_archive/famichi-era/` (16 Famichi-era duplicates) and `_archive/superseded-2026-09/` (5 docs the atlas marked superseded, incl. `musubu_project_overview`). Mapping tables in each. Nothing deleted. |
 | Public concept page | `Portal/musubu-concept.html` → published at https://claude.ai/code/artifact/fce13cb6-601c-4587-bb92-25afce8427bc (private) |
 | Its plan | `EXPLAINER-PLAN.md` |
 | Technical concept page | `Portal/musubu-coordination-layer.html` → https://claude.ai/code/artifact/c0bdb84b-06f2-4b29-a397-53a1e4ee0ecc (private) |
@@ -125,7 +129,21 @@ Nothing was broken; they were simply unreachable. So: after any writing session,
 check that every new file is in the README, and regenerate `OPEN_THREADS.md`.
 An unindexed document is invisible no matter how good it is.
 
-## Open, as of 2026-08-27
+## Git
+
+The project became a local git repository on 2026-09-17 so the consolidation pass
+could be reviewed as a diff. `.gitignore` keeps binaries, decks, screenshots and the
+Pinterest references out. Nothing is pushed anywhere. A public repository is the
+literal form of "steal it if you want" and is Wai's decision; `LICENSE.md` (CC BY 4.0)
+is proposed and marked as such.
+
+## Open, as of 2026-09-17
+
+- **Wai's decisions from the September pass:** contact method (two placeholders, `index.html` and the concept page) · licence (CC BY 4.0 proposed) · whether the Osaka share-house sentence goes on `index.html`, in his words · whether to publish `index.html` and make the repo public.
+- Japanese: `musubu_concept_ja_draft.md` exists and needs a native reader. So does `musubu_intake_ja_draft.md`.
+- No resident-facing surface, no day-one artifact (OPEN_THREADS 61, 62).
+
+## Open, as of 2026-08-27 (kept)
 
 - Contact method for the concept page. There is a dashed placeholder on it.
 - Japanese translation. `EXPLAINER-PLAN.md` treats it as required before launch,

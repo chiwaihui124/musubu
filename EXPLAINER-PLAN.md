@@ -79,8 +79,15 @@ this — "Example Town", labelled illustrative, qualitative values only.
 Twelve existing prototypes in `Portal/` will pull toward shipping a product
 tour. They are **illustrations inside the argument**, not destinations.
 
+## Resolved 2026-09-17
+
+- **Front door is the scene, not the argument.** `Portal/index.html` opens on the share-house screen (49 of 56) and offers three depths: this concept page at five minutes, the coordination-layer page at seven, the atlas for everything. The concept page keeps its own opening. This follows Wai's own framing on 2026-08-30 and 2026-09-16, both of which began with the portal screen years in.
+- **Shape is a stack, not a single artifact.** A deck compresses too far and one town undersells; a stack a stranger enters at any depth does neither.
+
 ## Open decisions
 
 - [ ] How interactive screen 3 really is — most of the engineering sits here
 - [ ] Whether screen 4 (life hinges) is next to draft
 - [ ] Where it gets hosted, and under what domain
+- [ ] Contact method (placeholders on `index.html` and the concept page)
+- [ ] Licence: CC BY 4.0 proposed in `LICENSE.md`

@@ -66,6 +66,12 @@ It also means a very small team can do what previously needed a large one — wh
 
 ---
 
+## Why Would Yours Work When a Decade of Policy Did Not
+
+*Added September 2026, from `01_Foundation/musubu_coordination_theory.md` §6. This is the first question an informed reader asks, and it needs a one-paragraph answer.*
+
+Not because the idea is cleverer. Because it pulls a different lever. Systems thinking ranks interventions from weakest to strongest: adjusting numbers (subsidies, grants, standards) is the weakest; changing what information exists and what rules apply is several rungs higher. A decade of 地方創生 worked almost entirely at the weakest level: a ¥1,000,000 relocation grant, twelve hundred roadside stations, renovated facilities. Musubu changes what people can see (who else is coming, what stops people, what lapsed) and one rule (nothing binds until enough others bind). Those are information and rule levers, they are far cheaper than grant programmes, and the record shows the lower levers have already been pulled hard.
+
 ## Why Kyushu, and Why Fukuoka Specifically
 
 - **The pilot is on the same island.** Bungotakada is ~2 hours away. This is a Kyushu problem with a Kyushu test site.

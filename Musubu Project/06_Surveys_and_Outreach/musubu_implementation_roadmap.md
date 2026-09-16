@@ -4,6 +4,8 @@ Famichi renamed to Musubu throughout, matching every other migrated document. --
 # Musubu Project Implementation Roadmap
 ## From Concept to First Community Launch
 
+> ⚠️ **Stale sequencing, kept for its phase structure.** Written in the Famichi era. The month numbers and the 50-family opening threshold no longer reflect current thinking. The current sequence is in `02_Platform/musubu_coordination_architecture.md` §"Sequencing Implication": demand board first, a cohort sized to be finishable, municipal partnership *after* first proof. Read this document for the shape of the phases, not the dates.
+
 ---
 
 ## Overview

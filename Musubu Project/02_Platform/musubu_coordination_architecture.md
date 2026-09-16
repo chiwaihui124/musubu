@@ -1,7 +1,7 @@
 # Musubu Coordination Architecture
 ## Generalising the Threshold — and Solving the Cold Start
 
-*Written August 2026. Extends `musubu_business_coordination.md` and `musubu_platform_vision_v2.md`.*
+*Written August 2026. Extends `musubu_business_coordination.md` and `musubu_platform_vision_v2.md` (archived in `_archive/superseded-2026-09/`).*
 
 ---
 

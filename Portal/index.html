@@ -1,0 +1,358 @@
+<meta charset="utf-8">
+<title>Musubu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1;
+  --card:#F8F9FA;
+  --screen:#FFFFFF;
+  --ink:#131B23;
+  --ink-2:#4B5661;
+  --ink-3:#7E8992;
+  --rule:#D3DADE;
+  --rule-soft:#E2E7EA;
+  --indigo:#1E4B76;
+  --indigo-deep:#12365A;
+  --indigo-wash:#E1E8EF;
+  --lapse:#9C5330;
+  --moss:#4A6B4F;
+
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418; --card:#161E25; --screen:#111A21;
+    --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+    --rule:#26313A; --rule-soft:#1D262D;
+    --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+    --lapse:#C9825A; --moss:#89AE8E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1418; --card:#161E25; --screen:#111A21;
+  --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+  --rule:#26313A; --rule-soft:#1D262D;
+  --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+  --lapse:#C9825A; --moss:#89AE8E;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.72;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.wrap{max-width:39rem; margin-inline:auto; padding:3.5rem 1rem 5rem}
+
+.mast{display:flex; align-items:baseline; gap:0.75rem; padding-bottom:2.75rem}
+.mast .name{font-family:var(--display); font-weight:500; font-size:1.05rem; letter-spacing:0.02em}
+.mast .kanji{font-family:var(--display); color:var(--indigo); font-size:1.05rem}
+.mast .stamp{margin-left:auto; font-family:var(--mono); font-size:0.72rem; color:var(--ink-3); letter-spacing:0.04em; text-align:right}
+
+h1{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.7rem,5.2vw,2.5rem); line-height:1.34; letter-spacing:-0.005em;
+  margin:0 0 1.5rem; text-wrap:balance;
+}
+h1 em{font-style:normal; color:var(--indigo)}
+.standfirst{font-size:1.05rem; color:var(--ink-2); margin:0 0 1.1rem; max-width:34rem}
+.readtime{font-family:var(--mono); font-size:0.75rem; color:var(--ink-3); letter-spacing:0.04em; margin:0 0 2.2rem}
+
+section{padding-top:2.6rem; margin-top:2.6rem; border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none; margin-top:0; padding-top:0}
+h2{font-family:var(--display); font-weight:500; font-size:1.32rem; line-height:1.4; margin:0 0 1.1rem; text-wrap:balance}
+p{margin:0 0 1.05rem; max-width:34rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600; color:var(--ink)}
+a{color:var(--indigo); text-decoration:none; border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radius:2px}
+
+/* ---------- the screen ---------- */
+.screen{
+  background:var(--card); border:1px solid var(--rule); border-radius:4px;
+  overflow:hidden; margin:0 0 0.9rem;
+}
+.chrome{
+  display:flex; align-items:center; gap:0.6rem;
+  padding:0.55rem 0.9rem; border-bottom:1px solid var(--rule-soft);
+  font-family:var(--mono); font-size:0.7rem; color:var(--ink-3); letter-spacing:0.03em;
+}
+.chrome .dot{width:0.55rem; height:0.55rem; border-radius:50%; background:var(--rule)}
+.chrome .right{margin-left:auto}
+.tile{background:var(--screen); padding:1.05rem 1.1rem 1.15rem}
+.tile .lane{
+  font-family:var(--mono); font-size:0.66rem; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.45rem;
+}
+.tile.forming .lane{color:var(--indigo)}
+.tile h4{font-family:var(--display); font-weight:500; font-size:1.15rem; line-height:1.35; margin:0 0 0.3rem}
+.tile .where{font-size:0.86rem; color:var(--ink-3); margin:0; line-height:1.55}
+.meter{height:6px; background:var(--rule-soft); border-radius:3px; margin:0.95rem 0 0.5rem; overflow:hidden}
+.meter .fill{display:block; height:100%; width:0; background:var(--indigo); border-radius:3px; transition:width 900ms cubic-bezier(.2,.7,.2,1)}
+.screen.lit .meter .fill{width:var(--pct)}
+.count{font-size:0.9rem; color:var(--ink-2); display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap}
+.count b{font-family:var(--mono); font-size:1.05rem; color:var(--ink); font-weight:500}
+.count .left{margin-left:auto; font-family:var(--mono); font-size:0.74rem; color:var(--indigo); letter-spacing:0.03em}
+.who{margin:1rem 0 0.85rem}
+.who .cap{font-family:var(--mono); font-size:0.66rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.45rem}
+.stack{display:flex; height:8px; border-radius:2px; overflow:hidden; gap:2px}
+.stack span{display:block; width:var(--w)}
+.stack .s1,.legend .s1{background:var(--indigo)}
+.stack .s2,.legend .s2{background:var(--indigo); opacity:0.6}
+.stack .s3,.legend .s3{background:var(--indigo); opacity:0.3}
+.legend{list-style:none; margin:0.5rem 0 0; padding:0; display:flex; gap:1rem; flex-wrap:wrap; font-size:0.78rem; color:var(--ink-2)}
+.legend i{display:inline-block; width:0.55rem; height:0.55rem; border-radius:1px; margin-right:0.35rem; vertical-align:middle}
+.fine{font-size:0.82rem; color:var(--ink-3); margin:0.85rem 0 0; line-height:1.55}
+.caption{font-size:0.82rem; color:var(--ink-3); margin:0 0 0; max-width:34rem}
+
+/* ---------- doors ---------- */
+.doors{display:flex; flex-direction:column; gap:0.75rem; margin:1.4rem 0 0}
+.door{
+  display:grid; grid-template-columns:6.2rem 1fr; gap:1rem; align-items:start;
+  background:var(--card); border:1px solid var(--rule); border-radius:3px;
+  padding:1.05rem 1.15rem; color:inherit; border-bottom:1px solid var(--rule);
+}
+.door:hover{border-color:var(--indigo)}
+@media (max-width:33rem){ .door{grid-template-columns:1fr; gap:0.3rem} }
+.door .t{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--indigo); padding-top:0.3rem}
+.door .h{font-family:var(--display); font-weight:500; font-size:1.08rem; line-height:1.4; color:var(--ink); margin-bottom:0.2rem}
+.door .d{font-size:0.9rem; color:var(--ink-2); line-height:1.6}
+
+/* ---------- true / not ---------- */
+.truth{
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:3px;
+  margin:1.4rem 0 0; overflow:hidden;
+}
+@media (max-width:33rem){ .truth{grid-template-columns:1fr} }
+.truth .col{background:var(--card); padding:1rem 1.1rem 1.1rem}
+.truth .cap{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.7rem}
+.truth .col.no .cap{color:var(--lapse)}
+.truth ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.45rem}
+.truth li{font-size:0.88rem; line-height:1.55; color:var(--ink-2); position:relative; padding-left:0.9rem}
+.truth li::before{content:""; position:absolute; left:0; top:0.68rem; width:0.4rem; height:1px; background:var(--ink-3)}
+.truth .col.no li::before{background:var(--lapse)}
+
+/* ---------- take it ---------- */
+.ask{
+  background:var(--card); border:1px solid var(--rule); border-radius:3px;
+  padding:1.35rem 1.3rem; margin-top:1.4rem; display:flex; flex-direction:column; gap:1.1rem;
+}
+.ask-item .h{font-weight:600; font-size:0.97rem; margin-bottom:0.2rem}
+.ask-item .d{font-size:0.9rem; color:var(--ink-2); line-height:1.62}
+.slot{font-family:var(--mono); font-size:0.78rem; color:var(--lapse); border-bottom:1px dashed var(--lapse)}
+
+footer{margin-top:3.2rem; padding-top:1.4rem; border-top:1px solid var(--rule); font-size:0.79rem; line-height:1.7; color:var(--ink-3)}
+footer p{max-width:34rem; margin:0 0 0.7rem}
+footer p:last-child{margin:0}
+</style>
+
+<div class="wrap">
+
+  <div class="mast">
+    <span class="name">Musubu</span>
+    <span class="kanji">結</span>
+    <span class="stamp">An open concept · 2026</span>
+  </div>
+
+  <h1>A share house in a town of four thousand. <em>Forty-nine of fifty-six rooms already taken.</em></h1>
+
+  <p class="standfirst">
+    This is a concept for how people could move to Japan's emptying towns together instead of
+    alone. It was worked out in detail by one person over about eighteen months, and it is online
+    so that anyone can read it, take it, or build it.
+    <!-- @@ one sentence here is yours if you want it: where this came from. The Osaka share house, the hundred units, the friends. It is the fact that gives you standing to propose this and it is on no page yet. Leave it out if it feels like too much. -->
+  </p>
+
+  <p class="readtime">Nothing here exists yet. Every screen on this site is illustrative.</p>
+
+  <section>
+
+    <div class="screen" id="screen">
+      <div class="chrome">
+        <span class="dot"></span>
+        <span>musubu.jp / kamisato</span>
+        <span class="right">SIGNED IN</span>
+      </div>
+      <article class="tile forming">
+        <span class="lane">Forming</span>
+        <h4>Share house in the old Ōhashi ryokan</h4>
+        <p class="where">Kamisato, Ōita · doors open April 2027 · ¥42,000 a month including utilities</p>
+        <div class="meter"><span class="fill" style="--pct:87.5%"></span></div>
+        <div class="count"><b>49</b> of 56 committed <span class="left">7 spots left</span></div>
+        <div class="who">
+          <span class="cap">Who is coming</span>
+          <div class="stack" aria-hidden="true">
+            <span class="s1" style="--w:41%"></span>
+            <span class="s2" style="--w:38%"></span>
+            <span class="s3" style="--w:21%"></span>
+          </div>
+          <ul class="legend">
+            <li><i class="s1"></i>20s · 41%</li>
+            <li><i class="s2"></i>30s · 38%</li>
+            <li><i class="s3"></i>40s and up · 21%</li>
+          </ul>
+        </div>
+        <p class="fine">Closes 14 March. Fully refundable until then. If it does not fill, nothing happens and everybody gets their deposit back.</p>
+      </article>
+    </div>
+
+    <p class="caption">
+      Illustrative. Kamisato is not a real town and none of these numbers are real. The shape of the
+      screen is the idea: you can see who else is going before you decide, and nobody moves unless
+      enough people do.
+    </p>
+  </section>
+
+  <section>
+    <h2>Three ways in</h2>
+
+    <p>
+      Read as much or as little as you like. The three below go from a single page to the whole
+      folder.
+    </p>
+
+    <div class="doors">
+      <a class="door" href="musubu-concept.html">
+        <span class="t">Five minutes</span>
+        <span>
+          <span class="h">The whole concept on one page</span>
+          <span class="d">What the problem actually is, how the mechanism works, what is in the way, and what was learned. Written in the first person by the person who made it.</span>
+        </span>
+      </a>
+      <a class="door" href="musubu-coordination-layer.html">
+        <span class="t">Seven minutes</span>
+        <span>
+          <span class="h">Musubu, five years in, drawn as a screen</span>
+          <span class="d">The share house above, the town's instrument panel around it, and the loop underneath that turns what stops people into options they can commit to. For people who build things.</span>
+        </span>
+      </a>
+      <a class="door" href="musubu-atlas.html">
+        <span class="t">As long as you like</span>
+        <span>
+          <span class="h">Everything</span>
+          <span class="d">Fifty-five documents and sixty-eight open questions on one page, filterable by branch and by how much each one rests on. The thesis, the mechanism, the economics, the pilot town research, and every number tiered by its source.</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>What is true</h2>
+
+    <div class="truth">
+      <div class="col yes">
+        <span class="cap">Exists</span>
+        <ul>
+          <li>A thesis about why people do and do not relocate</li>
+          <li>A specified mechanism, every part labelled by how much is known about it</li>
+          <li>A candidate first town, studied from public sources</li>
+          <li>Economics, housing and co-op models with their assumptions marked</li>
+          <li>A register that tiers every load-bearing number</li>
+          <li>Fifteen prototype screens</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <span class="cap">Does not exist</span>
+        <ul>
+          <li>A single survey respondent</li>
+          <li>A town that has agreed to anything</li>
+          <li>A company, a team, or funding</li>
+          <li>A verified renovation labour cost</li>
+          <li>A legal opinion on holding deposits</li>
+          <li>A day-one version of any screen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Take it</h2>
+
+    <p>
+      The person who made this would rather it existed than owned it. Everything on this site and
+      in the folder behind it is released for anyone to use, adapt, or build on, with attribution.
+      <!-- @@ licence: CC BY 4.0 is proposed in LICENSE.md and 00_START_HERE.md. Your call. If you would rather keep it informal, cut the second sentence here and delete LICENSE.md. -->
+    </p>
+
+    <div class="ask">
+      <div class="ask-item">
+        <div class="h">The whole folder</div>
+        <div class="d">
+          Every document, the prototypes, the claims register and the open questions.
+          <span class="slot">repository link to be added</span>
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="h">Reach out</div>
+        <div class="d">
+          If you think it is naive, say so. If you want to build it, say so. If you know someone
+          who should see it, send it to them.
+          <span class="slot">contact method to be added</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      An independent project, not connected to any company or government body. Bungotakada, Ōita is
+      being studied as a possible first location. Nothing has been proposed to the city and no figure
+      on this site has been agreed with anyone.
+    </p>
+    <p>
+      Everything here describing what could happen is a scenario, not a forecast.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var s = document.getElementById('screen');
+  if(!s) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){ s.classList.add('lit'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ s.classList.add('lit'); io.disconnect(); } });
+  }, {threshold:0.35});
+  io.observe(s);
+})();
+</script>
+
+<!-- ====================================================================
+     DEV ONLY. Surfaces review notes visibly, on localhost and file://.
+     Inert on any other host. Same block as musubu-concept.html.
+     The marker is built as '@'+'@' so tools/review-check.sh does not
+     flag this block forever.
+     ==================================================================== -->
+<script>
+(function(){
+  var dev = location.protocol === 'file:' ||
+            ['localhost','127.0.0.1','[::1]'].indexOf(location.hostname) !== -1;
+  if(!dev) return;
+  var MARK = '@' + '@';
+  var css = document.createElement('style');
+  css.textContent =
+    '.devnote{display:inline-block;font-family:var(--mono);font-size:0.72rem;line-height:1.5;' +
+      'color:var(--paper);background:var(--lapse);padding:0.1rem 0.45rem;border-radius:2px;margin:0 0.2rem}' +
+    '@media print{.devnote{display:none}}';
+  document.head.appendChild(css);
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+  var n, el;
+  while((n = walker.nextNode())){
+    if(n.nodeValue.indexOf(MARK) === -1) continue;
+    el = document.createElement('span');
+    el.className = 'devnote';
+    el.textContent = n.nodeValue.split(MARK).pop().trim() || '(empty note)';
+    n.parentNode.insertBefore(el, n.nextSibling);
+  }
+})();
+</script>

@@ -1,7 +1,7 @@
 # Town Archetype Axes
 ## Four Dimensions, Not One List — Plus Affinity Towns and the Commons
 
-*Written August 2026. Restructures the archetype model in `musubu_project_overview.md` and `musubu_platform_intelligence.md`.*
+*Written August 2026. Restructures the archetype model in `musubu_project_overview.md` (archived in `_archive/superseded-2026-09/`) and `musubu_platform_intelligence.md`.*
 
 ---
 

@@ -43,7 +43,7 @@ The rejected entries carry felt-as lines too, and there the line *is* the reason
 
 Each mechanic is tagged with the fear or want it serves. Six of them: `alone` · `illegible` · `irreversible` · `belonging` · `momentum` · `trust`.
 
-**Current distribution is itself a finding.** `illegible` is served by roughly a third of the board, which is consistent with the project's own thesis — the choice was never Tokyo versus the countryside, it was Tokyo versus a question mark. But `momentum` is served by **two** mechanics out of thirty-one, and momentum is what converts a visitor once anything is actually running. That's the clearest gap on the board.
+**Current distribution is itself a finding.** `illegible` is served by roughly a third of the board, which is consistent with the project's own thesis — the choice was never Tokyo versus the countryside, it was Tokyo versus a question mark. But `momentum` was served by **two** mechanics out of thirty-one when this was written, and momentum is what converts a visitor once anything is actually running. That was the clearest gap on the board. *September 2026: #32, #33 and the extension to #30 bring it to five. See `01_Foundation/musubu_coordination_theory.md`.*
 
 ---
 
@@ -90,6 +90,10 @@ This rule exists because two of the 2024 prototypes gave the same town two diffe
 | 29 | Exit visibility | `SKETCH` | irreversible | portal_taxonomy |
 | 30 | **Momentum visible from outside** | `SKETCH` | momentum | not yet |
 | 31 | **Paired thresholds** | `SKETCH` | illegible | not yet |
+| 32 | **Self-set thresholds and the cohort fixpoint** | `SKETCH` | illegible · momentum | coordination_theory §2 |
+| 33 | **The refund bonus** | `TESTABLE` | momentum · irreversible | coordination_theory §3 |
+| 34 | **Paired pledges and the pledge graph** | `SKETCH` | alone | coordination_theory §4 |
+| 35 | **The conflict path and graduated response** | `TESTABLE` | trust · irreversible | coordination_theory §8 |
 | S1 | **The funded return** | `TESTABLE` | irreversible | **funded_return_model** |
 | S2–S8 | Speculative wing | `SKETCH` | — | not yet |
 
@@ -338,6 +342,8 @@ A thing that is *filling*, not a thing that *needs filling*.
 
 **This is a different emotional engine from §1 and it was missing.** All-or-nothing is *"nothing happens unless enough of us commit"* — fear of being alone, and it's an ask. Momentum is *"this is filling, get in before it's gone"* — and it's an invitation. Opposite mechanics; you almost certainly need both, at different stages of the funnel. Momentum can't do cold start, but it very likely converts better than anything else on this board once there is something real to show.
 
+*Extended September 2026 (`coordination_theory` §5): a count people check privately produces mutual knowledge, not common knowledge. Momentum needs a **moment**. The closing of a threshold should be an event at a stated time, live, with the result read out, the way a 講 allocated its pot in a room. Felt as: "We all found out at the same time, in the same place."*
+
 ### 31. Paired thresholds · `SKETCH` · *illegible* · **new**
 Two counts that must clear **in ratio**, not independently.
 - **Felt as:** *"They won't take forty of us until there are twelve people to look after us properly."*
@@ -345,6 +351,38 @@ Two counts that must clear **in ratio**, not independently.
 - **Spec:** not yet
 
 Forty elders and three caregivers isn't a partial success — it's a crisis. Structurally different from every other threshold here, and it applies wherever a service has a staffing floor: eldercare (elders ↔ carers), school (children ↔ teachers), clinic (patients ↔ staff). Connects `musubu_eldercare_wellness_town.md` to §3, which currently don't reference each other.
+
+### 32. Self-set thresholds and the cohort fixpoint · `SKETCH` · *illegible · momentum* · **new, Sep 2026**
+Instead of one fixed number, each pledge carries its own: *I go if at least N others go.* Sort ascending; the cohort forms at the largest k where the k-th threshold is at most k − 1.
+- **Felt as:** *"They didn't tell me the number. They asked me mine."*
+- **Next move:** add question 06 to the demand test and look at the distribution. Cost: one question.
+- **Spec:** `coordination_theory` §2, with a worked example
+
+Granovetter's threshold model, elicited directly rather than inferred. The remaining count becomes honest about heterogeneity ("forms at 12 the moment three more people with a threshold of 11 or under arrive"), and a visible wall lowers thresholds because pledges are revisable and the count is public. Anchoring is the design risk.
+
+### 33. The refund bonus · `TESTABLE` · *momentum · irreversible* · **new, Sep 2026**
+If the threshold fails, every pledger gets the deposit back **plus a small gift**. Pledging early becomes the dominant move.
+- **Felt as:** *"If it doesn't happen I'm slightly ahead. There's no reason to wait."*
+- **Next move:** decide who funds it in a first cohort (municipality, sponsor, or the platform) and at what size relative to the deposit.
+- **Spec:** `coordination_theory` §3
+
+Tabarrok's dominant assurance contract. The only mechanic on the board that acts on cold start directly, and it converts a failed threshold into a story with an お礼 attached rather than a silence. Keep the bonus small enough that the deposit still filters.
+
+### 34. Paired pledges and the pledge graph · `SKETCH` · *alone* · **new, Sep 2026**
+*I go if [named person] goes, and at least N others go.* Two or three pledges bound together, jointly refundable.
+- **Felt as:** *"I'm not going alone and I'm not going with strangers. I'm going with Yuki, and forty other people."*
+- **Next move:** sketch the pair object and the composition line ("17 of the 49 came as pairs or triads").
+- **Spec:** `coordination_theory` §4
+
+Complex contagion (Centola and Macy): moving house spreads through clusters of overlapping ties, not through broadcast. §6 recruits pre-assembled groups from the supply side; this makes the friend the unit from the demand side. Pair status is also a retention predictor worth tracking from cohort one.
+
+### 35. The conflict path and graduated response · `TESTABLE` · *trust · irreversible* · **new, Sep 2026**
+Before anyone commits, the cohort portal states plainly what happens when someone stops pulling their weight (in steps, mild first) and who a dispute goes to.
+- **Felt as:** *"I know what happens if it goes wrong between us, and it isn't exile."*
+- **Next move:** write both paragraphs for the cohort portal. Look at how a 講 handled a missed contribution.
+- **Spec:** `coordination_theory` §8
+
+The two Ostrom design principles the corpus had no answer for, and the two that end intentional communities in practice. Uncomfortable to write for a project whose register is warmth, which is exactly why it makes the warmth credible.
 
 ---
 

@@ -32,7 +32,7 @@ After analyzing 32+ Japanese towns needing repopulation, **three distinct tiers*
 
 **2. Perfect Population Size**
 - 22,500 = Large enough for infrastructure
-- 50 families = 2.2% population increase (highly visible impact)
+- 50 families ≈ 150–200 people, under 1% of the town, concentrated in time and place. *(An earlier draft said 2.2%, which was arithmetically wrong for 22,500 people; see `CLAIMS_REGISTER.md`.)*
 - Existing schools, healthcare, services
 - Not so small that we overwhelm the community
 - Not so large that our impact gets lost
@@ -343,7 +343,7 @@ After analyzing 32+ Japanese towns needing repopulation, **three distinct tiers*
 | **Replication Potential** | Very High (thousands of similar towns) | Medium (unique circumstances) | High (hundreds of similar cities) | National impact if scaled |
 | **Risk Level** | LOW | MEDIUM | MEDIUM-HIGH | Determines whether suitable for first pilot |
 | **Timeline to Launch** | 12-18 months | 18-24 months | 24-36 months | Resource allocation planning |
-| **Population Impact** | 2.2% increase | 2.3% increase | 0.3% increase | Visibility of results |
+| **Population Impact** | under 1% (corrected from 2.2%) | 2.3% increase | 0.3% increase | Visibility of results |
 | **National Attention** | High (small town success) | Very High (Fukushima recovery) | Medium (regional model) | PR and replication catalyst |
 | **Musubu Model Fit** | Family Growth (perfect) | Tech Training (perfect) | Multiple models (complex) | Execution complexity |
 

@@ -103,4 +103,14 @@ The project has been describing itself in imported terms — *Kickstarter for co
 **Handle with care.** Appropriating a traditional term to dress up a startup is a recognisable and unattractive move, and older residents will spot it instantly. Use it only where the mechanism genuinely *is* mutual obligation — the build programme, the co-ops, the commons — and never as decoration on the software.
 
 → *Needs a native reader's judgement on whether this lands as respectful or presumptuous.*
+
+### 本音 と 建前, 空気を読む, 出る杭は打たれる
+
+*Added September 2026, from `musubu_coordination_theory.md` §1.*
+
+Ordinary words, not borrowed institutions, but they name the project's second diagnosis exactly. The true feeling and the public face; the skill of inferring what everyone believes everyone believes; the cost of being first. The tatemae is a coordination equilibrium, not a flaw, and its one weakness is that it has no way to discover when the honne underneath has quietly become the majority. A conditional pledge is a way of saying the honne without being the stake that sticks out.
+
+**Same care as 結 and 講.** A foreigner reaching for these words can land as accurate or as cliché, and only a native reader can say which. Use them where they do work (the twenties page, where the status fear is the real one) and nowhere as decoration.
+
+→ *Also already recorded in the profile-site content plan and on no Musubu page: Wai lived in a hundred-unit Oak House share house in Osaka and made friends there. That is the one biographical fact that gives him standing to propose this. Whether it goes on a page is his call; if it does, it is his sentence.*
 - Who owns tone once a team exists, and how is it kept from drifting into standard relocation-marketing language?

@@ -133,7 +133,7 @@ This is checkable before any survey runs: 総務省's 住民基本台帳人口�
 
 The current sequence is *choose a town → recruit people into it*. That is the sequence every failed regional-revitalisation programme has used, and it contradicts the product's own thesis.
 
-**Invert it.** The instruments already exist — `musubu_national_survey.md`, `musubu_demand_test.md`, `musubu_intake_instrument.md`. Add a geography question with candidate regions, run it once nationally, and see where demand actually clusters.
+**Invert it.** The instruments already exist — `musubu_demand_test.md` and `musubu_intake_instrument.md` (the older `musubu_national_survey.md` is archived). Add a geography question with candidate regions, run it once nationally, and see where demand actually clusters.
 
 > **The first threshold isn't a town's. It's the survey's.** Whichever candidate region's cluster clears first becomes pilot one.
 

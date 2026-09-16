@@ -1,6 +1,8 @@
 # Musubu Project — Master Index
 
-> **One-line summary:** Musubu is a coordinated migration platform that solves Japan's rural depopulation crisis by synchronizing family, business, and government commitments — so that communities form before anyone has to move alone.
+> **One-line summary:** Musubu is a concept for coordinated relocation to Japan's emptying towns. A town says what it is short of; people commit conditionally; the number is public; if it fills, everyone arrives in the same season, and if it does not, nobody has moved anywhere. What coordination adds is specification, not persuasion: a town you have never lived in becomes something you can weigh against Tokyo on the same terms.
+
+> **If you are a person opening this folder for the first time, read `00_START_HERE.md`.** This README is the full index and was written for people already working inside the project.
 
 ---
 
@@ -24,22 +26,23 @@ Start with `01_Foundation` to understand the "why." Move to `02_Platform` for th
 
 ```
 Musubu Project/
+├── 00_START_HERE.md                   ★ Sep 2026 — for a first-time reader; read this before the README
 ├── README.md                          ← You are here
 ├── CLAIMS_REGISTER.md                 ★ Aug 2026 — check before any number leaves the building
 ├── OPEN_THREADS.md                    ★ Aug 2026 — all 60 unresolved questions, tagged by what closes them
 ├── PORTAL_REVIEW_APRIL2026.md         Gap analysis: the prototypes against the intelligence system
 ├── INTEGRATION_SUMMARY_AUGUST2026.md  What changed and why, August 2026
+├── INTEGRATION_SUMMARY_SEPTEMBER2026.md ★ Sep 2026 — the consolidation pass and the theory document
+├── THREE_READERS_SEPT2026.md          ★ Sep 2026 — a municipal officer, a founder and a 23-year-old read the corpus
 │
 ├── 01_Foundation/                     The core "why" — Japan's crisis and Musubu's answer
-│   ├── musubu_project_overview.md
 │   ├── musubu_transition_thesis.md    ★ Aug 2026 — revised core insight + the offer
 │   ├── musubu_voice_and_posture.md    ★ Aug 2026 — the three words; vision vs. day-one
 │   ├── musubu_life_stage_doors.md     ★ Aug 2026 — four entry points; the 20s go first
+│   ├── musubu_coordination_theory.md  ★ Sep 2026 — the mechanism in eight disciplines; five new mechanics
 │   └── musubu_time_revolution.md
 │
 ├── 02_Platform/                       The digital coordination tool
-│   ├── musubu_platform_vision.md
-│   ├── musubu_platform_vision_v2.md
 │   ├── musubu_coordination_architecture.md  ★ Aug 2026 — generalized threshold, cold start
 │   ├── musubu_business_coordination.md
 │   ├── musubu_platform_intelligence.md
@@ -71,14 +74,13 @@ Musubu Project/
 │   └── musubu_precedent_research.md   ★ Aug 2026 — why a decade of policy failed
 │
 ├── 06_Surveys_and_Outreach/           Musubu — the public ignition mechanism
-│   ├── musubu_survey_strategy.md
 │   ├── musubu_living_profile.md       ★ Aug 2026 — survey becomes a standing register
 │   ├── musubu_intake_instrument.md    ★ Aug 2026 — the actual questions + census sprint
 │   ├── musubu_intake_ja_draft.md      ★ Aug 2026 — 日本語ドラフト（要ネイティブレビュー）
+│   ├── musubu_concept_ja_draft.md     ★ Sep 2026 — concept page in Japanese, for native review
 │   ├── musubu_demand_test.md          ★ Aug 2026 — the one number worth going to get
 │   ├── musubu_implementation_roadmap.md ★ Aug 2026 — promoted from root; the only end-to-end sequence
 │   ├── musubu_dhh_outreach.md         ★ Aug 2026 — cold note to a hostile-reader technologist
-│   ├── musubu_national_survey.md
 │   └── musubu_company_survey.md
 │
 ├── 07_Ideas_and_Future/               Parking lot — ideas not yet prioritized
@@ -96,7 +98,11 @@ Musubu Project/
 *Added 2026-08-30 after a full scan of the project directory. Roughly a third of
 the project's material lives outside `Musubu Project/` and none of it was indexed.*
 
-### `Portal/` — fifteen prototype pages
+### `Portal/` — sixteen pages, and a front door
+
+**`index.html`** (September 2026) is the front door. It opens on the share-house screen (49 of 56 committed), offers three ways in (the concept page at five minutes, the coordination-layer page at seven, the atlas for everything), states what exists and what does not, and closes with the licence and a contact placeholder. It is the answer to the question the project was stuck on: not one artifact at one depth, but a stack a stranger can enter wherever they like. Two `@@` notes on it are Wai's to resolve (a standing sentence about the Osaka share house; the licence).
+
+### `Portal/` — the fifteen prototype pages
 
 All are **vision artifacts** except where noted, and every one now carries a
 `<meta charset="utf-8">` so the Japanese renders (twelve were missing it as of the
@@ -159,6 +165,14 @@ population-tier research in particular is the evidence base under
 `02_Platform/musubu_business_coordination.md`, which currently asserts the service
 thresholds without pointing at where they came from.*
 
+### `_archive/superseded-2026-09/`
+
+Five documents the August atlas marked `superseded`, moved out of the working
+folders on 2026-09-17 so a first-time reader meets the current framing first:
+`musubu_project_overview`, `musubu_platform_vision`, `musubu_platform_vision_v2`,
+`musubu_national_survey`, `musubu_survey_strategy`. Mapping table in that
+folder's `README.md`. Nothing deleted.
+
 ### `_archive/famichi-era/`
 
 Sixteen superseded Famichi-era markdown files, moved out of the project root on
@@ -177,10 +191,8 @@ Not indexed individually.
 
 ### 01_Foundation — The "Why"
 
-**`musubu_project_overview.md`**
-The canonical starting point. Defines the core insight (rural depopulation is a coordination failure, not an individual choice problem), explains the Kickstarter-model solution, and maps out the five town archetypes (family growth, tech training, elder care, creative arts, sustainable agriculture). Read this first.
-→ *Connects to: everything. This is the spine.*
-→ ⚠️ *Two supersessions, both in `musubu_transition_thesis.md`. Its "people want rural living" framing is wrong (state, not trait), and **its "coordination failure / nobody moves alone" diagnosis is wrong too — it is not a standoff, it is illegibility.** The archetype list is superseded by `musubu_archetype_axes.md`.*
+**`musubu_project_overview.md`** → **archived September 2026** in `_archive/superseded-2026-09/`
+The original spine, and for a year the canonical starting point. Both of its central claims were corrected in August 2026 by `musubu_transition_thesis.md` (wanting rural life is a state, not a trait; the problem is illegibility, not a standoff) and its six fixed town types were replaced by `musubu_archetype_axes.md`. It was archived because a stranger opening this folder met the retired diagnosis before the current one. Start with `musubu_transition_thesis.md` instead.
 
 **`musubu_transition_thesis.md`** ★ *August 2026*
 
@@ -202,6 +214,10 @@ The register everything else should be delivered in, in three words: **coordinat
 Corrects a real skew: everything the project had built pointed at families and the elderly, while **the twenty-somethings are the strongest use case in the model and nothing was built for them.** The argument for making the first cohort young: they are the cheapest to move (the blocker taxonomy is nearly empty for a 23-year-old, which means coordination is almost the *only* thing stopping them), the highest-leverage to keep (forty years, the children, the businesses), the group for whom simultaneous arrival is a memory rather than an abstraction — and the only segment where the offer is *genuinely competitive*, since what Tokyo gives a 23-year-old is expensive rent, non-regular work and a social life that costs money. Defines **four doors** — one mechanism, four completely different pitches: 20s (*not retirement — work, a trade, twenty people your age, a fifth of the cost*), 30s (*not starting over — skills somewhere they count for more*), 50s (*a town that tells you before you sign whether the customers exist*), and retired (*not somewhere to be looked after, somewhere to be needed* — the framing every rural pitch to older people gets wrong, since what people miss after retiring is being needed, which a shrinking town has in surplus). Records the prototype's design decisions: the competitor is not city-vs-country but *this vs. moving to Tokyo for a job you don't care about*; lead with the full money comparison (¥21,000 left over versus ¥103,000); state six honest downsides at the same size as the upsides, because **the status anxiety — being read as having failed — is the real one and no economic argument touches it**; and make leaving designed-in. Connects to **intentional neighbourhoods**: districts with soft edges, planned for balance rather than accreting chaotically, which is how four cohorts can share one small town. Closes by flagging **immigration** as the genuinely unexamined question cutting across all four doors — coordinated arrival is plausibly worth *more* to a foreign arrival than a Japanese one.
 → *Connects to: transition_thesis (this is it operationalised), density_ladder (intentional neighbourhoods; what holds a 23-year-old at 27), intake_instrument (the blocker taxonomy is near-empty at 23), eldercare_wellness_town (the immigration thread), voice_and_posture (honest downsides)*
 
+**`musubu_coordination_theory.md`** ★ *(NEW, September 2026, drafted by Claude at Wai's request)*
+The coordination idea pushed past where the corpus had taken it, using eight disciplines. **Places are illegible, and so are people**: preference falsification and pluralistic ignorance (Kuran), in Japanese 本音/建前 and 出る杭は打たれる, mean nobody can see what anyone else privately wants, and a conditional pledge with a public count is the known remedy, a *mirror* rather than a progress bar. Five new mechanics follow: **self-set thresholds and the cohort fixpoint** (Granovetter, elicited directly, with a worked example); **the refund bonus** (Tabarrok's dominant assurance contract, which makes the first pledge rational before anyone else has pledged); **paired pledges and the pledge graph** (Centola's complex contagion: moving spreads through clusters, so make the pair the unit); **the closing day as a common-knowledge event** (Chwe); and **the conflict path and graduated response**, the two Ostrom principles the corpus was missing. Meadows' leverage points supply the one-paragraph answer to "why would yours work": a decade of policy pulled the weakest lever and this pulls a stronger one. Two verified Japanese precedents: **ふれあい切符**, 結 with a ledger that ran for thirty years and was hollowed out by a state cash channel; and **安野貴博 / チームみらい**, broad listening with a seat in the Diet since July 2025. Closes with the national version stated as carefully as the literature allows: a nation changes trajectory when a hidden majority discovers itself, the instrument for that is a mirror, and the honesty rules are what make it a mirror rather than a megaphone. Every section carries a confidence label; the last section is where it could be wrong.
+→ *Connects to: transition_thesis (extended), mechanics_registry (#32–35 added, #30 extended), demand_test (Q06 added), precedent_research (§5c, §5d added), voice_and_posture (vocabulary), portal_taxonomy §3, fukuoka_pitch, CLAIMS_REGISTER (new rows)*
+
 **`musubu_time_revolution.md`**
 The hidden value proposition. Goes beyond cost savings (¥1–2M/year) to argue that the most powerful offer is *time* — Musubu gives people their lives back. Quantifies Tokyo's time poverty crisis (40+ hours/week lost to logistics) and shows how rural coordinated living restores 25–35 hours/week. Argues that time affluence is both the deepest motivator and, paradoxically, leads to higher productivity.
 → *Connects to: platform_vision (messaging), national_survey (motivational questions), future_development_notes (emotional resonance)*
@@ -210,13 +226,8 @@ The hidden value proposition. Goes beyond cost savings (¥1–2M/year) to argue 
 
 ### 02_Platform — The Coordination Tool
 
-**`musubu_platform_vision.md`** *(original)*
-The first articulation of Musubu as a coordination communication platform. Explains what the platform provides for each stakeholder group: families (conditional commitment, progress tracking), towns (living portals, visibility), companies (workforce signal), and government (data for resource targeting). Introduces the "progress bar" mechanic — families watch the threshold fill in real time.
-→ *Connects to: project_overview (the problem it solves), business_coordination (economic layer)*
-
-**`musubu_platform_vision_v2.md`** *(expanded rewrite)*
-A more emotionally grounded version of the platform vision. Opens with vivid portraits of Japan's crisis (karoshi, birth rate collapse, town extinction) before laying out the coordination solution. Stronger narrative arc and sharper language throughout. Likely the better version for external audiences.
-→ *Note: v1 and v2 cover the same ground — consider consolidating into one canonical document.*
+**`musubu_platform_vision.md`** and **`musubu_platform_vision_v2.md`** → **archived September 2026** in `_archive/superseded-2026-09/`
+The first two platform documents. v1 introduced the progress-bar mechanic and the four stakeholder views; v2 was the emotionally grounded rewrite that opened on Japan's crisis. Both were absorbed into `musubu_coordination_architecture.md` and `musubu_portal_taxonomy.md`, and v2's opening carries Tier 3 and 4 figures stated as fact. Kept for lineage.
 
 **`musubu_business_coordination.md`**
 Extends the platform into economic formation. Describes the two-sided marketplace where residents signal demand (e.g., "we want a coffee shop") and entrepreneurs signal supply (e.g., "I'd open a pizzeria if there's demand"). Shows how the platform removes the chicken-and-egg problem for local businesses, not just families. Introduces signal quality tiers (casual interest → pre-committed).
@@ -348,8 +359,8 @@ The only **end-to-end sequence** on file, and it had no home. Six phases over ei
 → *Connects to: demand_test (a cheaper Phase 1), coordination_architecture (the sequencing implication supersedes parts of this), fukuoka_pitch (the four first steps), success_thresholds (what each phase has to clear)*
 
 
-**`musubu_survey_strategy.md`**
-The strategic brain behind the national survey. Argues that the survey is not research — it's "the first act of the movement." A 33-question, 5-stage engagement funnel that makes invisible desire visible, bootstraps the platform before it's built, and generates publishable data that proves demand to media, government, and potential towns. Includes psychological architecture, publication strategy, and implementation plan.
+**`musubu_survey_strategy.md`** → **archived September 2026** in `_archive/superseded-2026-09/`
+Replaced by `musubu_living_profile.md` (the register model) and `musubu_demand_test.md` (the one number). What follows describes the archived document. The strategic brain behind the national survey. Argues that the survey is not research — it's "the first act of the movement." A 33-question, 5-stage engagement funnel that makes invisible desire visible, bootstraps the platform before it's built, and generates publishable data that proves demand to media, government, and potential towns. Includes psychological architecture, publication strategy, and implementation plan.
 → *Connects to: national_survey (the actual questions), company_survey (business-side companion), platform_vision (survey feeds the funnel)*
 
 **`musubu_living_profile.md`** ★ *(NEW, August 2026)*
@@ -364,6 +375,10 @@ The working question set — what to ask, why, and how to deploy it. Governed by
 Japanese drafting of Round One, the added constraint questions, the time battery, and the blocker section — with the register decisions made explicit (です・ます, no heavy keigo, every section opens with *why*, 「特にない」 always available). Includes the two questions added in the August session: **town-size tolerance** (100 · 1,000 · 5,000 · 10,000 · 20,000+ · *depends on the place, not the size*) and **mobility**, split deliberately into driving ability (a hard filter — a household with no driver cannot be placed in most candidate towns) and mobility preference (a matching input — someone who wants a bikeable life will be unhappy in a spread-out town even with a car). The blocker section carries the most careful drafting: 「壁」 rather than 障害 or 問題, and an intro that relocates the blocker from personal failing to structural fact, which is both true and the only framing under which people answer honestly. Notes 「『逃げた』と思われそう」 as the identity blocker in its natural Japanese form, likely larger than an English instrument would predict. **Draft status** — carries explicit review notes and five named uncertainties for native reviewers.
 → *Connects to: intake_instrument (the source), translator-ja agent (review path), ai_enablement (draft natively, don't translate)*
 
+**`musubu_concept_ja_draft.md`** ★ *(NEW, September 2026)*
+The concept page in Japanese, section by section with the English kept above each block, in です・ます and first person. Two headline options, a note on whether to cut the 結/講 explanation for a Japanese reader, and six review questions at the end. **Not for publication until a native reader has been through it.** Its existence closes the gap `EXPLAINER-PLAN.md` names as required before launch; its quality is unverified.
+→ *Connects to: intake_ja_draft (register decisions), voice_and_posture, the concept page*
+
 **`musubu_demand_test.md`** ★ *(NEW, August 2026)*
 The smallest thing that converts the project's central assumption into evidence — written because the corpus reached eighteen documents and six prototypes with **zero people surveyed**. Tests one claim: *people will commit conditionally in a way they will not commit individually.* Everything else is downstream of it. The design principle is to test the load-bearing assumption rather than general interest — *"would you consider the countryside?"* has been asked repeatedly and always returns a soft yes that predicts nothing, because interest is not scarce and **willingness to act is**. So the instrument asks the same person about the same imagined town twice, changing one variable: arriving alone, versus arriving with fifty households where nobody moves unless everyone does. **The delta between those answers is the thesis expressed as a statistic**, and it survives the self-selection objection — a respondent predisposed to say yes is predisposed on both questions, which is why the gap is the metric rather than the headline. Eight questions total, including the transition detector and the blocker question. Specifies the mechanics that make it work: publish everything back (the aggregate mirror), a live counter that makes the respondent *experience* the coordination mechanic by participating in it, showing each person their own delta, and handling contrary answers gracefully because a survey that only hears from people it convinces measures nothing. Recommends **not building a survey platform** — commodity form tool for collection, custom page for results, since no form tool publishes results back well. Names the two real blockers: it must run in Japanese, and **distribution is unsolved and is the most likely failure mode**. Pre-commits to how each possible result should be read, so the outcome cannot be interpreted to taste afterwards.
 → *Connects to: intake_instrument (the source questions), living_profile (aggregate mirror), transition_thesis (what it tests), voice_and_posture (honesty applied to research), fukuoka_pitch (what a result would unlock)*
@@ -372,8 +387,8 @@ The smallest thing that converts the project's central assumption into evidence 
 Cold outreach draft to David Heinemeier Hansson (Ruby on Rails, 37signals), written after his Lex Fridman appearance. Companion to `Portal/musubu-coordination-layer.html`, the first artifact in the corpus written for a **technical** reader rather than a town, a ministry or an investor. Carries a documented **framing correction** worth keeping: the first version was built on DHH's public reputation as a sceptic of platforms and agent infrastructure, opened defensively, and closed by challenging its own premise. That was the wrong brief. What Wai actually responded to in the episode was flow, joy and wanting more people building things, so the register is **possibility rather than defence** — the page opens on a screen from a working portal five years in (a share house at 49 of 56 committed, seven spots left, ages shown, deposit refundable) and only then explains the machinery. The honesty rules stay in full, because they are Musubu's own posture rather than a concession to a doubter. The posture is a **friendly share rather than an ask** (corrected again the same day: *"it's not an ask, so you don't have to worry about it being a cold email... we can just be honest and authentic"*), so the note says the true thing plainly and asks for a reaction. Wai's own question set follows on the page, led by *is there a seed of something here*, and reaching the largest version of the idea: **a live shared ledger any citizen can write into about what is in their way, legible enough that policy can be written against it, and able to keep changing shape** — labelled `SKETCH` on the page and explicitly called a hope rather than a plan. Keeps both earlier passes documented as corrections worth not repeating. Two review notes mark the first-person sentences that must be written by Wai rather than approved.
 → *Connects to: ai_enablement (the argument the page compresses), coordination_architecture (the generalised threshold and the shared record), portal_feed_spec (the three lanes and the integrity rules), intake_instrument (blocker data as the fundable asset, which is step two of the loop), living_profile (the standing register the national version would be), voice_and_posture (the pull quote, used publicly for the first time), fukuoka_pitch (the other document written to be sent)*
 
-**`musubu_national_survey.md`**
-The full 33-question survey instrument for individuals and families. Covers current situation, pain points, ideal life vision, migration openness, community values, and commitment readiness. Designed to be both research and experience — completing the survey is itself a step toward commitment.
+**`musubu_national_survey.md`** → **archived September 2026** in `_archive/superseded-2026-09/`
+Replaced by `musubu_intake_instrument.md`. What follows describes the archived document. The full 33-question survey instrument for individuals and families. Covers current situation, pain points, ideal life vision, migration openness, community values, and commitment readiness. Designed to be both research and experience — completing the survey is itself a step toward commitment.
 → *Connects to: musubu_survey_strategy (the strategy behind it), time_revolution (motivational framing), platform_vision (survey as onboarding)*
 → ⚠️ *Needs restructuring against `musubu_living_profile.md`: Q2/Q3 become sorting keys not demographics, the "what's changing" domain is absent, and the welcome text's "wanting to raise families" excludes every non-family life stage by paragraph two.*
 
@@ -411,7 +426,7 @@ These are the structured tools, frameworks, matrices, and models embedded across
 
 ### 01_Foundation
 
-**`musubu_project_overview.md`**
+**`musubu_project_overview.md`** *(archived, `_archive/superseded-2026-09/`)*
 
 - **6 Town Type Models** — Full descriptions of Family Growth, Tech Training, Creative Hub, Manufacturing, Heritage Preserve, and Agricultural Innovation archetypes, each with economic base, target residents, and key features
 - **5-Step Coordinated Migration Process** — Town Selection → Conditional Commitments → Community Formation Before Migration → Synchronized Launch → Long-term Support
@@ -438,7 +453,7 @@ These are the structured tools, frameworks, matrices, and models embedded across
 
 ### 02_Platform
 
-**`musubu_platform_vision_v2.md`**
+**`musubu_platform_vision_v2.md`** *(archived, `_archive/superseded-2026-09/`)*
 
 - **4-Stakeholder Problem/Solution Matrix** — Families, Towns, Companies, Government: each with their specific problem and what Musubu provides
 - **"What Musubu Makes Visible" Framework** — The invisible desire, talent, and demand that exists but can't find itself
@@ -529,7 +544,7 @@ These are the structured tools, frameworks, matrices, and models embedded across
 
 ### 06_Surveys_and_Outreach
 
-**`musubu_survey_strategy.md`**
+**`musubu_survey_strategy.md`** *(archived, `_archive/superseded-2026-09/`)*
 
 - **"What It Appears to Be vs. What It Actually Is" Table** — Survey as research tool vs. first act of coordination; data collection vs. making invisible desire visible
 - **5-Stage Engagement Funnel** — From survey completion through platform conversion

@@ -38,6 +38,12 @@ Five-point scale both times. **The delta between the two answers is the thesis e
 
 **Both outcomes are worth more than another document.**
 
+### The third question, added September 2026
+
+> **06 · Your number.** What is the smallest number of other households that would have to go for you to go?
+
+Free numeric answer, no example shown (an example anchors). This turns the test from two points on a curve into the curve itself. Sorted ascending, the answers show whether a cohort can form at all in the respondent pool and at what size: the cohort forms at the largest *k* such that the *k*-th smallest answer is at most *k* − 1. See `01_Foundation/musubu_coordination_theory.md` §2 for the worked example and the design cautions. **Report the distribution alongside the delta.** The distribution is the finding.
+
 ### Why the delta survives the obvious objection
 
 Anyone who finds and completes this survey is self-selected toward yes, so absolute numbers will be inflated — a known and unavoidable bias.

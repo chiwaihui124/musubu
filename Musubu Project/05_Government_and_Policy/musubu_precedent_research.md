@@ -140,6 +140,24 @@ It is a genuine counter-example: a Japanese municipality that reversed decline *
 
 ---
 
+## 5c. 結 with a ledger already ran for thirty years: ふれあい切符
+
+*Added September 2026. Verified against secondary sources on 2026-09-17; see `musubu_coordination_theory.md` §9 for the argument and the source list.*
+
+**Fureai Kippu ("ticket for a caring relationship")** is a Japanese time-credit system for elder care: an hour of help earns an hour of credit, redeemable later or transferable to a parent elsewhere. Lineage from Teruko Mizushima's Volunteer Labour Bank (Osaka, 1973); modern form created 1995 by the Sawayaka Welfare Foundation; reported at roughly **400 branches and 70,000 active participants**. **Tier 3 figures.**
+
+Two things follow. The "結 with a ledger" framing on the concept page is not rhetorical: Japan built one at scale. And the failure mode matters: the 2000 Long-Term Care Insurance Act let people buy care with cash, and paid volunteers left the system. **A state cash channel crowded out reciprocal credit.** Any Musubu reciprocity layer denominated in something a subsidy can substitute for is fragile by the same mechanism; standing and vouching (registry #15) are harder to crowd out than redeemable credits.
+
+## 5d. Broad listening has a Japanese precedent with a seat in the Diet
+
+*Added September 2026. Electoral facts verified 2026-09-17 (Jiji, Nikkei); Tier 2. Characterisation of the method is Tier 3.*
+
+**安野貴博 (Takahiro Anno)** ran for Tokyo governor in 2024 on a manifesto built by **ブロードリスニング**: AI clustering of open citizen input (the Pol.is / Talk to the City family), receiving about 150,000 votes and the grand prix of the 19th Manifesto Awards. He founded **チームみらい (Team Mirai)** in May 2025; in the July 2025 House of Councillors election it won one proportional seat and over 2% of the proportional vote, meeting the legal requirements for party status.
+
+**Implication:** the corpus's "asking properly is only recently possible" argument (`musubu_ai_enablement.md`) is no longer an argument in Japan. It is a precedent. The loop drawn on `Portal/musubu-coordination-layer.html` (people say what is in the way, it becomes a legible number, somebody acts on it) has been run as a political method and has produced a legislator. This is recorded as precedent, not as a partnership strategy.
+
+**Design consequence:** the intake instrument should rank blockers by **breadth across segments**, as Pol.is surfaces bridging statements, not by raw count. A blocker named by 23-year-olds, young parents and retirees alike is the one a municipality can remove with broad support.
+
 ## 6. The competitive landscape is inventory, not coordination
 
 | Who | What | Note |
@@ -160,6 +178,7 @@ Not competitors, but solved problems the town portal will otherwise re-solve bad
 
 - **Decidim** — open-source participatory democracy platform, used at municipal scale (Barcelona and others). Directly relevant to the town portal's governance and voting surfaces, and to the question of who may participate in a decision.
 - **Loomio** — collaborative decision-making with a durable record of how a group reached a conclusion. Relevant to co-op governance rather than to the public portal.
+- **Pol.is / vTaiwan** — the Taiwanese consensus-finding process (Audrey Tang's team) that clusters opinions and surfaces the statements that *bridge* clusters rather than the ones that win a majority. The direct model for how the blocker mirror should rank what it shows first. See §5d.
 
 **Both are mature, open-source, and have already faced the moderation, legitimacy and participation-inequality problems the portal will run into.** Worth a serious look before building any governance feature from scratch.
 
@@ -208,4 +227,6 @@ It also connects to the project's least-treated risk: existing-resident oppositi
 - Failed private-sector attempts at relocation platforms — the graveyard is the most instructive part and searches did not surface it
 - 関係人口 (related population) policy and the "10 million" target — appeared in results, not yet examined
 - Whether any municipality has attempted conditional or threshold-based recruitment
+- ふれあい切符 current scale and governance, from 財団法人さわやか福祉財団 directly (Tier 3 at present)
+- What Team Mirai's broad-listening pipeline actually does with clustered input once it is a legislator's office rather than a campaign
 - Prefecture-level programmes, which may differ substantially from national ones

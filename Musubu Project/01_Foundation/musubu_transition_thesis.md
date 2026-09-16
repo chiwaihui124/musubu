@@ -1,7 +1,7 @@
 # The Transition Thesis
 ## Why People Move — and What Musubu Actually Offers
 
-*Written August 2026. Supersedes the framing in `musubu_project_overview.md` §"Core Insight". Companion to `musubu_archetype_axes.md` and `musubu_living_profile.md`.*
+*Written August 2026. Supersedes the framing in `musubu_project_overview.md` (archived in `_archive/superseded-2026-09/`) §"Core Insight". Companion to `musubu_archetype_axes.md` and `musubu_living_profile.md`.*
 
 ---
 
@@ -50,6 +50,12 @@ Three practical advantages over the standoff framing:
 **The mechanism does not change.** Conditional commitment, thresholds, simultaneous arrival — all of it stands. Only the diagnosis at the top of the argument changes, and it becomes both truer and easier to defend.
 
 > **The line to use:** *the choice was never Tokyo versus the countryside. It was Tokyo versus a question mark.*
+
+### The extension, September 2026: places are illegible, and so are people
+
+*Added after `musubu_coordination_theory.md` §1.*
+
+The correction above says a town cannot be assessed from outside. The same is true of other people's willingness. A person in Kawasaki who would leave has no way of knowing that thousands of others in the same position would too. Each reads the air, sees nobody moving, and concludes they are alone. They are not alone; they are uncounted. The literature calls this preference falsification and pluralistic ignorance; Japanese calls it 本音 and 建前. A conditional pledge with a public count lets a private preference be stated without being acted on alone, counts it, and publishes the count, which is what lets the next person revise what they believe about everyone else. The public number is not only a progress bar. It is a mirror. See `musubu_coordination_theory.md` for the full argument and the mechanics that follow from it.
 
 ### Where the old framing still holds
 The standoff description remains accurate for the **supply side** — employers, developers and municipalities genuinely are holding "I will if they will" positions and genuinely are waiting on each other. See `musubu_coordination_architecture.md`. The correction applies to how *individuals* experience the choice, which is the part that faces the public.

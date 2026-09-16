@@ -85,6 +85,18 @@
 
 ---
 
+### Precedents and literature added September 2026
+
+*From `01_Foundation/musubu_coordination_theory.md`. Named theories (Kuran, Granovetter, Chwe, Ostrom, Meadows, Bagnoli-Lipman, Tabarrok, Centola) are literature, not claims: cite them, do not tier them. The rows below are the empirical figures that ride on them.*
+
+| Claim | Tier | Note | Safer wording |
+|---|---|---|---|
+| ふれあい切符: ~400 branches, ~70,000 participants; created 1995; undermined by 2000 LTCI | **3** | Secondary academic sources (Hayashi 2012; MOPACT). Verify against さわやか福祉財団 | "A Japanese time-credit system for elder care ran at national scale for decades" |
+| チームみらい won 1 seat, >2% proportional vote, July 2025; 安野 ~150,000 votes in 2024 Tokyo governor race | **2** | Jiji and Nikkei, verified 2026-09-17 | State it, cite it |
+| Broad listening characterised as Pol.is-style clustering of open input | **3** | Method description from campaign materials and press | "An AI-assisted method for clustering open citizen input" |
+| A committed minority of ~25% can flip a social convention | **3** | Centola et al. 2018, *Science*. **Laboratory finding about naming conventions in online groups.** Not a field result about towns | "Norm change appears to have a threshold, and the threshold is a minority" |
+| Refund bonuses raise participation in assurance contracts | **3** | Tabarrok 1998 theory; 2020s field experiments small and mixed | "In theory a refund bonus makes early pledging the dominant move; field evidence is thin" |
+
 ## Standing rules
 
 1. **Nothing at Tier 4 enters a deck, a page or a conversation without the word "assumed", "modelled" or "illustrative" attached.**

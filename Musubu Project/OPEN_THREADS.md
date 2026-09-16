@@ -2,8 +2,10 @@
 ## Every unresolved question in the corpus, in one place
 
 *Generated 2026-08-30 by scanning all 48 corpus documents for `Open Questions`
-sections. Sixty questions across twenty documents. Regenerate after any writing
-session; the source of truth is still each document's own section.*
+sections. Sixty questions across twenty documents. **Eight added 2026-09-17** from
+the coordination theory document and the three-readers critique; see the last
+section. Regenerate after any writing session; the source of truth is still each
+document's own section.*
 
 ---
 
@@ -23,7 +25,7 @@ waiting on a decision somebody could make this afternoon.
 | `BUILD` | Resolves itself once the thing is built. | Whoever builds it |
 | `ANSWERED` | Closed. Kept so it does not get re-asked. | Done |
 
-**Current distribution:** `DECIDE` 24 · `RESEARCH` 11 · `TEST` 10 · `JAPANESE` 9 · `LEGAL` 4 · `ANSWERED` 1 · `BUILD` 1
+**Current distribution (68 threads):** `DECIDE` 26 · `RESEARCH` 13 · `TEST` 11 · `JAPANESE` 10 · `LEGAL` 4 · `ANSWERED` 1 · `BUILD` 3
 
 > **The distribution is itself a finding.** Twenty-two threads are decisions that
 > could be made today with no new input. Nine need a Japanese speaker, which is the
@@ -163,8 +165,28 @@ waiting on a decision somebody could make this afternoon.
 
 ---
 
-★ marks the four threads that block something else. Escrow structure and APPI
+## Added September 2026  ·  8 threads
+*From `01_Foundation/musubu_coordination_theory.md` and `THREE_READERS_SEPT2026.md`*
+
+### `THREE_READERS_SEPT2026.md`
+
+- **[61]** `BUILD` ★ **The existing residents have no surface.** All three readers raise it from different seats. Nothing in fifteen prototypes lets the people already in a town say what they will and will not accept, or shows them what a newcomer has agreed to before arriving. The party with the veto has no portal.
+- **[62]** `BUILD` A day-one artifact. Named in `musubu_voice_and_posture.md` in August, still absent, asked for by the officer and the founder in the same words.
+
+### `musubu_coordination_theory.md`
+
+- **[63]** `TEST` Do self-set thresholds anchor high and produce cohorts that never form? The fix (no example number, revisable pledges, aggregate revision shown) is designed; whether it works is a demand-test question.
+- **[64]** `DECIDE` Who funds the refund bonus in a first cohort, and at what size relative to the deposit? Municipality, sponsor, or the platform itself.
+- **[65]** `DECIDE` What is the graduated response when a co-op member stops pulling their weight, and who does a cohort dispute go to first? The two Ostrom principles the corpus lacks; both have to be written before anyone commits.
+- **[66]** `JAPANESE` Do 本音/建前 and 出る杭は打たれる land as accurate or as a foreigner's cliché when used on a Musubu page? Same judgement as 結/講.
+- **[67]** `RESEARCH` ふれあい切符 today: scale, governance, and what precisely the 2000 LTCI did to it, from さわやか福祉財団 directly. Currently Tier 3.
+- **[68]** `RESEARCH` What does チームみらい's broad-listening pipeline do with clustered input now that it belongs to a legislator's office rather than a campaign? Precedent to study, not a partner to approach.
+
+---
+
+★ marks the five threads that block something else. Escrow structure and APPI
 classification both gate any real launch; the akiya labour share is called out in
 `musubu_build_partnership_model.md` as the single most important number to obtain;
 and *who fields the poll, given nobody on the project speaks Japanese* is the one
-that gates the entire Motion branch.
+that gates the entire Motion branch. The resident-facing surface [61] gates any real
+conversation with a town, because the first person a mayor answers to is not a newcomer.

@@ -1,7 +1,7 @@
 # The Living Profile
 ## From One-Time Survey to a Standing Register of Readiness
 
-*Written August 2026. Supersedes the "survey as event" model in `musubu_survey_strategy.md`. The intake layer for `musubu_transition_thesis.md`.*
+*Written August 2026. Supersedes the "survey as event" model in `musubu_survey_strategy.md` (archived in `_archive/superseded-2026-09/`). The intake layer for `musubu_transition_thesis.md`.*
 
 ---
 
@@ -202,8 +202,8 @@ The profile is only alive if people return to it. Prompts should be light, infre
 
 | Document | Change |
 |---|---|
-| `musubu_national_survey.md` | Q2 (age) and Q3 (household) become sorting keys, not demographics. Domain 2 ("what's changing") must be added — it's absent. The welcome text's "wanting to raise families" excludes every non-family life stage from paragraph two and must be rewritten. |
-| `musubu_survey_strategy.md` | The 5-stage funnel now terminates in a maintained profile, not a conversion event. |
+| `musubu_national_survey.md` (archived) | Q2 (age) and Q3 (household) become sorting keys, not demographics. Domain 2 ("what's changing") must be added — it's absent. The welcome text's "wanting to raise families" excludes every non-family life stage from paragraph two and must be rewritten. |
+| `musubu_survey_strategy.md` (archived) | The 5-stage funnel now terminates in a maintained profile, not a conversion event. |
 | `musubu_platform_intelligence.md` | Layer 2 ("revealed interest") gets a much richer input — behavioural signals plus declared state, updated over time. |
 | Portal | Profile becomes a permanent, first-class surface, not an onboarding step. |
 

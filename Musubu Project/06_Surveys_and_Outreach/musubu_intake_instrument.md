@@ -1,7 +1,7 @@
 # The Intake Instrument
 ## What to Ask, Why, and How to Deploy It
 
-*Written August 2026. The working question set for `musubu_living_profile.md`. Replaces the 33-question form model in `musubu_national_survey.md`.*
+*Written August 2026. The working question set for `musubu_living_profile.md`. Replaces the 33-question form model in `musubu_national_survey.md` (archived in `_archive/superseded-2026-09/`).*
 
 ---
 

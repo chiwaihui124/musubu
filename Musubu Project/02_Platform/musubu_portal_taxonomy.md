@@ -1,7 +1,7 @@
 # Portal Taxonomy
 ## Who gets a portal, who gets an interface, and what a module is
 
-*Written August 2026. Prototype: `Portal/musubu-member-dashboard.html`. Extends `musubu_platform_vision_v2.md` and `musubu_platform_intelligence.md`.*
+*Written August 2026. Prototype: `Portal/musubu-member-dashboard.html`. Extends `musubu_platform_vision_v2.md` (archived in `_archive/superseded-2026-09/`) and `musubu_platform_intelligence.md`.*
 
 ---
 
@@ -162,7 +162,9 @@ Two things make it work rather than read as propaganda. The money is stated plai
 
 *Not previously identified. Proposed here.*
 
-Thirty households who have committed to arrive together, but haven't moved yet, are a group with no home. Forums are mentioned in `musubu_platform_vision.md` but never given a surface.
+Thirty households who have committed to arrive together, but haven't moved yet, are a group with no home. Forums are mentioned in `musubu_platform_vision.md` (archived in `_archive/superseded-2026-09/`) but never given a surface.
+
+*September 2026, from `musubu_coordination_theory.md` §5 and §8: the cohort portal should be built around a **calendar with a fixed cadence**, not a forum, because a group that meets at the same time knows that it knows it is a group. And it should carry, before anyone commits, a plain statement of what happens when someone stops pulling their weight and who a dispute goes to. Those are the two Ostrom principles the corpus was missing.*
 
 A cohort portal is where **community before migration** actually happens:
 - Who else is coming — names, faces, at whatever disclosure each has chosen

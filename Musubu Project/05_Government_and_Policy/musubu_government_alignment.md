@@ -1,4 +1,4 @@
-**FAMICHI PROJECT**
+**MUSUBU PROJECT** *(written under the project's earlier name, Famichi, January 2026; header updated September 2026)*
 
 Government Funding Alignment Analysis
 
