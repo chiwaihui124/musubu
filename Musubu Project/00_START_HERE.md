@@ -99,7 +99,7 @@ Most documents in this folder were drafted in working sessions between Wai and C
 
 ## Licence
 
-All text and prototypes in this repository are released under **CC0 1.0 Universal**, a public domain dedication. Use it, change it, build on it, commercially or not. No attribution required, no conditions. See `../LICENSE.md` and `../LICENSE`. Third-party material referenced in the documents (government statistics, published research) remains under its own terms.
+All text and prototypes in this repository are released under the **Creative Commons Attribution 4.0 International licence (CC BY 4.0)**. Use it, change it, build on it, commercially or not, with credit to the original. See `../LICENSE.md` and `../LICENSE`. Third-party material referenced in the documents (government statistics, published research) remains under its own terms.
 
 ## Contact
 
@@ -129,7 +129,7 @@ Musubuは、日本の空いていく町へ、**一人ではなく一緒に**移�
 
 > 私が関わっていても、いなくても、これが本当になったらうれしい。自分のものにしたいわけではありません。存在してほしいのです。
 
-だから、持っていってください。作る、分岐させる、反論する、仕組みを一つだけ取り出す、誰かに渡す。ライセンスは CC0 1.0（パブリックドメインへの献呈）です。出典表示も条件もありません。意味は書いてあるとおりです。
+だから、持っていってください。作る、分岐させる、反論する、仕組みを一つだけ取り出す、誰かに渡す。ライセンスは CC BY 4.0 です。出典を示せば、使っても、変えても、その上に作っても構いません。意味は書いてあるとおりです。
 
 ## 何が本当で、何がないか
 

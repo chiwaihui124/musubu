@@ -136,8 +136,8 @@ An unindexed document is invisible no matter how good it is.
 
 Public at **https://github.com/chiwaihui124/musubu** since 2026-09-17 (SSH remote
 `origin`, branch `main`). `.gitignore` keeps binaries, decks, screenshots and the
-Pinterest references out. Licence is **CC0 1.0**: `LICENSE` is GitHub's file, `LICENSE.md`
-says the same in plain words. Push to `main` publishes the folder; the site deploys from
+Pinterest references out. Licence is **CC BY 4.0**: `LICENSE` is the legal text, `LICENSE.md`
+says it in plain words. Push to `main` publishes the folder; the site deploys from
 `Portal/` once the Vercel project is connected (see below).
 
 **Hosting:** Vercel, project `musubu`, root directory `Portal`, same pattern as the profile
@@ -146,7 +146,7 @@ the repository once in the Vercel dashboard; after that every push deploys.
 
 ## Open, as of 2026-09-17
 
-- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC0 · no Osaka sentence · Japanese first · repo public. **Still open:** connecting the repo to Vercel (Wai, one import), then a subdomain.
+- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC BY 4.0 · no Osaka sentence · Japanese first · repo public. **Still open:** connecting the repo to Vercel (Wai, one import), then a subdomain.
 - Japanese: `musubu_concept_ja_draft.md` exists and needs a native reader. So does `musubu_intake_ja_draft.md`.
 - No resident-facing surface, no day-one artifact (OPEN_THREADS 61, 62).
 

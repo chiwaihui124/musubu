@@ -38,7 +38,7 @@ To `_archive/superseded-2026-09/` with a mapping table: `musubu_project_overview
 | `THREE_READERS_SEPT2026.md` | A municipal officer, a Fukuoka founder and a 23-year-old in Tokyo each read the corpus. Five structural objections recur. | 2,288 |
 | `06_Surveys_and_Outreach/musubu_concept_ja_draft.md` | The concept page in Japanese, for native review. | 958 |
 | `../Portal/index.html` | The front door. Opens on the share-house screen, three ways in, what is true, take it. | |
-| `../LICENSE.md` | Licence. Proposed as CC BY 4.0; Wai chose CC0 1.0 when creating the GitHub repository on 2026-09-17, which matches the concept page's own "no conditions", so CC0 it is. | |
+| `../LICENSE.md` | CC BY 4.0, confirmed by Wai 2026-09-17. GitHub's default CC0 file from repository creation was replaced with the CC BY legal text. | |
 | `../_archive/superseded-2026-09/README.md` | Mapping table. | |
 
 ### 5. The theory document, in brief
