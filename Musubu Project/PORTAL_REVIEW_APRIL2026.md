@@ -1,4 +1,6 @@
 # Musubu Portal Review
+
+> *September 2026: superseded as the description of the target system by `02_Platform/musubu_living_system.md`. Kept for lineage.*
 ## Architecture Assessment & Platform Intelligence Integration
 
 *Wai's Portal work-in-progress, reviewed April 24, 2026 against Platform Intelligence System and Eldercare Archetype concepts*

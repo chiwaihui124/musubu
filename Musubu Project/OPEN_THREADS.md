@@ -171,7 +171,7 @@ waiting on a decision somebody could make this afternoon.
 ### `THREE_READERS_SEPT2026.md`
 
 - **[61]** `BUILD` ★ **The existing residents have no surface.** All three readers raise it from different seats. Nothing in fifteen prototypes lets the people already in a town say what they will and will not accept, or shows them what a newcomer has agreed to before arriving. The party with the veto has no portal.
-- **[62]** `BUILD` A day-one artifact. Named in `musubu_voice_and_posture.md` in August, still absent, asked for by the officer and the founder in the same words.
+- **[62]** `BUILD` A day-one artifact. Named in `musubu_voice_and_posture.md` in August, still absent, asked for by the officer and the founder in the same words. *Specified in prose in `02_Platform/musubu_living_system.md` §8 on 2026-09-17; not yet drawn.*
 
 ### `musubu_coordination_theory.md`
 

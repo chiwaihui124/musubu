@@ -69,7 +69,7 @@ This rule exists because two of the 2024 prototypes gave the same town two diffe
 | 8 | Visible failure | `TESTABLE` | trust | map_spec §3 |
 | 9 | Over-subscription → spawn | `SKETCH` | momentum | not yet |
 | 10 | At-risk state | `SKETCH` | trust | not yet |
-| 11 | Tile dependency graph | `SKETCH` | illegible | not yet |
+| 11 | Tile dependency graph | `TESTABLE` | illegible · momentum | **living_system §2** (phases) |
 | 12 | Time scrubber, dual projection | `TESTABLE` | trust | map_spec §4 |
 | 13 | Provenance labelling | `TESTABLE` | trust | this doc |
 | 14 | Two-population data standard | `TESTABLE` | trust | this doc |
@@ -94,6 +94,7 @@ This rule exists because two of the 2024 prototypes gave the same town two diffe
 | 33 | **The refund bonus** | `TESTABLE` | momentum · irreversible | coordination_theory §3 |
 | 34 | **Paired pledges and the pledge graph** | `SKETCH` | alone | coordination_theory §4 |
 | 35 | **The conflict path and graduated response** | `TESTABLE` | trust · irreversible | coordination_theory §8 |
+| 36 | **The unlock** | `PRECEDENT` | momentum | living_system §3 |
 | S1 | **The funded return** | `TESTABLE` | irreversible | **funded_return_model** |
 | S2–S8 | Speculative wing | `SKETCH` | — | not yet |
 
@@ -177,13 +178,15 @@ Cleared its threshold but is now slipping — commitments withdrawing, timeline 
 - **Next move:** write an objective trigger, or drop it. Without one it becomes a vibe.
 - **Spec:** not yet
 
-### 11. Tile dependency graph · `SKETCH` · *illegible*
+### 11. Tile dependency graph · `TESTABLE` · *illegible · momentum* · **promoted Sep 2026**
 The cram school tracks the kindergarten. The laundromat follows the riverside block.
 - **Felt as:** *"The cram school comes because the kindergarten came. It's not a wish list, it's an order."*
 - **Next move:** model dependencies as a field on the tile.
 - **Spec:** not yet
 
 **Highest-leverage unbuilt item on the board.** Machine-readable dependencies are what let the scrubber *compute* cascades instead of replaying hand-authored ones.
+
+*September 2026: specified as **phases** in `musubu_living_system.md` §2, with a worked example (the family district) and display rules. From the outside a dependency graph is a plan you can see yourself in: every threshold shows what has to clear before it and what it opens after. Promoted to `TESTABLE`.*
 
 ### 12. Time scrubber, dual projection · `TESTABLE` · *trust*
 −24 to +36 months, with a "committed only" / "if gathering succeeds" toggle.
@@ -375,6 +378,14 @@ Tabarrok's dominant assurance contract. The only mechanic on the board that acts
 - **Spec:** `coordination_theory` §4
 
 Complex contagion (Centola and Macy): moving house spreads through clusters of overlapping ties, not through broadcast. §6 recruits pre-assembled groups from the supply side; this makes the friend the unit from the demand side. Pair status is also a retention predictor worth tracking from cohort one.
+
+### 36. The unlock · `PRECEDENT` · *momentum* · **new, Sep 2026**
+When a phase clears, the next one opens, and it opens as an announcement. Kickstarter's stretch goals, applied to a town's plan.
+- **Felt as:** *"They just reopened the kindergarten and the clinic is already three roles from opening. I want in before it goes."*
+- **Next move:** decide what an unlock announcement contains and who it goes to (the cohort, the town, the index).
+- **Spec:** `living_system` §3
+
+The shared name for what #9 (spawn) and #30 (momentum visible from outside) were reaching for. One constraint, and it is the whole thing: **an unlock is a committed threshold clearing, never a projection.** The fifth feed rule applied to phases.
 
 ### 35. The conflict path and graduated response · `TESTABLE` · *trust · irreversible* · **new, Sep 2026**
 Before anyone commits, the cohort portal states plainly what happens when someone stops pulling their weight (in steps, mild first) and who a dispute goes to.
