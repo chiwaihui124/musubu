@@ -140,7 +140,7 @@ Pinterest references out. Licence is **CC BY 4.0**: `LICENSE` is the legal text,
 says it in plain words. Push to `main` publishes the folder; the site deploys from
 `Portal/` once the Vercel project is connected (see below).
 
-**Live at https://musubu-five.vercel.app since 2026-09-17.** Vercel project `musubu`
+**Live at https://musubu.chiwaihui.fyi since 2026-09-17.** Vercel project `musubu`
 (`prj_8hiXsm4oaicjeVj7ACbhHjGd3fmf`, team `team_btGPDtXaWwSakj0eVWTl98Yj`), root directory
 `Portal`, no build step. Every push to `main` deploys. The team-scoped `*.vercel.app`
 preview URLs are behind Vercel login; the production URL and any custom domain are public.
