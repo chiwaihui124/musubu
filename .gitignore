@@ -31,3 +31,6 @@ japan-budget-clarified
 /imagine with claude/
 /.baselines/
 /.claude/settings.local.json
+
+# Portal/assets is the one place images belong in the repo (resized, captioned on the page)
+!/Portal/assets/*.jpg
