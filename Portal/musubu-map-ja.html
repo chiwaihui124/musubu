@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<title>Musubuを八つの部品で</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Musubuの構想全体を八つの部品で。The whole Musubu concept in eight pieces, each with the best of its branch and a way deeper: the problem, why people move, the mechanism, the portal, the poll, the evidence, the money, and what is not known.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1; --card:#F8F9FA; --screen:#FFFFFF;
+  --ink:#131B23; --ink-2:#4B5661; --ink-3:#7E8992;
+  --rule:#D3DADE; --rule-soft:#E2E7EA;
+  --indigo:#1E4B76; --indigo-deep:#12365A; --indigo-wash:#E1E8EF;
+  --lapse:#9C5330; --moss:#4A6B4F;
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418; --card:#161E25; --screen:#111A21;
+    --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+    --rule:#26313A; --rule-soft:#1D262D;
+    --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+    --lapse:#C9825A; --moss:#89AE8E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1418; --card:#161E25; --screen:#111A21;
+  --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+  --rule:#26313A; --rule-soft:#1D262D;
+  --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+  --lapse:#C9825A; --moss:#89AE8E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:lang(ja) body, body:lang(ja){line-height:1.9}
+.wrap{max-width:41rem;margin-inline:auto;padding:3.5rem 1rem 5rem}
+.mast{display:flex;align-items:baseline;gap:0.75rem;padding-bottom:2.75rem;flex-wrap:wrap}
+.mast .name{font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:0.02em}
+.mast .kanji{font-family:var(--display);color:var(--indigo);font-size:1.05rem}
+.mast .lang{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--indigo);border-bottom:1px solid var(--rule);margin-left:0.25rem;text-decoration:none}
+.mast .home{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--ink-3);text-decoration:none;border-bottom:1px solid var(--rule)}
+.mast .stamp{margin-left:auto;font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,5.2vw,2.5rem);line-height:1.34;letter-spacing:-0.005em;margin:0 0 1.5rem;text-wrap:balance}
+h1 em{font-style:normal;color:var(--indigo)}
+.standfirst{font-size:1.05rem;color:var(--ink-2);margin:0 0 1.1rem;max-width:36rem}
+.readtime{font-family:var(--mono);font-size:0.75rem;color:var(--ink-3);letter-spacing:0.04em;margin:0 0 2.2rem}
+section{padding-top:2.6rem;margin-top:2.6rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-family:var(--display);font-weight:500;font-size:1.32rem;line-height:1.4;margin:0 0 1.1rem;text-wrap:balance}
+h2 .n{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--indigo);display:block;margin-bottom:0.35rem;font-weight:400}
+h3{font-family:var(--body);font-weight:600;font-size:0.95rem;margin:1.9rem 0 0.5rem}
+p{margin:0 0 1.05rem;max-width:36rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+/* say it */
+.say{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.2rem 1.25rem;margin:0 0 2.2rem}
+.say .cap{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.5rem}
+.say p{font-size:0.97rem;color:var(--ink-2);max-width:none}
+.say p+ .cap{margin-top:1.1rem}
+.say blockquote{margin:0.6rem 0 0;padding:0 0 0 1rem;border-left:2px solid var(--indigo);font-family:var(--display);font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.say blockquote small{display:block;font-family:var(--mono);font-size:0.68rem;color:var(--ink-3);margin-top:0.4rem;letter-spacing:0.03em}
+
+/* diagram */
+figure{margin:1.6rem 0 1.2rem;padding:0}
+.diagram{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1rem 0.9rem}
+.diagram svg{display:block;width:100%;height:auto}
+.d-box{fill:var(--screen);stroke:var(--rule)}
+.d-gov{fill:var(--indigo-wash);stroke:var(--indigo)}
+.d-label{font-family:var(--body);font-size:13px;font-weight:600;fill:var(--ink)}
+.d-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:0.04em;fill:var(--ink-3)}
+.d-line{stroke:var(--indigo);stroke-width:1.4;fill:none}
+.d-arrow{fill:var(--indigo)}
+figcaption{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.03em;color:var(--ink-3);margin-top:0.55rem;line-height:1.6}
+figure.fig img{display:block;width:100%;height:auto;border-radius:3px;border:1px solid var(--rule)}
+
+/* pieces */
+.best{background:var(--indigo-wash);border-left:2px solid var(--indigo);padding:0.9rem 1.1rem;margin:1.3rem 0;font-size:0.95rem;line-height:1.65;color:var(--ink-2);border-radius:0 2px 2px 0}
+.best b{color:var(--ink)}
+.deeper{margin:1.3rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.deeper li{font-size:0.86rem;color:var(--ink-2);line-height:1.6;padding-left:1rem;position:relative}
+.deeper li::before{content:"→";position:absolute;left:0;color:var(--indigo);font-family:var(--mono)}
+.deeper .cap{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.2rem;padding-left:0}
+.deeper .cap::before{content:none}
+.deeper code{font-family:var(--mono);font-size:0.78rem;color:var(--ink-3)}
+
+/* resolve panels */
+.resolve{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;margin:1.6rem 0 0.6rem;overflow:hidden}
+@media (max-width:33rem){.resolve{grid-template-columns:1fr}}
+.panel{background:var(--card);padding:1.1rem 1.15rem 1.25rem}
+.panel .cap{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.85rem}
+.panel.after .cap{color:var(--indigo)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:0.75rem;padding:0.42rem 0;border-bottom:1px dotted var(--rule);font-size:0.88rem}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink-3);white-space:nowrap}
+.row .v{font-family:var(--mono);font-size:0.82rem;color:var(--ink);text-align:right}
+.panel.before .row .v{color:var(--ink-3);filter:blur(2.6px);user-select:none}
+
+/* steps */
+ol.steps{list-style:none;counter-reset:s;margin:1.2rem 0 0.6rem;padding:0;display:flex;flex-direction:column;gap:0.75rem}
+ol.steps li{counter-increment:s;position:relative;padding-left:2.1rem;font-size:0.95rem;line-height:1.62;color:var(--ink-2)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0.24rem;font-family:var(--mono);font-size:0.72rem;color:var(--indigo)}
+ol.steps li b{color:var(--ink);font-weight:600}
+
+/* phases table */
+.tablewrap{overflow-x:auto;margin:1.4rem 0 0.4rem;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:0.84rem}
+th,td{text-align:left;padding:0.6rem 0.8rem;border-bottom:1px solid var(--rule-soft);vertical-align:top;line-height:1.5}
+th{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+tr:last-child td{border-bottom:none}
+td.ph{font-weight:600;color:var(--ink);white-space:nowrap}
+td.st{font-family:var(--mono);font-size:0.78rem;white-space:nowrap}
+td.st.done{color:var(--moss)}
+td.st.now{color:var(--indigo)}
+td.st.later{color:var(--ink-3)}
+
+/* scene */
+.scene{background:var(--screen);border:1px solid var(--rule);border-radius:3px;padding:1.1rem 1.2rem;margin:1.4rem 0 0.6rem;font-size:0.92rem;line-height:1.65}
+.scene p{max-width:none;margin:0 0 0.7rem}
+.scene p:last-child{margin:0}
+.scene .who{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.15rem}
+.scene .clerk .who{color:var(--lapse)}
+.scene .portal .who{color:var(--indigo)}
+
+/* loop */
+ol.loop{list-style:none;counter-reset:l;margin:1.2rem 0 0.4rem;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+@media (max-width:33rem){ol.loop{grid-template-columns:1fr}}
+ol.loop li{counter-increment:l;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.85rem 0.95rem 0.95rem;font-size:0.86rem;line-height:1.58;color:var(--ink-2)}
+ol.loop li b{display:block;color:var(--ink);font-weight:600;margin-bottom:0.2rem}
+ol.loop li b::before{content:counter(l) " · ";font-family:var(--mono);font-size:0.72rem;color:var(--indigo);font-weight:400}
+
+/* evidence */
+.ev{margin:1.2rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.8rem}
+.ev li{display:grid;grid-template-columns:6.5rem 1fr;gap:0.9rem;font-size:0.9rem;line-height:1.6;color:var(--ink-2);padding-bottom:0.8rem;border-bottom:1px solid var(--rule-soft)}
+.ev li:last-child{border-bottom:none}
+@media (max-width:33rem){.ev li{grid-template-columns:1fr;gap:0.2rem}}
+.ev .k{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--indigo);padding-top:0.3rem}
+.ev b{color:var(--ink)}
+
+/* blockers */
+.blockers{margin:1.2rem 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+@media (max-width:33rem){.blockers{grid-template-columns:1fr}}
+.blockers li{font-size:0.86rem;line-height:1.55;color:var(--ink-2);background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.7rem 0.85rem}
+.blockers li b{display:block;font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--lapse);font-weight:400;margin-bottom:0.15rem}
+
+.doors{display:flex;flex-direction:column;gap:0.6rem;margin:1.3rem 0 0}
+.door{display:block;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.85rem 1rem 0.95rem;color:inherit}
+.door:hover{border-color:var(--indigo)}
+.door .h{font-family:var(--display);font-weight:500;font-size:1.02rem;color:var(--ink);display:block;margin-bottom:0.15rem}
+.door .d{font-size:0.86rem;color:var(--ink-2);line-height:1.6;display:block}
+footer{margin-top:3.2rem;padding-top:1.4rem;border-top:1px solid var(--rule);font-size:0.79rem;line-height:1.7;color:var(--ink-3)}
+footer p{max-width:36rem;margin:0 0 0.7rem}
+.draftnote{font-size:0.86rem;line-height:1.85;color:var(--ink-2);border:1px dashed var(--lapse);border-radius:3px;padding:0.8rem 1rem;margin:0 0 2rem}
+.draftnote b{color:var(--lapse);font-weight:600}
+body{line-height:1.9}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <span class="name">Musubu</span>
+  <span class="kanji">結</span>
+  <a class="home" href="index.html">入口</a>
+  <a class="lang" href="musubu-map.html">English</a>
+  <span class="stamp">全体図 · 2026</span>
+</div>
+
+<h1>Musubuを、<em>八つの部品</em>で。</h1>
+
+<p class="standfirst">構想、調査、仕組み、ポータル、調査票、政策、お金。これらは互いに噛み合った一つのものであり、だからこそ人に紹介しにくい。このページはそれを八つの部品に分け、それぞれをいちばん良いところから始めて、深く読む先を示します。順に読んでも、疑わしいところへ飛んでも構いません。</p>
+
+<p class="readtime">20分ほど · まだ何も作られていません · 数字はすべて例です</p>
+
+<div class="draftnote"><b>作業中のページです。</b> この日本語版はAIによる下訳で、まだ日本語のネイティブの方に見てもらっていません。おかしなところがあれば、それ自体が教えてほしいことです。</div>
+
+<div class="say">
+  <span class="cap">一文で</span>
+  <p>Musubuは、日本の空いていく町へ、一人ではなく一緒に移り住むための方法です。町が足りないものを言い、人が条件付きで約束し、その数は公開され、十分に集まらなければ誰も動きません。</p>
+  <span class="cap">一分で</span>
+  <p>もっと静かな場所で、時間があって、手の届く家に住めるとしたら、と聞くと、多くの人が「いいですね」と言います。でもほとんど誰も行きません。住んだことのない町は賭けであり、ほかの人がどれだけ行く気なのかも見えないからです。Musubuはその両方を見えるようにします。町は、何になりたいかを段階（フェーズ）に分けて宣言します。人は預り金を預けて条件付きで約束し、段階が埋まらなければ預り金は戻ります。数は公開されているので、決める前にほかに誰が行くかが見え、誰も一人で最初にはなりません。段階が埋まれば全員が同じ季節に着き、次の段階が開きます。その下には、人を本当に止めているものについての全国の調査があり、それは政策が書かれる相手そのものです。何も作られていません。公開された構想で、誰でも持っていけます。</p>
+  <span class="cap">いちばんよく言い表している一文、考えた本人の言葉で（訳）</span>
+  <blockquote>人生のどの段階にいるかだけでなく、同じ段階にいるほかの人たちも行くとわかっていたら、何に賭けてみる気があるか。ただ、賭けてみられる選択肢がないだけなのです。<small>Wai、2026年9月</small></blockquote>
+</div>
+
+<figure>
+<div class="diagram">
+<svg viewBox="0 0 660 400" role="img" aria-label="循環図。人が何に止められているかを言い、それが数になり、町が段階に分けて方向を宣言し、人が条件付きで約束し、段階が埋まって次が開き、人が到着して暮らしの記録が増え、それがさらに人を呼ぶ。行政は数を読んで障害を一つ取り除く。">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-arrow"></path></marker></defs>
+  <rect class="d-box" x="30" y="20" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="44" text-anchor="middle">人が、何に止められているかを言う</text>
+  <text class="d-sub" x="120" y="62" text-anchor="middle">調査 · 自分の言葉で</text>
+  <rect class="d-box" x="450" y="20" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="44" text-anchor="middle">町が、方向を宣言する</text>
+  <text class="d-sub" x="540" y="62" text-anchor="middle">四つの軸 · 足りないもの · 段階</text>
+  <rect class="d-box" x="450" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="196" text-anchor="middle">人が、条件付きで約束する</text>
+  <text class="d-sub" x="540" y="214" text-anchor="middle">N人行くなら私も · 返金あり</text>
+  <rect class="d-box" x="450" y="324" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="348" text-anchor="middle">段階が埋まり、次が開く</text>
+  <text class="d-sub" x="540" y="366" text-anchor="middle">同じ季節に · 解放</text>
+  <rect class="d-box" x="30" y="324" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="348" text-anchor="middle">到着と、暮らしの記録</text>
+  <text class="d-sub" x="120" y="366" text-anchor="middle">証拠 · 失敗も見える</text>
+  <rect class="d-box" x="30" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="196" text-anchor="middle">それが公開の数になる</text>
+  <text class="d-sub" x="120" y="214" text-anchor="middle">鏡 · 匿名</text>
+  <rect class="d-gov" x="240" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="330" y="196" text-anchor="middle">行政が数を読む</text>
+  <text class="d-sub" x="330" y="214" text-anchor="middle">障害を一つ除く · 段階に出資</text>
+  <line class="d-line" x1="120" y1="76" x2="120" y2="170" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="210" y1="48" x2="448" y2="48" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="540" y1="76" x2="540" y2="170" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="540" y1="228" x2="540" y2="322" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="450" y1="352" x2="212" y2="352" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="120" y1="322" x2="120" y2="230" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="210" y1="200" x2="238" y2="200" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="420" y1="200" x2="448" y2="200" marker-end="url(#ah)"></line>
+  <text class="d-sub" x="330" y="262" text-anchor="middle">現れた選択肢は、誰かに助けられて現れた</text>
+  <text class="d-sub" x="330" y="306" text-anchor="middle">もっと多くの人がそれを見て、何に止められているかを言う</text>
+</svg>
+</div>
+<figcaption>部品がどう噛み合うか。一つの記録、いくつもの見え方。人が何が邪魔かを言い、それが動くのを見ることで回る循環。</figcaption>
+</figure>
+
+<section>
+<h2><span class="n">部品 1 · 問題</span>東京か、よくわからない何かか</h2>
+<p>日本は、町が空いていくことをもう知っています。だからそれは問題ではありません。問題は、東京だけが、かたちを思い浮かべられる唯一の選択肢だということです。全国に約1,700の市町村がありますが、外から見て、どこに自分ができる仕事があり、どこが静かに空っぽになり、自分が10年間唯一の新入りになるのかどうか、見分けられません。評価できない町は選択肢ではなく、賭けです。人が賭けを断るのは正しい。</p>
+<p>そしてもう一歩あります。<strong>ほかの人も見えない。</strong> 川崎にいる誰かに、同じ状況の4,000人が行くつもりだとは見えません。それぞれが空気を読み、誰も動いていないのを見て、自分は一人だと結論します。一人ではないのです。数えられていないだけです。</p>
+<div class="best"><b>この部品でいちばん良いところ：</b> 診断が「人は都市が好き」でも「みんながお互いを待っている」でもないこと。住んだことのない場所と、誰も数えていない意志は、東京と同じ条件で比べられない。それだけです。調整が加えるのは説得ではなく、具体化です。</div>
+<div class="resolve">
+  <div class="panel before"><span class="cap">外から見た町</span>
+    <div class="row"><span class="k">ほかに誰が行くか</span><span class="v">わからない</span></div>
+    <div class="row"><span class="k">仕事</span><span class="v">不明</span></div>
+    <div class="row"><span class="k">家賃</span><span class="v">見当もつかない</span></div>
+    <div class="row"><span class="k">いつ</span><span class="v">いつでも</span></div>
+    <div class="row"><span class="k">うまくいかなかったら</span><span class="v">自分の問題</span></div>
+  </div>
+  <div class="panel after"><span class="cap">同じ町、みんなで決めたあと</span>
+    <div class="row"><span class="k">ほかに誰が行くか</span><span class="v">30世帯</span></div>
+    <div class="row"><span class="k">仕事</span><span class="v">教員2名</span></div>
+    <div class="row"><span class="k">家賃</span><span class="v">38,000円</span></div>
+    <div class="row"><span class="k">いつ</span><span class="v">ある年の春</span></div>
+    <div class="row"><span class="k">うまくいかなかったら</span><span class="v">預り金は返る</span></div>
+  </div>
+</div>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-concept-ja.html">構想ページ</a>、5分、本人の言葉で。</li>
+  <li><code>01_Foundation/musubu_transition_thesis.md</code> · <code>01_Foundation/musubu_coordination_theory.md</code> §1（本音と建前、なぜ数が鏡なのか）。英語。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 2 · 誰が本当に行くのか</span>人は、人生がすでに動いているときに引っ越す</h2>
+<p>田舎の暮らしを望むことは、一部の人が持つ性質ではありません。ほとんどの人が通り過ぎる状態です。最初の子ども、別れ、燃え尽き、仕事の終わり、子どもの独立、退職。そのとき、引っ越しの費用はもう別の理由で払われていて、本気の移住の決断が数か月だけ卓上にのぼります。その人が誰かより、いつなのかを知るほうが大事で、毎年、国の一部がこの節目を通り過ぎます。</p>
+<p>その人たちに差し出せるのは、どこでも買えないたった一つのもの、<strong>ほかの全員と同時に着くこと</strong>です。ほとんどの大人にとって、誰も先に内側にいない集まりに入った最後の経験は大学で、人はその数年をいちばん友人が濃かった時期だと言います。仕組みは若さではありませんでした。誰も先に内側にいなかったのです。</p>
+<div class="best"><b>この部品でいちばん良いところ：</b> 四つの入口。同じ仕組みが、23歳には別の申し出（手に職、同世代の20人、東京の5分の1の生活費）、35歳には別の申し出（今の技能が、もっと価値を持つ場所へ）、55歳には別の申し出（安い店舗と、契約前に客がいるかどうか教えてくれる町）、退職後にはまた別の申し出（世話される場所ではなく、必要とされる場所）になります。最初は20代から。彼らにとって、調整の問題はほとんど唯一の障害だからです。</div>
+<figure class="fig">
+  <img src="assets/communal-lunch.jpg" alt="木造の広間の長いテーブルで、いろいろな年齢の人が一緒に昼食を準備している。壁に「結ぶ」の幕。" loading="lazy">
+  <figcaption>イメージ画像（AI生成、2026年8月）。時間が土台です。一日45分の自由時間では、友情は育ちません。</figcaption>
+</figure>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-twenties.html">23歳へ。三つ目の選択肢がある。</a>（英語）20代の入口。お金の全部と、良いことと同じ大きさで書かれた悪いこと。</li>
+  <li><code>01_Foundation/musubu_life_stage_doors.md</code> · <code>01_Foundation/musubu_transition_thesis.md</code>（四つの社会的エンジン）· <code>01_Foundation/musubu_time_revolution.md</code>。英語。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 3 · 仕組み</span>条件付きの約束、そして連鎖する段階</h2>
+<ol class="steps">
+  <li><b>町が、足りないものを言う。</b> 教員が2人。建築の仕事を学ぶ人が6人。小さな子どもがいる家族と、そのために確保した住まい。</li>
+  <li><b>人が、条件付きで約束する。</b> ほかに30人行くなら私も行く。預り金を預ける。まだ何も起きない。</li>
+  <li><b>その数は公開される。</b> 動くのを見て、ほかに誰がいるかがだいたいわかる。</li>
+  <li><b>引っ越す前に、会う。</b> 何か月も。</li>
+  <li><b>集まるか、集まらないか。</b> 集まれば全員が同じ季節に行く。集まらなければお金は戻る。</li>
+</ol>
+<p>これが種です。これを生きたものにするのが<strong>段階（フェーズ）</strong>です。条件が一つだけなら、それは教員の募集であって、正直だけれど動きません。段階とは、条件に二つの事実を足したものです。その前に何が埋まっていなければならないか。埋まったら何が開くか。段階を順に並べると、町の計画は、見知らぬ人が自分の居場所を見つけられる図になります。</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>段階</th><th>開く条件</th><th>開くもの</th><th>状態</th></tr></thead>
+<tbody>
+<tr><td class="ph">1 · 最初の集まり</td><td>12世帯、うち6世帯は10歳未満の子どもあり。教員2名。住まい12戸を確保</td><td>この下の全部</td><td class="st done">3月に達成</td></tr>
+<tr><td class="ph">2 · 幼稚園</td><td>6歳未満の子ども15人が約束</td><td>2019年の建物が翌4月に再開</td><td class="st now">11 / 15</td></tr>
+<tr><td class="ph">3 · 診療所の協同組合</td><td>6つの役割のうち4つ、30世帯</td><td>週3日の診療所。小児科の巡回枠が資金対象に</td><td class="st now">役割 3 / 6</td></tr>
+<tr><td class="ph">4 · 放課後</td><td>幼稚園が開いて1年、学齢の子ども20人</td><td>塾の枠。バス路線の延長</td><td class="st later">未開始</td></tr>
+<tr><td class="ph">5 · 二つ目の集まり</td><td>段階3の達成</td><td>二つ目の住宅の区画が約束の受付を開始</td><td class="st later">未開始</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:0.82rem;color:var(--ink-3)">例です。人口5,000人の町の、子育ての地区。これを読む小児科医は、自分の枠が段階3で生まれるとわかる。4歳の子がいる夫婦は、自分たちが15人のうちの一人だとわかる。</p>
+<div class="best"><b>この部品でいちばん良いところ：</b> 二つの段階に、二つのエンジン。初めは「最初になる」のが怖いので、仕組みは保証です。全員か誰もか、埋まらなかったときの小さなお礼、二人一組の約束。あとになると「乗り遅れる」のが怖いので、仕組みは勢いです。埋まった段階が次を開き、それを知らせる。連鎖を正直に保つ規則は一つだけ。解放は、約束済みの条件が埋まったときにだけ起こり、見込みでは決して起こらない。</div>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-mechanisms.html">仕組みを、図で</a>（英語）、7枚。</li>
+  <li><code>02_Platform/musubu_living_system.md</code>（段階、解放、初日）· <code>02_Platform/musubu_mechanics_registry.md</code>（36の仕組み、それぞれに実績・前例・検証可能・スケッチの印）· <code>02_Platform/musubu_coordination_architecture.md</code>。英語。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 4 · ポータル</span>町と、来る人たちが一緒に組み立てる計器盤</h2>
+<p>ポータルは町についてのウェブサイトではありません。町の計画、数、予定表、記録が一つの画面にあり、三つの見え方があります。訪問者に見えるもの、住民に見えるもの、役場に見えるもの。すべての数字に出どころがつきます。流れた条件は残ります。閉じた店も残ります。投稿するのは、そこに住む人だけです。</p>
+<p>いまになって初めて試せる部分は、<strong>誰も入力しなくていい</strong>ということです。役場は、話すことで町の信号を形にできます。</p>
+<div class="scene">
+  <p class="clerk"><span class="who">担当者、火曜日</span>幼稚園ですけど。2019年に閉じたやつ。子どもが足りれば、また開けてもいい。6歳未満で15人、とか。建物は大丈夫です。</p>
+  <p class="portal"><span class="who">ポータル</span>それを段階としてページに載せられます。「6歳未満の子ども15人の約束で再開。2019年の建物、改修不要」。今は0人。川崎の家族には「小さな子どものいる世帯があと9つで、到着の翌4月に幼稚園が再開します」と読めます。公開の前に議会の確認を通しますか。</p>
+  <p class="clerk"><span class="who">担当者</span>議会。木曜の議題に入れて。</p>
+</div>
+<p style="font-size:0.82rem;color:var(--ink-3)">話し言葉が提案になる。人が決める。記録は一度だけ変わり、三通りに読まれる。仕組みが提案し、人が選び、どの提案も理由を示す。</p>
+<figure class="fig">
+  <img src="assets/shot-map-v1.jpg" alt="試作の地図のスクリーンショット。区画ごとに状態と条件の数、時間のつまみ。" loading="lazy">
+  <figcaption>試作品のスクリーンショット。豊後高田の地図。区画、条件、そして「約束済み」と「見込み」を分ける時間のつまみ。<a href="musubu-map-v1.html">開く（英語）</a></figcaption>
+</figure>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-coordination-layer-ja.html">5年後のMusubu</a>、56部屋のうち49が埋まったシェアハウスと、町の計器盤。</li>
+  <li><a href="musubu-town-page.html">町のページ</a> · <a href="musubu-member-dashboard.html">個人の画面</a> · <a href="musubu-2032-vision.html">豊後高田 2032</a>、うまくいった場合の一つの姿、失敗も含めて。いずれも英語の試作品。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 5 · 調査</span>調査票ではなく、鏡</h2>
+<p>日本のどの省庁も「東京を離れることを考える人がいる」ことは知っています。誰も持っていないのは、人生の段階と場所ごとに、<strong>何が正確に人を止めているのか</strong>を順位づけして更新し続ける地図です。政策は願いではなく障害に対して書かれます。その地図は、仕組みそのものより価値のある副産物かもしれません。</p>
+<ol class="loop">
+  <li><b>何が本当に自分を止めているかを言う</b>自分の言葉で。誰かが用意した8つのチェックボックスではなく。自由記述はいま、全国規模で読めます。</li>
+  <li><b>それが数になる</b>順位づけされ、層別され、匿名で。「あなたと同じ状況の412人が、同じ壁を挙げました」。</li>
+  <li><b>誰かが一つ取り除く</b>保育の枠、19時以降のバス、転用された建物、緩められた補助金の条件。</li>
+  <li><b>選択肢が画面に現れる</b>数と締め切りつきで。そして、障害を挙げた本人が、それが動くのを見る。</li>
+</ol>
+<div class="best"><b>この部品でいちばん良いところ：</b> 中心の前提を決着させる試験は、週末一つでできます。同じ人に、同じ架空の町について二度聞く。一人で、そしてほかの30世帯と一緒に。二つの答えの差が、仮説を統計にしたものです。そして三つ目の質問。ほかに最低何人行くなら、あなたも行きますか。答えを並べれば、集まりがそもそもできるのか、どの大きさでできるのかが見えます。どちらの質問も、まだ一人にも聞かれていません。</div>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-poll.html">調査票、ページとして</a>（英語）。</li>
+  <li><code>06_Surveys_and_Outreach/musubu_demand_test.md</code> · <code>06_Surveys_and_Outreach/musubu_living_profile.md</code>（常設の登録簿）· <code>06_Surveys_and_Outreach/musubu_intake_instrument.md</code> と、その日本語ドラフト。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 6 · 根拠</span>日本はもう、実験の大半を走らせている</h2>
+<ul class="ev">
+  <li><span class="k">配置は機能する</span><span>地域おこし協力隊は人を地方の町に送り、<b>およそ8割がその後も地域に残ります</b>。半分ほどが、実際は聞いていた話と違ったと答えています。配置は機能している。噛み合わせが壊れている。</span></li>
+  <li><span class="k">集団移転はある</span><span>日本は、法的な枠組みと補助金をもって、<b>300世帯を一緒に</b>移したことが何度もあります。火山が噴火するたびに。自発的に、機会のために、やったことはありません。</span></li>
+  <li><span class="k">なぜ政策は効かなかったか</span><span>10年の地方創生についていちばん引かれる説明は、人がどう一緒に暮らすかという適応の問題を、補助金と建物という技術の問題として扱ったこと。システム思考では補助金はいちばん弱いてこで、情報の流れはその何段も上です。これは上のてこを引きます。</span></li>
+  <li><span class="k">帳簿のある結</span><span><b>ふれあい切符</b>、介護の時間預託の仕組みは、全国規模で30年動きました。2000年に国の現金の経路が入ってきて空洞化しました。これは前例であると同時に、設計上の教訓です。</span></li>
+  <li><span class="k">ブロードリスニング</span><span>市民の自由な意見をAIでまとめて作ったマニフェストが、2024年の都知事選で15万票を、2025年には政党に参議院の議席を得ました。全国規模できちんと聞くことは、日本ではもう仮定ではありません。</span></li>
+  <li><span class="k">誰も人を集めていない</span><span>日本の移住サイトはどれも家を並べています。人を集めているものは一つもありません。調整には、物件一覧では貯まらない需要側の厚みが要るからです。</span></li>
+</ul>
+<p style="font-size:0.82rem;color:var(--ink-3);margin-top:1rem">上の数字はすべて、根拠の一覧で何に基づくかによって等級づけされています。議論をいちばん多く支えている数字ほど、先に検証する印がついています。</p>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><code>05_Government_and_Policy/musubu_precedent_research.md</code> · <code>01_Foundation/musubu_coordination_theory.md</code> §6, §9, §10 · <code>CLAIMS_REGISTER.md</code>。英語。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 7 · お金と、ネットワーク</span>誰が払い、一つの町の上に何があるか</h2>
+<p>町はすでに地方創生の予算を持っていて、パンフレットと、定着率の低い個人向けの助成に使っています。国の移住支援金は世帯あたり最大100万円で、全国で年に約3,500世帯を動かしました。自治体あたり2世帯です。集中させることが、要点そのものです。町や県がいちばん安く買えるものは、最初の集まりの「返金のお礼」です。約束して結局動かなかった40人への小さなお礼と引き換えに、これまで手にしたことのない精度の需要データが手に入ります。</p>
+<p>一つの町の上に、ネットワークがあります。町の一覧と生きた数。人はどの町がいちばん現実に近いかを比べられます。町をまたぐ事業の一覧。「町を選んだのではなく、造船所を選んだら、町がついてきた」。そして<strong>循環する集まり</strong>。ある町が大工仕事を教え、空き家を住める場所に変える。別の町に改修の事業があって、学び直したばかりの12人を9か月、住まい込みで呼ぶ。新しい町が一つ増えるたびに、既存のすべての町の価値が上がります。</p>
+<figure class="fig">
+  <img src="assets/carpentry-apprentices.jpg" alt="年配の大工が若い見習いたちに木の継ぎ手を教えている。" loading="lazy">
+  <figcaption>イメージ画像（AI生成、2026年8月）。教える町は技能の結節点、事業のある町は需要の結節点、登録簿がその間の辺。</figcaption>
+</figure>
+<div class="best"><b>この部品でいちばん良いところ：</b> 住まいのモデルが一つの数字に乗っていて、誰もその数字を持っていません。改修の人件費の割合は見積もりです。一人の工務店との一度の会話で、日本語で、決着します。ここでわかっていないことの大半は、その形をしています。謎ではなく、用事です。</div>
+<ul class="deeper"><li class="cap">もっと深く</li>
+  <li><a href="musubu-density-ladder.html">大きさを選ぶ：国東の集まり</a>（英語）。選んだ大きさで保つ町、断絶ではなく移動。</li>
+  <li><code>03_Economics/</code>（7文書）· <code>05_Government_and_Policy/musubu_government_alignment.md</code> · <code>08_Pitch/musubu_fukuoka_pitch.md</code>（どう稼ぐか）。英語。</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">部品 8 · わかっていないこと</span>本物の障害と、招待</h2>
+<ul class="blockers">
+  <li><b>言葉</b>考えた本人には、役所と話を進められるだけの日本語がありません。次の一歩のほとんどは、日本語か、日本にいることを必要とします。</li>
+  <li><b>未検証</b>誰にも、条件付きの約束を頼んだことがありません。一人にも。</li>
+  <li><b>数字</b>自信をもって使っていた数字のいくつかが見積もりだとわかりました。今はそう印がついています。</li>
+  <li><b>お金</b>誰が調整の費用を払うのか。紙の上では答えられ、実際には答えがありません。</li>
+  <li><b>仕組み</b>世帯・雇用主・自治体をまたいで預り金を預かり返すのは規制のある行為で、誰も調べていません。</li>
+  <li><b>住民</b>すでに町に住んでいる人たちは、どの試作品にもまだ居場所がありません。拒否権を持つ側です。</li>
+</ul>
+<p style="margin-top:1.3rem">68の未解決の問いが、何が解決するかで分類されて並んでいます。26は今日誰かが決められること。10は日本語の話者が要ること。4は弁護士が要ること。11は何かが動くまで進みません。</p>
+<div class="best"><b>この部品でいちばん良いところ：</b> 開いていることです。考えた人は、自分のものにするより存在してほしいと思っています。仕組みを一つだけでも、フォルダごとでも、持っていってください。</div>
+<div class="doors">
+  <a class="door" href="musubu-atlas.html"><span class="h">すべての文書</span><span class="d">56の文書と68の未解決の問いを1ページに。分野と、どこまで固まっているかで絞り込めます。各文書に日本語の一行説明つき（本文は英語）。</span></a>
+  <a class="door" href="index.html"><span class="h">入口へ戻る</span><span class="d">5分のページ、7分の画面、そしてこの全体図。英語と日本語で。</span></a>
+</div>
+</section>
+
+<footer>
+  <p>個人の構想です。どの企業・行政機関とも関係ありません。大分県豊後高田市を最初の候補地のひとつとして調べています。市には何も提案しておらず、このページの数字はどれも誰とも合意されたものではありません。「起こりうること」はすべて予測ではなく想定です。</p>
+</footer>
+
+</div>
+</html>

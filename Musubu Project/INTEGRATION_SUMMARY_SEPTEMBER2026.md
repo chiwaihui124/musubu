@@ -82,6 +82,10 @@ Wai asked for the site to go up in English and Japanese, with a distinct intro i
 - `Portal/assets/`: seven of Wai's Google Flow illustrations resized to 1200px and four headless-Chrome screenshots of the prototypes. Figures placed in the concept page (kitchen, carpentry, valley plan), the coordination-layer page (courtyard, 2032 map), and the front door (courtyard, town page). Every figure is captioned as AI-generated or as a prototype screenshot.
 - **Scope decision, stated for the record:** the reading layer is translated in full; the 55-document working folder is not. It changes, nobody reads 135,000 words in either language, and a Japanese reader who goes that deep can machine-translate a folder that says in Japanese that it is a working folder. The atlas one-liners are the Japanese map of it.
 
+### 9. Third pass: the map
+
+Wai: *"I struggle to even figure out how to introduce Musubu to somebody... anything you can do to give it a cohesive shape that leads with the best things and allows further exploration."* The missing layer was between the seven-minute screen and the fifty-six-document atlas. `Portal/musubu-map.html` (and `-ja`) takes the whole thing apart into eight pieces, each opening with the best thing in it and closing with links deeper: the problem, who would go, the mechanism and its phases, the portal (with the clerk-and-kindergarten scene), the poll, the evidence, the money and the network, and what is not known. It carries the one-sentence and one-minute versions and Wai's own line about what people would take a chance on. The front door now has four doors: five minutes, seven, twenty, and everything.
+
 ## What Wai has to decide
 
 Four things, none of which this session could decide for him.

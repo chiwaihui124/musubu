@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Musubu in eight pieces</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The whole Musubu concept in eight pieces, each with the best of its branch and a way deeper: the problem, why people move, the mechanism, the portal, the poll, the evidence, the money, and what is not known.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1; --card:#F8F9FA; --screen:#FFFFFF;
+  --ink:#131B23; --ink-2:#4B5661; --ink-3:#7E8992;
+  --rule:#D3DADE; --rule-soft:#E2E7EA;
+  --indigo:#1E4B76; --indigo-deep:#12365A; --indigo-wash:#E1E8EF;
+  --lapse:#9C5330; --moss:#4A6B4F;
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418; --card:#161E25; --screen:#111A21;
+    --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+    --rule:#26313A; --rule-soft:#1D262D;
+    --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+    --lapse:#C9825A; --moss:#89AE8E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1418; --card:#161E25; --screen:#111A21;
+  --ink:#DEE5EA; --ink-2:#9AA6B1; --ink-3:#6B7780;
+  --rule:#26313A; --rule-soft:#1D262D;
+  --indigo:#6EA6D6; --indigo-deep:#8FBEE6; --indigo-wash:#152431;
+  --lapse:#C9825A; --moss:#89AE8E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:lang(ja) body, body:lang(ja){line-height:1.9}
+.wrap{max-width:41rem;margin-inline:auto;padding:3.5rem 1rem 5rem}
+.mast{display:flex;align-items:baseline;gap:0.75rem;padding-bottom:2.75rem;flex-wrap:wrap}
+.mast .name{font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:0.02em}
+.mast .kanji{font-family:var(--display);color:var(--indigo);font-size:1.05rem}
+.mast .lang{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--indigo);border-bottom:1px solid var(--rule);margin-left:0.25rem;text-decoration:none}
+.mast .home{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--ink-3);text-decoration:none;border-bottom:1px solid var(--rule)}
+.mast .stamp{margin-left:auto;font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,5.2vw,2.5rem);line-height:1.34;letter-spacing:-0.005em;margin:0 0 1.5rem;text-wrap:balance}
+h1 em{font-style:normal;color:var(--indigo)}
+.standfirst{font-size:1.05rem;color:var(--ink-2);margin:0 0 1.1rem;max-width:36rem}
+.readtime{font-family:var(--mono);font-size:0.75rem;color:var(--ink-3);letter-spacing:0.04em;margin:0 0 2.2rem}
+section{padding-top:2.6rem;margin-top:2.6rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-family:var(--display);font-weight:500;font-size:1.32rem;line-height:1.4;margin:0 0 1.1rem;text-wrap:balance}
+h2 .n{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--indigo);display:block;margin-bottom:0.35rem;font-weight:400}
+h3{font-family:var(--body);font-weight:600;font-size:0.95rem;margin:1.9rem 0 0.5rem}
+p{margin:0 0 1.05rem;max-width:36rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+/* say it */
+.say{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.2rem 1.25rem;margin:0 0 2.2rem}
+.say .cap{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.5rem}
+.say p{font-size:0.97rem;color:var(--ink-2);max-width:none}
+.say p+ .cap{margin-top:1.1rem}
+.say blockquote{margin:0.6rem 0 0;padding:0 0 0 1rem;border-left:2px solid var(--indigo);font-family:var(--display);font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.say blockquote small{display:block;font-family:var(--mono);font-size:0.68rem;color:var(--ink-3);margin-top:0.4rem;letter-spacing:0.03em}
+
+/* diagram */
+figure{margin:1.6rem 0 1.2rem;padding:0}
+.diagram{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1rem 0.9rem}
+.diagram svg{display:block;width:100%;height:auto}
+.d-box{fill:var(--screen);stroke:var(--rule)}
+.d-gov{fill:var(--indigo-wash);stroke:var(--indigo)}
+.d-label{font-family:var(--body);font-size:13px;font-weight:600;fill:var(--ink)}
+.d-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:0.04em;fill:var(--ink-3)}
+.d-line{stroke:var(--indigo);stroke-width:1.4;fill:none}
+.d-arrow{fill:var(--indigo)}
+figcaption{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.03em;color:var(--ink-3);margin-top:0.55rem;line-height:1.6}
+figure.fig img{display:block;width:100%;height:auto;border-radius:3px;border:1px solid var(--rule)}
+
+/* pieces */
+.best{background:var(--indigo-wash);border-left:2px solid var(--indigo);padding:0.9rem 1.1rem;margin:1.3rem 0;font-size:0.95rem;line-height:1.65;color:var(--ink-2);border-radius:0 2px 2px 0}
+.best b{color:var(--ink)}
+.deeper{margin:1.3rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.deeper li{font-size:0.86rem;color:var(--ink-2);line-height:1.6;padding-left:1rem;position:relative}
+.deeper li::before{content:"→";position:absolute;left:0;color:var(--indigo);font-family:var(--mono)}
+.deeper .cap{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.2rem;padding-left:0}
+.deeper .cap::before{content:none}
+.deeper code{font-family:var(--mono);font-size:0.78rem;color:var(--ink-3)}
+
+/* resolve panels */
+.resolve{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;margin:1.6rem 0 0.6rem;overflow:hidden}
+@media (max-width:33rem){.resolve{grid-template-columns:1fr}}
+.panel{background:var(--card);padding:1.1rem 1.15rem 1.25rem}
+.panel .cap{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.85rem}
+.panel.after .cap{color:var(--indigo)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:0.75rem;padding:0.42rem 0;border-bottom:1px dotted var(--rule);font-size:0.88rem}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink-3);white-space:nowrap}
+.row .v{font-family:var(--mono);font-size:0.82rem;color:var(--ink);text-align:right}
+.panel.before .row .v{color:var(--ink-3);filter:blur(2.6px);user-select:none}
+
+/* steps */
+ol.steps{list-style:none;counter-reset:s;margin:1.2rem 0 0.6rem;padding:0;display:flex;flex-direction:column;gap:0.75rem}
+ol.steps li{counter-increment:s;position:relative;padding-left:2.1rem;font-size:0.95rem;line-height:1.62;color:var(--ink-2)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0.24rem;font-family:var(--mono);font-size:0.72rem;color:var(--indigo)}
+ol.steps li b{color:var(--ink);font-weight:600}
+
+/* phases table */
+.tablewrap{overflow-x:auto;margin:1.4rem 0 0.4rem;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:0.84rem}
+th,td{text-align:left;padding:0.6rem 0.8rem;border-bottom:1px solid var(--rule-soft);vertical-align:top;line-height:1.5}
+th{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+tr:last-child td{border-bottom:none}
+td.ph{font-weight:600;color:var(--ink);white-space:nowrap}
+td.st{font-family:var(--mono);font-size:0.78rem;white-space:nowrap}
+td.st.done{color:var(--moss)}
+td.st.now{color:var(--indigo)}
+td.st.later{color:var(--ink-3)}
+
+/* scene */
+.scene{background:var(--screen);border:1px solid var(--rule);border-radius:3px;padding:1.1rem 1.2rem;margin:1.4rem 0 0.6rem;font-size:0.92rem;line-height:1.65}
+.scene p{max-width:none;margin:0 0 0.7rem}
+.scene p:last-child{margin:0}
+.scene .who{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:0.15rem}
+.scene .clerk .who{color:var(--lapse)}
+.scene .portal .who{color:var(--indigo)}
+
+/* loop */
+ol.loop{list-style:none;counter-reset:l;margin:1.2rem 0 0.4rem;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+@media (max-width:33rem){ol.loop{grid-template-columns:1fr}}
+ol.loop li{counter-increment:l;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.85rem 0.95rem 0.95rem;font-size:0.86rem;line-height:1.58;color:var(--ink-2)}
+ol.loop li b{display:block;color:var(--ink);font-weight:600;margin-bottom:0.2rem}
+ol.loop li b::before{content:counter(l) " · ";font-family:var(--mono);font-size:0.72rem;color:var(--indigo);font-weight:400}
+
+/* evidence */
+.ev{margin:1.2rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.8rem}
+.ev li{display:grid;grid-template-columns:6.5rem 1fr;gap:0.9rem;font-size:0.9rem;line-height:1.6;color:var(--ink-2);padding-bottom:0.8rem;border-bottom:1px solid var(--rule-soft)}
+.ev li:last-child{border-bottom:none}
+@media (max-width:33rem){.ev li{grid-template-columns:1fr;gap:0.2rem}}
+.ev .k{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--indigo);padding-top:0.3rem}
+.ev b{color:var(--ink)}
+
+/* blockers */
+.blockers{margin:1.2rem 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+@media (max-width:33rem){.blockers{grid-template-columns:1fr}}
+.blockers li{font-size:0.86rem;line-height:1.55;color:var(--ink-2);background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.7rem 0.85rem}
+.blockers li b{display:block;font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--lapse);font-weight:400;margin-bottom:0.15rem}
+
+.doors{display:flex;flex-direction:column;gap:0.6rem;margin:1.3rem 0 0}
+.door{display:block;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:0.85rem 1rem 0.95rem;color:inherit}
+.door:hover{border-color:var(--indigo)}
+.door .h{font-family:var(--display);font-weight:500;font-size:1.02rem;color:var(--ink);display:block;margin-bottom:0.15rem}
+.door .d{font-size:0.86rem;color:var(--ink-2);line-height:1.6;display:block}
+footer{margin-top:3.2rem;padding-top:1.4rem;border-top:1px solid var(--rule);font-size:0.79rem;line-height:1.7;color:var(--ink-3)}
+footer p{max-width:36rem;margin:0 0 0.7rem}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <span class="name">Musubu</span>
+  <span class="kanji">結</span>
+  <a class="home" href="index.html">front door</a>
+  <a class="lang" href="musubu-map-ja.html">日本語</a>
+  <span class="stamp">THE MAP · 2026</span>
+</div>
+
+<h1>Musubu, in <em>eight pieces</em>.</h1>
+
+<p class="standfirst">The concept, the research, the mechanics, the portal, the poll, the policy and the money are one interlocking thing, and that is what makes it hard to introduce. This page takes it apart into eight pieces, leads each one with the best thing in it, and points deeper. Read the pieces in order or jump to the one you doubt.</p>
+
+<p class="readtime">ABOUT TWENTY MINUTES · NOTHING HERE EXISTS YET · EVERY FIGURE IS ILLUSTRATIVE</p>
+
+<div class="say">
+  <span class="cap">In one sentence</span>
+  <p>Musubu is a way for people to move to Japan's emptying towns together instead of alone: a town says what it is short of, people commit conditionally, the count is public, and nobody moves unless enough others do.</p>
+  <span class="cap">In one minute</span>
+  <p>Ask people whether they would live somewhere quieter with more time and a house they could afford, and many say yes. Almost nobody goes, because a town you have never lived in is a guess, and so is everyone else's willingness. Musubu makes both legible. A town declares what it wants to become, in phases. People pledge conditionally, with a deposit that comes back if the phase does not fill. The count is public, so you can see who else is going before you decide, and nobody is ever the first one alone. When a phase clears, everyone arrives in the same season, and the next phase opens. Underneath it is a national poll of what actually stops people, which is the map policy gets written against. Nothing is built. It is an open concept, and anyone may take it.</p>
+  <span class="cap">The line that says it best, in the author's words</span>
+  <blockquote>Not just where people are in life, but what they are willing to take a chance on if they knew other people in a similar phase were going. They just don't have an option they can take a chance on.<small>Wai, September 2026</small></blockquote>
+</div>
+
+<figure>
+<div class="diagram">
+<svg viewBox="0 0 660 400" role="img" aria-label="A loop: people say what stops them, it becomes a count, a town declares a direction in phases, people pledge conditionally, a phase clears and unlocks the next, people arrive and the feed shows life, which brings more people. Government reads the count and removes blockers.">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-arrow"></path></marker>
+  </defs>
+  <!-- ring nodes -->
+  <rect class="d-box" x="30" y="20" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="44" text-anchor="middle">People say what stops them</text>
+  <text class="d-sub" x="120" y="62" text-anchor="middle">THE POLL · OPEN WORDS</text>
+
+  <rect class="d-box" x="450" y="20" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="44" text-anchor="middle">A town declares a direction</text>
+  <text class="d-sub" x="540" y="62" text-anchor="middle">FOUR AXES · ASK LIST · PHASES</text>
+
+  <rect class="d-box" x="450" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="196" text-anchor="middle">People pledge conditionally</text>
+  <text class="d-sub" x="540" y="214" text-anchor="middle">I GO IF N OTHERS GO · REFUNDABLE</text>
+
+  <rect class="d-box" x="450" y="324" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="540" y="348" text-anchor="middle">A phase clears, the next opens</text>
+  <text class="d-sub" x="540" y="366" text-anchor="middle">SAME SEASON · UNLOCK</text>
+
+  <rect class="d-box" x="30" y="324" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="348" text-anchor="middle">Arrivals, and a feed of life</text>
+  <text class="d-sub" x="120" y="366" text-anchor="middle">PROOF · VISIBLE FAILURE TOO</text>
+
+  <rect class="d-box" x="30" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="120" y="196" text-anchor="middle">It becomes a public count</text>
+  <text class="d-sub" x="120" y="214" text-anchor="middle">THE MIRROR · ANONYMOUS</text>
+
+  <!-- government -->
+  <rect class="d-gov" x="240" y="172" width="180" height="56" rx="3"></rect>
+  <text class="d-label" x="330" y="196" text-anchor="middle">Government reads the count</text>
+  <text class="d-sub" x="330" y="214" text-anchor="middle">REMOVES ONE BLOCKER · FUNDS A PHASE</text>
+
+  <!-- ring arrows -->
+  <line class="d-line" x1="120" y1="76" x2="120" y2="170" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="210" y1="48" x2="448" y2="48" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="540" y1="76" x2="540" y2="170" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="540" y1="228" x2="540" y2="322" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="450" y1="352" x2="212" y2="352" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="120" y1="322" x2="120" y2="230" marker-end="url(#ah)"></line>
+  <!-- gov arrows -->
+  <line class="d-line" x1="210" y1="200" x2="238" y2="200" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="420" y1="200" x2="448" y2="200" marker-end="url(#ah)"></line>
+  <text class="d-sub" x="330" y="262" text-anchor="middle">THE OPTION THAT APPEARS WAS HELPED ALONG</text>
+  <text class="d-sub" x="330" y="306" text-anchor="middle">MORE PEOPLE SEE IT, AND SAY WHAT STOPS THEM</text>
+</svg>
+</div>
+<figcaption>How the pieces lock together. One record, many views, and a loop that runs on people saying what is in the way and then watching it move.</figcaption>
+</figure>
+
+<section>
+<h2><span class="n">PIECE 1 · THE PROBLEM</span>Tokyo versus a question mark</h2>
+<p>Japan already knows its towns are emptying, so that is not the problem. The problem is that Tokyo is the only option with a shape you can picture. There are around 1,700 municipalities and you cannot tell, from outside, which one has work you could do, which one is quietly emptying, or whether you would be the only new person there for ten years. A town nobody can evaluate is not an option. It is a guess, and people are right to refuse a guess.</p>
+<p>And it goes one step further. <strong>Other people are illegible too.</strong> Nobody in Kawasaki can see that four thousand others in the same position would go. Each reads the air, sees nobody moving, and concludes they are alone. They are not alone. They are uncounted.</p>
+<div class="best"><b>The best thing in this piece:</b> the diagnosis is not "people prefer cities" and not "everyone is waiting on everyone." It is that a place you have never lived in, and a willingness nobody has counted, cannot be weighed against Tokyo on the same terms. What coordination adds is not persuasion. It is specification.</div>
+<div class="resolve">
+  <div class="panel before"><span class="cap">A town, from outside</span>
+    <div class="row"><span class="k">Who else is going</span><span class="v">unknown</span></div>
+    <div class="row"><span class="k">Work</span><span class="v">unclear</span></div>
+    <div class="row"><span class="k">Rent</span><span class="v">no idea</span></div>
+    <div class="row"><span class="k">When</span><span class="v">whenever</span></div>
+    <div class="row"><span class="k">If it goes wrong</span><span class="v">your problem</span></div>
+  </div>
+  <div class="panel after"><span class="cap">The same town, coordinated</span>
+    <div class="row"><span class="k">Who else is going</span><span class="v">30 households</span></div>
+    <div class="row"><span class="k">Work</span><span class="v">2 teaching posts</span></div>
+    <div class="row"><span class="k">Rent</span><span class="v">¥38,000</span></div>
+    <div class="row"><span class="k">When</span><span class="v">one spring</span></div>
+    <div class="row"><span class="k">If it goes wrong</span><span class="v">deposit returns</span></div>
+  </div>
+</div>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-concept.html">The concept page</a>, five minutes, in the author's voice.</li>
+  <li><code>01_Foundation/musubu_transition_thesis.md</code> · <code>01_Foundation/musubu_coordination_theory.md</code> §1 (本音 and 建前, and why the count is a mirror).</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 2 · WHO WOULD ACTUALLY GO</span>People move when their life is already moving</h2>
+<p>Wanting rural life is not a trait some people have. It is a state most people pass through. A first child, a breakup, burnout, a job ending, kids leaving home, retirement. At those moments the costs of moving are already being paid for other reasons, and a serious relocation decision is on the table for a few months. Knowing <em>when</em> someone is matters more than knowing who they are, and a slice of the country passes through a hinge every year.</p>
+<p>What is on offer to them is the one thing you cannot buy anywhere: <strong>arriving somewhere at the same time as everyone else</strong>. The last time most adults joined a group where nobody was already inside was university, and people describe those years as the most friendship-dense of their lives. The mechanism was not youth. Nobody was already inside.</p>
+<div class="best"><b>The best thing in this piece:</b> the four doors. The same mechanism is a different offer at twenty-three (a trade, twenty people your age, a fifth of Tokyo's cost of living), at thirty-five (your skills, somewhere they count for more), at fifty-five (cheap premises and a town that tells you before you sign whether the customers exist), and at retirement (not somewhere to be looked after, somewhere to be needed). The twenties go first, because for them the coordination problem is almost the only thing in the way.</div>
+<figure class="fig">
+  <img src="assets/communal-lunch.jpg" alt="A long wooden table in a timber-framed hall, people of several ages preparing lunch together, a 結ぶ banner on the wall." loading="lazy">
+  <figcaption>Illustration, AI-generated, August 2026. Time is the substrate: you cannot form friendships on forty-five free minutes a day.</figcaption>
+</figure>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-twenties.html">You are 23. There is a third option.</a> The twenties door, with the money in full and what is worse at the same size as what is better.</li>
+  <li><code>01_Foundation/musubu_life_stage_doors.md</code> · <code>01_Foundation/musubu_transition_thesis.md</code> (the four social engines) · <code>01_Foundation/musubu_time_revolution.md</code>.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 3 · THE MECHANISM</span>A conditional pledge, then phases that cascade</h2>
+<ol class="steps">
+  <li><b>A town says what it is short of.</b> Two teachers. Six people who will learn a building trade. Families with young children, and here is the housing held for them.</li>
+  <li><b>People commit conditionally.</b> I will go if thirty others go. A deposit is held. Nothing happens yet.</li>
+  <li><b>The number is public.</b> You watch it move and see roughly who else is in.</li>
+  <li><b>You meet before you move.</b> Months of it.</li>
+  <li><b>It fills, or it does not.</b> If it fills, everyone goes in the same season. If not, the money goes back.</li>
+</ol>
+<p>That is the seed. What makes it a living thing is <strong>phases</strong>. A threshold on its own is a call-out for a teacher, honest and inert. A phase is a threshold with two more facts attached: what has to clear before it, and what it opens when it clears. Put the phases in order and the town's plan becomes a graph a stranger can see themselves in.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Phase</th><th>Opens when</th><th>What it opens</th><th>State</th></tr></thead>
+<tbody>
+<tr><td class="ph">1 · First cohort</td><td>12 households, 6 with children under ten; 2 teaching posts; 12 houses held</td><td>Everything below</td><td class="st done">cleared March</td></tr>
+<tr><td class="ph">2 · Kindergarten</td><td>15 children under six committed</td><td>The 2019 building reopens next April</td><td class="st now">11 of 15</td></tr>
+<tr><td class="ph">3 · Clinic co-op</td><td>4 of 6 roles claimed, 30 households</td><td>Three-day clinic; pediatric post becomes fundable</td><td class="st now">3 of 6 roles</td></tr>
+<tr><td class="ph">4 · After-school</td><td>Kindergarten open one year, 20 school-age children</td><td>Cram-school slot; bus route extends</td><td class="st later">not open</td></tr>
+<tr><td class="ph">5 · Second cohort</td><td>Phase 3 cleared</td><td>A second housing cluster opens for pledges</td><td class="st later">not open</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:0.82rem;color:var(--ink-3)">Illustrative. A family district in a town of five thousand. A pediatrician reading this knows her post exists when phase 3 clears. A couple with a four-year-old know they are one of the fifteen.</p>
+<div class="best"><b>The best thing in this piece:</b> two engines for two stages. Early on, the fear is being first, so the mechanics are assurance: all-or-nothing, a small gift if it fails to fill, pledging as a pair. Later, the fear is missing it, so the mechanics are momentum: a cleared phase unlocks the next and announces it. One rule keeps the cascade honest. An unlock is a committed threshold clearing, never a projection.</div>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-mechanisms.html">The mechanisms, drawn</a>, seven figures.</li>
+  <li><code>02_Platform/musubu_living_system.md</code> (phases, unlocks, day one) · <code>02_Platform/musubu_mechanics_registry.md</code> (36 mechanics, each labelled proven, precedent, testable or sketch) · <code>02_Platform/musubu_coordination_architecture.md</code>.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 4 · THE PORTAL</span>An instrument a town and its arrivals assemble together</h2>
+<p>The portal is not a website about a town. It is the town's plan, its counts, its calendar and its record, on one surface, in three views: what a visitor sees, what a resident sees, what the office sees. Every number carries where it came from. Lapsed thresholds stay. Closed businesses stay. Only people who live there post.</p>
+<p>The part that could only be attempted now is that <strong>nobody has to type</strong>. A town office can shape its signal by talking.</p>
+<div class="scene">
+  <p class="clerk"><span class="who">Clerk, Tuesday</span>The kindergarten. We closed it in 2019. We would take it back if there were enough children. Fifteen under six, say. The building is fine.</p>
+  <p class="portal"><span class="who">Portal</span>I can put that on the page as a phase: opens when fifteen children under six are committed, the 2019 site, no renovation. Zero of fifteen now. A family in Kawasaki would read it as "nine more households with young children and the kindergarten reopens the April after you arrive." Do you want the assembly to confirm before it goes public?</p>
+  <p class="clerk"><span class="who">Clerk</span>Assembly. Put it on Thursday's agenda.</p>
+</div>
+<p style="font-size:0.82rem;color:var(--ink-3)">Speech becomes a proposal. A person decides. The record changes once, and is read three ways. The system proposes, people choose, every proposal shows its reasoning.</p>
+<figure class="fig">
+  <img src="assets/shot-map-v1.jpg" alt="Screenshot of a prototype map with tiles at different states, a threshold count on each, and a time scrubber." loading="lazy">
+  <figcaption>Screenshot of a prototype: the map of Bungotakada with tiles, thresholds and a time scrubber that separates committed from projected. <a href="musubu-map-v1.html">Open it</a></figcaption>
+</figure>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-coordination-layer.html">Musubu, five years in</a>, the share house at 49 of 56 and the town's instrument panel.</li>
+  <li><a href="musubu-town-page.html">A town page</a> · <a href="musubu-member-dashboard.html">A member's dashboard</a> · <a href="musubu-2032-vision.html">Bungotakada 2032</a>, one version of it going well, failures included.</li>
+  <li><code>02_Platform/musubu_portal_taxonomy.md</code> · <code>02_Platform/musubu_portal_feed_spec.md</code> · <code>02_Platform/musubu_map_spec.md</code>.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 5 · THE POLL</span>A mirror, not a survey</h2>
+<p>Every ministry in Japan has heard that people would consider leaving Tokyo. Nobody holds a ranked, refreshed map of <strong>what precisely stops them</strong>, by life stage and by place. Policy is written against blockers, not desires. That map is the by-product that might be worth more than the platform.</p>
+<ol class="loop">
+  <li><b>You say what would actually stop you</b>In your own words, not eight checkboxes somebody else wrote. Open answers can now be read at national scale.</li>
+  <li><b>It becomes a number</b>Ranked, segmented, anonymous. "412 people in your situation named this same wall."</li>
+  <li><b>Somebody removes one</b>A childcare place, a bus after seven, a building converted, a subsidy condition loosened.</li>
+  <li><b>The option appears on the screen</b>With a count and a deadline. And the person who named the blocker watches it move.</li>
+</ol>
+<div class="best"><b>The best thing in this piece:</b> the test that would settle the central assumption costs a weekend. Ask the same person about the same imagined town twice, alone and with thirty others, and the gap between the two answers is the thesis as a statistic. Then ask a third question: what is the smallest number of others that would make you go? Sort the answers and you can see whether a cohort can form at all, and at what size. Nobody has asked either question of a single respondent yet.</div>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-poll.html">The poll, as a page</a>.</li>
+  <li><code>06_Surveys_and_Outreach/musubu_demand_test.md</code> · <code>06_Surveys_and_Outreach/musubu_living_profile.md</code> (the standing register) · <code>06_Surveys_and_Outreach/musubu_intake_instrument.md</code> and its Japanese draft.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 6 · THE EVIDENCE</span>Japan has already run most of the experiment</h2>
+<ul class="ev">
+  <li><span class="k">Placement works</span><span>The 地域おこし協力隊 programme places people in rural towns, and <b>roughly eight in ten stay in the region</b>. Around half report the reality did not match what they were told. Placement works. Matching is what is broken.</span></li>
+  <li><span class="k">Group moves exist</span><span>Japan has moved <b>three hundred households together</b>, with a legal framework and a subsidy, every time a volcano erupted. It has never done it voluntarily, for opportunity.</span></li>
+  <li><span class="k">Why policy failed</span><span>The most-cited explanation for a decade of 地方創生 is that an adaptive problem was treated as a technical one: subsidies and buildings instead of how people live together. Systems thinking ranks a subsidy as the weakest lever and information flow several rungs higher. This pulls the higher lever.</span></li>
+  <li><span class="k">結 with a ledger</span><span><b>ふれあい切符</b>, a time-credit system for elder care, ran at national scale for thirty years. It was hollowed out when a state cash channel arrived in 2000, which is a design lesson as much as a precedent.</span></li>
+  <li><span class="k">Broad listening</span><span>An AI-clustered manifesto built from open citizen input won a Tokyo governor candidate 150,000 votes in 2024 and his party a Diet seat in 2025. Asking properly at national scale is no longer hypothetical in Japan.</span></li>
+  <li><span class="k">Nobody assembles people</span><span>Every relocation platform in Japan lists houses. None of them assembles people, because coordination needs demand-side liquidity a listing site cannot accumulate.</span></li>
+</ul>
+<p style="font-size:0.82rem;color:var(--ink-3);margin-top:1rem">Every figure above is tiered in the claims register by what it rests on. The ones that carry the most argument are the ones marked for verification first.</p>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><code>05_Government_and_Policy/musubu_precedent_research.md</code> · <code>01_Foundation/musubu_coordination_theory.md</code> §6, §9, §10 · <code>CLAIMS_REGISTER.md</code>.</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 7 · THE MONEY, AND THE NETWORK</span>Who pays, and what sits above one town</h2>
+<p>Towns already hold revitalization budget and spend it on brochures and individual grants with poor retention. The national relocation grant is up to ¥1,000,000 per household and moved about 3,500 households in a year across the whole country, which is two per municipality. Concentration is the entire point. The cheapest thing a town or a prefecture could buy is a first cohort's refund bonus: a small thank-you to forty people who committed and did not move, in exchange for the most precise demand data it has ever held.</p>
+<p>Above one town there is a network. An index of towns with live counts, so a person can compare which one is closest to becoming real. A cross-town project feed: "I did not choose the town, I chose the boatyard, and the town came with it." And <strong>circulating cohorts</strong>: one town teaches carpentry and turns empty houses into places to live; another has a renovation project and calls for twelve recently reskilled people for nine months, housing included. Each new town raises the value of every existing one.</p>
+<figure class="fig">
+  <img src="assets/carpentry-apprentices.jpg" alt="An older carpenter showing young apprentices a timber joint." loading="lazy">
+  <figcaption>Illustration, AI-generated, August 2026. The training town is the network's node for skill, the project town its node for demand, and the register the edge between them.</figcaption>
+</figure>
+<div class="best"><b>The best thing in this piece:</b> the housing model has a number it turns on and nobody has it. The renovation labour share is an estimate. One conversation with one contractor, in Japanese, would settle it. That is the shape of most of what is unknown here: not mysteries, errands.</div>
+<ul class="deeper"><li class="cap">Deeper</li>
+  <li><a href="musubu-density-ladder.html">Choose your size: the Kunisaki cluster</a>, towns held at chosen sizes, transfer instead of rupture.</li>
+  <li><code>03_Economics/</code> (seven documents) · <code>05_Government_and_Policy/musubu_government_alignment.md</code> · <code>08_Pitch/musubu_fukuoka_pitch.md</code> (how it would earn).</li>
+</ul>
+</section>
+
+<section>
+<h2><span class="n">PIECE 8 · WHAT IS NOT KNOWN</span>The real ones, and the invitation</h2>
+<ul class="blockers">
+  <li><b>Language</b>The author does not speak Japanese well enough to run a municipal conversation. Almost every next step needs Japanese fluency or presence in Japan.</li>
+  <li><b>Untested</b>Nobody has been asked to conditionally commit to anything. Not one respondent.</li>
+  <li><b>Numbers</b>Several figures used confidently turned out to be estimates. They are now labelled as such.</li>
+  <li><b>Money</b>Who pays for coordination is answerable on paper and unanswered in practice.</li>
+  <li><b>Mechanics</b>Holding and releasing deposits across households, employers and a municipality is regulated, and nobody has examined it.</li>
+  <li><b>Residents</b>The people already living in a town have no surface in any prototype yet. They are the party with the veto.</li>
+</ul>
+<p style="margin-top:1.3rem">Sixty-eight open questions are listed, each tagged by what would close it. Twenty-six are decisions someone could make today. Ten need a Japanese speaker. Four need a lawyer. Eleven cannot move until something is running.</p>
+<div class="best"><b>The best thing in this piece:</b> it is open. The person who made this would rather it existed than owned it. Take one mechanic, or the whole folder.</div>
+<div class="doors">
+  <a class="door" href="musubu-atlas.html"><span class="h">Every document</span><span class="d">Fifty-six documents and sixty-eight open questions on one page, filterable by branch and by how settled each one is. Japanese one-line descriptions on each.</span></a>
+  <a class="door" href="index.html"><span class="h">Back to the front door</span><span class="d">The five-minute page, the seven-minute screen, and this map, in English and Japanese.</span></a>
+</div>
+</section>
+
+<footer>
+  <p>An independent project, not connected to any company or government body. Bungotakada, Ōita is being studied as a possible first location. Nothing has been proposed to the city and no figure on this page has been agreed with anyone. Everything describing what could happen is a scenario, not a forecast.</p>
+</footer>
+
+</div>
+</html>
