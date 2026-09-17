@@ -10,7 +10,7 @@ Musubu is a concept for how people could move to Japan's emptying towns **togeth
 
 The idea borrows a mechanic that already works elsewhere, the conditional pledge, and points it at moving house. A town says what it is short of. People commit conditionally: *I will go if thirty other households go.* The number is public. If it fills, everyone arrives in the same season. If it does not, the money goes back and nobody has moved anywhere.
 
-It was worked on by one person, Wai (Chi Wai Hui), between early 2025 and late 2026, as a side project. It grew into the fifty-odd documents in this folder and fifteen prototype pages in `../Portal/`.
+It was worked on by one person, Wai (Chi Wai Hui), between early 2025 and late 2026, as a side project. It grew into the fifty-odd documents in this folder and the pages in `../Portal/`. The whole thing is public at https://github.com/chiwaihui124/musubu.
 
 **Nothing here exists.** No town has agreed to anything. There is no company, no team, no funding, and nobody has been asked to conditionally commit to anything. That last point matters most: the whole concept rests on people saying yes to a conditional offer, and that has never been tested with a single real respondent.
 

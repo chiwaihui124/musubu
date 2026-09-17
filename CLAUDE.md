@@ -109,7 +109,7 @@ on honest artifacts, so committed-vs-projected must never be blurred.
 | Strategy corpus | `Musubu Project/` — `01_Foundation` → `08_Pitch`, with `README.md` as master index (all 51 docs indexed as of 2026-08-30) |
 | **Where to start (a stranger)** | `Musubu Project/00_START_HERE.md` — written for a first-time reader, Sept 2026 |
 | **Where to start (working)** | `Musubu Project/OPEN_THREADS.md` — all 68 unresolved questions, tagged by what would close them |
-| **Front door** | `Portal/index.html` — bilingual (EN intro and JA intro side by side), opens on the share-house screen. Sept 2026. Not yet published. |
+| **Front door** | `Portal/index.html` — Japanese first, English one tap away, opens on the share-house screen. Sept 2026. |
 | **The map** | `Portal/musubu-map.html` + `-ja` — the whole idea in eight pieces, each leading with its best thing and pointing deeper. The middle layer between the seven-minute screen and the atlas. Sept 2026. |
 | Japanese pages | `Portal/musubu-concept-ja.html`, `Portal/musubu-coordination-layer-ja.html` — AI drafts, flagged on-page. Atlas has JA one-liners. Corpus stays English by decision (working folder). |
 | Images | `Portal/assets/` — Wai's Google Flow illustrations + prototype screenshots. Do not use Pinterest files, the Gemini infographic, or Google Earth captures on public pages. |
@@ -134,15 +134,19 @@ An unindexed document is invisible no matter how good it is.
 
 ## Git
 
-The project became a local git repository on 2026-09-17 so the consolidation pass
-could be reviewed as a diff. `.gitignore` keeps binaries, decks, screenshots and the
-Pinterest references out. Nothing is pushed anywhere. A public repository is the
-literal form of "steal it if you want" and is Wai's decision; `LICENSE.md` (CC BY 4.0)
-is proposed and marked as such.
+Public at **https://github.com/chiwaihui124/musubu** since 2026-09-17 (SSH remote
+`origin`, branch `main`). `.gitignore` keeps binaries, decks, screenshots and the
+Pinterest references out. Licence is **CC0 1.0**: `LICENSE` is GitHub's file, `LICENSE.md`
+says the same in plain words. Push to `main` publishes the folder; the site deploys from
+`Portal/` once the Vercel project is connected (see below).
+
+**Hosting:** Vercel, project `musubu`, root directory `Portal`, same pattern as the profile
+site. The Vercel token available to Claude cannot create projects (403), so Wai imports
+the repository once in the Vercel dashboard; after that every push deploys.
 
 ## Open, as of 2026-09-17
 
-- **Wai's decisions from the September pass:** contact method (two placeholders, `index.html` and the concept page) · licence (CC BY 4.0 proposed) · whether the Osaka share-house sentence goes on `index.html`, in his words · whether to publish `index.html` and make the repo public.
+- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC0 · no Osaka sentence · Japanese first · repo public. **Still open:** connecting the repo to Vercel (Wai, one import), then a subdomain.
 - Japanese: `musubu_concept_ja_draft.md` exists and needs a native reader. So does `musubu_intake_ja_draft.md`.
 - No resident-facing surface, no day-one artifact (OPEN_THREADS 61, 62).
 
