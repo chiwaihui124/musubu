@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <meta charset="utf-8">
 <title>Musubu 結</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Musubu is an open concept for how people could move to Japan's emptying towns together instead of alone. Nothing exists yet. Read it, take it, or build it. 日本の空いていく町へ、一人ではなく一緒に移り住むための構想。">
+<meta name="description" content="日本の空いていく町へ、一人ではなく一緒に移り住むための構想。まだ何も作られていません。読んで、持っていって、作ってください。Musubu is an open concept for moving to Japan's emptying towns together instead of alone.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -48,7 +48,7 @@
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:var(--body); font-size:17px; line-height:1.72;
+  font-family:var(--body); font-size:17px; line-height:1.85;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 .wrap{max-width:46rem; margin-inline:auto; padding:3.5rem 1rem 5rem}
@@ -125,7 +125,8 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
 @media (max-width:40rem){ .two{grid-template-columns:1fr; gap:2.4rem} }
 .col h2{margin-bottom:0.8rem}
 .col .intro{font-size:0.97rem; color:var(--ink-2); line-height:1.7; margin-bottom:1.1rem}
-.col[lang="ja"] .intro{line-height:1.9}
+.col[lang="en"] .intro{line-height:1.7}
+[lang="en"]{line-height:1.7}
 .doors{display:flex; flex-direction:column; gap:0.6rem; margin:0}
 .door{
   display:block; background:var(--card); border:1px solid var(--rule); border-radius:3px;
@@ -135,7 +136,7 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
 .door .t{font-family:var(--mono); font-size:0.66rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--indigo); display:block; margin-bottom:0.25rem}
 .door .h{font-family:var(--display); font-weight:500; font-size:1.02rem; line-height:1.4; color:var(--ink); display:block; margin-bottom:0.15rem}
 .door .d{font-size:0.86rem; color:var(--ink-2); line-height:1.6; display:block}
-.col[lang="ja"] .door .d{line-height:1.75}
+.col[lang="en"] .door .d{line-height:1.6}
 .wip{
   font-size:0.82rem; line-height:1.65; color:var(--ink-2);
   border:1px dashed var(--lapse); border-radius:3px; padding:0.7rem 0.9rem; margin-top:1rem;
@@ -185,13 +186,13 @@ footer p[lang="ja"]{line-height:1.85}
   <div class="mast">
     <span class="name">Musubu</span>
     <span class="kanji">結</span>
-    <span class="stamp">An open concept · 公開中の構想 · 2026</span>
+    <span class="stamp">公開中の構想 · An open concept · 2026</span>
   </div>
 
-  <h1>A share house in a town of four thousand. <em>Forty-nine of fifty-six rooms already taken.</em></h1>
-  <p class="h1ja">人口4,000人の町のシェアハウス。56部屋のうち、49はもう埋まっている。</p>
+  <h1>人口4,000人の町のシェアハウス。<em>56部屋のうち、49はもう埋まっている。</em></h1>
+  <p class="h1ja" lang="en">A share house in a town of four thousand. Forty-nine of fifty-six rooms already taken.</p>
 
-  <p class="readtime">NOTHING HERE EXISTS YET · EVERY SCREEN ON THIS SITE IS ILLUSTRATIVE<br>まだ何も作られていません · すべての画面は例です</p>
+  <p class="readtime">まだ何も作られていません · すべての画面は例です<br><span lang="en">NOTHING HERE EXISTS YET · EVERY SCREEN ON THIS SITE IS ILLUSTRATIVE</span></p>
 
   <section>
 
@@ -202,13 +203,13 @@ footer p[lang="ja"]{line-height:1.85}
         <span class="right">SIGNED IN</span>
       </div>
       <article class="tile">
-        <span class="lane">Forming · 集まり中</span>
+        <span class="lane">集まり中 · Forming</span>
         <h4>Share house in the old Ōhashi ryokan</h4>
         <p class="where">Kamisato, Ōita · doors open April 2027 · ¥42,000 a month including utilities</p>
         <div class="meter"><span class="fill" style="--pct:87.5%"></span></div>
-        <div class="count"><b>49</b> of 56 committed <span class="left">7 spots left · 残り7枠</span></div>
+        <div class="count"><b>49</b> of 56 committed <span class="left">残り7枠 · 7 spots left</span></div>
         <div class="who">
-          <span class="cap">Who is coming · 誰が来るか</span>
+          <span class="cap">誰が来るか · Who is coming</span>
           <div class="stack" aria-hidden="true">
             <span class="s1" style="--w:41%"></span>
             <span class="s2" style="--w:38%"></span>
@@ -225,50 +226,17 @@ footer p[lang="ja"]{line-height:1.85}
     </div>
 
     <p class="caption">
+      例です。上里は実在の町ではなく、数字も架空です。画面の「かたち」が構想そのものです。決める前に、ほかに誰が行くかが見えて、十分に集まらなければ誰も動かない。
+    </p>
+    <p class="caption" lang="en">
       Illustrative. Kamisato is not a real town and none of these numbers are real. The shape of the
       screen is the idea: you can see who else is going before you decide, and nobody moves unless
       enough people do.
-    </p>
-    <p class="caption" lang="ja">
-      例です。上里は実在の町ではなく、数字も架空です。画面の「かたち」が構想そのものです。決める前に、ほかに誰が行くかが見えて、十分に集まらなければ誰も動かない。
     </p>
   </section>
 
   <section>
     <div class="two">
-
-      <div class="col" lang="en">
-        <h2>Start here, in English</h2>
-        <p class="intro">
-          This is a concept for how people could move to Japan's emptying towns together instead of
-          alone. It was worked out in detail by one person over about eighteen months, and it is online
-          so that anyone can read it, take it, or build it.
-          <!-- @@ one sentence here is yours if you want it: where this came from. The Osaka share house, the hundred units, the friends. It is the fact that gives you standing to propose this and it is on no page yet. Leave it out if it feels like too much. -->
-        </p>
-        <div class="doors">
-          <a class="door" href="musubu-concept.html">
-            <span class="t">Five minutes</span>
-            <span class="h">The whole concept on one page</span>
-            <span class="d">What the problem actually is, how the mechanism works, what is in the way, and what was learned. Written in the first person by the person who made it.</span>
-          </a>
-          <a class="door" href="musubu-coordination-layer.html">
-            <span class="t">Seven minutes</span>
-            <span class="h">Musubu, five years in, drawn as a screen</span>
-            <span class="d">The share house above, the town's instrument panel around it, and the loop underneath that turns what stops people into options they can commit to.</span>
-          </a>
-          <a class="door" href="musubu-map.html">
-            <span class="t">Twenty minutes</span>
-            <span class="h">The whole idea, in eight pieces</span>
-            <span class="d">The problem, who would go, the mechanism and its phases, the portal, the poll, the evidence, the money, and what is not known. Each piece leads with its best thing and points deeper.</span>
-          </a>
-          <a class="door" href="musubu-atlas.html">
-            <span class="t">As long as you like</span>
-            <span class="h">Every document</span>
-            <span class="d">Fifty-six documents and sixty-eight open questions on one page, filterable by branch and by how settled each one is. Every number tiered by its source.</span>
-          </a>
-        </div>
-        <div class="wip"><b>Work in progress.</b> This is a living folder, not a finished thing. Documents change, numbers get corrected, and the open questions are open.</div>
-      </div>
 
       <div class="col" lang="ja">
         <h2>日本語で読む</h2>
@@ -300,88 +268,119 @@ footer p[lang="ja"]{line-height:1.85}
         <div class="wip"><b>作業中です。</b> 日本語のページはAIによる下訳で、まだ日本語のネイティブの方に見てもらっていません。おかしなところがあれば、それ自体が教えてほしいことです。</div>
       </div>
 
+      <div class="col" lang="en">
+        <h2 lang="en">Start here, in English</h2>
+        <p class="intro">
+          This is a concept for how people could move to Japan's emptying towns together instead of
+          alone. It was worked out in detail by one person over about eighteen months, and it is online
+          so that anyone can read it, take it, or build it.
+        </p>
+        <div class="doors">
+          <a class="door" href="musubu-concept.html">
+            <span class="t">Five minutes</span>
+            <span class="h">The whole concept on one page</span>
+            <span class="d">What the problem actually is, how the mechanism works, what is in the way, and what was learned. Written in the first person by the person who made it.</span>
+          </a>
+          <a class="door" href="musubu-coordination-layer.html">
+            <span class="t">Seven minutes</span>
+            <span class="h">Musubu, five years in, drawn as a screen</span>
+            <span class="d">The share house above, the town's instrument panel around it, and the loop underneath that turns what stops people into options they can commit to.</span>
+          </a>
+          <a class="door" href="musubu-map.html">
+            <span class="t">Twenty minutes</span>
+            <span class="h">The whole idea, in eight pieces</span>
+            <span class="d">The problem, who would go, the mechanism and its phases, the portal, the poll, the evidence, the money, and what is not known. Each piece leads with its best thing and points deeper.</span>
+          </a>
+          <a class="door" href="musubu-atlas.html">
+            <span class="t">As long as you like</span>
+            <span class="h">Every document</span>
+            <span class="d">Fifty-six documents and sixty-eight open questions on one page, filterable by branch and by how settled each one is. Every number tiered by its source.</span>
+          </a>
+        </div>
+        <div class="wip"><b>Work in progress.</b> This is a living folder, not a finished thing. Documents change, numbers get corrected, and the open questions are open.</div>
+      </div>
+
     </div>
 
     <figure class="fig">
       <img src="assets/sharehouse-courtyard.jpg" alt="The courtyard of a three-storey timber share house: raised garden beds, bicycles under a pergola, people on a deck. 木造シェアハウスの中庭。" loading="lazy">
-      <figcaption>Illustration, AI-generated, August 2026. Not a real building. · イメージ画像（AI生成）。実在の建物ではありません。</figcaption>
+      <figcaption>イメージ画像（AI生成、2026年8月）。実在の建物ではありません。 · Illustration, AI-generated. Not a real building.</figcaption>
     </figure>
   </section>
 
   <section>
-    <h2>What is true <span class="ja">今、本当のこと</span></h2>
+    <h2>今、本当のこと <span class="ja" lang="en">What is true</span></h2>
 
     <div class="truth">
       <div class="col2 yes">
-        <span class="cap">Exists · あるもの</span>
+        <span class="cap">あるもの · Exists</span>
         <ul>
-          <li>A thesis about why people do and do not relocate<small>人がなぜ引っ越し、なぜ引っ越さないかについての仮説</small></li>
-          <li>A specified mechanism, every part labelled by how much is known about it<small>仕組みの設計。どの部分もどこまでわかっているかの印つき</small></li>
-          <li>A candidate first town, studied from public sources<small>公開情報から調べた、最初の候補地</small></li>
-          <li>Economics, housing and co-op models with their assumptions marked<small>経済、住まい、協同組合のモデル。前提は明記</small></li>
-          <li>A register that tiers every load-bearing number<small>主要な数字をすべて根拠で等級づけした一覧</small></li>
-          <li>Fifteen prototype screens<small>15の試作画面</small></li>
+          <li>人がなぜ引っ越し、なぜ引っ越さないかについての仮説<small lang="en">A thesis about why people do and do not relocate</small></li>
+          <li>仕組みの設計。どの部分もどこまでわかっているかの印つき<small lang="en">A specified mechanism, every part labelled by how much is known about it</small></li>
+          <li>公開情報から調べた、最初の候補地<small lang="en">A candidate first town, studied from public sources</small></li>
+          <li>経済、住まい、協同組合のモデル。前提は明記<small lang="en">Economics, housing and co-op models with their assumptions marked</small></li>
+          <li>主要な数字をすべて根拠で等級づけした一覧<small lang="en">A register that tiers every load-bearing number</small></li>
+          <li>15の試作画面<small lang="en">Fifteen prototype screens</small></li>
         </ul>
       </div>
       <div class="col2 no">
-        <span class="cap">Does not exist · ないもの</span>
+        <span class="cap">ないもの · Does not exist</span>
         <ul>
-          <li>A single survey respondent<small>調査の回答者、一人も</small></li>
-          <li>A town that has agreed to anything<small>何かに合意した町</small></li>
-          <li>A company, a team, or funding<small>会社、チーム、資金</small></li>
-          <li>A verified renovation labour cost<small>裏付けのある改修の人件費</small></li>
-          <li>A legal opinion on holding deposits<small>預り金についての法的な見解</small></li>
-          <li>A day-one version of any screen<small>どの画面の「初日版」も</small></li>
+          <li>調査の回答者、一人も<small lang="en">A single survey respondent</small></li>
+          <li>何かに合意した町<small lang="en">A town that has agreed to anything</small></li>
+          <li>会社、チーム、資金<small lang="en">A company, a team, or funding</small></li>
+          <li>裏付けのある改修の人件費<small lang="en">A verified renovation labour cost</small></li>
+          <li>預り金についての法的な見解<small lang="en">A legal opinion on holding deposits</small></li>
+          <li>どの画面の「初日版」も<small lang="en">A day-one version of any screen</small></li>
         </ul>
       </div>
     </div>
 
     <figure class="fig">
       <img src="assets/shot-town-page.jpg" alt="Screenshot of a prototype town page for Bungotakada. 試作の町ページのスクリーンショット。" loading="lazy">
-      <figcaption>Screenshot of a prototype town page. Illustrative figures throughout. <a href="musubu-town-page.html">Open it</a> · 試作の町ページ。数字はすべて例です。</figcaption>
+      <figcaption>試作の町ページ。数字はすべて例です。<a href="musubu-town-page.html">開く（英語）</a> · Screenshot of a prototype town page, illustrative throughout.</figcaption>
     </figure>
   </section>
 
   <section>
-    <h2>Take it <span class="ja">持っていってください</span></h2>
+    <h2>持っていってください <span class="ja" lang="en">Take it</span></h2>
 
     <p>
-      The person who made this would rather it existed than owned it. Everything on this site and
-      in the folder behind it is released for anyone to use, adapt, or build on, with attribution.
-      <!-- @@ licence: CC BY 4.0 is proposed in LICENSE.md and 00_START_HERE.md. Your call. If you would rather keep it informal, cut the second sentence here and in the Japanese below, and delete LICENSE.md. -->
+      これを考えた人は、自分のものにするより、存在してほしいと思っています。このサイトと、その裏にあるフォルダの中身はすべて、誰でも使い、変え、その上に作ってよいものとして公開しています。出典表示も条件もありません。
     </p>
-    <p lang="ja">
-      これを考えた人は、自分のものにするより、存在してほしいと思っています。このサイトと、その裏にあるフォルダの中身はすべて、出典を示せば誰でも使い、変え、その上に作ってよいものとして公開しています。
+    <p lang="en">
+      The person who made this would rather it existed than owned it. Everything on this site and
+      in the folder behind it is released for anyone to use, adapt, or build on. No attribution required. No conditions.
     </p>
 
     <div class="ask">
-      <div class="ask-item">
-        <div class="h">The whole folder</div>
-        <div class="d">
-          Every document, the prototypes, the claims register and the open questions.
-          <span class="slot">repository link to be added</span>
-        </div>
-      </div>
       <div class="ask-item" lang="ja">
         <div class="h">フォルダごと</div>
         <div class="d">
           すべての文書、試作品、数字の根拠一覧、未解決の問い。
-          <span class="slot">リポジトリのリンクは後日追加</span>
-        </div>
-      </div>
-      <div class="ask-item">
-        <div class="h">Reach out</div>
-        <div class="d">
-          If you think it is naive, say so. If you want to build it, say so. If you know someone
-          who should see it, send it to them.
-          <span class="slot">contact method to be added</span>
+          <a href="https://github.com/chiwaihui124/musubu">github.com/chiwaihui124/musubu</a>
         </div>
       </div>
       <div class="ask-item" lang="ja">
         <div class="h">連絡する</div>
         <div class="d">
           甘いと思ったら、そう言ってください。作りたいと思ったら、そう言ってください。見せるべき人を知っていたら、送ってください。
-          <span class="slot">連絡先は後日追加</span>
+          <a href="mailto:chiwaihui124@gmail.com">chiwaihui124@gmail.com</a>
+        </div>
+      </div>
+      <div class="ask-item" lang="en">
+        <div class="h">The whole folder</div>
+        <div class="d">
+          Every document, the prototypes, the claims register and the open questions.
+          <a href="https://github.com/chiwaihui124/musubu">github.com/chiwaihui124/musubu</a>
+        </div>
+      </div>
+      <div class="ask-item" lang="en">
+        <div class="h">Reach out</div>
+        <div class="d">
+          If you think it is naive, say so. If you want to build it, say so. If you know someone
+          who should see it, send it to them.
+          <a href="mailto:chiwaihui124@gmail.com">chiwaihui124@gmail.com</a>
         </div>
       </div>
     </div>
@@ -389,13 +388,13 @@ footer p[lang="ja"]{line-height:1.85}
 
   <footer>
     <p>
+      個人の構想です。どの企業・行政機関とも関係ありません。大分県豊後高田市を最初の候補地のひとつとして調べていますが、市には何も提案しておらず、このサイトの数字はどれも誰とも合意されたものではありません。「起こりうること」はすべて予測ではなく想定です。
+    </p>
+    <p lang="en">
       An independent project, not connected to any company or government body. Bungotakada, Ōita is
       being studied as a possible first location. Nothing has been proposed to the city and no figure
       on this site has been agreed with anyone. Everything here describing what could happen is a
       scenario, not a forecast.
-    </p>
-    <p lang="ja">
-      個人の構想です。どの企業・行政機関とも関係ありません。大分県豊後高田市を最初の候補地のひとつとして調べていますが、市には何も提案しておらず、このサイトの数字はどれも誰とも合意されたものではありません。「起こりうること」はすべて予測ではなく想定です。
     </p>
   </footer>
 

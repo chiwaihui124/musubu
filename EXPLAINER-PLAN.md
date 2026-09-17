@@ -91,3 +91,13 @@ tour. They are **illustrations inside the argument**, not destinations.
 - [ ] Where it gets hosted, and under what domain
 - [ ] Contact method (placeholders on `index.html` and the concept page)
 - [ ] Licence: CC BY 4.0 proposed in `LICENSE.md`
+
+## Wai's review notes on the concept page, moved out at publish time (2026-09-17)
+
+These were `@@` comments inside `Portal/musubu-concept.html` from August. The publish gate forbids `@@` in a public file, so they live here verbatim. None is resolved by moving it.
+
+1. is this needed? would people actually think this is a company? should we put more emphasis and signals that this is just a concept?
+2. It feels hard to know where to start with this page.
+3. Even people who lean towards slowing down or moving to somewhere rural, don't really know wether they are joining a town that is declining or on the rise, really. One thought was, what if, resources were allocated to build con focus effort in a few cities, if there was a sort of movement, if i know many people we interested and wanted to move to one particualar town, it feels like it would a an opportunity to be a part of something big, that can build momemtum, grow large in scope, give people a choice.
+
+The third note is the momentum idea that became phases and unlocks in `Musubu Project/02_Platform/musubu_living_system.md`.
