@@ -88,7 +88,7 @@ Wai: *"I struggle to even figure out how to introduce Musubu to somebody... anyt
 
 ### 10. Published
 
-Repository public at https://github.com/chiwaihui124/musubu. Site live at https://musubu-five.vercel.app (Vercel, root `Portal`, deploys on push). Contact, licence (CC BY 4.0), Japanese-first and no Osaka sentence all decided by Wai on 2026-09-17. Japanese web font added after Vercel's deploy screenshot showed tofu in the mono labels.
+Repository public at https://github.com/chiwaihui124/musubu. Site live at https://musubu.chiwaihui.fyi (Vercel, root `Portal`, deploys on push). Contact, licence (CC BY 4.0), Japanese-first and no Osaka sentence all decided by Wai on 2026-09-17. Japanese web font added after Vercel's deploy screenshot showed tofu in the mono labels.
 
 ## What Wai has to decide
 

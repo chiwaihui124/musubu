@@ -144,11 +144,11 @@ says it in plain words. Push to `main` publishes the folder; the site deploys fr
 (`prj_8hiXsm4oaicjeVj7ACbhHjGd3fmf`, team `team_btGPDtXaWwSakj0eVWTl98Yj`), root directory
 `Portal`, no build step. Every push to `main` deploys. The team-scoped `*.vercel.app`
 preview URLs are behind Vercel login; the production URL and any custom domain are public.
-Next: add `musubu.chiwaihui.fyi` in Vercel and a CNAME at Porkbun.
+Custom domain added 2026-09-17 (CNAME at Porkbun → Vercel, Let's Encrypt cert). `musubu-five.vercel.app` still works as an alias.
 
 ## Open, as of 2026-09-17
 
-- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC BY 4.0 · no Osaka sentence · Japanese first · repo public. **Still open:** the subdomain `musubu.chiwaihui.fyi`.
+- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC BY 4.0 · no Osaka sentence · Japanese first · repo public. **Still open:** a native Japanese reader for the two translated pages; the resident-facing surface and the day-one artifact (OPEN_THREADS 61, 62).
 - Japanese: `musubu_concept_ja_draft.md` exists and needs a native reader. So does `musubu_intake_ja_draft.md`.
 - No resident-facing surface, no day-one artifact (OPEN_THREADS 61, 62).
 

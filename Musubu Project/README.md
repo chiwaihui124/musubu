@@ -103,7 +103,7 @@ the project's material lives outside `Musubu Project/` and none of it was indexe
 
 **`index.html`** (September 2026) is the front door. It opens on the share-house screen (49 of 56 committed), offers three ways in (the concept page at five minutes, the coordination-layer page at seven, the atlas for everything), states what exists and what does not, and closes with the licence and a contact placeholder. It is the answer to the question the project was stuck on: not one artifact at one depth, but a stack a stranger can enter wherever they like. Two `@@` notes on it are Wai's to resolve (a standing sentence about the Osaka share house; the licence).
 
-**Live at https://musubu-five.vercel.app (Vercel, from `Portal/`) and public at https://github.com/chiwaihui124/musubu since 2026-09-17.**
+**Live at https://musubu.chiwaihui.fyi (Vercel, from `Portal/`) and public at https://github.com/chiwaihui124/musubu since 2026-09-17.**
 
 **The map, 2026-09-17.** `musubu-map.html` and `musubu-map-ja.html`: the whole idea in eight pieces (problem · who would go · mechanism and phases · portal · poll · evidence · money and network · what is not known), each piece opening with the best thing in its branch and closing with links deeper. Carries the one-sentence and one-minute versions, Wai's own line about what people would take a chance on, a lock-together diagram, the phases table and the clerk-and-kindergarten scene. It is the fourth door on the front page and the answer to "how do I introduce this to somebody."
 
