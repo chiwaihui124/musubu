@@ -140,13 +140,15 @@ Pinterest references out. Licence is **CC BY 4.0**: `LICENSE` is the legal text,
 says it in plain words. Push to `main` publishes the folder; the site deploys from
 `Portal/` once the Vercel project is connected (see below).
 
-**Hosting:** Vercel, project `musubu`, root directory `Portal`, same pattern as the profile
-site. The Vercel token available to Claude cannot create projects (403), so Wai imports
-the repository once in the Vercel dashboard; after that every push deploys.
+**Live at https://musubu-five.vercel.app since 2026-09-17.** Vercel project `musubu`
+(`prj_8hiXsm4oaicjeVj7ACbhHjGd3fmf`, team `team_btGPDtXaWwSakj0eVWTl98Yj`), root directory
+`Portal`, no build step. Every push to `main` deploys. The team-scoped `*.vercel.app`
+preview URLs are behind Vercel login; the production URL and any custom domain are public.
+Next: add `musubu.chiwaihui.fyi` in Vercel and a CNAME at Porkbun.
 
 ## Open, as of 2026-09-17
 
-- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC BY 4.0 · no Osaka sentence · Japanese first · repo public. **Still open:** connecting the repo to Vercel (Wai, one import), then a subdomain.
+- **Decided 2026-09-17:** contact is chiwaihui124@gmail.com (on every page) · licence CC BY 4.0 · no Osaka sentence · Japanese first · repo public. **Still open:** the subdomain `musubu.chiwaihui.fyi`.
 - Japanese: `musubu_concept_ja_draft.md` exists and needs a native reader. So does `musubu_intake_ja_draft.md`.
 - No resident-facing surface, no day-one artifact (OPEN_THREADS 61, 62).
 
