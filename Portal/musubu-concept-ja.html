@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musubu 結 · 構想</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1;
+  --card:#F8F9FA;
+  --ink:#131B23;
+  --ink-2:#4B5661;
+  --ink-3:#7E8992;
+  --rule:#D3DADE;
+  --rule-soft:#E2E7EA;
+  --indigo:#1E4B76;
+  --indigo-deep:#12365A;
+  --indigo-wash:#E1E8EF;
+  --lapse:#9C5330;
+
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418;
+    --card:#161E25;
+    --ink:#DEE5EA;
+    --ink-2:#9AA6B1;
+    --ink-3:#6B7780;
+    --rule:#26313A;
+    --rule-soft:#1D262D;
+    --indigo:#6EA6D6;
+    --indigo-deep:#8FBEE6;
+    --indigo-wash:#152431;
+    --lapse:#C9825A;
+  }
+}
+
+:root[data-theme="dark"]{
+  --paper:#0E1418;
+  --card:#161E25;
+  --ink:#DEE5EA;
+  --ink-2:#9AA6B1;
+  --ink-3:#6B7780;
+  --rule:#26313A;
+  --rule-soft:#1D262D;
+  --indigo:#6EA6D6;
+  --indigo-deep:#8FBEE6;
+  --indigo-wash:#152431;
+  --lapse:#C9825A;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.wrap{
+  max-width:39rem;
+  margin-inline:auto;
+  padding:3.5rem 1.5rem 5rem;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+/* ---------- masthead ---------- */
+
+.mast{
+  display:flex;
+  align-items:baseline;
+  gap:0.75rem;
+  padding-bottom:2.75rem;
+}
+.mast .name{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:1.05rem;
+  letter-spacing:0.02em;
+}
+.mast .kanji{
+  font-family:var(--display);
+  color:var(--indigo);
+  font-size:1.05rem;
+}
+.mast .stamp{
+  margin-left:auto;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+}
+
+/* ---------- hero ---------- */
+
+h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(1.7rem,5.2vw,2.5rem);
+  line-height:1.34;
+  letter-spacing:-0.005em;
+  margin:0 0 1.5rem;
+  text-wrap:balance;
+}
+h1 em{
+  font-style:normal;
+  color:var(--indigo);
+}
+
+.standfirst{
+  font-size:1.05rem;
+  color:var(--ink-2);
+  margin:0 0 1.1rem;
+  max-width:34rem;
+}
+.readtime{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+  margin:0 0 2.5rem;
+}
+
+/* ---------- sections ---------- */
+
+section{
+  padding-top:2.6rem;
+  margin-top:2.6rem;
+  border-top:1px solid var(--rule-soft);
+}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+
+h2{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:1.32rem;
+  line-height:1.4;
+  letter-spacing:0;
+  margin:0 0 1.1rem;
+  text-wrap:balance;
+}
+
+h3{
+  font-family:var(--body);
+  font-weight:600;
+  font-size:0.95rem;
+  margin:1.9rem 0 0.5rem;
+}
+
+p{margin:0 0 1.05rem;max-width:34rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+/* ---------- the standing notice ---------- */
+
+.notice{
+  background:var(--indigo-wash);
+  border-left:2px solid var(--indigo);
+  padding:0.95rem 1.15rem;
+  margin:1.9rem 0;
+  font-size:0.94rem;
+  line-height:1.65;
+  color:var(--ink-2);
+  border-radius:0 2px 2px 0;
+}
+.notice strong{color:var(--ink)}
+
+/* ---------- the resolve block ---------- */
+
+.resolve{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  margin:1.9rem 0 1.4rem;
+  overflow:hidden;
+}
+@media (max-width:33rem){
+  .resolve{grid-template-columns:1fr}
+}
+.panel{
+  background:var(--card);
+  padding:1.1rem 1.15rem 1.25rem;
+}
+.panel .cap{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  display:block;
+  margin-bottom:0.85rem;
+}
+.panel.after .cap{color:var(--indigo)}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:0.75rem;
+  padding:0.42rem 0;
+  border-bottom:1px dotted var(--rule);
+  font-size:0.88rem;
+}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink-3);white-space:nowrap}
+.row .v{
+  font-family:var(--mono);
+  font-size:0.82rem;
+  color:var(--ink);
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.panel.before .row .v{
+  color:var(--ink-3);
+  filter:blur(2.6px);
+  user-select:none;
+}
+
+.panel.after .row .v{
+  opacity:0;
+  filter:blur(5px);
+  transition:opacity 620ms ease,filter 620ms ease;
+}
+.panel.after.lit .row .v{opacity:1;filter:blur(0)}
+.panel.after.lit .row:nth-child(2) .v{transition-delay:60ms}
+.panel.after.lit .row:nth-child(3) .v{transition-delay:180ms}
+.panel.after.lit .row:nth-child(4) .v{transition-delay:300ms}
+.panel.after.lit .row:nth-child(5) .v{transition-delay:420ms}
+
+@media (prefers-reduced-motion:reduce){
+  .panel.after .row .v{opacity:1;filter:blur(0);transition:none}
+}
+
+.resolve-note{
+  font-size:0.86rem;
+  color:var(--ink-3);
+  margin:0 0 0;
+  max-width:34rem;
+}
+
+/* ---------- the sequence ---------- */
+
+ol.steps{
+  list-style:none;
+  counter-reset:s;
+  margin:1.4rem 0 1.3rem;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:0.9rem;
+}
+ol.steps li{
+  counter-increment:s;
+  position:relative;
+  padding-left:2.1rem;
+  font-size:0.97rem;
+  line-height:1.65;
+  color:var(--ink-2);
+}
+ol.steps li::before{
+  content:counter(s);
+  position:absolute;
+  left:0;
+  top:0.28rem;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--indigo);
+  letter-spacing:0.02em;
+}
+ol.steps li b{color:var(--ink);font-weight:600}
+
+/* ---------- plain lists ---------- */
+
+ul.plain{
+  list-style:none;
+  margin:1.1rem 0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:0.85rem;
+}
+ul.plain li{
+  position:relative;
+  padding-left:1.1rem;
+  font-size:0.97rem;
+  line-height:1.65;
+  color:var(--ink-2);
+  max-width:34rem;
+}
+ul.plain li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0.72rem;
+  width:0.4rem;
+  height:1px;
+  background:var(--indigo);
+}
+ul.plain li b{color:var(--ink);font-weight:600}
+
+/* ---------- illustrative example ---------- */
+
+.scene{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:1.2rem 1.25rem;
+  margin:1.6rem 0 1.1rem;
+  font-size:0.95rem;
+  line-height:1.7;
+  color:var(--ink-2);
+}
+.scene p{margin:0 0 0.75rem;max-width:none}
+.scene p:last-child{margin:0}
+.scene b{color:var(--ink);font-weight:600}
+.scene .tag{
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  display:block;
+  margin-bottom:0.75rem;
+}
+
+/* ---------- obstacles ---------- */
+
+.blockers{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin:1.3rem 0 0;
+  border-top:1px solid var(--rule-soft);
+}
+.blocker{
+  display:grid;
+  grid-template-columns:5.5rem 1fr;
+  gap:1rem;
+  padding:0.95rem 0;
+  border-bottom:1px solid var(--rule-soft);
+  align-items:start;
+}
+@media (max-width:33rem){
+  .blocker{grid-template-columns:1fr;gap:0.3rem}
+}
+.blocker .lbl{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--lapse);
+  padding-top:0.32rem;
+}
+.blocker .txt{font-size:0.94rem;line-height:1.62;color:var(--ink-2)}
+.blocker .txt b{color:var(--ink);font-weight:600}
+
+/* ---------- the ask ---------- */
+
+.ask{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:1.35rem 1.3rem;
+  margin-top:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.1rem;
+}
+.ask-item .h{
+  font-weight:600;
+  font-size:0.97rem;
+  margin-bottom:0.2rem;
+}
+.ask-item .d{
+  font-size:0.9rem;
+  color:var(--ink-2);
+  line-height:1.62;
+}
+
+.slot{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  color:var(--lapse);
+  border-bottom:1px dashed var(--lapse);
+}
+
+footer{
+  margin-top:3.2rem;
+  padding-top:1.4rem;
+  border-top:1px solid var(--rule);
+  font-size:0.79rem;
+  line-height:1.7;
+  color:var(--ink-3);
+}
+footer p{max-width:34rem;margin:0 0 0.7rem}
+footer p:last-child{margin:0}
+
+/* ---------- added Sep 2026: language link, draft notice, figures ---------- */
+.mast .lang{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--indigo);border-bottom:1px solid var(--rule);margin-left:0.25rem}
+.mast .lang:hover{border-bottom-color:var(--indigo)}
+.draftnote{
+  font-size:0.86rem;line-height:1.65;color:var(--ink-2);
+  border:1px dashed var(--lapse);border-radius:3px;padding:0.8rem 1rem;margin:0 0 2.4rem;
+}
+.draftnote b{color:var(--lapse);font-weight:600}
+figure.fig{margin:1.7rem 0 1.4rem;padding:0}
+figure.fig img{display:block;width:100%;height:auto;border-radius:3px;border:1px solid var(--rule)}
+figure.fig figcaption{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.03em;color:var(--ink-3);margin-top:0.55rem;line-height:1.55}
+figure.fig figcaption a{color:var(--indigo)}
+</style>
+
+<div class="wrap">
+
+  <div class="mast">
+    <span class="name">Musubu</span>
+    <span class="kanji">結</span>
+    <a class="lang" href="musubu-concept.html">English</a>
+    <span class="stamp">構想です · 会社ではありません</span>
+  </div>
+
+  <h1>本当の選択肢は「東京か田舎か」ではなかった。「東京か、<em>よくわからない何か</em>か」だった。</h1>
+
+  <p class="standfirst">
+    Musubuは、私がしばらく考え続けてきた構想です。すでに別の場所でうまく動いている仕組み、条件付きの約束という仕組みを借りて、引っ越しに向けてみたものです。このページに、その全部があります。
+  </p>
+
+  <p class="readtime">読むのに5分ほど。登録するものは何もありません。</p>
+
+  <div class="draftnote">
+    <b>作業中のページです。</b> この日本語版はAIによる下訳で、まだ日本語のネイティブの方に見てもらっていません。英語版を書いたのは私ですが、日本語は私自身では確かめられません。おかしなところがあれば、それ自体が教えてほしいことです。
+  </div>
+
+  <section>
+    <h2>私が思う、本当に起きていること</h2>
+
+    <p>
+      もっと静かな場所で、時間があって、手の届く家に住めるとしたら、と聞くと、多くの人が「いいですね」と言います。でも、ほとんど誰も行きません。
+    </p>
+
+    <p>
+      それは、都市のほうが好きだから、ではないと思っています。<strong>東京だけが、かたちを思い浮かべられる唯一の選択肢だから</strong>だと思います。全国に約1,700の市町村がありますが、外から見て、どこに自分ができる仕事があるのか、どこが静かに空っぽになっているのか、自分がこの先10年、唯一の新しい住人になってしまうのかどうか、見分けることはできません。
+    </p>
+
+    <p>
+      評価できない町は、選択肢ではありません。それは賭けです。そして人が賭けを断るのは、正しいことです。
+    </p>
+
+    <p>
+      だから足りていないのは、説得ではありません。<strong>具体的に示すこと</strong>です。誰かが、前もって言えなければならない。誰が来るのか。仕事はいくらなのか。いつなのか。家賃はいくらか。集まらなかったらどうなるのか。
+    </p>
+
+    <div class="resolve">
+      <div class="panel before">
+        <span class="cap">外から見た町</span>
+        <div class="row"><span class="k">ほかに誰が行くか</span><span class="v">わからない</span></div>
+        <div class="row"><span class="k">仕事</span><span class="v">不明</span></div>
+        <div class="row"><span class="k">家賃</span><span class="v">見当もつかない</span></div>
+        <div class="row"><span class="k">いつ</span><span class="v">いつでも</span></div>
+        <div class="row"><span class="k">うまくいかなかったら</span><span class="v">自分の問題</span></div>
+      </div>
+      <div class="panel after" id="afterPanel">
+        <span class="cap">同じ町、みんなで決めたあと</span>
+        <div class="row"><span class="k">ほかに誰が行くか</span><span class="v">30世帯</span></div>
+        <div class="row"><span class="k">仕事</span><span class="v">教員2名</span></div>
+        <div class="row"><span class="k">家賃</span><span class="v">38,000円</span></div>
+        <div class="row"><span class="k">いつ</span><span class="v">ある年の春</span></div>
+        <div class="row"><span class="k">うまくいかなかったら</span><span class="v">預り金は返る</span></div>
+      </div>
+    </div>
+
+    <p class="resolve-note">
+      数字は例です。右側の内容は、どの町とも合意されたものではありません。
+    </p>
+  </section>
+
+  <section>
+    <h2>構想</h2>
+
+    <div class="notice">
+      <strong>これは存在していません。</strong> どの町も何にも合意していませんし、会社もなく、誰も募集していません。1年半ほど考え続けてきた、ひとつのアイデアです。
+    </div>
+
+    <ol class="steps">
+      <li><b>町が、足りないものを言う。</b> パンフレットではなく。教員が2人。建築の仕事を学ぶ人が6人。小さな子どもがいる家族、そのために確保しておく住まいはこれです、と。</li>
+      <li><b>人が、条件付きで約束する。</b> 「ほかに30世帯が行くなら、私も行きます」と言う。預り金を預ける。まだ何も起きません。</li>
+      <li><b>その数は公開される。</b> 数が動くのを見ることができて、ほかに誰が入っているのかも、だいたいわかります。家族が何世帯か、どんな仕事の人か、隣人になるのはどんな人か。</li>
+      <li><b>引っ越す前に、会う。</b> 何か月もかけて。訪ねて、食事をして、質問をする。まず集まりができて、引っ越しはそのあとです。</li>
+      <li><b>集まるか、集まらないか。</b> 集まれば、みんなが同じ季節に行きます。集まらなければ、お金は戻り、誰もどこにも引っ越していません。</li>
+    </ol>
+
+    <p>
+      大事なのは、田舎はいいところだと誰かを説得することではありません。ほかの30世帯と一緒に着くことと、一人で着くことは、まったく別のことだ、ということです。誰も先に内側にいなくて、誰も唯一の新入りではない。
+    </p>
+
+    <p>
+      ほとんどの大人にとって、全員が同時に集まって誰にも先輩後輩がなかった最後の経験は、大学か、新入社員の同期か、寮でしょう。人はその数年を人生でいちばん友人が濃かった時期だと言い、たいてい若かったからだと言います。私は、仕組みはもっと単純だと思っています。誰も先に、内側にいなかったのです。
+    </p>
+
+    <figure class="fig">
+      <img src="assets/shared-kitchen-evening.jpg" alt="木造の共同キッチンで夕食を囲む人たち。黒板に当番表が書かれている。" loading="lazy">
+      <figcaption>イメージ画像（AI生成、2026年8月）。実在の場所ではありません。</figcaption>
+    </figure>
+
+    <h3>もともとあった言葉</h3>
+
+    <p>
+      日本には、このための言葉がもとからあります。クラウドファンディングよりずっと古いものです。<strong>結（ゆい）</strong>は、労働の相互扶助です。隣同士で田を手伝い、順番に屋根を葺き替える。誰も払わない。みんなが借りていて、みんなが貸している。<strong>講（こう）</strong>は、お金を出し合って順番に受け取る相互扶助の集まりで、これは何百年も前からある、「集まったら動く」仕組みです。
+    </p>
+
+    <p>
+      Musubuは「結ぶ」です。私はこれを、シリコンバレーの仕組みが田舎に来たもの、と呼ぶより、<strong>帳簿のある結</strong>と呼びたい。ただ、それが敬意として読めるのか、それとも厚かましく読めるのか、私には判断できません。日本の読者に教えてほしいところです。
+    </p>
+  </section>
+
+  <section>
+    <h2>どんな姿になるか</h2>
+
+    <div class="scene">
+      <span class="tag">例です · どの町も合意していません</span>
+      <p>
+        人口5,000人くらいの町。学校と診療所と店があって、自分が実際にできる仕事がある。一軒家の家賃が<b>38,000円</b>ほど。
+      </p>
+      <p>
+        30世帯が同じ春に着きます。そのうち6世帯は、後継ぎのいない、引退の近い地元の大工から大工仕事を学んでいます。誰かが、11年間空いていた店舗でカフェを開きます。40世帯がすでに「客になる」と言っているからです。2019年に閉じた幼稚園が再開します。突然、子どもの数が足りるようになったからです。
+      </p>
+      <p>
+        誰の通勤も、10分を超えません。
+      </p>
+    </div>
+
+    <figure class="fig">
+      <img src="assets/carpentry-apprentices.jpg" alt="古い日本家屋の作業場で、年配の大工が若い人たちに木の継ぎ手を教えている。" loading="lazy">
+      <figcaption>イメージ画像（AI生成、2026年8月）。</figcaption>
+    </figure>
+
+    <p>
+      そして同じことが、次の町でも、その次の町でも起きます。偶然ではなく、意図してつくられた場所の集まりが、人が選んだ大きさで。
+    </p>
+
+    <figure class="fig">
+      <img src="assets/valley-town-plan.jpg" alt="谷あいの町の鳥瞰図。住宅の区域、工房の区域、食事の区域が色分けされている。" loading="lazy">
+      <figcaption>区域のイメージ（AI生成、2026年8月）。線ははっきり引かず、意図をもって配置する、という考え方の絵です。</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>私が望んでいること</h2>
+
+    <p>
+      一つの町に、一度試してほしい。14の町でもなく、国の事業でもなく。一つの集まりを、一つの場所で、終わらせられる大きさで。
+    </p>
+
+    <p>
+      仕組みの下に、もっと素朴なことがあって、私はそこに戻ってきます。ほとんどの大人は、どう生きるかを本気で選ぶ機会を一度しか持たず、それを22歳で、追われながら決めて、その後きちんとやり直す機会は来ません。ここで差し出しているのは、その実験をまともにやり直す方法です。ほかの人と一緒に、戻る道を残して、一人で勇気を出さなくてもいいように。
+    </p>
+
+    <p>
+      <strong>私が関わっていても、いなくても、これが本当になったらうれしい。</strong> 自分のものにしたいわけではありません。存在してほしいのです。
+    </p>
+  </section>
+
+  <section>
+    <h2>邪魔になっているもの</h2>
+
+    <p>
+      本物の障害です。控えめなリストではありません。どれ一つでも、これを沈めかねません。
+    </p>
+
+    <div class="blockers">
+      <div class="blocker">
+        <span class="lbl">言葉</span>
+        <span class="txt"><b>私には、役所と話を進められるだけの日本語がありません。</b> 本当の次の一歩は、ほとんどすべて、日本語か、現地にいることか、組織としての立場を必要とします。日本の外にいる一人がやるべきことではありません。</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">未検証</span>
+        <span class="txt">誰にも、条件付きの約束を頼んだことがありません。この構想は「条件付きの申し出に人がイエスと言う」という前提に全部乗っていて、それは一人の回答者にも試されていません。</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">数字</span>
+        <span class="txt">自信を持って使っていた数字のいくつかが、<b>私自身の見積もり</b>だとわかりました。いちばんまずいのは改修工事の人件費の割合で、住まいの仕組みがそこに全部かかっているのに、出どころがありません。</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">お金</span>
+        <span class="txt">誰がこの調整の費用を払うのか。紙の上では答えられて、実際には答えがありません。町には地方創生の予算がありますが、それをこれに使うと合意した町はありません。</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">仕組み</span>
+        <span class="txt">預り金を預かり、返し、それを世帯・雇用主・自治体をまたいで行うのは、規制のある行為です。まだきちんと調べていません。</span>
+      </div>
+      <div class="blocker">
+        <span class="lbl">画一化</span>
+        <span class="txt">一つの型を14の町に当てはめることは、日本ではすでに記録された失敗の形であって、効率ではありません。同じにならないよう設計しなければならず、そのぶん、わざと広げにくくなります。</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>わかったこと</h2>
+
+    <ul class="plain">
+      <li>
+        <b>最初の診断は間違っていました。</b> 私はこれを、みんながお互いを待っている状態、と説明していました。きれいな図ですが、実際にそう感じて決めている人はいません。待ち合いではなく、住んだことのない場所は評価できない、ということでした。
+      </li>
+      <li>
+        <b>人は、田舎が好きだから引っ越すのではありません。</b> 人生がすでに動いているから引っ越します。最初の子ども、別れ、燃え尽き、子どもの独立、退職。そのときには、引っ越しの費用はもう別の理由で払われています。その人が<em>誰</em>かより、<em>いつ</em>なのかを知ることのほうが大事です。
+      </li>
+      <li>
+        <b>日本はすでに、この実験の一種を走らせています。</b> 地域おこし協力隊は人を地方の町に送り、およそ8割がその後も地域に残ります。半分ほどが、実際は聞いていた話と違ったと答えています。配置は機能している。噛み合わせが壊れている。
+      </li>
+      <li>
+        <b>10年の政策の失敗を研究した人たちが、私より先に同じ結論に着いていました。</b> 地方創生がうまくいかなかった理由としていちばん引かれる説明は、人がどう一緒に暮らすかを変えるべき問題を、補助金と建物で解こうとした、というものです。自分がうまいことを考えたと思っていましたが、批判の文献と同じ結論だった。それは、ずっといい立ち位置です。
+      </li>
+      <li>
+        <b>自分の主張を一覧にして、等級をつけなければなりませんでした。</b> 気持ちのいい作業ではなく、この構想でいちばん役に立ったものです。つくった数字には、つくったと書いてあります。
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>この先にあるかもしれないもの</h2>
+
+    <p>
+      心から面白いと思っていて、まだ答えの出ていないことが三つあります。
+    </p>
+
+    <ul class="plain">
+      <li>
+        <b>一緒に着くことは、日本人より外国人にとって価値が大きいかもしれません。</b> 日本の町への引っ越しを難しくしているもの、つながりがない、入り口がない、唯一の新入りになる、そのすべてが、日本人でなければもっと重い。つまり仕組みはもっと効きます。構想全体を横切る話で、私はほとんど手をつけていません。
+      </li>
+      <li>
+        <b>副産物のほうが、仕組みそのものより価値があるかもしれません。</b> 東京を離れることを考える人がいることは、どの省庁も知っています。どこにもないのは、<em>何が正確に人を止めているのか</em>を順位づけして更新し続けている地図です。政策は、願いに対してではなく、障害に対して書かれます。
+      </li>
+      <li>
+        <b>きちんと聞くことは、ごく最近まで不可能でした。</b> 質問はすべて先に選択肢を用意しなければならなかったので、調査は作り手がすでに想像していたものしか返してきませんでした。その天井はなくなりました。人を止めているものの一覧が、人が実際に言った言葉から出てくる。ごく小さなチームで、かつては大人数が要ったことができる、ということでもあります。
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>何か言いたいことがあれば</h2>
+
+    <p>
+      甘い、と言われるほうが、何も言われないよりいい。読んでいて最初に浮かんだ反応がいちばん役に立ちます。私に言う版より、誰か別の人に言うだろう版のほうが、もっと役に立ちます。
+    </p>
+
+    <div class="ask">
+      <div class="ask-item">
+        <div class="h">このページにコメントする</div>
+        <div class="d">
+          違うと思うところ、明らかに間違っているところ、外国っぽい言葉や宣伝っぽい言葉。短くて構いません。
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="h">直接連絡する</div>
+        <div class="d">
+          質問、提案、あるいは、これを見せるべき人を知っているなら。
+          <span class="slot">連絡先は後日追加</span>
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="h">全部を見たければ</div>
+        <div class="d">
+          互いに参照し合う50ほどの文書と、動く試作品があります。作業中の資料なので英語のままですが、<a href="musubu-atlas.html">一覧（英語）</a>から全部たどれます。役に立つなら、あなたのものです。条件はありません。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      個人の構想です。どの企業・行政機関とも関係ありません。大分県豊後高田市を、最初の候補地のひとつとして調べています。市には何も提案しておらず、このページの数字はどれも、誰とも合意されたものではありません。
+    </p>
+    <p>
+      ここに書いてある「起こりうること」はすべて、予測ではなく、想定です。家賃、町の人口、世帯数、例はどれも仮のものです。
+    </p>
+  </footer>
+
+</div>
+
+
+<script>
+(function(){
+  var panel = document.getElementById('afterPanel');
+  if(!panel) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){
+    panel.classList.add('lit');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        panel.classList.add('lit');
+        io.disconnect();
+      }
+    });
+  }, {threshold:0.45});
+  io.observe(panel);
+})();
+</script>
+
+<!-- ====================================================================
+     DEV ONLY. Surfaces review notes visibly, on localhost and file://.
+     Inert on any other host, so notes cannot appear on the published page.
+     Self-contained: delete this block and nothing else changes.
+
+     The marker is built as '@'+'@' on purpose. A literal one here would
+     make tools/review-check.sh flag this block forever and the clean
+     gate would never pass.
+     ==================================================================== -->
+<script>
+(function(){
+  var dev = location.protocol === 'file:' ||
+            ['localhost','127.0.0.1','[::1]'].indexOf(location.hostname) !== -1;
+  if(!dev) return;
+
+  var MARK = '@' + '@';
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.devnote{display:inline-block;font-family:var(--mono);font-size:0.72rem;' +
+      'line-height:1.5;color:var(--paper);background:var(--lapse);' +
+      'padding:0.1rem 0.45rem;border-radius:2px;margin:0 0.2rem;cursor:pointer}' +
+    '.devnote.on{outline:2px solid var(--ink);outline-offset:2px}' +
+    '#devbar{position:fixed;right:0.9rem;bottom:0.9rem;z-index:99;' +
+      'font-family:var(--mono);font-size:0.72rem;background:var(--lapse);' +
+      'color:var(--paper);border:none;padding:0.4rem 0.7rem;' +
+      'border-radius:3px;cursor:pointer}' +
+    '@media print{.devnote,#devbar{display:none}}';
+  document.head.appendChild(css);
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+  var notes = [], n, el;
+  while((n = walker.nextNode())){
+    if(n.nodeValue.indexOf(MARK) === -1) continue;
+    el = document.createElement('span');
+    el.className = 'devnote';
+    el.textContent = n.nodeValue.split(MARK).pop().trim() || '(empty note)';
+    n.parentNode.insertBefore(el, n.nextSibling);
+    notes.push(el);
+  }
+  if(!notes.length) return;
+
+  var i = -1;
+  var bar = document.createElement('button');
+  bar.id = 'devbar';
+  bar.textContent = notes.length + (notes.length === 1 ? ' note' : ' notes');
+  bar.title = 'Jump to the next note';
+  bar.addEventListener('click', function(){
+    if(notes[i]) notes[i].classList.remove('on');
+    i = (i + 1) % notes.length;
+    notes[i].classList.add('on');
+    notes[i].scrollIntoView({block:'center', behavior:'smooth'});
+  });
+  document.body.appendChild(bar);
+})();
+</script>

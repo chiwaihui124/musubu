@@ -109,7 +109,9 @@ on honest artifacts, so committed-vs-projected must never be blurred.
 | Strategy corpus | `Musubu Project/` — `01_Foundation` → `08_Pitch`, with `README.md` as master index (all 51 docs indexed as of 2026-08-30) |
 | **Where to start (a stranger)** | `Musubu Project/00_START_HERE.md` — written for a first-time reader, Sept 2026 |
 | **Where to start (working)** | `Musubu Project/OPEN_THREADS.md` — all 68 unresolved questions, tagged by what would close them |
-| **Front door** | `Portal/index.html` — opens on the share-house screen, three ways in. Sept 2026. Not yet published. |
+| **Front door** | `Portal/index.html` — bilingual (EN intro and JA intro side by side), opens on the share-house screen. Sept 2026. Not yet published. |
+| Japanese pages | `Portal/musubu-concept-ja.html`, `Portal/musubu-coordination-layer-ja.html` — AI drafts, flagged on-page. Atlas has JA one-liners. Corpus stays English by decision (working folder). |
+| Images | `Portal/assets/` — Wai's Google Flow illustrations + prototype screenshots. Do not use Pinterest files, the Gemini infographic, or Google Earth captures on public pages. |
 | Theory | `Musubu Project/01_Foundation/musubu_coordination_theory.md` — the mechanism in eight disciplines, five new mechanics. Claude-drafted, labelled as such. |
 | Critique | `Musubu Project/THREE_READERS_SEPT2026.md` — what an officer, a founder and a 23-year-old would say |
 | Navigable atlas | `Portal/musubu-atlas.html` → https://claude.ai/code/artifact/7300e6a3-e971-466b-9975-a1420f25652d (private) |

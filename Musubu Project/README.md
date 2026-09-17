@@ -102,6 +102,8 @@ the project's material lives outside `Musubu Project/` and none of it was indexe
 
 **`index.html`** (September 2026) is the front door. It opens on the share-house screen (49 of 56 committed), offers three ways in (the concept page at five minutes, the coordination-layer page at seven, the atlas for everything), states what exists and what does not, and closes with the licence and a contact placeholder. It is the answer to the question the project was stuck on: not one artifact at one depth, but a stack a stranger can enter wherever they like. Two `@@` notes on it are Wai's to resolve (a standing sentence about the Osaka share house; the licence).
 
+**Bilingual since 2026-09-17.** The front door carries an English intro and a Japanese intro side by side, each leading into its own path. `musubu-concept-ja.html` and `musubu-coordination-layer-ja.html` are full Japanese versions of the two reading pages (AI draft, flagged on-page as awaiting a native reader). The atlas carries a Japanese one-line description under every document and a Japanese banner explaining the folder stays in English. `00_START_HERE.md` has a Japanese section at the end. Every page has a language link in the masthead. `assets/` holds seven of Wai's Google Flow illustrations (resized, labelled AI-generated on the page) and four screenshots of the prototypes; the Pinterest references, the Gemini infographic (retired framing, Tier 4 numbers) and the Google Earth captures were deliberately not used.
+
 ### `Portal/` — the fifteen prototype pages
 
 All are **vision artifacts** except where noted, and every one now carries a

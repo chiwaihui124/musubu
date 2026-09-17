@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
-<title>Musubu</title>
+<title>Musubu 結</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Musubu is an open concept for how people could move to Japan's emptying towns together instead of alone. Nothing exists yet. Read it, take it, or build it. 日本の空いていく町へ、一人ではなく一緒に移り住むための構想。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -22,7 +25,7 @@
   --moss:#4A6B4F;
 
   --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
-  --body:"IBM Plex Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --body:"IBM Plex Sans","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
@@ -48,7 +51,7 @@ body{
   font-family:var(--body); font-size:17px; line-height:1.72;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
-.wrap{max-width:39rem; margin-inline:auto; padding:3.5rem 1rem 5rem}
+.wrap{max-width:46rem; margin-inline:auto; padding:3.5rem 1rem 5rem}
 
 .mast{display:flex; align-items:baseline; gap:0.75rem; padding-bottom:2.75rem}
 .mast .name{font-family:var(--display); font-weight:500; font-size:1.05rem; letter-spacing:0.02em}
@@ -58,15 +61,19 @@ body{
 h1{
   font-family:var(--display); font-weight:400;
   font-size:clamp(1.7rem,5.2vw,2.5rem); line-height:1.34; letter-spacing:-0.005em;
-  margin:0 0 1.5rem; text-wrap:balance;
+  margin:0 0 1.5rem; text-wrap:balance; max-width:39rem;
 }
 h1 em{font-style:normal; color:var(--indigo)}
-.standfirst{font-size:1.05rem; color:var(--ink-2); margin:0 0 1.1rem; max-width:34rem}
-.readtime{font-family:var(--mono); font-size:0.75rem; color:var(--ink-3); letter-spacing:0.04em; margin:0 0 2.2rem}
+.h1ja{
+  font-family:var(--display); font-weight:400; font-size:clamp(1.05rem,2.6vw,1.3rem); line-height:1.7;
+  color:var(--ink-2); margin:0 0 2.2rem; max-width:39rem;
+}
+.readtime{font-family:var(--mono); font-size:0.75rem; color:var(--ink-3); letter-spacing:0.04em; margin:0 0 2.2rem; line-height:1.8}
 
 section{padding-top:2.6rem; margin-top:2.6rem; border-top:1px solid var(--rule-soft)}
 section:first-of-type{border-top:none; margin-top:0; padding-top:0}
 h2{font-family:var(--display); font-weight:500; font-size:1.32rem; line-height:1.4; margin:0 0 1.1rem; text-wrap:balance}
+h2 .ja{display:block; font-size:0.95rem; color:var(--ink-3); font-weight:400; margin-top:0.15rem}
 p{margin:0 0 1.05rem; max-width:34rem}
 p:last-child{margin-bottom:0}
 strong{font-weight:600; color:var(--ink)}
@@ -77,21 +84,20 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
 /* ---------- the screen ---------- */
 .screen{
   background:var(--card); border:1px solid var(--rule); border-radius:4px;
-  overflow:hidden; margin:0 0 0.9rem;
+  overflow:hidden; margin:0 0 0.9rem; max-width:39rem;
 }
 .chrome{
   display:flex; align-items:center; gap:0.6rem;
   padding:0.55rem 0.9rem; border-bottom:1px solid var(--rule-soft);
   font-family:var(--mono); font-size:0.7rem; color:var(--ink-3); letter-spacing:0.03em;
 }
-.chrome .dot{width:0.55rem; height:0.55rem; border-radius:50%; background:var(--rule)}
+.chrome .dot{width:0.55rem; height:0.55rem; border-radius:50%; background:var(--moss)}
 .chrome .right{margin-left:auto}
 .tile{background:var(--screen); padding:1.05rem 1.1rem 1.15rem}
 .tile .lane{
   font-family:var(--mono); font-size:0.66rem; letter-spacing:0.08em;
-  text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.45rem;
+  text-transform:uppercase; color:var(--indigo); display:block; margin-bottom:0.45rem;
 }
-.tile.forming .lane{color:var(--indigo)}
 .tile h4{font-family:var(--display); font-weight:500; font-size:1.15rem; line-height:1.35; margin:0 0 0.3rem}
 .tile .where{font-size:0.86rem; color:var(--ink-3); margin:0; line-height:1.55}
 .meter{height:6px; background:var(--rule-soft); border-radius:3px; margin:0.95rem 0 0.5rem; overflow:hidden}
@@ -99,7 +105,7 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
 .screen.lit .meter .fill{width:var(--pct)}
 .count{font-size:0.9rem; color:var(--ink-2); display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap}
 .count b{font-family:var(--mono); font-size:1.05rem; color:var(--ink); font-weight:500}
-.count .left{margin-left:auto; font-family:var(--mono); font-size:0.74rem; color:var(--indigo); letter-spacing:0.03em}
+.count .left{margin-left:auto; font-family:var(--mono); font-size:0.74rem; color:var(--lapse); letter-spacing:0.03em}
 .who{margin:1rem 0 0.85rem}
 .who .cap{font-family:var(--mono); font-size:0.66rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.45rem}
 .stack{display:flex; height:8px; border-radius:2px; overflow:hidden; gap:2px}
@@ -110,20 +116,36 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
 .legend{list-style:none; margin:0.5rem 0 0; padding:0; display:flex; gap:1rem; flex-wrap:wrap; font-size:0.78rem; color:var(--ink-2)}
 .legend i{display:inline-block; width:0.55rem; height:0.55rem; border-radius:1px; margin-right:0.35rem; vertical-align:middle}
 .fine{font-size:0.82rem; color:var(--ink-3); margin:0.85rem 0 0; line-height:1.55}
-.caption{font-size:0.82rem; color:var(--ink-3); margin:0 0 0; max-width:34rem}
+.caption{font-size:0.82rem; color:var(--ink-3); margin:0 0 0.4rem; max-width:34rem}
 
-/* ---------- doors ---------- */
-.doors{display:flex; flex-direction:column; gap:0.75rem; margin:1.4rem 0 0}
+/* ---------- two languages ---------- */
+.two{
+  display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; margin-top:0.4rem;
+}
+@media (max-width:40rem){ .two{grid-template-columns:1fr; gap:2.4rem} }
+.col h2{margin-bottom:0.8rem}
+.col .intro{font-size:0.97rem; color:var(--ink-2); line-height:1.7; margin-bottom:1.1rem}
+.col[lang="ja"] .intro{line-height:1.9}
+.doors{display:flex; flex-direction:column; gap:0.6rem; margin:0}
 .door{
-  display:grid; grid-template-columns:6.2rem 1fr; gap:1rem; align-items:start;
-  background:var(--card); border:1px solid var(--rule); border-radius:3px;
-  padding:1.05rem 1.15rem; color:inherit; border-bottom:1px solid var(--rule);
+  display:block; background:var(--card); border:1px solid var(--rule); border-radius:3px;
+  padding:0.85rem 1rem 0.95rem; color:inherit; border-bottom:1px solid var(--rule);
 }
 .door:hover{border-color:var(--indigo)}
-@media (max-width:33rem){ .door{grid-template-columns:1fr; gap:0.3rem} }
-.door .t{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--indigo); padding-top:0.3rem}
-.door .h{font-family:var(--display); font-weight:500; font-size:1.08rem; line-height:1.4; color:var(--ink); margin-bottom:0.2rem}
-.door .d{font-size:0.9rem; color:var(--ink-2); line-height:1.6}
+.door .t{font-family:var(--mono); font-size:0.66rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--indigo); display:block; margin-bottom:0.25rem}
+.door .h{font-family:var(--display); font-weight:500; font-size:1.02rem; line-height:1.4; color:var(--ink); display:block; margin-bottom:0.15rem}
+.door .d{font-size:0.86rem; color:var(--ink-2); line-height:1.6; display:block}
+.col[lang="ja"] .door .d{line-height:1.75}
+.wip{
+  font-size:0.82rem; line-height:1.65; color:var(--ink-2);
+  border:1px dashed var(--lapse); border-radius:3px; padding:0.7rem 0.9rem; margin-top:1rem;
+}
+.wip b{color:var(--lapse); font-weight:600}
+
+/* ---------- figures ---------- */
+figure.fig{margin:1.9rem 0 0; padding:0}
+figure.fig img{display:block; width:100%; height:auto; border-radius:3px; border:1px solid var(--rule)}
+figure.fig figcaption{font-family:var(--mono); font-size:0.7rem; letter-spacing:0.03em; color:var(--ink-3); margin-top:0.55rem; line-height:1.6}
 
 /* ---------- true / not ---------- */
 .truth{
@@ -131,27 +153,31 @@ a:focus-visible{outline:2px solid var(--indigo); outline-offset:3px; border-radi
   background:var(--rule); border:1px solid var(--rule); border-radius:3px;
   margin:1.4rem 0 0; overflow:hidden;
 }
-@media (max-width:33rem){ .truth{grid-template-columns:1fr} }
-.truth .col{background:var(--card); padding:1rem 1.1rem 1.1rem}
+@media (max-width:40rem){ .truth{grid-template-columns:1fr} }
+.truth .col2{background:var(--card); padding:1rem 1.1rem 1.1rem}
 .truth .cap{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:0.7rem}
-.truth .col.no .cap{color:var(--lapse)}
-.truth ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.45rem}
-.truth li{font-size:0.88rem; line-height:1.55; color:var(--ink-2); position:relative; padding-left:0.9rem}
-.truth li::before{content:""; position:absolute; left:0; top:0.68rem; width:0.4rem; height:1px; background:var(--ink-3)}
-.truth .col.no li::before{background:var(--lapse)}
+.truth .col2.no .cap{color:var(--lapse)}
+.truth ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem}
+.truth li{font-size:0.86rem; line-height:1.5; color:var(--ink-2); position:relative; padding-left:0.9rem}
+.truth li small{display:block; color:var(--ink-3); font-size:0.8rem; line-height:1.6}
+.truth li::before{content:""; position:absolute; left:0; top:0.66rem; width:0.4rem; height:1px; background:var(--ink-3)}
+.truth .col2.no li::before{background:var(--lapse)}
 
 /* ---------- take it ---------- */
 .ask{
   background:var(--card); border:1px solid var(--rule); border-radius:3px;
-  padding:1.35rem 1.3rem; margin-top:1.4rem; display:flex; flex-direction:column; gap:1.1rem;
+  padding:1.35rem 1.3rem; margin-top:1.4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;
 }
-.ask-item .h{font-weight:600; font-size:0.97rem; margin-bottom:0.2rem}
-.ask-item .d{font-size:0.9rem; color:var(--ink-2); line-height:1.62}
-.slot{font-family:var(--mono); font-size:0.78rem; color:var(--lapse); border-bottom:1px dashed var(--lapse)}
+@media (max-width:40rem){ .ask{grid-template-columns:1fr} }
+.ask-item .h{font-weight:600; font-size:0.95rem; margin-bottom:0.2rem}
+.ask-item .d{font-size:0.87rem; color:var(--ink-2); line-height:1.62}
+.ask-item[lang="ja"] .d{line-height:1.8}
+.slot{font-family:var(--mono); font-size:0.76rem; color:var(--lapse); border-bottom:1px dashed var(--lapse)}
 
 footer{margin-top:3.2rem; padding-top:1.4rem; border-top:1px solid var(--rule); font-size:0.79rem; line-height:1.7; color:var(--ink-3)}
-footer p{max-width:34rem; margin:0 0 0.7rem}
+footer p{max-width:39rem; margin:0 0 0.7rem}
 footer p:last-child{margin:0}
+footer p[lang="ja"]{line-height:1.85}
 </style>
 
 <div class="wrap">
@@ -159,19 +185,13 @@ footer p:last-child{margin:0}
   <div class="mast">
     <span class="name">Musubu</span>
     <span class="kanji">結</span>
-    <span class="stamp">An open concept · 2026</span>
+    <span class="stamp">An open concept · 公開中の構想 · 2026</span>
   </div>
 
   <h1>A share house in a town of four thousand. <em>Forty-nine of fifty-six rooms already taken.</em></h1>
+  <p class="h1ja">人口4,000人の町のシェアハウス。56部屋のうち、49はもう埋まっている。</p>
 
-  <p class="standfirst">
-    This is a concept for how people could move to Japan's emptying towns together instead of
-    alone. It was worked out in detail by one person over about eighteen months, and it is online
-    so that anyone can read it, take it, or build it.
-    <!-- @@ one sentence here is yours if you want it: where this came from. The Osaka share house, the hundred units, the friends. It is the fact that gives you standing to propose this and it is on no page yet. Leave it out if it feels like too much. -->
-  </p>
-
-  <p class="readtime">Nothing here exists yet. Every screen on this site is illustrative.</p>
+  <p class="readtime">NOTHING HERE EXISTS YET · EVERY SCREEN ON THIS SITE IS ILLUSTRATIVE<br>まだ何も作られていません · すべての画面は例です</p>
 
   <section>
 
@@ -181,14 +201,14 @@ footer p:last-child{margin:0}
         <span>musubu.jp / kamisato</span>
         <span class="right">SIGNED IN</span>
       </div>
-      <article class="tile forming">
-        <span class="lane">Forming</span>
+      <article class="tile">
+        <span class="lane">Forming · 集まり中</span>
         <h4>Share house in the old Ōhashi ryokan</h4>
         <p class="where">Kamisato, Ōita · doors open April 2027 · ¥42,000 a month including utilities</p>
         <div class="meter"><span class="fill" style="--pct:87.5%"></span></div>
-        <div class="count"><b>49</b> of 56 committed <span class="left">7 spots left</span></div>
+        <div class="count"><b>49</b> of 56 committed <span class="left">7 spots left · 残り7枠</span></div>
         <div class="who">
-          <span class="cap">Who is coming</span>
+          <span class="cap">Who is coming · 誰が来るか</span>
           <div class="stack" aria-hidden="true">
             <span class="s1" style="--w:41%"></span>
             <span class="s2" style="--w:38%"></span>
@@ -209,77 +229,119 @@ footer p:last-child{margin:0}
       screen is the idea: you can see who else is going before you decide, and nobody moves unless
       enough people do.
     </p>
-  </section>
-
-  <section>
-    <h2>Three ways in</h2>
-
-    <p>
-      Read as much or as little as you like. The three below go from a single page to the whole
-      folder.
+    <p class="caption" lang="ja">
+      例です。上里は実在の町ではなく、数字も架空です。画面の「かたち」が構想そのものです。決める前に、ほかに誰が行くかが見えて、十分に集まらなければ誰も動かない。
     </p>
-
-    <div class="doors">
-      <a class="door" href="musubu-concept.html">
-        <span class="t">Five minutes</span>
-        <span>
-          <span class="h">The whole concept on one page</span>
-          <span class="d">What the problem actually is, how the mechanism works, what is in the way, and what was learned. Written in the first person by the person who made it.</span>
-        </span>
-      </a>
-      <a class="door" href="musubu-coordination-layer.html">
-        <span class="t">Seven minutes</span>
-        <span>
-          <span class="h">Musubu, five years in, drawn as a screen</span>
-          <span class="d">The share house above, the town's instrument panel around it, and the loop underneath that turns what stops people into options they can commit to. For people who build things.</span>
-        </span>
-      </a>
-      <a class="door" href="musubu-atlas.html">
-        <span class="t">As long as you like</span>
-        <span>
-          <span class="h">Everything</span>
-          <span class="d">Fifty-five documents and sixty-eight open questions on one page, filterable by branch and by how much each one rests on. The thesis, the mechanism, the economics, the pilot town research, and every number tiered by its source.</span>
-        </span>
-      </a>
-    </div>
   </section>
 
   <section>
-    <h2>What is true</h2>
+    <div class="two">
+
+      <div class="col" lang="en">
+        <h2>Start here, in English</h2>
+        <p class="intro">
+          This is a concept for how people could move to Japan's emptying towns together instead of
+          alone. It was worked out in detail by one person over about eighteen months, and it is online
+          so that anyone can read it, take it, or build it.
+          <!-- @@ one sentence here is yours if you want it: where this came from. The Osaka share house, the hundred units, the friends. It is the fact that gives you standing to propose this and it is on no page yet. Leave it out if it feels like too much. -->
+        </p>
+        <div class="doors">
+          <a class="door" href="musubu-concept.html">
+            <span class="t">Five minutes</span>
+            <span class="h">The whole concept on one page</span>
+            <span class="d">What the problem actually is, how the mechanism works, what is in the way, and what was learned. Written in the first person by the person who made it.</span>
+          </a>
+          <a class="door" href="musubu-coordination-layer.html">
+            <span class="t">Seven minutes</span>
+            <span class="h">Musubu, five years in, drawn as a screen</span>
+            <span class="d">The share house above, the town's instrument panel around it, and the loop underneath that turns what stops people into options they can commit to.</span>
+          </a>
+          <a class="door" href="musubu-atlas.html">
+            <span class="t">As long as you like</span>
+            <span class="h">Everything</span>
+            <span class="d">Fifty-five documents and sixty-eight open questions on one page. The thesis, the mechanism, the economics, the pilot town research, and every number tiered by its source.</span>
+          </a>
+        </div>
+        <div class="wip"><b>Work in progress.</b> This is a living folder, not a finished thing. Documents change, numbers get corrected, and the open questions are open.</div>
+      </div>
+
+      <div class="col" lang="ja">
+        <h2>日本語で読む</h2>
+        <p class="intro">
+          これは、日本の空いていく町へ、一人ではなく一緒に移り住むための構想です。一人の人間が1年半ほどかけて細かく考えたもので、誰でも読んで、持っていって、作れるように公開しています。
+        </p>
+        <div class="doors">
+          <a class="door" href="musubu-concept-ja.html">
+            <span class="t">5分</span>
+            <span class="h">構想の全部を、1ページで</span>
+            <span class="d">本当の問題は何か、仕組みはどう動くか、何が邪魔をしているか、何がわかったか。考えた本人が一人称で書いています。</span>
+          </a>
+          <a class="door" href="musubu-coordination-layer-ja.html">
+            <span class="t">7分</span>
+            <span class="h">5年後のMusubuを、画面として</span>
+            <span class="d">上のシェアハウス、その周りにある町の計器盤、そして人を止めているものを約束できる選択肢に変える、その下の循環。</span>
+          </a>
+          <a class="door" href="musubu-atlas.html">
+            <span class="t">じっくり</span>
+            <span class="h">全部（英語）</span>
+            <span class="d">55の文書と68の未解決の問いを1ページに。作業中の資料なので英語のままですが、各文書に日本語の一行説明がついています。</span>
+          </a>
+        </div>
+        <div class="wip"><b>作業中です。</b> 日本語のページはAIによる下訳で、まだ日本語のネイティブの方に見てもらっていません。おかしなところがあれば、それ自体が教えてほしいことです。</div>
+      </div>
+
+    </div>
+
+    <figure class="fig">
+      <img src="assets/sharehouse-courtyard.jpg" alt="The courtyard of a three-storey timber share house: raised garden beds, bicycles under a pergola, people on a deck. 木造シェアハウスの中庭。" loading="lazy">
+      <figcaption>Illustration, AI-generated, August 2026. Not a real building. · イメージ画像（AI生成）。実在の建物ではありません。</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>What is true <span class="ja">今、本当のこと</span></h2>
 
     <div class="truth">
-      <div class="col yes">
-        <span class="cap">Exists</span>
+      <div class="col2 yes">
+        <span class="cap">Exists · あるもの</span>
         <ul>
-          <li>A thesis about why people do and do not relocate</li>
-          <li>A specified mechanism, every part labelled by how much is known about it</li>
-          <li>A candidate first town, studied from public sources</li>
-          <li>Economics, housing and co-op models with their assumptions marked</li>
-          <li>A register that tiers every load-bearing number</li>
-          <li>Fifteen prototype screens</li>
+          <li>A thesis about why people do and do not relocate<small>人がなぜ引っ越し、なぜ引っ越さないかについての仮説</small></li>
+          <li>A specified mechanism, every part labelled by how much is known about it<small>仕組みの設計。どの部分もどこまでわかっているかの印つき</small></li>
+          <li>A candidate first town, studied from public sources<small>公開情報から調べた、最初の候補地</small></li>
+          <li>Economics, housing and co-op models with their assumptions marked<small>経済、住まい、協同組合のモデル。前提は明記</small></li>
+          <li>A register that tiers every load-bearing number<small>主要な数字をすべて根拠で等級づけした一覧</small></li>
+          <li>Fifteen prototype screens<small>15の試作画面</small></li>
         </ul>
       </div>
-      <div class="col no">
-        <span class="cap">Does not exist</span>
+      <div class="col2 no">
+        <span class="cap">Does not exist · ないもの</span>
         <ul>
-          <li>A single survey respondent</li>
-          <li>A town that has agreed to anything</li>
-          <li>A company, a team, or funding</li>
-          <li>A verified renovation labour cost</li>
-          <li>A legal opinion on holding deposits</li>
-          <li>A day-one version of any screen</li>
+          <li>A single survey respondent<small>調査の回答者、一人も</small></li>
+          <li>A town that has agreed to anything<small>何かに合意した町</small></li>
+          <li>A company, a team, or funding<small>会社、チーム、資金</small></li>
+          <li>A verified renovation labour cost<small>裏付けのある改修の人件費</small></li>
+          <li>A legal opinion on holding deposits<small>預り金についての法的な見解</small></li>
+          <li>A day-one version of any screen<small>どの画面の「初日版」も</small></li>
         </ul>
       </div>
     </div>
+
+    <figure class="fig">
+      <img src="assets/shot-town-page.jpg" alt="Screenshot of a prototype town page for Bungotakada. 試作の町ページのスクリーンショット。" loading="lazy">
+      <figcaption>Screenshot of a prototype town page. Illustrative figures throughout. <a href="musubu-town-page.html">Open it</a> · 試作の町ページ。数字はすべて例です。</figcaption>
+    </figure>
   </section>
 
   <section>
-    <h2>Take it</h2>
+    <h2>Take it <span class="ja">持っていってください</span></h2>
 
     <p>
       The person who made this would rather it existed than owned it. Everything on this site and
       in the folder behind it is released for anyone to use, adapt, or build on, with attribution.
-      <!-- @@ licence: CC BY 4.0 is proposed in LICENSE.md and 00_START_HERE.md. Your call. If you would rather keep it informal, cut the second sentence here and delete LICENSE.md. -->
+      <!-- @@ licence: CC BY 4.0 is proposed in LICENSE.md and 00_START_HERE.md. Your call. If you would rather keep it informal, cut the second sentence here and in the Japanese below, and delete LICENSE.md. -->
+    </p>
+    <p lang="ja">
+      これを考えた人は、自分のものにするより、存在してほしいと思っています。このサイトと、その裏にあるフォルダの中身はすべて、出典を示せば誰でも使い、変え、その上に作ってよいものとして公開しています。
     </p>
 
     <div class="ask">
@@ -290,12 +352,26 @@ footer p:last-child{margin:0}
           <span class="slot">repository link to be added</span>
         </div>
       </div>
+      <div class="ask-item" lang="ja">
+        <div class="h">フォルダごと</div>
+        <div class="d">
+          すべての文書、試作品、数字の根拠一覧、未解決の問い。
+          <span class="slot">リポジトリのリンクは後日追加</span>
+        </div>
+      </div>
       <div class="ask-item">
         <div class="h">Reach out</div>
         <div class="d">
           If you think it is naive, say so. If you want to build it, say so. If you know someone
           who should see it, send it to them.
           <span class="slot">contact method to be added</span>
+        </div>
+      </div>
+      <div class="ask-item" lang="ja">
+        <div class="h">連絡する</div>
+        <div class="d">
+          甘いと思ったら、そう言ってください。作りたいと思ったら、そう言ってください。見せるべき人を知っていたら、送ってください。
+          <span class="slot">連絡先は後日追加</span>
         </div>
       </div>
     </div>
@@ -305,10 +381,11 @@ footer p:last-child{margin:0}
     <p>
       An independent project, not connected to any company or government body. Bungotakada, Ōita is
       being studied as a possible first location. Nothing has been proposed to the city and no figure
-      on this site has been agreed with anyone.
+      on this site has been agreed with anyone. Everything here describing what could happen is a
+      scenario, not a forecast.
     </p>
-    <p>
-      Everything here describing what could happen is a scenario, not a forecast.
+    <p lang="ja">
+      個人の構想です。どの企業・行政機関とも関係ありません。大分県豊後高田市を最初の候補地のひとつとして調べていますが、市には何も提案しておらず、このサイトの数字はどれも誰とも合意されたものではありません。「起こりうること」はすべて予測ではなく想定です。
     </p>
   </footer>
 
@@ -356,3 +433,4 @@ footer p:last-child{margin:0}
   }
 })();
 </script>
+</html>

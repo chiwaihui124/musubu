@@ -71,6 +71,17 @@ Wai asked for the coordination idea to be developed deeper, across disciplines. 
 
 ---
 
+### 8. Second pass, same day: bilingual and illustrated
+
+Wai asked for the site to go up in English and Japanese, with a distinct intro in each on the front page leading into its own path, and for the walls of text to be broken up with the project's own images.
+
+- `Portal/index.html` rebuilt as a bilingual landing: the share-house screen, then two columns (English intro and doors; Japanese intro and doors), a bilingual "what is true" grid, and a bilingual "take it." Work-in-progress notices in both languages; the Japanese one says the translation is an AI draft awaiting a native reader.
+- `Portal/musubu-concept-ja.html` and `Portal/musubu-coordination-layer-ja.html`: full Japanese versions, same markup and CSS as the English, Japanese font stack, `lang="ja"`, language link in the masthead. The English pages got the reciprocal link.
+- The atlas: a Japanese one-line description under all 55 rows and a banner explaining the folder stays in English.
+- `00_START_HERE.md`: a Japanese section appended.
+- `Portal/assets/`: seven of Wai's Google Flow illustrations resized to 1200px and four headless-Chrome screenshots of the prototypes. Figures placed in the concept page (kitchen, carpentry, valley plan), the coordination-layer page (courtyard, 2032 map), and the front door (courtyard, town page). Every figure is captioned as AI-generated or as a prototype screenshot.
+- **Scope decision, stated for the record:** the reading layer is translated in full; the 55-document working folder is not. It changes, nobody reads 135,000 words in either language, and a Japanese reader who goes that deep can machine-translate a folder that says in Japanese that it is a working folder. The atlas one-liners are the Japanese map of it.
+
 ## What Wai has to decide
 
 Four things, none of which this session could decide for him.
@@ -78,7 +89,7 @@ Four things, none of which this session could decide for him.
 1. **Contact method.** Two dashed placeholders: `Portal/index.html` and the concept page.
 2. **Licence.** CC BY 4.0 is proposed in `LICENSE.md` and `00_START_HERE.md`, both marked proposed. Confirm, change, or keep it informal and delete the file.
 3. **The standing sentence.** `index.html` carries an `@@` note where one sentence about the Osaka share house could go. It is the one biographical fact that gives him standing to propose this and it is on no page. His sentence or nothing.
-4. **Publish or not.** `index.html` is built and unpublished. The repository is local. Both are one action each and both are exposure tasks.
+4. **Publish or not, and where.** The recommendation is the same pattern as the profile site: a public GitHub repository (the literal form of "steal it") with Vercel serving `Portal/` as a static site at a subdomain such as `musubu.chiwaihui.fyi`. One CNAME at Porkbun. The repository is local and nothing is deployed.
 
 The concept page itself was not edited. Its three pending `@@` notes from August are still his.
 

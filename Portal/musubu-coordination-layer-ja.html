@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musubu、5年後</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EEF0F1;
+  --card:#F8F9FA;
+  --screen:#FFFFFF;
+  --ink:#131B23;
+  --ink-2:#4B5661;
+  --ink-3:#7E8992;
+  --rule:#D3DADE;
+  --rule-soft:#E2E7EA;
+  --indigo:#1E4B76;
+  --indigo-deep:#12365A;
+  --indigo-wash:#E1E8EF;
+  --lapse:#9C5330;
+  --moss:#4A6B4F;
+
+  --display:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --body:"IBM Plex Sans","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1418;
+    --card:#161E25;
+    --screen:#111A21;
+    --ink:#DEE5EA;
+    --ink-2:#9AA6B1;
+    --ink-3:#6B7780;
+    --rule:#26313A;
+    --rule-soft:#1D262D;
+    --indigo:#6EA6D6;
+    --indigo-deep:#8FBEE6;
+    --indigo-wash:#152431;
+    --lapse:#C9825A;
+    --moss:#89AE8E;
+  }
+}
+
+:root[data-theme="dark"]{
+  --paper:#0E1418;
+  --card:#161E25;
+  --screen:#111A21;
+  --ink:#DEE5EA;
+  --ink-2:#9AA6B1;
+  --ink-3:#6B7780;
+  --rule:#26313A;
+  --rule-soft:#1D262D;
+  --indigo:#6EA6D6;
+  --indigo-deep:#8FBEE6;
+  --indigo-wash:#152431;
+  --lapse:#C9825A;
+  --moss:#89AE8E;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.wrap{
+  max-width:39rem;
+  margin-inline:auto;
+  padding:3.5rem 1.5rem 5rem;
+}
+
+/* ---------- masthead ---------- */
+
+.mast{display:flex;align-items:baseline;gap:0.75rem;padding-bottom:2.75rem}
+.mast .name{font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:0.02em}
+.mast .kanji{font-family:var(--display);color:var(--indigo);font-size:1.05rem}
+.mast .stamp{margin-left:auto;font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em}
+
+/* ---------- hero ---------- */
+
+h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(1.7rem,5.2vw,2.5rem);
+  line-height:1.34;
+  letter-spacing:-0.005em;
+  margin:0 0 1.5rem;
+  text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--indigo)}
+
+.standfirst{font-size:1.05rem;color:var(--ink-2);margin:0 0 1.1rem;max-width:34rem}
+.readtime{font-family:var(--mono);font-size:0.75rem;color:var(--ink-3);letter-spacing:0.04em;margin:0 0 2.5rem}
+
+/* ---------- sections ---------- */
+
+section{padding-top:2.6rem;margin-top:2.6rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+
+h2{font-family:var(--display);font-weight:500;font-size:1.32rem;line-height:1.4;margin:0 0 1.1rem;text-wrap:balance}
+h3{
+  font-family:var(--body);font-weight:600;font-size:0.95rem;
+  margin:2rem 0 0.5rem;display:flex;align-items:baseline;gap:0.6rem;flex-wrap:wrap;
+}
+
+p{margin:0 0 1.05rem;max-width:34rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--indigo)}
+a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:2px}
+
+.chip{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.12rem 0.42rem;border:1px solid var(--rule);border-radius:2px;
+  color:var(--ink-3);font-weight:400;white-space:nowrap;
+}
+.chip.proven{color:var(--indigo);border-color:var(--indigo)}
+.chip.sketch{color:var(--lapse);border-color:var(--lapse)}
+
+/* ---------- the screen ---------- */
+
+.screen{
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin:2rem 0 0.85rem;
+  background:var(--screen);
+  box-shadow:0 1px 2px rgba(19,27,35,0.04),0 8px 24px -14px rgba(19,27,35,0.18);
+}
+.chrome{
+  display:flex;align-items:center;gap:0.55rem;
+  padding:0.6rem 0.9rem;
+  border-bottom:1px solid var(--rule-soft);
+  background:var(--card);
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.04em;color:var(--ink-3);
+}
+.chrome .dot{width:7px;height:7px;border-radius:50%;background:var(--moss);flex:none}
+.chrome .right{margin-left:auto}
+
+.feed{display:flex;flex-direction:column;gap:1px;background:var(--rule-soft)}
+.tile{background:var(--screen);padding:1.05rem 1.1rem 1.15rem}
+.tile .lane{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.5rem;
+}
+.tile.forming .lane{color:var(--indigo)}
+.tile.life .lane{color:var(--moss)}
+.tile h4{
+  font-family:var(--body);font-weight:600;font-size:1rem;line-height:1.45;
+  margin:0 0 0.28rem;color:var(--ink);
+}
+.tile .where{font-size:0.86rem;color:var(--ink-3);margin:0;line-height:1.55}
+
+.meter{
+  height:6px;border-radius:3px;background:var(--rule-soft);
+  margin:0.95rem 0 0.6rem;overflow:hidden;
+}
+.meter .fill{
+  display:block;height:100%;width:0;border-radius:3px;background:var(--indigo);
+  transition:width 1100ms cubic-bezier(.22,.61,.36,1) 180ms;
+}
+.screen.lit .meter .fill{width:var(--pct)}
+
+.count{
+  display:flex;align-items:baseline;gap:0.6rem;flex-wrap:wrap;
+  font-size:0.88rem;color:var(--ink-2);font-variant-numeric:tabular-nums;
+}
+.count b{font-family:var(--mono);font-size:1.05rem;color:var(--ink);font-weight:500}
+.count .left{
+  margin-left:auto;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--lapse);
+}
+
+.who{margin:1rem 0 0.85rem}
+.who .cap{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.45rem;
+}
+.stack{display:flex;height:10px;border-radius:2px;overflow:hidden;gap:1px}
+.stack span{flex:0 0 var(--w)}
+.s1{background:var(--indigo)}
+.s2{background:color-mix(in srgb,var(--indigo) 62%,var(--card))}
+.s3{background:color-mix(in srgb,var(--indigo) 30%,var(--card))}
+
+.legend{
+  list-style:none;margin:0.55rem 0 0;padding:0;
+  display:flex;flex-wrap:wrap;gap:0.35rem 1rem;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.02em;color:var(--ink-2);
+}
+.legend li{display:flex;align-items:center;gap:0.4rem}
+.legend i{width:0.6rem;height:0.6rem;border-radius:2px;flex:none}
+
+.fine{font-size:0.82rem;color:var(--ink-3);line-height:1.6;margin:0.85rem 0 0;max-width:none}
+
+.caption{font-size:0.84rem;color:var(--ink-3);line-height:1.6;margin:0 0 0;max-width:34rem}
+
+/* ---------- module panels ---------- */
+
+.panels{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;
+  overflow:hidden;margin:1.7rem 0 1rem;
+}
+@media (max-width:36rem){.panels{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:24rem){.panels{grid-template-columns:1fr}}
+
+.panel{background:var(--card);padding:0.9rem 0.95rem 1rem;display:flex;flex-direction:column;gap:0.4rem}
+.panel .pcap{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--ink-3);line-height:1.4;
+}
+.panel .pval{
+  font-family:var(--mono);font-size:1.32rem;line-height:1.15;color:var(--ink);
+  font-variant-numeric:tabular-nums;font-weight:500;
+}
+.panel .pval small{font-size:0.78rem;color:var(--ink-3);font-weight:400}
+.panel .pnote{font-size:0.78rem;line-height:1.5;color:var(--ink-2);margin:0;max-width:none}
+
+.pbar{height:4px;border-radius:2px;background:var(--rule-soft);overflow:hidden}
+.pbar span{display:block;height:100%;border-radius:2px;width:var(--pct);background:var(--indigo)}
+.panel.done .pbar span{background:var(--moss)}
+.panel.stalled .pbar span{background:var(--lapse)}
+
+.state{
+  align-self:flex-start;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.09em;
+  text-transform:uppercase;padding:0.1rem 0.36rem;border-radius:2px;
+  border:1px solid var(--indigo);color:var(--indigo);
+}
+.panel.done .state{border-color:var(--moss);color:var(--moss)}
+.panel.stalled .state{border-color:var(--lapse);color:var(--lapse)}
+
+
+
+/* ---------- notice ---------- */
+
+.notice{
+  background:var(--indigo-wash);border-left:2px solid var(--indigo);
+  padding:0.95rem 1.15rem;margin:1.9rem 0;font-size:0.94rem;line-height:1.65;
+  color:var(--ink-2);border-radius:0 2px 2px 0;
+}
+.notice strong{color:var(--ink)}
+.notice p{max-width:none}
+
+/* ---------- the loop ---------- */
+
+ol.loop{
+  list-style:none;counter-reset:l;margin:1.7rem 0 1.3rem;padding:0 0 0 1.6rem;
+  display:flex;flex-direction:column;gap:1.5rem;position:relative;
+}
+ol.loop::before{
+  content:"";position:absolute;left:0.32rem;top:0.55rem;bottom:0.55rem;
+  width:1px;background:var(--rule);
+}
+ol.loop li{counter-increment:l;position:relative;max-width:33rem}
+ol.loop li::before{
+  content:"";position:absolute;left:-1.6rem;top:0.5rem;
+  width:0.68rem;height:0.68rem;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--indigo);
+}
+ol.loop li b{display:block;font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:0.15rem}
+ol.loop li span{display:block;font-size:0.94rem;line-height:1.65;color:var(--ink-2)}
+
+.loop-close{
+  font-size:0.94rem;color:var(--ink-2);border-top:1px solid var(--rule-soft);
+  padding-top:1.2rem;margin:0;
+}
+
+/* ---------- diagram ---------- */
+
+figure{margin:1.9rem 0 1.2rem;padding:0}
+.diagram{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:1.4rem 1.1rem 1.1rem}
+.diagram svg{display:block;width:100%;height:auto}
+figcaption{font-size:0.84rem;color:var(--ink-3);margin-top:0.75rem;line-height:1.6}
+
+.d-box{fill:var(--paper);stroke:var(--rule);stroke-width:1}
+.d-bar{fill:var(--indigo-wash);stroke:var(--indigo);stroke-width:1}
+.d-label{font-family:var(--body);font-size:13px;font-weight:600;fill:var(--ink)}
+.d-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:0.06em;fill:var(--ink-3)}
+.d-line{stroke:var(--indigo);stroke-width:1}
+.d-arrow{fill:var(--indigo)}
+
+/* ---------- three renderings ---------- */
+
+.renders{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:1.6rem 0 1rem;
+}
+@media (max-width:36rem){.renders{grid-template-columns:1fr}}
+.render{background:var(--card);padding:1rem 1.05rem 1.15rem}
+.render .whocap{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--indigo);display:block;margin-bottom:0.7rem;
+}
+.render .said{font-size:0.9rem;line-height:1.6;color:var(--ink-2);margin:0;max-width:none}
+
+/* ---------- table ---------- */
+
+.tablewrap{overflow-x:auto;margin:1.5rem 0 1.2rem}
+table{border-collapse:collapse;width:100%;min-width:29rem;font-size:0.9rem}
+th{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;text-align:left;padding:0 0.9rem 0.6rem 0;
+  border-bottom:1px solid var(--rule);
+}
+td{padding:0.58rem 0.9rem 0.58rem 0;border-bottom:1px solid var(--rule-soft);color:var(--ink-2);vertical-align:top;line-height:1.55}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+
+/* ---------- rules ---------- */
+
+ol.rules{list-style:none;counter-reset:r;margin:1.4rem 0 0;padding:0;display:flex;flex-direction:column;gap:0.95rem}
+ol.rules li{
+  counter-increment:r;position:relative;padding-left:2.1rem;
+  font-size:0.96rem;line-height:1.65;color:var(--ink-2);max-width:34rem;
+}
+ol.rules li::before{
+  content:counter(r);position:absolute;left:0;top:0.26rem;
+  font-family:var(--mono);font-size:0.72rem;color:var(--indigo);
+}
+ol.rules li b{color:var(--ink);font-weight:600}
+
+/* ---------- open items ---------- */
+
+.open{margin:1.3rem 0 0;border-top:1px solid var(--rule-soft)}
+.open-row{
+  display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:0.9rem 0;
+  border-bottom:1px solid var(--rule-soft);align-items:start;
+}
+@media (max-width:33rem){.open-row{grid-template-columns:1fr;gap:0.25rem}}
+.open-row .lbl{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--lapse);padding-top:0.34rem;
+}
+.open-row .txt{font-size:0.94rem;line-height:1.62;color:var(--ink-2)}
+.open-row .txt b{color:var(--ink);font-weight:600}
+
+/* ---------- pull quote ---------- */
+
+blockquote{
+  margin:1.9rem 0;padding:0 0 0 1.2rem;border-left:2px solid var(--indigo);
+  font-family:var(--display);font-size:1.12rem;line-height:1.62;color:var(--ink);
+  max-width:33rem;
+}
+blockquote p{max-width:none;margin:0 0 0.6rem}
+blockquote p:last-child{margin:0}
+
+/* ---------- the question ---------- */
+
+.question{
+  border:1px solid var(--indigo);border-radius:3px;padding:1.5rem 1.4rem;
+  margin-top:1.5rem;background:var(--card);
+}
+.question .cap{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:0.9rem;
+}
+.question .q{
+  font-family:var(--display);font-size:1.22rem;line-height:1.5;color:var(--ink);
+  margin:0 0 1rem;max-width:none;text-wrap:balance;
+}
+.question .after{font-size:0.93rem;color:var(--ink-2);margin:0;max-width:none}
+
+ol.asks{
+  list-style:none;counter-reset:a;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:1.05rem;
+}
+ol.asks li{
+  counter-increment:a;position:relative;padding-left:1.9rem;
+  font-size:0.96rem;line-height:1.62;color:var(--ink-2);max-width:none;
+}
+ol.asks li::before{
+  content:counter(a);position:absolute;left:0;top:0.22rem;
+  font-family:var(--mono);font-size:0.72rem;color:var(--indigo);
+}
+ol.asks li b{color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:3.2rem;padding-top:1.6rem;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.03em;color:var(--ink-3);line-height:1.9;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .meter .fill{transition:none;width:var(--pct)}
+}
+
+/* ---------- added Sep 2026: language link, draft notice, figures ---------- */
+.mast .lang{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--indigo);border-bottom:1px solid var(--rule);margin-left:0.25rem}
+.mast .lang:hover{border-bottom-color:var(--indigo)}
+.draftnote{
+  font-size:0.86rem;line-height:1.65;color:var(--ink-2);
+  border:1px dashed var(--lapse);border-radius:3px;padding:0.8rem 1rem;margin:0 0 2.4rem;
+}
+.draftnote b{color:var(--lapse);font-weight:600}
+figure.fig{margin:1.7rem 0 1.4rem;padding:0}
+figure.fig img{display:block;width:100%;height:auto;border-radius:3px;border:1px solid var(--rule)}
+figure.fig figcaption{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.03em;color:var(--ink-3);margin-top:0.55rem;line-height:1.55}
+figure.fig figcaption a{color:var(--indigo)}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <span class="name">Musubu</span>
+  <span class="kanji">結</span>
+  <a class="lang" href="musubu-coordination-layer.html">English</a>
+  <span class="stamp">構想ノート · 2026</span>
+</div>
+
+<h1>49人がもう「行く」と言った。<em>残り7枠。</em></h1>
+
+<p class="standfirst">これは、5年後のMusubuを画面として描いたものです。人口4,000人の町のシェアハウス、部屋はほとんど埋まっていて、締め切りがあり、埋まらなければ全員に預り金が戻ります。この画面の数字はどれも、先に決めた誰かが置いたものです。</p>
+
+<p class="readtime">7分 · まだ何も作られていません · すべての画面は例です</p>
+
+<div class="draftnote">
+  <b>作業中のページです。</b> この日本語版はAIによる下訳で、まだ日本語のネイティブの方に見てもらっていません。おかしなところがあれば、それ自体が教えてほしいことです。
+</div>
+
+<section>
+
+<div class="screen" id="screen">
+  <div class="chrome">
+    <span class="dot"></span>
+    <span>musubu.jp / kamisato</span>
+    <span class="right">ログイン中</span>
+  </div>
+
+  <div class="feed">
+
+    <article class="tile forming">
+      <span class="lane">集まり中</span>
+      <h4>旧大橋旅館のシェアハウス</h4>
+      <p class="where">上里（架空の町）、大分 · 2027年4月入居 · 月42,000円（光熱費込み）</p>
+
+      <div class="meter"><span class="fill" style="--pct:87.5%"></span></div>
+      <div class="count"><b>49</b> / 56 人が約束済み <span class="left">残り7枠</span></div>
+
+      <div class="who">
+        <span class="cap">誰が来るか</span>
+        <div class="stack" aria-hidden="true">
+          <span class="s1" style="--w:41%"></span>
+          <span class="s2" style="--w:38%"></span>
+          <span class="s3" style="--w:21%"></span>
+        </div>
+        <ul class="legend">
+          <li><i class="s1"></i>20代 · 41%</li>
+          <li><i class="s2"></i>30代 · 38%</li>
+          <li><i class="s3"></i>40代以上 · 21%</li>
+        </ul>
+      </div>
+
+      <p class="fine">3月14日締め切り。それまでは全額返金。埋まらなければ何も起きず、全員に預り金が戻ります。</p>
+    </article>
+
+    <article class="tile forming">
+      <span class="lane">集まり中</span>
+      <h4>診療所の受付、週3日</h4>
+      <p class="where">上里医療協同組合 · 必要な6つの役割のうち4つが埋まった時点で募集を開始</p>
+      <div class="meter"><span class="fill" style="--pct:50%"></span></div>
+      <div class="count"><b>3</b> / 6 の役割が埋まった</div>
+    </article>
+
+    <article class="tile">
+      <span class="lane">予定</span>
+      <h4>町民集会：製材所をどうするか</h4>
+      <p class="where">木曜 19:00 · 中央公民館 · まだ引っ越していない人も参加できます</p>
+    </article>
+
+    <article class="tile life">
+      <span class="lane">暮らし</span>
+      <h4>中村さん一家が火曜日に到着</h4>
+      <p class="where">川崎から。子どもは6歳と9歳。土曜に歓迎の夕食、何か一品持ち寄りで。</p>
+    </article>
+
+  </div>
+</div>
+
+<p class="caption">例です。上里は実在の町ではなく、数字もすべて架空です。主張しているのは画面の「かたち」であって、数字ではありません。</p>
+
+</section>
+
+<section>
+<h2>この画面にできて、パンフレットにできないこと</h2>
+
+<p>日本の移住案内は、どれもパンフレットです。棚田の写真、補助金の額、電話番号。パンフレットは、場所の説明を信じてくださいと言います。本当に知りたいたった一つのこと、<strong>ほかに誰か来るのか</strong>には答えられません。</p>
+
+<p>シェアハウスの札は、四つの問いに同時に答えていて、どれも形容詞では答えていません。49人がもう決めているので、あなたが最初ではない。ほとんどが20代と30代なので、台所の様子が想像できる。2027年4月に開くので、「いつか」ではなく日付がある。そして埋まらなければ預り金が戻るので、早く「行く」と言っても何も失わない。</p>
+
+<p>その下には、役割が埋まれば開く診療所があり、住む前から参加できる町民集会があり、火曜日に着いた一家がいます。これは宣伝サイトではありません。<strong>予定表のある場所で、そこに自分の名前が入るところが見える。</strong></p>
+
+<figure class="fig">
+  <img src="assets/sharehouse-courtyard.jpg" alt="木造3階建てのシェアハウスの中庭。菜園、自転車置き場、デッキで人がくつろいでいる。" loading="lazy">
+  <figcaption>イメージ画像（AI生成、2026年8月）。実在の建物ではありません。</figcaption>
+</figure>
+</section>
+
+<section>
+<h2>計器盤の残り</h2>
+
+<p>あの札は、もっと多くのものを載せた町のページの上にあります。自分たちで再生を進めている町には、把握しておくべきことがたくさんあるからです。何もしなかった場合と比べた人口。どの建設が資金を得ていて、どこまで進んでいるか。どの参加条件が生きていて、どれがまだ足りず、どれが静かに流れたか。この12か月で何が開いたか。事業の各段階が、次に進む前に何を必要としているか。</p>
+
+<div class="panels">
+
+  <div class="panel">
+    <span class="pcap">町の集まり</span>
+    <span class="pval">31<small> / 50 世帯</small></span>
+    <div class="pbar"><span style="--pct:62%"></span></div>
+    <p class="pnote">50で一斉に始動。締め切りまで9週間。</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">人口</span>
+    <span class="pval">2,847</span>
+    <p class="pnote">前年比 +2.3%。予測では1.5%の減少だった。</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">デジタル拠点の建設</span>
+    <span class="pval">84%</span>
+    <div class="pbar"><span style="--pct:84%"></span></div>
+    <p class="pnote">4,500万円のうち3,800万円が確定。2028年第2四半期に開設。</p>
+  </div>
+
+  <div class="panel done">
+    <span class="pcap">共同菜園</span>
+    <span class="pval">18<small> / 15</small></span>
+    <span class="state">条件達成</span>
+    <p class="pnote">定員超過。2つ目の区画を調査中。</p>
+  </div>
+
+  <div class="panel">
+    <span class="pcap">保育の枠</span>
+    <span class="pval">12<small> / 20</small></span>
+    <div class="pbar"><span style="--pct:60%"></span></div>
+    <p class="pnote">あと8世帯で職員を配置できる。</p>
+  </div>
+
+  <div class="panel stalled">
+    <span class="pcap">地ビール醸造所</span>
+    <span class="pval">0<small> / 25</small></span>
+    <span class="state">流れた</span>
+    <p class="pnote">3月に提案、誰も申し込まず。ページには残る。</p>
+  </div>
+
+</div>
+
+<p class="caption">例です。町のページが載せるであろう6つのパネル。町は実在しません。</p>
+
+<figure class="fig">
+  <img src="assets/shot-vision-2032.jpg" alt="6年分の土地利用の変化を年ごとに再生できる、試作の地図画面のスクリーンショット。" loading="lazy">
+  <figcaption>試作品のスクリーンショット。豊後高田市を舞台に、2026年から2032年までの「うまくいった場合」を描いた地図。数字はすべて創作で、ページにもそう書いてあります。<a href="musubu-2032-vision.html">試作品を開く（英語）</a></figcaption>
+</figure>
+
+<p style="margin-top:1.6rem">どれも飾りではありません。一つひとつが、実在の誰かが決めなければならないことだからです。そして、同じ組み合わせを必要とする町は二つとありません。醸造所のない町に醸造所のパネルはない。パネルは、測る対象が存在し始めたときに現れ、それが止まってもそこに残ります。勝ちしか見せない画面は、誰も計画を立てられない画面だからです。</p>
+
+<p><strong>設計する価値があるのは、この性質です。</strong> 決まった画面の一式をどの町にも配る製品ではなく、町とそこに来る人たちが一緒に組み立て、やっていることが変わるたびに並べ替え続ける計器盤。1年目に必要な信号は、4年目に必要な信号ではありません。</p>
+</section>
+
+<section>
+<h2>その下にある循環</h2>
+
+<p>画面は出力です。それを生み出しているのは一つの循環で、作る価値があるのはその循環のほうです。</p>
+
+<ol class="loop">
+  <li>
+    <b>何が本当に自分を止めているかを言う</b>
+    <span>自分の言葉で。誰かが用意した8つのチェックボックスではない調査で。5万件のなかでいちばん役に立つ答えは、たいてい誰も選択肢として思いつかなかったものです。</span>
+  </li>
+  <li>
+    <b>それが数になる</b>
+    <span>順位づけされ、層別され、全国規模で。日本のどの省庁も「移住を考える人がいる」ことは知っています。人生の段階と場所ごとに、何が正確に止めているのかの地図を持っている人は誰もいません。</span>
+  </li>
+  <li>
+    <b>誰かが一つ取り除く</b>
+    <span>政策は、願いよりも障害に対してのほうがずっと書きやすい。保育の枠。19時以降も走るバス。転用された建物。緩められた補助金の条件。去年はなかった仕事。</span>
+  </li>
+  <li>
+    <b>選択肢が画面に現れる</b>
+    <span>そしてそれは、数と締め切りのついた、実在の人が約束できる実在のものになっています。</span>
+  </li>
+</ol>
+
+<p class="loop-close">そのあと、障害を名指しした本人が、それが動くのを見ることになります。頼りにする価値があるのは、この仕組みです。移住サイトではなく、何が邪魔なのかを言い、それが取り除かれるのを見る方法。</p>
+</section>
+
+<section>
+<h2>三者、一つの記録</h2>
+
+<p>この循環が閉じるのは、個人と、町と、地域政策に資金を出す国の事業が、同じ場所に書き込んでいるからです。今は三者がそれぞれ、ほかの二者を推測していて、その推測が問題の大半です。</p>
+
+<figure>
+<div class="diagram">
+<svg viewBox="0 0 660 300" role="img" aria-label="個人・町・行政の三つの箱が、約束・条件・締め切り・障害・返金を記録する一つの共有記録と双方向の矢印で結ばれている図。">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="d-arrow"></path>
+    </marker>
+  </defs>
+
+  <rect class="d-box" x="8" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="106" y="34" text-anchor="middle">個人</text>
+  <text class="d-sub" x="106" y="52" text-anchor="middle">何がしたいか · 何が止めているか</text>
+
+  <rect class="d-box" x="232" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="330" y="34" text-anchor="middle">町</text>
+  <text class="d-sub" x="330" y="52" text-anchor="middle">何があるか · 何が足りないか</text>
+
+  <rect class="d-box" x="456" y="8" width="196" height="62" rx="3"></rect>
+  <text class="d-label" x="554" y="34" text-anchor="middle">行政</text>
+  <text class="d-sub" x="554" y="52" text-anchor="middle">何に出すか · どんな条件で</text>
+
+  <line class="d-line" x1="74" y1="78" x2="74" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="138" y1="186" x2="138" y2="78" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="298" y1="78" x2="298" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="362" y1="186" x2="362" y2="78" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="522" y1="78" x2="522" y2="186" marker-end="url(#ah)"></line>
+  <line class="d-line" x1="586" y1="186" x2="586" y2="78" marker-end="url(#ah)"></line>
+
+  <text class="d-sub" x="68" y="136" text-anchor="end">書く</text>
+  <text class="d-sub" x="144" y="136">見る</text>
+  <text class="d-sub" x="292" y="136" text-anchor="end">書く</text>
+  <text class="d-sub" x="368" y="136">見る</text>
+  <text class="d-sub" x="516" y="136" text-anchor="end">書く</text>
+  <text class="d-sub" x="592" y="136">見る</text>
+
+  <rect class="d-bar" x="8" y="194" width="644" height="66" rx="3"></rect>
+  <text class="d-label" x="330" y="222" text-anchor="middle">一つの共有記録</text>
+  <text class="d-sub" x="330" y="240" text-anchor="middle">約束 · 条件 · 締め切り · 障害 · 返金 · 流れたもの</text>
+</svg>
+</div>
+<figcaption>全員が同じ記録に書き込み、それぞれ別の見え方で読み出す。記録が製品で、見え方はその窓口です。</figcaption>
+</figure>
+
+<p>つまり、一つの出来事が三つの言葉づかいで同時に届かなければなりません。中村さん一家が上里に約束したことは、同じ一つの事実が三通りに書かれたものです。</p>
+
+<div class="renders">
+  <div class="render">
+    <span class="whocap">あなたに見えるもの</span>
+    <p class="said">あと9世帯で、来年4月に小学校のクラスができます。預り金は締め切りまで返金できます。</p>
+  </div>
+  <div class="render">
+    <span class="whocap">町の担当者に見えるもの</span>
+    <p class="said">第3四半期の到着で、児童数が学級編制の基準を超える。予算要求の受付は11月まで。</p>
+  </div>
+  <div class="render">
+    <span class="whocap">省庁に見えるもの</span>
+    <p class="said">10歳未満の子どものいる約束済み世帯が、この県で前四半期比で増加。既存の移住支援金の対象圏内に、新たに2つの自治体。</p>
+  </div>
+</div>
+
+<p class="caption">例です。一つの約束が、三通りに描かれる。</p>
+</section>
+
+<section>
+<h2>なぜ、その数を信じられるのか <span class="chip proven">実績あり</span></h2>
+
+<p>すべては、数が本物であることに乗っています。それを本物にする仕組みは、古くて退屈です。全員か誰もか、の条件付きの約束。公開された数、決まった締め切り、本当に戻る預り金。条件が満たされるまで何も動かず、決めるあいだ、誰もが数が上がっていくのを見ていられる。</p>
+
+<p>これは世帯の話にとどまりません。そこが、ウェブサイトをインフラに変える部分です。</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>誰が</th><th>何を約束するか</th><th>いつ解除されるか</th></tr></thead>
+<tbody>
+<tr><td>世帯</td><td>預り金、到着日</td><td>集まりの人数が条件に達したとき</td></tr>
+<tr><td>小さな事業者</td><td>賃貸契約と開店日</td><td>客の事前の約束が条件に達したとき</td></tr>
+<tr><td>工場などの雇用主</td><td>設備投資</td><td>働き手の人数が条件に達したとき</td></tr>
+<tr><td>開発事業者</td><td>改修や建設の着工</td><td>住戸が事前に埋まったとき</td></tr>
+<tr><td>自治体</td><td>予算項目、補助金の申請</td><td>人口の約束が条件に達したとき</td></tr>
+<tr><td>学区</td><td>学級の編制</td><td>児童数が条件に達したとき</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>クラウドファンディングは2009年にこれを世に出しましたが、日本は何百年も前から社会の側でこれを回してきました。講は、お金を出し合って順番に受け取る相互扶助の集まりです。「集まったら動く」仕組みに、何百年もの地元の前例がある。ここでは、ソフトウェアについてのどんな議論より、その事実のほうが重い。</p>
+
+<p>数が信じられ続けるのは、その周りの画面が誰にも媚びないときだけです。五つのルール。これは譲歩ではなく、見知らぬ人がこの画面をそもそも信じる理由です。</p>
+
+<ol class="rules">
+<li><b>空っぽは、空っぽのまま見せる。</b> 何も起きていない町は、何も載っていない画面を見せる。埋め草も、素材写真も、「近日公開」もなし。</li>
+<li><b>失敗は見えたままにする。</b> 流れた条件は地図に残る。閉じた店はページに残る。出ていった住人も、載ったまま、連絡が取れるままにする。</li>
+<li><b>そこに住む人だけが投稿する。</b> 町の記事を代わりに書く広報チームはいない。参加者が撮った少し下手な写真は、信頼の印。</li>
+<li><b>順位づけなし、注目の最適化なし、無限スクロールなし。</b> これは村の掲示板です。注目を集めるよう最適化した瞬間に、本当ではなくなる。</li>
+<li><b>「約束済み」と「見込み」を決して混ぜない。</b> これから来る人の曲線は約束だけを示す。家族も事業者も、その数を見て取り返しのつかない決断をするからです。</li>
+</ol>
+</section>
+
+<section>
+<h2>AIが働くところ</h2>
+
+<p>記録そのものは、わざと単純にしてあります。約束、数、締め切り、返金を、普通の監査できる台帳に。考える部分はその周りにあって、データベースへの問い合わせでは済まない仕事が五つあります。</p>
+
+<h3>調査が、自由な問いを立てられる <span class="chip">検証可能</span></h3>
+<p>選択肢を先に決めた調査は、作り手がすでに想像していたものしか返してきません。区分が天井だからです。自由記述をいま、全国規模で読み、まとめ、引用できるようになったので、調査は「それでも何があなたを止めますか」と聞き、誰も予想していなかった答えから学べます。循環の一歩目は、まるごとこれに依存しています。</p>
+
+<h3>一人のために書かれた提案 <span class="chip">検証可能</span></h3>
+<p>人生の段階、動かせない条件、必要な収入、人づきあいの好み、移動のしやすさ、時期をまたいで合わせるのは、十いくつもの考慮が競う判断です。出力は、特定の人に向けて、その人自身の言葉を引きながら描かれた、特定の暮らしです。それを5万件つくることは、数年前ならどんな値段でも不可能でした。</p>
+
+<h3>断られたものから学ぶ <span class="chip">検証可能</span></h3>
+<p>三つの選択肢を見せ、なぜ断られたかを自由記述で読み、次の問いを選ぶ。誰かが「孤立しすぎているし、ずっと演じているような気がしそう」と書いたとき、大事なのは文の後半です。人は自分が何を望むかは言えませんが、目の前のものの何が違うかは即座に言えます。</p>
+
+<h3>一つの記録、三つの言葉づかい <span class="chip sketch">スケッチ</span></h3>
+<p>これは前例のない部分です。どの出来事も、世帯と、町の担当者と、省庁の分析官に、それぞれが働いている言葉で届かなければならない。今その翻訳は人が、ゆっくりと、そしてたいていはまったく行っていません。三者に共有の眺めがこれまで一度もなかったのは、まさにそのためです。</p>
+
+<h3>国を、その国の言葉で読む <span class="chip proven">実績あり</span></h3>
+<p>自治体のデータ、県の統計、事業の文書が、たまたま翻訳されたものを通してではなく、一次資料として読めるようになります。同じ能力で、調査を日本語、英語、ベトナム語、タガログ語、ポルトガル語、ネパール語で同時に走らせられます。介護人材の移住は、この経済の周辺ではなく中心にあるので、これは大事です。</p>
+
+<div class="notice">
+<p><strong>はっきり言っておく価値のある帰結。</strong> かつて15人必要だったことを、いま3人のチームが回せます。町の情報、調査の分析、事業の調査、翻訳、ページの内容、そしてこういう構想が生きていくための継続的な整理。これは費用削減ではありません。大きな組織が必要なものと、作りたい数人が実際に始められるもの、の違いです。</p>
+</div>
+</section>
+
+<section>
+<h2>今、本当のこと</h2>
+
+<div class="open">
+  <div class="open-row"><span class="lbl">あるもの</span><span class="txt">戦略の文書群と、いくつかの試作ページ。<b>動いているシステムはなく、集まりもなく、町との提携もなく、まだ誰にも調査していない。</b></span></div>
+  <div class="open-row"><span class="lbl">未検証</span><span class="txt">提案がよかったかどうかは、誰かが引っ越して住み続けて初めてわかるので、マッチングには何年も答え合わせがない。</span></div>
+  <div class="open-row"><span class="lbl">未解決</span><span class="txt">預り金。誰が世帯の預り金を、どの許認可のもとで、どの法域で預かるのか。</span></div>
+  <div class="open-row"><span class="lbl">不明</span><span class="txt">工場などの雇用主が、公開の条件付きの立場を取るのか、それとも守秘の都合で最初から無理なのか。</span></div>
+  <div class="open-row"><span class="lbl">ありうる</span><span class="txt">考える層は飾りで、最初に動く版は三つの表と夜間の処理と進捗バーだけ、ということ。それなら朗報です。</span></div>
+  <div class="open-row"><span class="lbl">保留</span><span class="txt">下にある全国版。名前をつけ、印をつけ、あえてまだ手をつけていない。</span></div>
+</div>
+
+<p style="margin-top:1.6rem">最初の版に、町も、省庁も、提携も要りません。要るのは、まだ何も裏付けのない公開の数と、存在しないものに名前を書く気のある人が十分にいること。それが、唯一大事な前提を試す、いちばん安い方法です。</p>
+</section>
+
+<section>
+<h2>もっと大きな版 <span class="chip sketch">スケッチ</span></h2>
+
+<p>シェアハウスは小さな版で、最初に作る価値があるのはそちらです。その下にあるもっと大きな考えは、人々が本当に何を望み、何が本当に邪魔なのかの、常設の全国の記録です。閉じた日から劣化が始まるスナップショットの調査ではなく、どの市民も書き込めて、自分の人生が動くたびに更新し続けられるもの。</p>
+
+<p>その記録は、触れる全員にとって価値があります。個人は、自分と同じ状況の4,000人が同じことを言ったと知ることができ、それは私的な不満と目に見える集団との違いです。町は、都市の家族が何を望むかの推測ではなく、本物の需要を得ます。省庁は、順位づけされ層別された障害の地図を得ます。政策が実際に書かれるかたちは、それです。</p>
+
+<p>いまになって初めて試せる部分は、それを一度設計して凍らせなくてよい、ということです。チェックボックスではなく自由な言葉で聞き、全国規模で読み、人が違うものを必要とし、それを作る道具が現れるにつれて、<strong>かたちを変え続ける</strong>ことを許せる。完成した製品ではなく、生きている台帳。</p>
+
+<p class="caption">スケッチと印をつけたのは、そういうものだからです。仕様も、費用も、検証もなく、解決ではなく保留。ここにあるのは、これが小さな版を始める価値の理由だからです。</p>
+</section>
+
+<section>
+<h2>招待</h2>
+
+<p>仕組みの下には、もっと素朴な申し出があって、住居費についてのどんな文よりも、人がなぜ気にかけるかに近いものです。</p>
+
+<blockquote>
+<p>生きていて、変わり続けて、合わせていけるもの。選択肢が見えて、選択肢を作れて、本当に共有された知恵と意図があって、実験してみることができる。</p>
+<p>そんなことができる人が、どれだけいるだろう。違う暮らしを試す。もっと意図をもって生きる。何かの一部になる。</p>
+</blockquote>
+
+<p>ほとんどの大人は、どう生きるかを本気で選ぶ機会を一度しか持たず、それを22歳で、追われながら決めて、その後きちんとやり直す機会は来ません。ここで差し出しているのは、その実験をまともにやり直す方法です。ほかの人と一緒に、戻る道を残して、一人で勇気を出さなくてもいいように。</p>
+
+<div class="question">
+  <span class="cap">このノートの目的</span>
+  <p class="q">ここに、何かの種はありますか。</p>
+  <p class="after" style="margin-bottom:1.4rem">問いはそれだけで、もう少し細かい版が下にあります。全部に賛成してもらうより、どれか一つへの答えのほうが価値があります。</p>
+
+  <ol class="asks">
+    <li><b>全国版は現実的ですか。</b> どの市民も書き込める共有の台帳で、政策が実際にそれに対して書けるほど読みやすいもの。その規模で読めるのはAIがあるからです。それは成り立ちますか、それとも明らかなどこかで崩れますか。</li>
+    <li><b>変化に合わせて作るのは、強みですか、言い訳ですか。</b> 一度設計するのではなく、人が必要とするたびに新しい道具や窓口を生やし続けるつもりです。それは要点そのものか、何も出荷しないための上手な言い訳か。</li>
+    <li><b>何かが変わりますか。追いかける価値がありますか。</b> 率直に。正直な答えは「いいえ」かもしれず、それは今知れたら役に立ちます。</li>
+    <li><b>何を直しますか。どの糸から引きますか。</b> 作業の順番は、内側からはいちばん見えにくい部分です。</li>
+    <li><b>上に挙がっていない障害は何ですか。</b> わかっているのは、預り金の扱い、何年もマッチングの答え合わせがないこと、町に「はい」と言ってもらう必要があること。面白いのは、この構想の誰も思いついていないものです。</li>
+  </ol>
+</div>
+</section>
+
+<footer>
+MUSUBU 結 · 構想であって、製品ではありません<br>
+ここに確定したものは何もありません。すべての画面と数字は例で、そう書いてあります。
+</footer>
+
+</div>
+
+
+<script>
+(function(){
+  var s = document.getElementById('screen');
+  if(!s || !('IntersectionObserver' in window)){ if(s) s.classList.add('lit'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('lit'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.25});
+  io.observe(s);
+})();
+</script>
+
+<!-- ====================================================================
+     DEV ONLY. Surfaces review notes visibly, on localhost and file://.
+     Inert on any other host, so notes cannot appear on the published page.
+     Self-contained: delete this block and nothing else changes.
+
+     The marker is built as '@'+'@' on purpose. A literal one here would
+     make tools/review-check.sh flag this block forever and the clean
+     gate would never pass.
+     ==================================================================== -->
+<script>
+(function(){
+  var dev = location.protocol === 'file:' ||
+            ['localhost','127.0.0.1','[::1]'].indexOf(location.hostname) !== -1;
+  if(!dev) return;
+
+  var MARK = '@' + '@';
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.devnote{display:inline-block;font-family:var(--mono);font-size:0.72rem;' +
+      'line-height:1.5;color:var(--paper);background:var(--lapse);' +
+      'padding:0.1rem 0.45rem;border-radius:2px;margin:0 0.2rem;cursor:pointer}' +
+    '.devnote.on{outline:2px solid var(--ink);outline-offset:2px}' +
+    '#devbar{position:fixed;right:0.9rem;bottom:0.9rem;z-index:99;' +
+      'font-family:var(--mono);font-size:0.72rem;background:var(--lapse);' +
+      'color:var(--paper);border:none;padding:0.4rem 0.7rem;' +
+      'border-radius:3px;cursor:pointer}' +
+    '@media print{.devnote,#devbar{display:none}}';
+  document.head.appendChild(css);
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+  var notes = [], n, el;
+  while((n = walker.nextNode())){
+    if(n.nodeValue.indexOf(MARK) === -1) continue;
+    el = document.createElement('span');
+    el.className = 'devnote';
+    el.textContent = n.nodeValue.split(MARK).pop().trim() || '(empty note)';
+    n.parentNode.insertBefore(el, n.nextSibling);
+    notes.push(el);
+  }
+  if(!notes.length) return;
+
+  var i = -1;
+  var bar = document.createElement('button');
+  bar.id = 'devbar';
+  bar.textContent = notes.length + (notes.length === 1 ? ' note' : ' notes');
+  bar.title = 'Jump to the next note';
+  bar.addEventListener('click', function(){
+    if(notes[i]) notes[i].classList.remove('on');
+    i = (i + 1) % notes.length;
+    notes[i].classList.add('on');
+    notes[i].scrollIntoView({block:'center', behavior:'smooth'});
+  });
+  document.body.appendChild(bar);
+})();
+</script>

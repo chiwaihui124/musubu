@@ -33,7 +33,7 @@ So: take it. Build it, fork it, argue with it, lift one mechanic out of it, pass
 | A register that tiers every load-bearing figure by what it rests on | A legal opinion on holding deposits |
 | An intake instrument drafted in English and Japanese | A native Japanese review of that draft |
 | Fifteen prototype pages showing what the portal could look like | A day-one version of any of them |
-| Sixty open questions, tagged by what would close each one | A team |
+| Sixty-eight open questions, tagged by what would close each one | A team |
 
 ## Three ways in
 
@@ -52,7 +52,7 @@ Read in this order. Each is under three thousand words.
 3. `05_Government_and_Policy/musubu_precedent_research.md`. What Japan has already tried, what failed, and the programme that already retains eight in ten of the people it places.
 4. `01_Foundation/musubu_coordination_theory.md`. The mechanism in the languages of eight disciplines, and five things it should do that it does not yet. Written in September 2026 as a deliberate push past where the project had got to.
 5. `CLAIMS_REGISTER.md`. Every number, tiered. Read this before you repeat any figure from anywhere else in the folder.
-6. `OPEN_THREADS.md`. Sixty unresolved questions. Twenty-four are decisions someone could make today.
+6. `OPEN_THREADS.md`. Sixty-eight unresolved questions. Twenty-six are decisions someone could make today.
 
 ## How to read the numbers
 
@@ -108,3 +108,70 @@ All text and prototypes in this repository are released under the **Creative Com
 @@ Yours to decide. The concept page has the same dashed placeholder.
 
 Contact method to be added.
+
+---
+
+# 日本語で · はじめに
+
+*英語版の要約です。AIによる下訳で、ネイティブレビュー前。フォルダの中の文書は作業中の資料なので英語のままです。*
+
+## これは何か
+
+Musubuは、日本の空いていく町へ、**一人ではなく一緒に**移り住むための構想です。
+
+すでに別の場所でうまく動いている仕組み、条件付きの約束を借りて、引っ越しに向けています。町が足りないものを言う。人が条件付きで約束する（「ほかに30世帯が行くなら、私も行きます」）。その数は公開される。集まれば全員が同じ季節に着く。集まらなければお金は戻り、誰もどこにも引っ越していません。
+
+一人の人間（Wai、Chi Wai Hui）が2025年初めから2026年秋にかけて、副業として考えたものです。このフォルダの50余りの文書と、`../Portal/` の15の試作ページになりました。
+
+**ここにあるものは、何一つ存在していません。** どの町も何にも合意していません。会社も、チームも、資金もなく、誰にも条件付きの約束を頼んだことがありません。最後の点がいちばん大事です。構想全体が「条件付きの申し出に人がイエスと言う」という前提に乗っていて、それは一人の回答者にも試されていません。
+
+## なぜ公開するのか
+
+構想ページから、本人の言葉で（訳）：
+
+> 私が関わっていても、いなくても、これが本当になったらうれしい。自分のものにしたいわけではありません。存在してほしいのです。
+
+だから、持っていってください。作る、分岐させる、反論する、仕組みを一つだけ取り出す、誰かに渡す。ライセンス（英語版の末尾）はその形式的な意味を定めています。意味は書いてあるとおりです。
+
+## 何が本当で、何がないか
+
+| あるもの | ないもの |
+|---|---|
+| 人がなぜ引っ越し、なぜ引っ越さないかの仮説 | 調査の回答者、一人も |
+| 仕組みの設計。どの部分もどこまでわかっているかの印つき | 何かに合意した町 |
+| 公開情報から調べた最初の候補地（大分県豊後高田市）と三つの代替 | 自治体との会話 |
+| 経済、住まい、協同組合、建設のモデル。前提は明記 | 裏付けのある改修の人件費 |
+| 主要な数字をすべて根拠で等級づけした一覧 | 預り金についての法的な見解 |
+| 英語と日本語で書いた質問票 | その日本語のネイティブレビュー |
+| 15の試作ページ | どの画面の「初日版」も |
+| 68の未解決の問い。何が解決するかで分類 | チーム |
+
+## 三つの入口
+
+**5分。** `../Portal/musubu-concept-ja.html`。構想の全部を1ページで。一つだけ読むなら、これ。
+
+**7分。** `../Portal/musubu-coordination-layer-ja.html`。5年後のポータルを画面として。56部屋のうち49が埋まったシェアハウスと、その下の循環。
+
+**じっくり。** このフォルダ。`../Portal/musubu-atlas.html` が全体を1ページに（英語。各文書に日本語の一行説明つき）。
+
+## 数字の読み方
+
+文書の中の数字は、公開の出典で確認したものもあれば、この構想自身の目標のものも、妥当な推論のものもあります。**そして、作ったものもあります。** もっともらしく作られ、そう印がつけてあります。`CLAIMS_REGISTER.md` がどれがどれかを言っています。公開のものに使う場合のルールは一行です。下の二つの等級のものは、「〜である」ではなく「もし〜なら」で書く。
+
+## 作るなら
+
+この構想が、拾い上げる人に向けて自分で書いている助言（`02_Platform/musubu_coordination_architecture.md` §6 と `06_Surveys_and_Outreach/musubu_demand_test.md` から）：
+
+- **まず需要の試験を、日本語で。** 100人ほどの回答で、条件付きの約束が誰かの答えを変えるかどうかは見えます。質問票は下書き済み。配る方法は未解決。
+- **最初の集まりは、終わらせられる大きさに。** 50世帯ではなく。着いて機能した12世帯が、次の100を呼びます。
+- **一人の工務店から、一つの改修の人件費を。** 日本語で。この構想でいちばん重い未確認の数字です。
+- **地方の町の前に、都市の中の地区を考える。** 誰の許可も要らなくなるので、いちばん重い依存が消えます。
+- **`01_Foundation/musubu_coordination_theory.md` の §2 と §3 を、約束の仕組みを設計する前に。** 自分で決める人数の条件と、返金のお礼は、始めにくさを大きく変えます。どちらも古い文書にはありません。
+
+このほとんどが、日本語か、日本にいることを必要とします。この構想の作者にはどちらもなく、それがこのフォルダが使われずに公開されている理由の大半です。
+
+## 連絡先
+
+@@ Wai の判断。英語版と同じ。
+
+連絡先は後日追加。

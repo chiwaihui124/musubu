@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Musubu, Five Years In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -393,6 +394,19 @@ footer{
 @media (prefers-reduced-motion:reduce){
   .meter .fill{transition:none;width:var(--pct)}
 }
+
+/* ---------- added Sep 2026: language link, draft notice, figures ---------- */
+.mast .lang{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--indigo);border-bottom:1px solid var(--rule);margin-left:0.25rem}
+.mast .lang:hover{border-bottom-color:var(--indigo)}
+.draftnote{
+  font-size:0.86rem;line-height:1.65;color:var(--ink-2);
+  border:1px dashed var(--lapse);border-radius:3px;padding:0.8rem 1rem;margin:0 0 2.4rem;
+}
+.draftnote b{color:var(--lapse);font-weight:600}
+figure.fig{margin:1.7rem 0 1.4rem;padding:0}
+figure.fig img{display:block;width:100%;height:auto;border-radius:3px;border:1px solid var(--rule)}
+figure.fig figcaption{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.03em;color:var(--ink-3);margin-top:0.55rem;line-height:1.55}
+figure.fig figcaption a{color:var(--indigo)}
 </style>
 
 <div class="wrap">
@@ -400,6 +414,7 @@ footer{
 <div class="mast">
   <span class="name">Musubu</span>
   <span class="kanji">結</span>
+    <a class="lang" href="musubu-coordination-layer-ja.html">日本語</a>
   <span class="stamp">CONCEPT NOTE · 2026</span>
 </div>
 
@@ -480,6 +495,11 @@ footer{
 <p>The share house tile answers four questions at once, and none of them are answered with adjectives. Forty-nine people have already decided, so you would not be first. Most of them are in their twenties and thirties, so you can picture the kitchen. It opens in April 2027, so it is a date rather than a someday. And the deposit comes back if it does not fill, so saying yes early costs you nothing.</p>
 
 <p>Underneath it there is a clinic that opens when enough people claim the roles, a town hall meeting you are allowed to attend before you live there, and a family who arrived on Tuesday. That is not a marketing site. <strong>It is a place with a schedule, and you can see your own name fitting into it.</strong></p>
+<figure class="fig">
+  <img src="assets/sharehouse-courtyard.jpg" alt="The courtyard of a three-storey timber share house: raised garden beds, bicycles under a pergola, people on a deck." loading="lazy">
+  <figcaption>Illustration, AI-generated, August 2026. Not a real building.</figcaption>
+</figure>
+
 </section>
 
 <section>
@@ -533,6 +553,11 @@ footer{
 </div>
 
 <p class="caption">Illustrative. Six of the panels a town page would carry, on a town that does not exist.</p>
+<figure class="fig">
+  <img src="assets/shot-vision-2032.jpg" alt="Screenshot of a prototype map that plays six years of land-use change year by year." loading="lazy">
+  <figcaption>Screenshot of a prototype: Bungotakada 2026 to 2032, one version of it going well, failures included. Every figure on it is invented and the page says so. <a href="musubu-2032-vision.html">Open the prototype</a></figcaption>
+</figure>
+
 
 <p style="margin-top:1.6rem">None of these are decoration, because every one of them is something a real person has to decide about. And no two towns need the same set. A town with no brewery has no brewery panel. A panel appears when the thing it measures starts existing, and it stays there when the thing stalls, because a surface that only shows wins is a surface nobody can plan against.</p>
 
